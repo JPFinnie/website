@@ -653,7 +653,7 @@
 
         .systems-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 28px;
         }
 
@@ -1049,6 +1049,7 @@
             .project:nth-child(even) .project__image-wrap { order: 0; }
             .project:nth-child(even) .project__content { order: 0; }
             .lab-grid { grid-template-columns: 1fr; }
+            .about__thinking div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
             .now__grid { grid-template-columns: 1fr; gap: 40px; }
             .education-grid { grid-template-columns: 1fr; }
             .section--contact { padding: 100px 0; }
@@ -1205,7 +1206,7 @@
                 <div class="lab-card reveal reveal-delay-3">
                     <span class="lab-card__num">04</span>
                     <h3 class="lab-card__title">Geopolitical Signal Monitoring</h3>
-                    <p class="lab-card__desc">Experimenting with systems that aggregate geopolitical events, market signals, and macroeconomic developments into clearer intelligence for analysts and investors. The broader question is how structured data and AI can help people interpret global complexity more effectively.</p>
+                    <p class="lab-card__desc">Experimenting with systems that aggregate geopolitical events, market signals, and macroeconomic developments into clearer intelligence for analysts and investors. As part of a team, I contributed to <a href="https://www.worldmonitor.app" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">World Monitor</a>, an open-source OSINT application (<a href="https://github.com/koala73/worldmonitor" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">GitHub</a>). With a background in international studies and diplomacy, I find the intersection of structured intelligence and technology fascinating.</p>
                 </div>
             </div>
         </div>
@@ -1254,22 +1255,6 @@
                     </div>
                     <p class="system__purpose">Help investors make better financial decisions using structured analysis.</p>
                 </div>
-                <div class="system reveal reveal-delay-2">
-                    <h3 class="system__title">Personalisation Engine</h3>
-                    <p class="system__desc">A system for adapting digital financial products to different client needs and behaviours.</p>
-                    <div class="flow">
-                        <div class="flow__step">Client Data</div>
-                        <div class="flow__arrow">&darr;</div>
-                        <div class="flow__step">Segmentation Model</div>
-                        <div class="flow__arrow">&darr;</div>
-                        <div class="flow__step">Behavioural Signals</div>
-                        <div class="flow__arrow">&darr;</div>
-                        <div class="flow__step">Content / Journey Logic</div>
-                        <div class="flow__arrow">&darr;</div>
-                        <div class="flow__step">Personalised Experience</div>
-                    </div>
-                    <p class="system__purpose">Create financial products that feel intelligently tailored to the individual.</p>
-                </div>
             </div>
         </div>
     </section>
@@ -1298,8 +1283,30 @@
                     <span class="about__tag">Financial Decision Systems</span>
                     <span class="about__tag">Personalisation Platforms</span>
                     <span class="about__tag">Fintech Products</span>
-                    <span class="about__tag">Capital Markets</span>
-                    <span class="about__tag">Client Journeys</span>
+                    <span class="about__tag">AI-Augmented Product Teams</span>
+                </div>
+            </div>
+            <div class="about__thinking reveal" style="margin-top:64px;padding-top:48px;border-top:1px solid var(--border);">
+                <h4 style="font-family:var(--font-display);font-size:1.375rem;color:var(--white);margin-bottom:20px;">On building in the age of AI</h4>
+                <p style="font-size:0.9375rem;font-weight:300;color:var(--text-secondary);line-height:1.75;max-width:640px;margin-bottom:24px;">I&rsquo;m thinking deeply about the future of building in a world of AI-driven development. Particularly how product teams will evolve into a new age of AI-augmented work &mdash; where the craft of product management shifts from coordination to judgement, and the tools we use become collaborators rather than utilities.</p>
+                <p style="font-size:0.6875rem;font-weight:500;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-muted);margin-bottom:16px;">People shaping my thinking</p>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                    <div style="padding:20px;border:1px solid var(--border);background:var(--bg-card);">
+                        <p style="font-family:var(--font-display);font-size:1rem;color:var(--white);margin-bottom:6px;">Boris Cherny</p>
+                        <p style="font-size:0.8125rem;font-weight:300;color:var(--text-secondary);line-height:1.5;max-width:none;">Engineering leader exploring how AI changes the way software gets built.</p>
+                    </div>
+                    <div style="padding:20px;border:1px solid var(--border);background:var(--bg-card);">
+                        <p style="font-family:var(--font-display);font-size:1rem;color:var(--white);margin-bottom:6px;">Lenny Rachitsky</p>
+                        <p style="font-size:0.8125rem;font-weight:300;color:var(--text-secondary);line-height:1.5;max-width:none;">Writes the top-rated Lenny&rsquo;s Newsletter on Substack, focusing on tactical execution, growth, and product strategy.</p>
+                    </div>
+                    <div style="padding:20px;border:1px solid var(--border);background:var(--bg-card);">
+                        <p style="font-family:var(--font-display);font-size:1rem;color:var(--white);margin-bottom:6px;">Melissa Perri</p>
+                        <p style="font-size:0.8125rem;font-weight:300;color:var(--text-secondary);line-height:1.5;max-width:none;">Author of The Build Trap and founder of Product Institute; focuses on scaling product organisations.</p>
+                    </div>
+                    <div style="padding:20px;border:1px solid var(--border);background:var(--bg-card);">
+                        <p style="font-family:var(--font-display);font-size:1rem;color:var(--white);margin-bottom:6px;">Marty Cagan</p>
+                        <p style="font-size:0.8125rem;font-weight:300;color:var(--text-secondary);line-height:1.5;max-width:none;">Founder of Silicon Valley Product Group and author of Inspired and Empowered.</p>
+                    </div>
                 </div>
             </div>
         </div>
