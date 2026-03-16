@@ -347,6 +347,8 @@
         .hero__title-line {
             display: block;
             overflow: hidden;
+            padding-left: 8px;
+            margin-left: -8px;
         }
 
         .hero__title-line span {
@@ -1097,11 +1099,10 @@
         <nav class="sidenav__panel" id="sidenavPanel">
             <ul class="sidenav__links">
                 <li><a href="#work" class="sidenav__link" data-nav-link><span class="sidenav__link-num">01</span><span class="sidenav__link-text">Selected Work</span></a></li>
-                <li><a href="#lab" class="sidenav__link" data-nav-link><span class="sidenav__link-num">02</span><span class="sidenav__link-text">The Lab</span></a></li>
-                <li><a href="#systems" class="sidenav__link" data-nav-link><span class="sidenav__link-num">03</span><span class="sidenav__link-text">Systems</span></a></li>
-                <li><a href="#about" class="sidenav__link" data-nav-link><span class="sidenav__link-num">04</span><span class="sidenav__link-text">About</span></a></li>
-                <li><a href="#experience" class="sidenav__link" data-nav-link><span class="sidenav__link-num">05</span><span class="sidenav__link-text">Experience</span></a></li>
-                <li><a href="#contact" class="sidenav__link" data-nav-link><span class="sidenav__link-num">06</span><span class="sidenav__link-text">Contact</span></a></li>
+                <li><a href="#systems" class="sidenav__link" data-nav-link><span class="sidenav__link-num">02</span><span class="sidenav__link-text">Systems</span></a></li>
+                <li><a href="#about" class="sidenav__link" data-nav-link><span class="sidenav__link-num">03</span><span class="sidenav__link-text">About</span></a></li>
+                <li><a href="#experience" class="sidenav__link" data-nav-link><span class="sidenav__link-num">04</span><span class="sidenav__link-text">Experience</span></a></li>
+                <li><a href="#contact" class="sidenav__link" data-nav-link><span class="sidenav__link-num">05</span><span class="sidenav__link-text">Contact</span></a></li>
             </ul>
             <div class="sidenav__footer" id="sidenavFooter">
                 <p class="sidenav__footer-label">Socials</p>
@@ -1131,7 +1132,7 @@
             <p class="hero__subtitle-secondary">My work focuses on building products that help people make better decisions in complex environments such as investing, financial markets, and digital platforms.</p>
             <div class="hero__ctas">
                 <a href="#work" class="btn btn--primary">View Work</a>
-                <a href="#lab" class="btn btn--outline">Explore the Lab</a>
+                <a href="#systems" class="btn btn--outline">Explore Systems</a>
                 <a href="#contact" class="btn btn--ghost">Get In Touch</a>
             </div>
         </div>
@@ -1173,41 +1174,17 @@
                         <a href="https://portfoliiointeligence.vercel.app/" target="_blank" rel="noopener noreferrer" class="project__link">Try live demo <span>&rarr;</span></a>
                     </div>
                 </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==========================================
-         THE LAB
-         ========================================== -->
-    <section class="section" id="lab">
-        <div class="container">
-            <div class="section__header reveal">
-                <span class="section__num">02</span>
-                <h2 class="section__title">The Lab</h2>
-            </div>
-            <p class="section__intro reveal">The Lab is where I explore ideas in artificial intelligence, finance, and product systems. Most of these begin as small prototypes, thought experiments, or technical investigations into how intelligent software could improve decision-making.</p>
-            <div class="lab-grid">
-                <div class="lab-card reveal">
-                    <span class="lab-card__num">01</span>
-                    <h3 class="lab-card__title">Product Feedback Intelligence</h3>
-                    <p class="lab-card__desc">Exploring how LLM-based pipelines can transform unstructured product feedback into structured insights. This includes experiments in signal ingestion, sentiment scoring, pattern detection, and converting qualitative feedback into opportunities product teams can act on.</p>
-                </div>
-                <div class="lab-card reveal reveal-delay-1">
-                    <span class="lab-card__num">02</span>
-                    <h3 class="lab-card__title">Financial Decision Engines</h3>
-                    <p class="lab-card__desc">Research into deterministic optimisation systems for personal finance and investing. I&rsquo;m interested in how algorithms can evaluate portfolio actions such as rebalancing, tax-loss harvesting, account optimisation, and capital deployment in a transparent and explainable way.</p>
-                </div>
-                <div class="lab-card reveal reveal-delay-2">
-                    <span class="lab-card__num">03</span>
-                    <h3 class="lab-card__title">AI Evaluation Systems</h3>
-                    <p class="lab-card__desc">Investigating how organisations can benchmark AI models before deploying them into financial workflows. Focus areas include reasoning accuracy, hallucination detection, financial calculation reliability, and structured evaluation environments for decision-support systems.</p>
-                </div>
-                <div class="lab-card reveal reveal-delay-3">
-                    <span class="lab-card__num">04</span>
-                    <h3 class="lab-card__title">Geopolitical Signal Monitoring</h3>
-                    <p class="lab-card__desc">Experimenting with systems that aggregate geopolitical events, market signals, and macroeconomic developments into clearer intelligence for analysts and investors. As part of a team, I contributed to <a href="https://www.worldmonitor.app" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">World Monitor</a>, an open-source OSINT application (<a href="https://github.com/koala73/worldmonitor" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;">GitHub</a>). With a background in international studies and diplomacy, I find the intersection of structured intelligence and technology fascinating.</p>
-                </div>
+                <article class="project reveal">
+                    <a href="https://imaging-umber.vercel.app/" target="_blank" rel="noopener noreferrer" class="project__image-wrap">
+                        <img src="dicom.jpg" alt="DICOM Viewer" class="project__image" onerror="this.style.display='none'">
+                    </a>
+                    <div class="project__content">
+                        <span class="project__meta">Side Project &middot; Healthcare &middot; Open Source</span>
+                        <h3 class="project__title">DICOM Viewer</h3>
+                        <p class="project__desc">Facing surgery in 2026, I wanted to view my own CT scans &mdash; but they were paywalled behind my hospital&rsquo;s imaging software. In under an hour I built a browser-based DICOM viewer with drag-and-drop loading, window/level adjustment, zoom, pan, multi-frame support, and full metadata inspection. No server required.</p>
+                        <a href="https://imaging-umber.vercel.app/" target="_blank" rel="noopener noreferrer" class="project__link">Try live demo <span>&rarr;</span></a>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -1218,7 +1195,7 @@
     <section class="section section--systems" id="systems">
         <div class="container">
             <div class="section__header reveal">
-                <span class="section__num">03</span>
+                <span class="section__num">02</span>
                 <h2 class="section__title">Systems I Think About</h2>
             </div>
             <p class="section__intro reveal">I&rsquo;m fascinated by systems that convert complex data into useful decisions. Many of the most interesting products today are not simple applications, but decision engines &mdash; systems that interpret signals, apply logic, and help humans decide what to do next.</p>
@@ -1265,7 +1242,7 @@
     <section class="section" id="about">
         <div class="container">
             <div class="section__header reveal">
-                <span class="section__num">04</span>
+                <span class="section__num">03</span>
                 <h2 class="section__title">About</h2>
             </div>
             <h3 class="about__headline reveal">Product manager exploring how AI changes decision-making.</h3>
@@ -1318,7 +1295,7 @@
     <section class="section" id="experience">
         <div class="container">
             <div class="section__header reveal">
-                <span class="section__num">05</span>
+                <span class="section__num">04</span>
                 <h2 class="section__title">Experience</h2>
             </div>
             <div class="timeline">
@@ -1364,7 +1341,7 @@
     <section class="section section--now" id="now">
         <div class="container">
             <div class="section__header reveal">
-                <span class="section__num">06</span>
+                <span class="section__num">05</span>
                 <h2 class="section__title">Now</h2>
             </div>
             <p class="now__updated reveal">Updated March 2026</p>
@@ -1397,7 +1374,7 @@
     <section class="section" id="education">
         <div class="container">
             <div class="section__header reveal">
-                <span class="section__num">07</span>
+                <span class="section__num">06</span>
                 <h2 class="section__title">Education</h2>
             </div>
             <div class="education-grid">
