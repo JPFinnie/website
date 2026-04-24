@@ -645,55 +645,90 @@ footer a:hover{color:var(--gold)}
 
 // TICKER
 (function(){
-  const rows = [
-    {sym:'TSX', name:'S&P/TSX Composite', price:24812.44},
-    {sym:'SPX', name:'S&P 500', price:5874.12},
-    {sym:'XIC', name:'iShares Core Canada', price:39.82},
-    {sym:'VFV', name:'Vanguard S&P 500 CAD', price:124.07},
-    {sym:'AAPL',name:'Apple Inc.', price:228.45},
-    {sym:'SHOP',name:'Shopify Inc.', price:112.68},
-    {sym:'RY',  name:'Royal Bank of Canada', price:178.90},
-    {sym:'BTC', name:'Bitcoin / USD', price:68420.00},
-  ];
   const container = document.getElementById('ticker-rows');
+  const liveLabel = document.querySelector('.ticker__live');
+  const tc = document.getElementById('tick-count');
+  const bars = document.getElementById('sig-bars');
   if (!container) return;
+
+  let rows = [];
+  let isLive = false;
+  let tickN = 0;
+
+  // Seed rows for initial render / fallback
+  const SEED = [
+    {sym:'TSX',  name:'S&P/TSX Composite',    price:24812.44, chg:0},
+    {sym:'SPX',  name:'S&P 500',               price:5874.12,  chg:0},
+    {sym:'XIU',  name:'iShares S&P/TSX 60',    price:39.82,    chg:0},
+    {sym:'VFV',  name:'Vanguard S&P 500 CAD',  price:124.07,   chg:0},
+    {sym:'CM',   name:'CIBC',                  price:89.40,    chg:0},
+    {sym:'SHOP', name:'Shopify Inc.',           price:112.68,   chg:0},
+    {sym:'RY',   name:'Royal Bank of Canada',  price:178.90,   chg:0},
+    {sym:'BTC',  name:'Bitcoin / USD',         price:68420.00, chg:0},
+  ];
+  rows = SEED.map(r=>({...r}));
+
+  function fmt(price, sym){
+    if(sym==='TSX'||sym==='SPX') return price.toLocaleString('en-CA',{maximumFractionDigits:2});
+    return price.toFixed(2);
+  }
+
   function render(){
     container.innerHTML = rows.map(r=>{
-      const chgVal = r.chg||0;
-      const up = chgVal >= 0;
-      const sign = up ? '+' : '';
+      const up = r.chg >= 0;
       return `<div class="t-row">
         <span class="t-sym">${r.sym}</span>
         <span class="t-name">${r.name}</span>
-        <span class="t-price">${r.price.toFixed(2)}</span>
-        <span class="t-chg ${up?'up':'down'}">${sign}${chgVal.toFixed(2)}%</span>
+        <span class="t-price">${fmt(r.price, r.sym)}</span>
+        <span class="t-chg ${up?'up':'down'}">${up?'+':''}${r.chg.toFixed(2)}%</span>
       </div>`;
     }).join('');
   }
-  function step(){
+
+  // Simulated nudge — applied on top of live prices between refreshes
+  function nudge(){
     rows.forEach(r=>{
-      const vol = r.sym==='BTC'?0.8:(r.sym==='SPX'||r.sym==='TSX'?0.15:0.35);
-      const delta = (Math.random()-0.48)*vol;
-      r.price = Math.max(0.01, r.price * (1 + delta/100));
-      r.chg = ((r.chg||0)*0.92) + delta;
+      const vol = r.sym==='BTC'?0.12:(r.sym==='SPX'||r.sym==='TSX'?0.03:0.06);
+      const delta = (Math.random()-0.5)*vol;
+      r.price = Math.max(0.01, r.price*(1+delta/100));
+      r.chg = r.chg + delta * 0.1;
     });
     render();
+    tickN++;
+    if(tc) tc.textContent = 'tick '+String(tickN).padStart(5,'0');
   }
-  step(); setInterval(step,1800);
 
-  // Tick counter
-  let n = 0;
-  const tc = document.getElementById('tick-count');
-  setInterval(()=>{n++;if(tc)tc.textContent='tick '+String(n).padStart(5,'0')},1800);
+  // Fetch live quotes from /api/quotes
+  async function fetchLive(){
+    try {
+      const res = await fetch('/api/quotes');
+      if(!res.ok) throw new Error(res.status);
+      const data = await res.json();
+      if(!Array.isArray(data)||!data.length) throw new Error('empty');
+      // Merge live prices into rows, preserving order
+      data.forEach(q=>{
+        const r = rows.find(x=>x.sym===q.sym);
+        if(r){ r.price=q.price; r.chg=q.chg; }
+        else rows.push(q);
+      });
+      isLive = true;
+      if(liveLabel) liveLabel.textContent = 'Live';
+      render();
+    } catch(e){
+      // Stay on simulated data; label already says Synthesizing
+    }
+  }
 
   // Signal bars
-  const bars = document.getElementById('sig-bars');
-  if (bars) {
-    for (let i=0;i<40;i++){const b=document.createElement('div');b.style.height=(15+Math.random()*70)+'%';b.style.opacity=.25+Math.random()*.55;bars.appendChild(b)}
-    setInterval(()=>{
-      [...bars.children].forEach(b=>{b.style.height=(15+Math.random()*70)+'%';b.style.opacity=.25+Math.random()*.55});
-    },900);
+  if(bars){
+    for(let i=0;i<40;i++){const b=document.createElement('div');b.style.height=(15+Math.random()*70)+'%';b.style.opacity=.25+Math.random()*.55;bars.appendChild(b)}
+    setInterval(()=>{[...bars.children].forEach(b=>{b.style.height=(15+Math.random()*70)+'%';b.style.opacity=.25+Math.random()*.55})},900);
   }
+
+  render();
+  fetchLive();
+  setInterval(nudge, 1800);
+  setInterval(fetchLive, 30000); // refresh live data every 30s
 })();
 </script>
 </body>
