@@ -22,7 +22,7 @@
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:var(--sans);font-weight:400;font-size:15px;line-height:1.65;color:var(--text);background:var(--ink);overflow-x:hidden;cursor:none}
 @media(pointer:coarse){body{cursor:auto}.cursor,.cursor-dot{display:none!important}}
 img{display:block;max-width:100%}
@@ -402,19 +402,19 @@ footer a:hover{color:var(--gold)}
       <span class="system-card__idx">Engine / 01</span>
       <h3 class="system-card__title">Feedback <em>Agent</em></h3>
       <p class="system-card__desc">A background loop that reads every channel, clusters intent, and proposes roadmap work &mdash; while the team sleeps.</p>
-      <svg class="diagram" viewBox="0 0 420 320" data-animate>
+      <svg class="diagram" viewBox="-8 0 436 320" data-animate>
         <rect class="node accent" x="10" y="20" width="140" height="32"/>
         <text x="80" y="40" text-anchor="middle">Slack / GH / Support</text>
-        <rect class="node" x="270" y="20" width="140" height="32"/>
-        <text x="340" y="40" text-anchor="middle">Sentiment</text>
+        <rect class="node" x="270" y="20" width="148" height="32"/>
+        <text x="344" y="40" text-anchor="middle">Sentiment</text>
         <rect class="node" x="10" y="140" width="140" height="32"/>
         <text x="80" y="160" text-anchor="middle">Clusters</text>
-        <rect class="node" x="270" y="140" width="140" height="32"/>
-        <text x="340" y="160" text-anchor="middle">Opportunity Score</text>
+        <rect class="node" x="270" y="140" width="148" height="32"/>
+        <text x="344" y="160" text-anchor="middle">Opportunity Score</text>
         <rect class="node accent" x="140" y="260" width="140" height="32"/>
         <text x="210" y="280" text-anchor="middle">Product Epic</text>
         <line class="edge" x1="150" y1="36" x2="270" y2="36"/>
-        <line class="edge" x1="340" y1="52" x2="340" y2="140"/>
+        <line class="edge" x1="344" y1="52" x2="344" y2="140"/>
         <line class="edge" x1="270" y1="156" x2="150" y2="156"/>
         <line class="edge" x1="80" y1="172" x2="80" y2="220"/>
         <line class="edge" x1="80" y1="220" x2="210" y2="220"/>
@@ -428,22 +428,22 @@ footer a:hover{color:var(--gold)}
       <span class="system-card__idx">Engine / 02</span>
       <h3 class="system-card__title">Capital <em>Decision Agent</em></h3>
       <p class="system-card__desc">State, tax, and signal collapsed by a deterministic solver &mdash; then narrated by a model the human can overrule.</p>
-      <svg class="diagram" viewBox="0 0 420 320" data-animate>
+      <svg class="diagram" viewBox="-8 0 436 320" data-animate>
         <rect class="node accent" x="10" y="20" width="140" height="32"/>
         <text x="80" y="40" text-anchor="middle">Holdings</text>
-        <rect class="node" x="270" y="20" width="140" height="32"/>
-        <text x="340" y="40" text-anchor="middle">Tax Position</text>
+        <rect class="node" x="270" y="20" width="148" height="32"/>
+        <text x="344" y="40" text-anchor="middle">Tax Position</text>
         <rect class="node" x="10" y="140" width="140" height="32"/>
         <text x="80" y="160" text-anchor="middle">Market Opportunity</text>
-        <rect class="node" x="270" y="140" width="140" height="32"/>
-        <text x="340" y="160" text-anchor="middle">Optimisation</text>
+        <rect class="node" x="270" y="140" width="148" height="32"/>
+        <text x="344" y="160" text-anchor="middle">Optimisation</text>
         <rect class="node accent" x="140" y="260" width="140" height="32"/>
         <text x="210" y="280" text-anchor="middle">Next Best Action</text>
         <line class="edge" x1="150" y1="36" x2="270" y2="36"/>
         <line class="edge" x1="80" y1="52" x2="80" y2="140"/>
-        <line class="edge" x1="340" y1="52" x2="340" y2="140"/>
+        <line class="edge" x1="344" y1="52" x2="344" y2="140"/>
         <line class="edge" x1="150" y1="156" x2="270" y2="156"/>
-        <line class="edge" x1="340" y1="172" x2="210" y2="260"/>
+        <line class="edge" x1="344" y1="172" x2="210" y2="260"/>
         <line class="edge" x1="80" y1="172" x2="210" y2="260"/>
         <circle class="pulse" cx="210" cy="276" r="4"/>
       </svg>
