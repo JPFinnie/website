@@ -135,8 +135,7 @@ main{position:relative;z-index:1}
 .case__link:hover{gap:18px}
 
 /* SYSTEMS — animated SVG diagrams */
-.systems-section{background:var(--ink-1);margin:0 -50vw;padding-left:calc(50vw - 660px);padding-right:calc(50vw - 660px);max-width:none;position:relative}
-@media(max-width:1320px){.systems-section{padding-left:var(--gutter);padding-right:var(--gutter);margin:0}}
+.systems-bg{background:var(--ink-1)}
 .systems-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line)}
 .system-card{padding:48px 40px;border-right:1px solid var(--line);position:relative}
 .system-card:last-child{border-right:none}
@@ -180,27 +179,6 @@ main{position:relative;z-index:1}
 .tl__desc{font-size:14px;color:var(--text-2);line-height:1.7;max-width:60ch}
 .tl__loc{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
 
-/* CURRENTLY */
-.currently-section{background:var(--ink-1);margin:0 -50vw;padding-left:calc(50vw - 660px);padding-right:calc(50vw - 660px);max-width:none}
-@media(max-width:1320px){.currently-section{padding-left:var(--gutter);padding-right:var(--gutter);margin:0}}
-.cur-stamp{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:40px;display:flex;align-items:center;gap:10px}
-.cur-stamp::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%}
-.cur-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
-.cur-col h4{font-family:var(--serif);font-weight:400;font-size:1.375rem;color:var(--white);margin-bottom:24px;font-variation-settings:"opsz" 28}
-.cur-col h4 em{font-style:italic;color:var(--gold)}
-.cur-col ul li{padding:14px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--text);line-height:1.5}
-.cur-col ul li span{display:block;font-size:12px;color:var(--text-3);margin-top:4px;font-family:var(--mono);letter-spacing:.04em}
-
-/* WRITING shell */
-.writing-list{display:flex;flex-direction:column}
-.wr-item{display:grid;grid-template-columns:120px 1fr auto;gap:40px;padding:32px 0;border-bottom:1px solid var(--line);align-items:baseline;transition:padding .4s var(--ease)}
-.wr-item:hover{padding-left:24px}
-.wr-item:hover .wr-title{color:var(--gold)}
-.wr-date{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--text-3)}
-.wr-title{font-family:var(--serif);font-weight:300;font-size:1.625rem;line-height:1.2;color:var(--white);transition:color .3s var(--ease);font-variation-settings:"opsz" 28}
-.wr-title em{font-style:italic}
-.wr-meta{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
-.wr-note{margin-top:48px;padding:24px;border:1px dashed var(--line-2);font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--text-3);text-align:center}
 
 /* CONTACT */
 .contact{padding:200px var(--gutter) 100px;text-align:center;position:relative;max-width:var(--max);margin:0 auto;border-top:1px solid var(--line)}
@@ -233,9 +211,8 @@ footer a:hover{color:var(--gold)}
   .systems-grid{grid-template-columns:1fr}
   .system-card{border-right:none;border-bottom:1px solid var(--line)}
   .about-grid{grid-template-columns:1fr;gap:40px}
-  .tl__item,.wr-item{grid-template-columns:1fr;gap:8px}
-  .tl__date,.wr-date{order:-1}
-  .cur-grid{grid-template-columns:1fr;gap:40px}
+  .tl__item{grid-template-columns:1fr;gap:8px}
+  .tl__date{order:-1}
   .section{padding:80px var(--gutter)}
   .header__nav{display:none}
 }
@@ -259,7 +236,6 @@ footer a:hover{color:var(--gold)}
     <a href="#work">Work</a>
     <a href="#systems">Systems</a>
     <a href="#about">About</a>
-    <a href="#writing">Writing</a>
     <a href="#contact">Contact</a>
   </nav>
   <span class="header__time" id="clock">— — : — —  TOR</span>
@@ -391,7 +367,8 @@ footer a:hover{color:var(--gold)}
 </section>
 
 <!-- SYSTEMS -->
-<section class="section systems-section" id="systems">
+<div class="systems-bg">
+<section class="section" id="systems">
   <div class="sec-head reveal">
     <span class="sec-num">&sect; 03</span>
     <h2 class="sec-title">Systems <em>&mdash; agents in production.</em></h2>
@@ -451,6 +428,7 @@ footer a:hover{color:var(--gold)}
     </div>
   </div>
 </section>
+</div>
 
 <!-- ABOUT -->
 <section class="section" id="about">
@@ -518,62 +496,9 @@ footer a:hover{color:var(--gold)}
   </div>
 </section>
 
-<!-- CURRENTLY -->
-<section class="section currently-section" id="now">
-  <div class="sec-head reveal">
-    <span class="sec-num">&sect; 06</span>
-    <h2 class="sec-title">Currently <em>&mdash; shipping, reading, watching.</em></h2>
-  </div>
-  <div class="cur-stamp reveal">Last updated &mdash; April 2026</div>
-  <div class="cur-grid">
-    <div class="cur-col reveal">
-      <h4><em>Shipping</em></h4>
-      <ul>
-        <li>Agent surface for Investor&rsquo;s Edge <span>Q2 &middot; in review</span></li>
-        <li>Prism v2 &mdash; the conversational lens <span>Weekends</span></li>
-        <li>Signal &mdash; clustering + eval harness <span>Open source</span></li>
-      </ul>
-    </div>
-    <div class="cur-col reveal reveal-d1">
-      <h4><em>Reading</em></h4>
-      <ul>
-        <li>Anthropic &mdash; Constitutional AI &amp; Sonnet 4.5 evals <span>Alignment as UX</span></li>
-        <li>The Deficit Myth &mdash; Stephanie Kelton <span>MMT as a lens</span></li>
-        <li>Papers on tool-use + RLHF calibration <span>Trust, legibility</span></li>
-      </ul>
-    </div>
-    <div class="cur-col reveal reveal-d2">
-      <h4><em>Watching</em></h4>
-      <ul>
-        <li>How agents change the shape of the PM role <span>Essay in progress</span></li>
-        <li>Trust as a measurable UX property <span>Open question</span></li>
-        <li>Retail optimisation under behavioural drift <span>Prism R&amp;D</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- WRITING -->
-<section class="section" id="writing">
-  <div class="sec-head reveal">
-    <span class="sec-num">&sect; 07</span>
-    <h2 class="sec-title">Writing <em>&mdash; coming soon.</em></h2>
-  </div>
-  <div class="writing-list">
-    <div class="wr-item reveal">
-      <span class="wr-date">Soon</span>
-      <div>
-        <h3 class="wr-title">Essays forthcoming &mdash; <em>on agents, trust, and the PM role in flux.</em></h3>
-      </div>
-      <span class="wr-meta">Index opening 2026</span>
-    </div>
-  </div>
-  <p class="wr-note reveal">No posts yet. The first essays land when they&rsquo;re honest enough to publish &mdash; reach out below to hear first.</p>
-</section>
-
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <div class="contact__eyebrow reveal">&sect; 08 &mdash; Get in touch</div>
+  <div class="contact__eyebrow reveal">&sect; 06 &mdash; Get in touch</div>
   <h2 class="contact__title reveal reveal-d1">Let&rsquo;s <span style="font-style:normal;color:var(--gold);">build.</span></h2>
   <p class="reveal reveal-d2" style="max-width:540px;margin:0 auto;font-size:15px;color:var(--text-2);line-height:1.7">Open to conversations on agents, fintech, and the edge between what a model proposes and what a human actually trusts.</p>
   <div class="contact__links reveal reveal-d3">
