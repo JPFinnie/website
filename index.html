@@ -29,7 +29,7 @@
   --paper:#f6f4ee; --surface:#fcfbf7; --surface-2:#f1efe7;
   --ink:#1b1915; --ink-soft:#56524a; --ink-faint:#8d887c;
   --line:#e4e0d5; --line-2:#d6d1c3;
-  --accent:#9c6b3f; --accent-2:#7d5430; --accent-tint:rgba(156,107,63,.08);
+  --accent:#1f3f6b; --accent-2:#15294a; --accent-tint:rgba(31,63,107,.08);
   --display:'Space Grotesk',sans-serif;
   --sans:'Inter',sans-serif;
   --mono:'JetBrains Mono',monospace;
@@ -55,8 +55,8 @@ em{font-style:normal}
 .header.scrolled{border-bottom:1px solid var(--line)}
 .header__id{display:flex;align-items:center;gap:11px;font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:var(--ink)}
 .header__id b{font-weight:500}
-.header__dot{width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 0 0 rgba(156,107,63,.4);animation:pulse 2.8s ease-out infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(156,107,63,.4)}70%{box-shadow:0 0 0 7px rgba(156,107,63,0)}100%{box-shadow:0 0 0 0 rgba(156,107,63,0)}}
+.header__dot{width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 0 0 rgba(31,63,107,.4);animation:pulse 2.8s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,63,107,.4)}70%{box-shadow:0 0 0 7px rgba(31,63,107,0)}100%{box-shadow:0 0 0 0 rgba(31,63,107,0)}}
 .header__nav{display:flex;gap:30px;font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:var(--ink-soft)}
 .header__nav a{transition:color .25s var(--ease)}
 .header__nav a:hover{color:var(--accent)}
@@ -85,7 +85,7 @@ main{position:relative;z-index:1}
 .hero__actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;letter-spacing:.02em;padding:14px 22px;border-radius:100px;transition:transform .25s var(--ease),background .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease)}
 .btn--primary{background:var(--ink);color:var(--paper)}
-.btn--primary:hover{background:var(--accent);box-shadow:0 10px 30px -12px rgba(156,107,63,.55)}
+.btn--primary:hover{background:var(--accent);box-shadow:0 10px 30px -12px rgba(31,63,107,.55)}
 .btn--ghost{border:1px solid var(--line-2);color:var(--ink)}
 .btn--ghost:hover{border-color:var(--ink);transform:translateY(-1px)}
 
@@ -170,10 +170,18 @@ footer{border-top:1px solid var(--line);padding:30px var(--gutter);max-width:var
 footer a:hover{color:var(--accent)}
 
 /* Reveal */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
-.reveal.is-visible{opacity:1;transform:translateY(0)}
+.reveal{opacity:0;transform:translateY(26px);filter:blur(6px);transition:opacity .9s var(--ease),transform .9s var(--ease),filter .9s var(--ease)}
+.reveal.is-visible{opacity:1;transform:translateY(0);filter:blur(0)}
 .reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}.reveal-d3{transition-delay:.24s}.reveal-d4{transition-delay:.32s}
-@media(prefers-reduced-motion:reduce){.reveal{transition:none;opacity:1;transform:none}}
+
+/* Text-generate (hero word streaming) */
+.tg-word{display:inline-block;opacity:0;filter:blur(9px);transform:translateY(6px);transition:opacity .6s var(--ease),filter .6s var(--ease),transform .6s var(--ease)}
+.tg-word.is-in{opacity:1;filter:blur(0);transform:none}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal{transition:none;opacity:1;transform:none;filter:none}
+  .tg-word{transition:none;opacity:1;filter:none;transform:none}
+}
 
 /* Responsive */
 @media(max-width:960px){
@@ -222,8 +230,8 @@ footer a:hover{color:var(--accent)}
 <section class="hero">
   <div class="hero__left">
     <div class="hero__eyebrow reveal">Senior Product Manager &middot; AI &amp; Agentic Product</div>
-    <h1 class="hero__title reveal reveal-d1">James<br><em>Finnie</em></h1>
-    <p class="hero__lede reveal reveal-d2">
+    <h1 class="hero__title">James<br><em>Finnie</em></h1>
+    <p class="hero__lede">
       I build <strong>AI-native products and deep context systems</strong> &mdash; prototype-first, agents in the loop, and a relentless focus on <strong>what</strong> we&rsquo;re building and <strong>why</strong>.
     </p>
     <div class="hero__actions reveal reveal-d3">
@@ -491,6 +499,44 @@ footer a:hover{color:var(--accent)}
     el.textContent = d.toLocaleTimeString('en-GB',opts) + '  TOR';
   }
   tick(); setInterval(tick, 1000*15);
+})();
+
+// HERO TEXT-GENERATE — stream words in from blur (Aceternity-style, vanilla)
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function streamify(root){
+    const spans = [];
+    (function walk(node){
+      [...node.childNodes].forEach(n=>{
+        if(n.nodeType === 3){
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(tok=>{
+            if(tok === '' ) return;
+            if(/^\s+$/.test(tok)){ frag.appendChild(document.createTextNode(tok)); return; }
+            const s = document.createElement('span');
+            s.className = 'tg-word';
+            s.textContent = tok;
+            frag.appendChild(s);
+            spans.push(s);
+          });
+          n.replaceWith(frag);
+        } else if(n.nodeType === 1 && n.tagName !== 'BR'){
+          walk(n);
+        }
+      });
+    })(root);
+    return spans;
+  }
+  function run(sel, base, step){
+    const el = document.querySelector(sel);
+    if(!el) return base;
+    const words = streamify(el);
+    if(reduce){ words.forEach(w=>w.classList.add('is-in')); return base; }
+    words.forEach((w,i)=> setTimeout(()=>w.classList.add('is-in'), base + i*step));
+    return base + words.length*step;
+  }
+  const afterTitle = run('.hero__title', 120, 110);
+  run('.hero__lede', afterTitle + 120, 42);
 })();
 </script>
 
