@@ -10,7 +10,7 @@ Personal portfolio for James Finnie — Senior Product Manager at CIBC Investor'
 
 Single-page portfolio (`index.html`) with no build step, no framework, no dependencies. Served as a static file.
 
-**Sections:** Hero · Thesis · Selected Work · Systems · About · Experience · Capabilities · Contact
+**Sections:** Hero · About · Focus areas · Experience · Capabilities · Contact
 
 ---
 
@@ -20,7 +20,7 @@ Single-page portfolio (`index.html`) with no build step, no framework, no depend
 |---|---|
 | Markup | Vanilla HTML |
 | Styles | Inline CSS — Fraunces (variable serif) + JetBrains Mono + Outfit |
-| Motion | CSS transitions + IntersectionObserver reveals + SVG stroke animation |
+| Motion | CSS transitions + IntersectionObserver reveals |
 | Hosting | Vercel (static) |
 | Analytics | Vercel Web Analytics + Speed Insights (static-script injection) |
 
@@ -30,22 +30,14 @@ No bundler. No npm install needed to view or edit.
 
 ---
 
-## Projects featured
-
-| Project | Description | Link |
-|---|---|---|
-| **Signal** | AI agent that ingests product feedback from Slack, GitHub, and support channels — clusters intent and drafts epics | [product-plum-nu.vercel.app](https://product-plum-nu.vercel.app) |
-| **Prism** | Portfolio intelligence tool — deterministic solver surfaces the single highest-EV move for self-directed investors | [portfoliiointeligence.vercel.app](https://portfoliiointeligence.vercel.app) |
-| **DICOM Viewer** | Browser-native CT scan viewer built in under an hour to read my own surgical scans — zero server, open source | [imaging-umber.vercel.app](https://imaging-umber.vercel.app) |
-
----
-
 ## Design
 
-- **Palette:** Near-black (`#050505`) with warm gold accent (`#c8a87c`)
-- **Type:** Fraunces variable serif (optical-size aware) + JetBrains Mono for labels/UI
-- **Motifs:** Decision-grid background, custom gold cursor, live market ticker in hero
-- **Motion:** IntersectionObserver reveals, SVG edge-draw animations, no libraries
+- **Palette:** Warm paper (`#f6f4ee`) with near-black ink (`#1b1915`) and a bronze accent (`#9c6b3f`) — light, modern, editorial
+- **Type:** Fraunces variable serif (optical-size aware) for display + Outfit for body + JetBrains Mono for labels/UI
+- **Layout:** At-a-glance hero card, focus-area grid, experience timeline, capability columns
+- **Motion:** IntersectionObserver fade-up reveals, scroll progress bar, no libraries
+
+> Content is deliberately written in generalities to respect employer IP — capability themes and domains rather than internal specifics.
 
 ---
 

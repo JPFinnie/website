@@ -3,278 +3,221 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>James Finnie — Senior Product Manager · AI &amp; Fintech</title>
-<meta name="description" content="Senior Product Manager building the agent layer for finance — AI-assisted investing, intelligent systems, and the seam between what a model proposes and what a human decides. Open to new roles.">
+<title>James Finnie — Senior Product Manager · WealthTech &amp; AI</title>
+<meta name="description" content="Senior Product Manager / Product Owner building AI-enabled, commercially grounded product strategy for regulated digital platforms — across wealth, brokerage, fintech, and connected health. Toronto. Open to new roles.">
 <meta name="author" content="James Finnie">
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#f6f4ee">
 <link rel="canonical" href="https://www.james-finnie.com/">
 
-<!-- Open Graph — recruiters & LinkedIn shares -->
+<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.james-finnie.com/">
-<meta property="og:title" content="James Finnie — Senior Product Manager · AI &amp; Fintech">
-<meta property="og:description" content="Building the agent layer for finance — AI-assisted investing, intelligent systems, and the seam between what a model proposes and what a human decides. Open to new roles.">
-<meta property="og:image" content="https://www.james-finnie.com/signal.jpg">
+<meta property="og:title" content="James Finnie — Senior Product Manager · WealthTech &amp; AI">
+<meta property="og:description" content="AI-enabled, commercially grounded product strategy for regulated digital platforms — wealth, brokerage, fintech, connected health. Open to new roles.">
 <meta property="og:site_name" content="James Finnie">
 
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="James Finnie — Senior Product Manager · AI &amp; Fintech">
-<meta name="twitter:description" content="Building the agent layer for finance. AI-assisted investing, intelligent systems, decision-support. Open to new roles.">
-<meta name="twitter:image" content="https://www.james-finnie.com/signal.jpg">
+<meta name="twitter:title" content="James Finnie — Senior Product Manager · WealthTech &amp; AI">
+<meta name="twitter:description" content="AI-enabled product strategy for regulated digital platforms — wealth, brokerage, fintech, connected health. Open to new roles.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --black:#000; --ink:#050505; --ink-1:#0a0a0a; --ink-2:#0f0f0f; --ink-3:#141414;
-  --white:#f2f0ec; --text:#cfc9bf; --text-2:#7c7468; --text-3:#3a352d;
-  --gold:#c8a87c; --gold-2:#b8965e; --gold-dim:rgba(200,168,124,.12);
-  --line:#1a1814; --line-2:#25221c;
-  --red:#d95e4a; --green:#7ea36b;
+  --paper:#f6f4ee; --surface:#fcfbf7; --surface-2:#f1efe7;
+  --ink:#1b1915; --ink-soft:#56524a; --ink-faint:#8d887c;
+  --line:#e4e0d5; --line-2:#d6d1c3;
+  --accent:#9c6b3f; --accent-2:#7d5430; --accent-tint:rgba(156,107,63,.08);
+  --green:#5f7d4f;
   --serif:'Fraunces',Georgia,serif;
   --sans:'Outfit',sans-serif;
   --mono:'JetBrains Mono',monospace;
-  --gutter:32px; --max:1320px;
+  --gutter:32px; --max:1240px;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:var(--sans);font-weight:400;font-size:15px;line-height:1.65;color:var(--text);background:var(--ink);overflow-x:hidden;cursor:none}
-@media(pointer:coarse){body{cursor:auto}.cursor,.cursor-dot{display:none!important}}
+body{font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.65;color:var(--ink);background:var(--paper);overflow-x:hidden}
 img{display:block;max-width:100%}
-a{color:inherit;text-decoration:none;cursor:none}
-button{font-family:inherit;cursor:none;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
 ul{list-style:none}
-::selection{background:var(--gold);color:var(--black)}
-
-/* Decision grid overlay — signature motif */
-.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size:80px 80px;
-  opacity:.35;
-  mask-image:radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 80%);
-  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 80%);
-}
-.grain{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.04;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:220px;}
-
-/* Cursor */
-.cursor{position:fixed;top:0;left:0;width:28px;height:28px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s var(--ease),height .25s var(--ease),background .25s var(--ease),border-color .25s var(--ease)}
-.cursor-dot{position:fixed;top:0;left:0;width:4px;height:4px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%)}
-.cursor.is-hover{width:56px;height:56px;background:var(--gold-dim);border-color:var(--gold)}
-.cursor.is-text{width:2px;height:28px;border-radius:1px;background:var(--gold);border:none}
+::selection{background:var(--accent);color:#fff}
 
 /* Scroll progress */
-.progress{position:fixed;top:0;left:0;right:0;height:1px;background:var(--line);z-index:200}
-.progress::after{content:'';position:absolute;top:0;left:0;height:100%;width:var(--p,0%);background:var(--gold);transition:width .05s linear}
+.progress{position:fixed;top:0;left:0;right:0;height:2px;background:transparent;z-index:200}
+.progress::after{content:'';position:absolute;top:0;left:0;height:100%;width:var(--p,0%);background:var(--accent);transition:width .05s linear}
 
 /* Header */
-.header{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px var(--gutter);display:flex;justify-content:space-between;align-items:center;mix-blend-mode:difference;color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
-.header__id{display:flex;align-items:baseline;gap:14px}
-.header__dot{width:6px;height:6px;background:var(--gold);border-radius:50%;display:inline-block;animation:pulse 2.4s ease-in-out infinite;mix-blend-mode:normal}
-@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
-.header__nav{display:flex;gap:28px}
-.header__nav a{opacity:.7;transition:opacity .3s var(--ease),color .3s var(--ease)}
-.header__nav a:hover{opacity:1}
-.header__time{opacity:.5}
+.header{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px var(--gutter);display:flex;justify-content:space-between;align-items:center;
+  background:rgba(246,244,238,.78);backdrop-filter:saturate(140%) blur(12px);-webkit-backdrop-filter:saturate(140%) blur(12px);border-bottom:1px solid transparent;transition:border-color .3s var(--ease)}
+.header.scrolled{border-bottom:1px solid var(--line)}
+.header__id{display:flex;align-items:center;gap:11px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink)}
+.header__id b{font-weight:500}
+.header__dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 0 0 rgba(95,125,79,.45);animation:pulse 2.6s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(95,125,79,.45)}70%{box-shadow:0 0 0 7px rgba(95,125,79,0)}100%{box-shadow:0 0 0 0 rgba(95,125,79,0)}}
+.header__nav{display:flex;gap:30px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink-soft)}
+.header__nav a{transition:color .25s var(--ease)}
+.header__nav a:hover{color:var(--accent)}
+.header__cta{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--accent);border:1px solid var(--line-2);border-radius:100px;padding:7px 15px;transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease)}
+.header__cta:hover{background:var(--accent);border-color:var(--accent);color:#fff}
 
 main{position:relative;z-index:1}
 
+/* Shared section scaffold */
+.section{padding:120px var(--gutter);max-width:var(--max);margin:0 auto;position:relative}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:'';width:26px;height:1px;background:var(--accent)}
+.sec-head{margin-bottom:72px}
+.sec-head .eyebrow{margin-bottom:26px}
+.sec-title{font-family:var(--serif);font-weight:300;font-size:clamp(2.25rem,4.5vw,3.6rem);letter-spacing:-.02em;line-height:1.05;color:var(--ink);font-variation-settings:"opsz" 72;max-width:18ch}
+.sec-title em{font-style:italic;color:var(--accent)}
+
 /* HERO */
-.hero{position:relative;min-height:100vh;padding:120px var(--gutter) 80px;display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center;max-width:var(--max);margin:0 auto}
-.hero__left{position:relative}
-.hero__meta{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:40px;display:flex;align-items:center;gap:12px}
-.hero__meta::before{content:'';width:32px;height:1px;background:var(--gold)}
-.hero__title{font-family:var(--serif);font-weight:300;font-size:clamp(4rem,9vw,8.5rem);line-height:.9;letter-spacing:-.04em;color:var(--white);margin-bottom:48px;font-variation-settings:"opsz" 36}
-.hero__title-line{display:block}
-.hero__title em{font-style:italic;font-weight:400;color:var(--gold)}
-.hero__thesis{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(1.25rem,2vw,1.6rem);line-height:1.35;color:var(--text);max-width:560px;margin-bottom:40px;font-variation-settings:"opsz" 14}
-.hero__thesis strong{font-style:normal;font-weight:400;color:var(--white);border-bottom:1px solid var(--gold);padding-bottom:2px}
-.hero__role{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--text-2);line-height:1.8}
-.hero__role span{color:var(--white)}
-.hero__status{display:inline-flex;align-items:center;gap:10px;margin-top:28px;padding:9px 16px;border:1px solid var(--line-2);border-radius:100px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text);background:rgba(200,168,124,.04);transition:border-color .3s var(--ease),color .3s var(--ease)}
-.hero__status:hover{border-color:var(--gold);color:var(--white)}
-.hero__status::before{content:'';width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 0 0 rgba(126,163,107,.5);animation:availPulse 2.4s ease-out infinite}
-@keyframes availPulse{0%{box-shadow:0 0 0 0 rgba(126,163,107,.5)}70%{box-shadow:0 0 0 7px rgba(126,163,107,0)}100%{box-shadow:0 0 0 0 rgba(126,163,107,0)}}
+.hero{padding:160px var(--gutter) 90px;max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.25fr .9fr;gap:72px;align-items:center;min-height:92vh}
+.hero__eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:30px;display:flex;align-items:center;gap:12px}
+.hero__eyebrow::before{content:'';width:26px;height:1px;background:var(--accent)}
+.hero__title{font-family:var(--serif);font-weight:300;font-size:clamp(3.4rem,7.5vw,6.6rem);line-height:.94;letter-spacing:-.035em;color:var(--ink);margin-bottom:34px;font-variation-settings:"opsz" 144}
+.hero__title em{font-style:italic;font-weight:400}
+.hero__lede{font-family:var(--serif);font-weight:300;font-size:clamp(1.3rem,2vw,1.7rem);line-height:1.4;color:var(--ink-soft);max-width:30ch;margin-bottom:36px;font-variation-settings:"opsz" 20}
+.hero__lede strong{font-weight:500;color:var(--ink);font-style:italic}
+.hero__actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;letter-spacing:.04em;padding:14px 22px;border-radius:100px;transition:transform .25s var(--ease),background .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease)}
+.btn--primary{background:var(--ink);color:var(--paper)}
+.btn--primary:hover{background:var(--accent);box-shadow:0 10px 30px -12px rgba(156,107,63,.55)}
+.btn--ghost{border:1px solid var(--line-2);color:var(--ink)}
+.btn--ghost:hover{border-color:var(--ink);transform:translateY(-1px)}
+.hero__avail{margin-top:34px;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.05em;color:var(--ink-soft)}
+.hero__avail::before{content:'';width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 0 0 rgba(95,125,79,.45);animation:pulse 2.6s ease-out infinite}
 
-/* Hero ticker — right side */
-.ticker{position:relative;border:1px solid var(--line);background:linear-gradient(180deg, var(--ink-1) 0%, var(--ink-2) 100%);padding:28px;font-family:var(--mono);font-size:12px;overflow:hidden;min-height:460px}
-.ticker::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.6}
-.ticker__head{display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:20px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
-.ticker__head span:first-child{color:var(--gold)}
-.ticker__rows{display:flex;flex-direction:column;gap:14px}
-.t-row{display:grid;grid-template-columns:56px 1fr auto auto;gap:14px;align-items:center;padding-bottom:12px;border-bottom:1px dashed var(--line)}
-.t-row:last-child{border-bottom:none}
-.t-sym{color:var(--white);font-weight:500;letter-spacing:.04em}
-.t-name{color:var(--text-2);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.t-price{color:var(--text);text-align:right;font-variant-numeric:tabular-nums}
-.t-chg{text-align:right;font-size:11px;font-variant-numeric:tabular-nums;min-width:64px}
-.t-chg.up{color:var(--green)}
-.t-chg.down{color:var(--red)}
-.ticker__footer{margin-top:24px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
-.ticker__live{display:flex;align-items:center;gap:6px;color:var(--gold)}
-.ticker__live::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 1.4s ease-in-out infinite}
-.sig-bars{margin-top:18px;height:44px;display:flex;align-items:flex-end;gap:3px}
-.sig-bars div{flex:1;background:var(--gold);opacity:.4;transition:height .6s var(--ease),opacity .6s var(--ease)}
+/* At-a-glance card */
+.glance{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:30px;box-shadow:0 30px 60px -40px rgba(27,25,21,.35)}
+.glance__head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.glance__head b{color:var(--accent);font-weight:500}
+.glance__row{display:grid;grid-template-columns:78px 1fr;gap:16px;padding:16px 0;border-bottom:1px dashed var(--line);align-items:baseline}
+.glance__row:last-of-type{border-bottom:none}
+.glance__k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.glance__v{font-size:14px;line-height:1.45;color:var(--ink)}
+.glance__v b{font-weight:500}
+.glance__foot{margin-top:14px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-soft);display:flex;align-items:center;gap:9px}
+.glance__foot::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green)}
 
-.hero__scroll{position:absolute;bottom:40px;left:var(--gutter);font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-3);display:flex;align-items:center;gap:12px}
-.hero__scroll::after{content:'';width:60px;height:1px;background:var(--line);position:relative;overflow:hidden}
+/* ABOUT */
+.about{display:grid;grid-template-columns:1fr 1.15fr;gap:90px;align-items:start}
+.about__lead{font-family:var(--serif);font-weight:300;font-size:clamp(1.7rem,2.6vw,2.4rem);line-height:1.22;letter-spacing:-.015em;color:var(--ink);font-variation-settings:"opsz" 48}
+.about__lead em{font-style:italic;color:var(--accent)}
+.about__body{display:flex;flex-direction:column;gap:22px}
+.about__body p{font-size:16px;line-height:1.75;color:var(--ink-soft)}
+.about__body p strong{color:var(--ink);font-weight:500}
+.about__quote{font-family:var(--serif);font-style:italic;font-weight:300;font-size:1.5rem;line-height:1.35;color:var(--accent-2);padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-variation-settings:"opsz" 40}
 
-/* Section scaffold */
-.section{padding:140px var(--gutter);max-width:var(--max);margin:0 auto;position:relative}
-.sec-head{display:grid;grid-template-columns:80px 1fr;gap:40px;margin-bottom:80px;padding-bottom:40px;border-bottom:1px solid var(--line);align-items:baseline}
-.sec-num{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
-.sec-title{font-family:var(--serif);font-weight:300;font-size:clamp(2.25rem,5vw,4rem);letter-spacing:-.025em;color:var(--white);line-height:1;font-variation-settings:"opsz" 72}
-.sec-title em{font-style:italic;color:var(--gold)}
+/* PRINCIPLES */
+.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);margin-top:64px}
+.principle{padding:34px 30px;border-right:1px solid var(--line)}
+.principle:last-child{border-right:none}
+.principle__n{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent);margin-bottom:18px}
+.principle__t{font-family:var(--serif);font-weight:400;font-size:1.4rem;color:var(--ink);margin-bottom:12px;font-variation-settings:"opsz" 30}
+.principle__d{font-size:14.5px;line-height:1.6;color:var(--ink-soft)}
 
-/* THESIS */
-.thesis{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
-.thesis__item{padding:40px 32px 40px 0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);position:relative}
-.thesis__item:last-child{border-right:none}
-.thesis__num{font-family:var(--mono);font-size:11px;letter-spacing:.15em;color:var(--text-3);margin-bottom:24px;display:block}
-.thesis__body{font-family:var(--serif);font-weight:300;font-size:1.25rem;line-height:1.4;color:var(--text);font-variation-settings:"opsz" 24}
-.thesis__body em{font-style:italic;color:var(--gold)}
+/* FOCUS */
+.focus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.fcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease)}
+.fcard:hover{transform:translateY(-4px);box-shadow:0 28px 50px -34px rgba(27,25,21,.4);border-color:var(--line-2)}
+.fcard__n{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ink-faint);margin-bottom:22px}
+.fcard__t{font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.15;color:var(--ink);margin-bottom:14px;font-variation-settings:"opsz" 32}
+.fcard__d{font-size:14.5px;line-height:1.6;color:var(--ink-soft);margin-bottom:22px}
+.fcard__tags{display:flex;flex-wrap:wrap;gap:7px}
+.fcard__tags span{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--accent-2);background:var(--accent-tint);border-radius:100px;padding:4px 11px}
 
-/* WORK — case strips */
-.case{display:grid;grid-template-columns:440px 1fr;gap:80px;padding:80px 0;border-bottom:1px solid var(--line);align-items:start}
-.case:first-child{padding-top:0}
-.case__visual{position:relative;aspect-ratio:4/3;overflow:hidden;border:1px solid var(--line);background:var(--ink-2)}
-.case__visual img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.05);transition:transform .9s var(--ease),filter .6s var(--ease)}
-.case:hover .case__visual img{transform:scale(1.04);filter:saturate(1) contrast(1.1)}
-.case__tag{position:absolute;top:16px;left:16px;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:rgba(0,0,0,.7);backdrop-filter:blur(8px);padding:6px 12px;border:1px solid var(--line-2)}
-.case__kicker{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:18px;display:flex;gap:16px}
-.case__kicker span:not(:last-child)::after{content:'·';margin-left:16px;color:var(--line-2)}
-.case__title{font-family:var(--serif);font-weight:300;font-size:clamp(2rem,3.5vw,3.25rem);line-height:1.05;letter-spacing:-.02em;color:var(--white);margin-bottom:28px;font-variation-settings:"opsz" 72}
-.case__title em{font-style:italic;color:var(--gold)}
-.case__strip{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin:32px 0;padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.case__strip-item .strip__label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block}
-.case__strip-item .strip__text{font-size:13px;line-height:1.45;color:var(--text)}
-.case__link{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);padding-bottom:4px;border-bottom:1px solid var(--gold);transition:gap .3s var(--ease)}
-.case__link:hover{gap:18px}
-
-/* SYSTEMS — animated SVG diagrams */
-.systems-bg{background:var(--ink-1)}
-.systems-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line)}
-.system-card{padding:48px 40px;border-right:1px solid var(--line);position:relative}
-.system-card:last-child{border-right:none}
-.system-card__idx{font-family:var(--mono);font-size:10px;letter-spacing:.15em;color:var(--text-3);margin-bottom:20px}
-.system-card__title{font-family:var(--serif);font-weight:300;font-size:1.875rem;line-height:1.15;color:var(--white);margin-bottom:14px;font-variation-settings:"opsz" 36}
-.system-card__title em{font-style:italic;color:var(--gold)}
-.system-card__desc{font-size:14px;color:var(--text-2);line-height:1.65;margin-bottom:32px;max-width:42ch}
-.diagram{width:100%;height:320px;margin-bottom:28px}
-.diagram text{font-family:var(--mono);font-size:10px;letter-spacing:.08em;fill:var(--text);text-transform:uppercase}
-.diagram rect.node{fill:var(--ink-2);stroke:var(--line-2);stroke-width:1}
-.diagram rect.node.accent{stroke:var(--gold)}
-.diagram line.edge{stroke:var(--gold);stroke-width:1;stroke-dasharray:200;stroke-dashoffset:200;opacity:.5}
-.diagram.is-visible line.edge{animation:drawEdge 1.4s var(--ease) forwards}
-.diagram.is-visible line.edge:nth-of-type(2){animation-delay:.15s}
-.diagram.is-visible line.edge:nth-of-type(3){animation-delay:.3s}
-.diagram.is-visible line.edge:nth-of-type(4){animation-delay:.45s}
-.diagram.is-visible line.edge:nth-of-type(5){animation-delay:.6s}
-.diagram.is-visible line.edge:nth-of-type(6){animation-delay:.75s}
-.diagram circle.pulse{fill:var(--gold);opacity:0}
-.diagram.is-visible circle.pulse{animation:pulseOn 2s var(--ease) infinite 1.2s}
-@keyframes drawEdge{to{stroke-dashoffset:0}}
-@keyframes pulseOn{0%{opacity:0;r:3}50%{opacity:1;r:5}100%{opacity:0;r:3}}
-.system-card__outcome{padding-top:20px;border-top:1px solid var(--line);font-family:var(--serif);font-style:italic;font-weight:300;font-size:15px;color:var(--gold);font-variation-settings:"opsz" 14}
+/* EXPERIENCE */
+.exp-band{background:var(--surface-2)}
+.tl{border-top:1px solid var(--line)}
+.tl__item{display:grid;grid-template-columns:150px 1fr auto;gap:44px;padding:38px 12px 38px 0;border-bottom:1px solid var(--line);align-items:baseline;transition:padding .35s var(--ease),background .35s var(--ease)}
+.tl__item:hover{padding-left:20px;background:linear-gradient(90deg,var(--accent-tint),transparent)}
+.tl__date{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink-faint)}
+.tl__co{font-family:var(--serif);font-weight:500;font-size:1.5rem;color:var(--ink);margin-bottom:5px;font-variation-settings:"opsz" 30}
+.tl__role{font-family:var(--mono);font-size:12.5px;letter-spacing:.03em;color:var(--accent);margin-bottom:14px}
+.tl__desc{font-size:14.5px;color:var(--ink-soft);line-height:1.7;max-width:64ch}
+.tl__loc{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);white-space:nowrap}
+.edu{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:48px}
+.edu__item{border:1px solid var(--line);border-radius:14px;padding:24px 26px;background:var(--surface)}
+.edu__school{font-family:var(--serif);font-weight:500;font-size:1.15rem;color:var(--ink);margin-bottom:4px}
+.edu__deg{font-size:14px;color:var(--ink-soft)}
+.edu__yr{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-faint);margin-top:10px}
 
 /* CAPABILITIES */
 .caps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
-.cap{padding:36px 32px 36px 0;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cap{padding:34px 28px 34px 0;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
 .cap:last-child{border-right:none}
-.cap__label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:10px}
-.cap__label::before{content:'';width:20px;height:1px;background:var(--gold)}
-.cap__list{display:flex;flex-direction:column;gap:12px}
-.cap__list li{font-size:14px;line-height:1.4;color:var(--text);padding-left:18px;position:relative}
-.cap__list li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border:1px solid var(--text-3);transform:rotate(45deg)}
-.cap__list li strong{color:var(--white);font-weight:400}
-
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:100px;align-items:start}
-.about__tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
-.about__big{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(2rem,3.5vw,3rem);line-height:1.15;letter-spacing:-.02em;color:var(--white);margin-bottom:40px;font-variation-settings:"opsz" 60}
-.about__body{display:flex;flex-direction:column;gap:24px}
-.about__body p{font-size:15px;line-height:1.75;color:var(--text-2);max-width:none}
-.about__body p strong{color:var(--white);font-weight:400}
-.about__pq{font-family:var(--serif);font-weight:300;font-style:italic;font-size:1.75rem;line-height:1.3;color:var(--gold);padding:32px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:8px 0;font-variation-settings:"opsz" 48}
-
-/* EXPERIENCE — timeline */
-.tl{border-top:1px solid var(--line)}
-.tl__item{display:grid;grid-template-columns:140px 1fr auto;gap:40px;padding:40px 0;border-bottom:1px solid var(--line);align-items:baseline;transition:padding .4s var(--ease),background .4s var(--ease)}
-.tl__item:hover{padding-left:24px;background:linear-gradient(90deg,rgba(200,168,124,.04),transparent)}
-.tl__date{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--text-3)}
-.tl__body .tl__co{font-family:var(--serif);font-weight:400;font-size:1.5rem;color:var(--white);margin-bottom:6px;font-variation-settings:"opsz" 28}
-.tl__role{font-size:13px;color:var(--gold);margin-bottom:14px;font-family:var(--mono);letter-spacing:.04em}
-.tl__desc{font-size:14px;color:var(--text-2);line-height:1.7;max-width:60ch}
-.tl__loc{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
-
+.cap__label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;display:flex;align-items:center;gap:10px}
+.cap__label::before{content:'';width:18px;height:1px;background:var(--accent)}
+.cap__list{display:flex;flex-direction:column;gap:11px}
+.cap__list li{font-size:14px;line-height:1.4;color:var(--ink-soft);padding-left:18px;position:relative}
+.cap__list li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border:1px solid var(--accent);transform:rotate(45deg)}
+.cap__list li strong{color:var(--ink);font-weight:500}
 
 /* CONTACT */
-.contact{padding:200px var(--gutter) 100px;text-align:center;position:relative;max-width:var(--max);margin:0 auto;border-top:1px solid var(--line)}
-.contact__eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:32px}
-.contact__title{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(3rem,9vw,8rem);line-height:.9;letter-spacing:-.04em;color:var(--white);margin-bottom:40px;font-variation-settings:"opsz" 144}
-.contact__links{display:flex;justify-content:center;flex-wrap:wrap;gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:720px;margin:48px auto 0}
-.contact__link{flex:1;min-width:180px;padding:28px 20px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text);border-right:1px solid var(--line);transition:background .3s var(--ease),color .3s var(--ease)}
-.contact__link:last-child{border-right:none}
-.contact__link:hover{background:var(--gold);color:var(--black)}
-.contact__footnote{margin-top:80px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
+.contact{padding:150px var(--gutter) 110px;text-align:center;max-width:var(--max);margin:0 auto}
+.contact .eyebrow{justify-content:center;margin-bottom:30px}
+.contact .eyebrow::after{content:'';width:26px;height:1px;background:var(--accent)}
+.contact__title{font-family:var(--serif);font-weight:300;font-size:clamp(3rem,8vw,6.5rem);line-height:.95;letter-spacing:-.03em;color:var(--ink);margin-bottom:28px;font-variation-settings:"opsz" 144}
+.contact__title em{font-style:italic;color:var(--accent)}
+.contact__sub{max-width:50ch;margin:0 auto 50px;font-size:16px;color:var(--ink-soft);line-height:1.7}
+.contact__links{display:flex;justify-content:center;flex-wrap:wrap;gap:14px}
+.contact__link{font-family:var(--mono);font-size:13px;letter-spacing:.05em;padding:15px 26px;border:1px solid var(--line-2);border-radius:100px;color:var(--ink);transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease)}
+.contact__link:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);transform:translateY(-2px)}
+.contact__link.is-mail:hover{background:var(--accent);border-color:var(--accent)}
 
 /* Footer */
-footer{border-top:1px solid var(--line);padding:32px var(--gutter);max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
-footer a:hover{color:var(--gold)}
+footer{border-top:1px solid var(--line);padding:30px var(--gutter);max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-faint)}
+footer a:hover{color:var(--accent)}
 
 /* Reveal */
-.reveal{opacity:0;transform:translateY(32px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .reveal.is-visible{opacity:1;transform:translateY(0)}
-.reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}.reveal-d4{transition-delay:.4s}
+.reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}.reveal-d3{transition-delay:.24s}.reveal-d4{transition-delay:.32s}
+@media(prefers-reduced-motion:reduce){.reveal{transition:none;opacity:1;transform:none}}
 
 /* Responsive */
 @media(max-width:960px){
-  .hero{grid-template-columns:1fr;gap:48px;padding-top:100px;min-height:auto}
-  .ticker{min-height:380px}
-  .sec-head{grid-template-columns:1fr;gap:16px;margin-bottom:48px}
-  .thesis{grid-template-columns:1fr 1fr}
-  .thesis__item:nth-child(2n){border-right:none}
+  .header__nav{display:none}
+  .hero{grid-template-columns:1fr;gap:48px;padding-top:130px;min-height:auto}
+  .about{grid-template-columns:1fr;gap:40px}
+  .principles{grid-template-columns:1fr}
+  .principle{border-right:none;border-bottom:1px solid var(--line)}
+  .principle:last-child{border-bottom:none}
+  .focus-grid{grid-template-columns:1fr 1fr}
   .caps{grid-template-columns:1fr 1fr}
   .cap:nth-child(2n){border-right:none}
-  .case{grid-template-columns:1fr;gap:32px}
-  .case__strip{grid-template-columns:1fr 1fr}
-  .systems-grid{grid-template-columns:1fr}
-  .system-card{border-right:none;border-bottom:1px solid var(--line)}
-  .about-grid{grid-template-columns:1fr;gap:40px}
   .tl__item{grid-template-columns:1fr;gap:8px}
   .tl__date{order:-1}
-  .section{padding:80px var(--gutter)}
-  .header__nav{display:none}
+  .tl__loc{display:none}
+  .section{padding:84px var(--gutter)}
+}
+@media(max-width:600px){
+  .focus-grid{grid-template-columns:1fr}
+  .edu{grid-template-columns:1fr}
+  .header__cta{display:none}
 }
 </style>
 </head>
 <body>
 
-<div class="grid-bg"></div>
-<div class="grain"></div>
-<div class="cursor"></div>
-<div class="cursor-dot"></div>
 <div class="progress"></div>
 
-<header class="header">
+<header class="header" id="header">
   <div class="header__id">
     <span class="header__dot"></span>
-    <span>James Finnie / SPM</span>
+    <span><b>James Finnie</b> · Senior PM</span>
   </div>
   <nav class="header__nav">
-    <a href="#thesis">Thesis</a>
-    <a href="#work">Work</a>
-    <a href="#systems">Systems</a>
     <a href="#about">About</a>
-    <a href="#capabilities">Skills</a>
-    <a href="#contact">Contact</a>
+    <a href="#focus">Focus</a>
+    <a href="#experience">Experience</a>
+    <a href="#capabilities">Capabilities</a>
   </nav>
-  <span class="header__time" id="clock">— — : — —  TOR</span>
+  <a href="#contact" class="header__cta">Get in touch &rarr;</a>
 </header>
 
 <main>
@@ -282,224 +225,126 @@ footer a:hover{color:var(--gold)}
 <!-- HERO -->
 <section class="hero">
   <div class="hero__left">
-    <div class="hero__meta reveal">Portfolio / Vol. 01 / 2026</div>
-    <h1 class="hero__title reveal reveal-d1">
-      <span class="hero__title-line"><em>James</em></span>
-      <span class="hero__title-line"><em>Finnie</em></span>
-    </h1>
-    <p class="hero__thesis reveal reveal-d2">
-      Product manager designing the <strong>agent layer</strong> for finance &mdash; where the model proposes, the human decides, and both leave a trace.
+    <div class="hero__eyebrow reveal">Senior Product Manager &middot; Product Owner</div>
+    <h1 class="hero__title reveal reveal-d1">James<br><em>Finnie</em></h1>
+    <p class="hero__lede reveal reveal-d2">
+      I build <strong>AI-enabled, commercially grounded</strong> product strategy for regulated digital platforms &mdash; across wealth, brokerage, fintech, and connected health.
     </p>
-    <p class="hero__role reveal reveal-d3">
-      <span>Senior Product Manager</span> &mdash; CIBC Investor&rsquo;s Edge<br>
-      Toronto &middot; previously London &middot; building since 2019
-    </p>
-    <a href="#contact" class="hero__status reveal reveal-d4">Open to new roles &mdash; AI &amp; fintech product</a>
-  </div>
-
-  <div class="hero__right reveal reveal-d2">
-    <div class="ticker" id="ticker">
-      <div class="ticker__head">
-        <span>Live Signal</span>
-        <span>&Delta; 24h</span>
-      </div>
-      <div class="ticker__rows" id="ticker-rows"></div>
-      <div class="sig-bars" id="sig-bars"></div>
-      <div class="ticker__footer">
-        <span class="ticker__live">Synthesizing</span>
-        <span id="tick-count">tick 00000</span>
-      </div>
+    <div class="hero__actions reveal reveal-d3">
+      <a href="#contact" class="btn btn--primary">Let&rsquo;s talk &rarr;</a>
+      <a href="#focus" class="btn btn--ghost">See my focus</a>
     </div>
+    <div class="hero__avail reveal reveal-d4">Open to new senior product roles &mdash; remote or Toronto</div>
   </div>
 
-  <div class="hero__scroll">Scroll / Begin</div>
+  <aside class="hero__right reveal reveal-d2">
+    <div class="glance">
+      <div class="glance__head"><span>At a glance</span><b>2026</b></div>
+      <div class="glance__row"><span class="glance__k">Now</span><span class="glance__v"><b>CIBC Investor&rsquo;s Edge</b> &mdash; wealth &amp; investing technology</span></div>
+      <div class="glance__row"><span class="glance__k">Focus</span><span class="glance__v">AI personalisation, client segmentation, platform modernisation</span></div>
+      <div class="glance__row"><span class="glance__k">Domains</span><span class="glance__v">WealthTech &middot; Brokerage &middot; Fintech &middot; Connected health</span></div>
+      <div class="glance__row"><span class="glance__k">Based</span><span class="glance__v">Toronto, Canada &middot; previously London, UK</span></div>
+      <div class="glance__foot">Available for new opportunities</div>
+    </div>
+  </aside>
 </section>
-
-<!-- THESIS -->
-<section class="section" id="thesis">
-  <div class="sec-head reveal">
-    <span class="sec-num">&sect; 01</span>
-    <h2 class="sec-title">Thesis <em>&mdash; how I&rsquo;m building in the agent era.</em></h2>
-  </div>
-  <div class="thesis">
-    <div class="thesis__item reveal">
-      <span class="thesis__num">I.</span>
-      <p class="thesis__body">The product is no longer the <em>dashboard</em>. The product is the <em>agent</em> &mdash; and the seams where it hands control back.</p>
-    </div>
-    <div class="thesis__item reveal reveal-d1">
-      <span class="thesis__num">II.</span>
-      <p class="thesis__body">Coordination is free now. What&rsquo;s scarce is <em>taste</em> &mdash; knowing which of a thousand generated paths is the one to ship.</p>
-    </div>
-    <div class="thesis__item reveal reveal-d2">
-      <span class="thesis__num">III.</span>
-      <p class="thesis__body">Speed of iteration is a proxy for conviction. If you can&rsquo;t rebuild it in a weekend, you probably shouldn&rsquo;t defend it for a quarter.</p>
-    </div>
-    <div class="thesis__item reveal reveal-d3">
-      <span class="thesis__num">IV.</span>
-      <p class="thesis__body">Trust is the only moat left. Every opaque recommendation spends it; every legible one <em>earns it back</em>.</p>
-    </div>
-  </div>
-</section>
-
-<!-- WORK -->
-<section class="section" id="work">
-  <div class="sec-head reveal">
-    <span class="sec-num">&sect; 02</span>
-    <h2 class="sec-title">Selected Work <em>&mdash; prototypes, shipped.</em></h2>
-  </div>
-
-  <article class="case reveal">
-    <a href="https://product-plum-nu.vercel.app" target="_blank" rel="noopener" class="case__visual">
-      <span class="case__tag">Live Demo &nearr;</span>
-      <img src="signal.jpg" alt="Signal">
-    </a>
-    <div>
-      <div class="case__kicker"><span>2025</span><span>AI / SaaS</span><span>Solo build</span></div>
-      <h3 class="case__title">Signal &mdash; <em>an agent for product feedback.</em></h3>
-      <div class="case__strip">
-        <div class="case__strip-item"><span class="strip__label">Problem</span><p class="strip__text">Product teams drown in Slack, GitHub, support. Themes surface weeks late &mdash; if at all.</p></div>
-        <div class="case__strip-item"><span class="strip__label">Approach</span><p class="strip__text">An agent reads every channel, scores sentiment and urgency, clusters intent, drafts the epic.</p></div>
-        <div class="case__strip-item"><span class="strip__label">Stack</span><p class="strip__text">Ingestion &rarr; embeddings &rarr; urgency model &rarr; theme clusters &rarr; epic generator.</p></div>
-        <div class="case__strip-item"><span class="strip__label">Effect</span><p class="strip__text">Weekly roadmap review collapsed from days to a ten-minute scan.</p></div>
-      </div>
-      <a href="https://product-plum-nu.vercel.app" target="_blank" rel="noopener" class="case__link">Open the prototype &rarr;</a>
-    </div>
-  </article>
-
-  <article class="case reveal">
-    <a href="https://portfoliiointeligence.vercel.app/" target="_blank" rel="noopener" class="case__visual">
-      <span class="case__tag">Live Demo &nearr;</span>
-      <img src="prism.jpg" alt="Prism">
-    </a>
-    <div>
-      <div class="case__kicker"><span>2025</span><span>AI / Fintech</span><span>Solo build</span></div>
-      <h3 class="case__title">Prism &mdash; <em>the single next move.</em></h3>
-      <div class="case__strip">
-        <div class="case__strip-item"><span class="strip__label">Problem</span><p class="strip__text">Self-directed investors face N possible actions. &ldquo;What should I do?&rdquo; has no honest answer.</p></div>
-        <div class="case__strip-item"><span class="strip__label">Approach</span><p class="strip__text">Solver first. Language second. The model narrates what the math already decided.</p></div>
-        <div class="case__strip-item"><span class="strip__label">Stack</span><p class="strip__text">Holdings &rarr; tax + market model &rarr; ranked actions &rarr; conversational follow-up.</p></div>
-        <div class="case__strip-item"><span class="strip__label">Effect</span><p class="strip__text">One defensible recommendation &mdash; with reasoning a retail investor can read and argue with.</p></div>
-      </div>
-      <a href="https://portfoliiointeligence.vercel.app/" target="_blank" rel="noopener" class="case__link">Open the prototype &rarr;</a>
-    </div>
-  </article>
-
-  <article class="case reveal">
-    <a href="https://imaging-umber.vercel.app/" target="_blank" rel="noopener" class="case__visual">
-      <span class="case__tag">Live Demo &nearr;</span>
-      <img src="dicom.jpg" alt="DICOM Viewer">
-    </a>
-    <div>
-      <div class="case__kicker"><span>2026</span><span>Healthcare / OSS</span><span>Weekend build</span></div>
-      <h3 class="case__title">DICOM Viewer &mdash; <em>vibe-coded in under an hour.</em></h3>
-      <div class="case__strip">
-        <div class="case__strip-item"><span class="strip__label">Problem</span><p class="strip__text">Facing surgery in 2026. Needed to read my own CT scans. They sat behind a paywall.</p></div>
-        <div class="case__strip-item"><span class="strip__label">Approach</span><p class="strip__text">Skipped the hospital software. Prompted a browser-native viewer into existence.</p></div>
-        <div class="case__strip-item"><span class="strip__label">Stack</span><p class="strip__text">Drag-drop DICOM parse &middot; window/level &middot; pan/zoom &middot; multi-frame &middot; full metadata &middot; zero server.</p></div>
-        <div class="case__strip-item"><span class="strip__label">Intent</span><p class="strip__text">Proof that a weekend + a model removes a gatekeeper. Open source from day one.</p></div>
-      </div>
-      <a href="https://imaging-umber.vercel.app/" target="_blank" rel="noopener" class="case__link">Open the viewer &rarr;</a>
-    </div>
-  </article>
-</section>
-
-<!-- SYSTEMS -->
-<div class="systems-bg">
-<section class="section" id="systems">
-  <div class="sec-head reveal">
-    <span class="sec-num">&sect; 03</span>
-    <h2 class="sec-title">Systems <em>&mdash; agents in production.</em></h2>
-  </div>
-
-  <div class="systems-grid">
-    <div class="system-card reveal">
-      <span class="system-card__idx">Engine / 01</span>
-      <h3 class="system-card__title">Feedback <em>Agent</em></h3>
-      <p class="system-card__desc">A background loop that reads every channel, clusters intent, and proposes roadmap work &mdash; while the team sleeps.</p>
-      <svg class="diagram" viewBox="-8 0 436 320" data-animate>
-        <rect class="node accent" x="10" y="20" width="140" height="32"/>
-        <text x="80" y="40" text-anchor="middle">Slack / GH / Support</text>
-        <rect class="node" x="270" y="20" width="148" height="32"/>
-        <text x="344" y="40" text-anchor="middle">Sentiment</text>
-        <rect class="node" x="10" y="140" width="140" height="32"/>
-        <text x="80" y="160" text-anchor="middle">Clusters</text>
-        <rect class="node" x="270" y="140" width="148" height="32"/>
-        <text x="344" y="160" text-anchor="middle">Opportunity Score</text>
-        <rect class="node accent" x="140" y="260" width="140" height="32"/>
-        <text x="210" y="280" text-anchor="middle">Product Epic</text>
-        <line class="edge" x1="150" y1="36" x2="270" y2="36"/>
-        <line class="edge" x1="344" y1="52" x2="344" y2="140"/>
-        <line class="edge" x1="270" y1="156" x2="150" y2="156"/>
-        <line class="edge" x1="80" y1="172" x2="80" y2="220"/>
-        <line class="edge" x1="80" y1="220" x2="210" y2="220"/>
-        <line class="edge" x1="210" y1="220" x2="210" y2="260"/>
-        <circle class="pulse" cx="210" cy="276" r="4"/>
-      </svg>
-      <p class="system-card__outcome">Turn fragmented customer signals into clear product priorities.</p>
-    </div>
-
-    <div class="system-card reveal reveal-d1">
-      <span class="system-card__idx">Engine / 02</span>
-      <h3 class="system-card__title">Capital <em>Decision Agent</em></h3>
-      <p class="system-card__desc">State, tax, and signal collapsed by a deterministic solver &mdash; then narrated by a model the human can overrule.</p>
-      <svg class="diagram" viewBox="-8 0 436 320" data-animate>
-        <rect class="node accent" x="10" y="20" width="140" height="32"/>
-        <text x="80" y="40" text-anchor="middle">Holdings</text>
-        <rect class="node" x="270" y="20" width="148" height="32"/>
-        <text x="344" y="40" text-anchor="middle">Tax Position</text>
-        <rect class="node" x="10" y="140" width="140" height="32"/>
-        <text x="80" y="160" text-anchor="middle">Market Opportunity</text>
-        <rect class="node" x="270" y="140" width="148" height="32"/>
-        <text x="344" y="160" text-anchor="middle">Optimisation</text>
-        <rect class="node accent" x="140" y="260" width="140" height="32"/>
-        <text x="210" y="280" text-anchor="middle">Next Best Action</text>
-        <line class="edge" x1="150" y1="36" x2="270" y2="36"/>
-        <line class="edge" x1="80" y1="52" x2="80" y2="140"/>
-        <line class="edge" x1="344" y1="52" x2="344" y2="140"/>
-        <line class="edge" x1="150" y1="156" x2="270" y2="156"/>
-        <line class="edge" x1="344" y1="172" x2="210" y2="260"/>
-        <line class="edge" x1="80" y1="172" x2="210" y2="260"/>
-        <circle class="pulse" cx="210" cy="276" r="4"/>
-      </svg>
-      <p class="system-card__outcome">Help investors make better decisions through structured reasoning.</p>
-    </div>
-  </div>
-</section>
-</div>
 
 <!-- ABOUT -->
 <section class="section" id="about">
   <div class="sec-head reveal">
-    <span class="sec-num">&sect; 04</span>
-    <h2 class="sec-title">About <em>&mdash; the short read.</em></h2>
+    <div class="eyebrow">&sect; 01 &mdash; About</div>
   </div>
-  <div class="about-grid">
+  <div class="about">
     <div class="reveal">
-      <span class="about__tag">/ Short form</span>
-      <h3 class="about__big">Product manager studying what we trust after the models arrived.</h3>
+      <p class="about__lead">A product leader for <em>regulated, data-driven</em> platforms &mdash; turning ambiguous AI and platform opportunities into deliverable product work.</p>
     </div>
     <div class="about__body reveal reveal-d1">
-      <p>I work at the intersection of <strong>data, systems, and human judgement</strong> &mdash; three surfaces that keep converging as AI matures. Financial markets. Digital health. AI-assisted investing.</p>
-      <p>Started in London building fintech &mdash; FX, payments, trading. Moved to Canada for connected health, where decisions had to survive regulators. Now at <strong>CIBC Investor&rsquo;s Edge</strong>, prototyping the agent layer for Canadian retail investors.</p>
-      <p class="about__pq">When the model is faster than you, what&rsquo;s left to decide?</p>
-      <p>Offline: golf, Sunday roasts, rugby, and renovating a house in Toronto with my wife Natalie.</p>
+      <p>I&rsquo;m a Senior Product Manager / Product Owner based in Toronto, working at the intersection of <strong>wealth technology, AI-enabled product strategy, and regulated digital platforms</strong>.</p>
+      <p>At CIBC Investor&rsquo;s Edge, I focus on modernising digital investing experiences across client journeys, segmentation, personalisation, platform strategy, and AI-assisted product operations. My work sits between business strategy and execution &mdash; sizing opportunities, shaping product narratives, evaluating vendors, building prototypes, and helping teams translate complex ideas into practical, governed delivery.</p>
+      <p class="about__quote">&ldquo;In regulated finance and health, legibility isn&rsquo;t a constraint &mdash; it&rsquo;s the product.&rdquo;</p>
+      <p>Before CIBC, I led <strong>IoT and intelligent-systems</strong> product work in regulated medical technology, owning digital respiratory health products across mobile apps, connected devices, and clinician workflows. Earlier, I worked in fintech and trading product roles in London &mdash; brokerage, mobile trading, onboarding, and KYC.</p>
+    </div>
+  </div>
+
+  <div class="principles">
+    <div class="principle reveal">
+      <div class="principle__n">I.</div>
+      <h3 class="principle__t">Strategy that ships</h3>
+      <p class="principle__d">Translate ambiguous AI and platform opportunities into governed, deliverable product work &mdash; not just decks.</p>
+    </div>
+    <div class="principle reveal reveal-d1">
+      <div class="principle__n">II.</div>
+      <h3 class="principle__t">Commercially grounded</h3>
+      <p class="principle__d">Tie experience and engagement decisions to clear business outcomes, opportunity sizing, and measurable value.</p>
+    </div>
+    <div class="principle reveal reveal-d2">
+      <div class="principle__n">III.</div>
+      <h3 class="principle__t">Trust by design</h3>
+      <p class="principle__d">Work fluently across compliance, governance, and legal &mdash; so good ideas survive regulated environments.</p>
     </div>
   </div>
 </section>
 
+<!-- FOCUS -->
+<section class="section" id="focus">
+  <div class="sec-head reveal">
+    <div class="eyebrow">&sect; 02 &mdash; Focus areas</div>
+    <h2 class="sec-title">What I work on <em>&mdash; in generalities.</em></h2>
+  </div>
+  <div class="focus-grid">
+    <article class="fcard reveal">
+      <div class="fcard__n">01</div>
+      <h3 class="fcard__t">Personalised investing journeys</h3>
+      <p class="fcard__d">How a brokerage can use lifecycle signals, behavioural data, and progressive onboarding to support beginner, engaged, and confident investors &mdash; without overwhelming anyone.</p>
+      <div class="fcard__tags"><span>Segmentation</span><span>Personalisation</span><span>Onboarding</span></div>
+    </article>
+    <article class="fcard reveal reveal-d1">
+      <div class="fcard__n">02</div>
+      <h3 class="fcard__t">AI for product teams</h3>
+      <p class="fcard__d">Applying AI and structured context so teams retrieve institutional knowledge, reduce duplicated discovery, and keep strategy connected to delivery.</p>
+      <div class="fcard__tags"><span>AI product ops</span><span>Knowledge layers</span><span>Agentic workflows</span></div>
+    </article>
+    <article class="fcard reveal reveal-d2">
+      <div class="fcard__n">03</div>
+      <h3 class="fcard__t">CRM &amp; advisor workflows</h3>
+      <p class="fcard__d">Modernising contact management, household visibility, booking flows, and workflow automation for advisor-supported wealth teams.</p>
+      <div class="fcard__tags"><span>CRM strategy</span><span>Advisor UX</span><span>Vendor evaluation</span></div>
+    </article>
+    <article class="fcard reveal">
+      <div class="fcard__n">04</div>
+      <h3 class="fcard__t">Advanced trading experience</h3>
+      <p class="fcard__d">Differentiating tools for active and confident investors &mdash; richer data, watchlists, and more capable order flows &mdash; through competitive research and platform strategy.</p>
+      <div class="fcard__tags"><span>Trading UX</span><span>Brokerage strategy</span><span>Benchmarking</span></div>
+    </article>
+    <article class="fcard reveal reveal-d1">
+      <div class="fcard__n">05</div>
+      <h3 class="fcard__t">Market integrity &amp; surveillance</h3>
+      <p class="fcard__d">Approaching market-abuse and financial-crime detection through regulatory framing, risk analysis, and build-versus-buy assessment.</p>
+      <div class="fcard__tags"><span>Trade surveillance</span><span>Risk &amp; compliance</span><span>Build vs. buy</span></div>
+    </article>
+    <article class="fcard reveal reveal-d2">
+      <div class="fcard__n">06</div>
+      <h3 class="fcard__t">Regulated digital health</h3>
+      <p class="fcard__d">Shipping mobile and connected-device experiences in regulated respiratory health &mdash; across clinical workflows, vendor delivery, and software validation.</p>
+      <div class="fcard__tags"><span>Connected health</span><span>IoT</span><span>Regulated delivery</span></div>
+    </article>
+  </div>
+</section>
+
 <!-- EXPERIENCE -->
+<div class="exp-band">
 <section class="section" id="experience">
   <div class="sec-head reveal">
-    <span class="sec-num">&sect; 05</span>
-    <h2 class="sec-title">Experience <em>&mdash; the r&eacute;sum&eacute;, compressed.</em></h2>
+    <div class="eyebrow">&sect; 03 &mdash; Experience</div>
+    <h2 class="sec-title">The r&eacute;sum&eacute;, <em>compressed.</em></h2>
   </div>
   <div class="tl">
     <div class="tl__item reveal">
       <span class="tl__date">2025 &mdash; Now</span>
       <div class="tl__body">
         <div class="tl__co">CIBC Investor&rsquo;s Edge</div>
-        <p class="tl__role">Senior Product Manager</p>
-        <p class="tl__desc">Prototyping the agent layer for Canada&rsquo;s self-directed investors &mdash; personalisation, AI-assisted analysis, and how clients read portfolios, opportunities, and signal.</p>
+        <p class="tl__role">Senior Product Manager / Product Owner</p>
+        <p class="tl__desc">Modernising digital investing for self-directed clients &mdash; AI-enabled personalisation, client segmentation, platform strategy, CRM modernisation, advanced brokerage experiences, and commercially grounded, regulated product delivery.</p>
       </div>
       <span class="tl__loc">Toronto</span>
     </div>
@@ -507,77 +352,91 @@ footer a:hover{color:var(--gold)}
       <span class="tl__date">2023 &mdash; 2025</span>
       <div class="tl__body">
         <div class="tl__co">Trudell Medical International</div>
-        <p class="tl__role">Manager &middot; Connected Health &amp; Intelligent Systems</p>
-        <p class="tl__desc">Product strategy for connected healthcare platforms &mdash; device data, analytics, and mobile clinical decision-support.</p>
+        <p class="tl__role">Manager &middot; IoT &amp; Intelligent Systems</p>
+        <p class="tl__desc">Owned regulated digital respiratory health products across mobile app, connected devices, and clinician-facing experiences &mdash; coordinating vendor delivery, QA, regulatory context, and release planning.</p>
       </div>
       <span class="tl__loc">London, ON</span>
     </div>
     <div class="tl__item reveal">
       <span class="tl__date">2022 &mdash; 2023</span>
       <div class="tl__body">
-        <div class="tl__co">StoneX (SNEX)</div>
-        <p class="tl__role">Associate Product Manager &middot; Global Trading Platforms</p>
-        <p class="tl__desc">Trading infrastructure and digital experiences for institutional and retail financial markets.</p>
+        <div class="tl__co">StoneX</div>
+        <p class="tl__role">Product Analyst / Associate Product Manager</p>
+        <p class="tl__desc">Trading and brokerage product &mdash; mobile trading, share dealing, ISA and crypto-related initiatives. Drove reliability work including a major mobile crash-rate reduction on a mobile-first platform.</p>
       </div>
       <span class="tl__loc">London</span>
     </div>
     <div class="tl__item reveal">
-      <span class="tl__date">2021 &mdash; 2022</span>
+      <span class="tl__date">2020 &mdash; 2022</span>
       <div class="tl__body">
-        <div class="tl__co">Equals Money (EQLS)</div>
+        <div class="tl__co">Equals Money</div>
         <p class="tl__role">Product Analyst</p>
-        <p class="tl__desc">Fintech payments infrastructure, FX products, and digital financial services.</p>
+        <p class="tl__desc">Fintech product, onboarding, and operations &mdash; KYC and identity-verification flows, internal tooling, and customer-journey improvements across payments and FX.</p>
       </div>
       <span class="tl__loc">London</span>
     </div>
   </div>
+
+  <div class="edu">
+    <div class="edu__item reveal">
+      <div class="edu__school">SOAS, University of London</div>
+      <div class="edu__deg">MA International Studies &amp; Diplomacy &mdash; Merit</div>
+      <div class="edu__yr">2020 &mdash; 2021</div>
+    </div>
+    <div class="edu__item reveal reveal-d1">
+      <div class="edu__school">University of Glasgow</div>
+      <div class="edu__deg">MA (SocSci) Business &amp; Management &mdash; 2:1</div>
+      <div class="edu__yr">2016 &mdash; 2020</div>
+    </div>
+  </div>
 </section>
+</div>
 
 <!-- CAPABILITIES -->
 <section class="section" id="capabilities">
   <div class="sec-head reveal">
-    <span class="sec-num">&sect; 06</span>
-    <h2 class="sec-title">Capabilities <em>&mdash; what I bring.</em></h2>
+    <div class="eyebrow">&sect; 04 &mdash; Capabilities</div>
+    <h2 class="sec-title">What I bring <em>to a team.</em></h2>
   </div>
   <div class="caps">
     <div class="cap reveal">
       <span class="cap__label">Product</span>
       <ul class="cap__list">
-        <li><strong>0&rarr;1 product</strong> strategy &amp; discovery</li>
+        <li><strong>0&rarr;1 strategy</strong> &amp; discovery</li>
         <li>Roadmapping &amp; prioritisation</li>
-        <li>AI / agent UX design</li>
-        <li>Rapid prototyping</li>
-        <li>Stakeholder &amp; exec alignment</li>
+        <li>Product operating models</li>
+        <li>Executive communication</li>
+        <li>Stakeholder alignment</li>
       </ul>
     </div>
     <div class="cap reveal reveal-d1">
-      <span class="cap__label">AI &amp; Data</span>
+      <span class="cap__label">WealthTech</span>
       <ul class="cap__list">
-        <li><strong>LLM agents</strong> &amp; tool use</li>
-        <li>RAG &amp; embeddings</li>
-        <li>Prompt &amp; eval design</li>
-        <li>Recommendation systems</li>
-        <li>Analytics &amp; experimentation</li>
+        <li><strong>Self-directed investing</strong> platforms</li>
+        <li>Brokerage client journeys</li>
+        <li>Investor segmentation</li>
+        <li>Advanced trading tools</li>
+        <li>CRM &amp; advisor models</li>
       </ul>
     </div>
     <div class="cap reveal reveal-d2">
-      <span class="cap__label">Build</span>
+      <span class="cap__label">AI &amp; Data</span>
       <ul class="cap__list">
-        <li><strong>Next.js</strong> / React / TypeScript</li>
-        <li>Supabase &amp; Postgres</li>
-        <li>Vercel edge &amp; serverless</li>
-        <li>Python &amp; data pipelines</li>
-        <li>API &amp; system design</li>
+        <li><strong>AI product strategy</strong></li>
+        <li>Behavioural personalisation</li>
+        <li>ML product use cases</li>
+        <li>Knowledge &amp; retrieval workflows</li>
+        <li>AI governance awareness</li>
       </ul>
     </div>
     <div class="cap reveal reveal-d3">
-      <span class="cap__label">Domains</span>
+      <span class="cap__label">Commercial &amp; Regulated</span>
       <ul class="cap__list">
-        <li><strong>Self-directed investing</strong></li>
-        <li>Trading &amp; capital markets</li>
-        <li>Payments &amp; FX</li>
-        <li>Connected &amp; digital health</li>
-        <li>Regulated environments</li>
+        <li><strong>Financial modelling</strong> &amp; sizing</li>
+        <li>Build-versus-buy analysis</li>
+        <li>Vendor evaluation</li>
+        <li>Compliance-sensitive design</li>
+        <li>Audit-conscious delivery</li>
       </ul>
     </div>
   </div>
@@ -585,162 +444,59 @@ footer a:hover{color:var(--gold)}
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <div class="contact__eyebrow reveal">&sect; 07 &mdash; Get in touch</div>
-  <h2 class="contact__title reveal reveal-d1">Let&rsquo;s <span style="font-style:normal;color:var(--gold);">build.</span></h2>
-  <p class="reveal reveal-d2" style="max-width:540px;margin:0 auto;font-size:15px;color:var(--text-2);line-height:1.7">Open to conversations on agents, fintech, and the edge between what a model proposes and what a human actually trusts.</p>
+  <div class="eyebrow reveal">&sect; 05 &mdash; Get in touch</div>
+  <h2 class="contact__title reveal reveal-d1">Let&rsquo;s <em>build.</em></h2>
+  <p class="contact__sub reveal reveal-d2">Open to senior product roles and conversations on AI-enabled wealth, brokerage, fintech, and regulated digital platforms.</p>
   <div class="contact__links reveal reveal-d3">
-    <a href="mailto:james_finnie@me.com" class="contact__link">Email &rarr;</a>
+    <a href="mailto:james_finnie@me.com" class="contact__link is-mail">Email &rarr;</a>
     <a href="https://www.linkedin.com/in/james-finnie/" target="_blank" rel="noopener" class="contact__link">LinkedIn &rarr;</a>
     <a href="https://github.com/JPFinnie" target="_blank" rel="noopener" class="contact__link">GitHub &rarr;</a>
   </div>
-  <p class="contact__footnote">Based in Toronto &middot; open to remote</p>
 </section>
 
 <footer>
-  <span>&copy; 2026 James Finnie</span>
-  <span>Vol. 01 / Built in the open</span>
-  <a href="#top">&uarr; Top</a>
+  <span>&copy; <span id="year">2026</span> James Finnie &middot; Toronto</span>
+  <span id="clock">— — : — —  TOR</span>
+  <a href="#top">&uarr; Back to top</a>
 </footer>
 
 </main>
 
 <script>
-// CURSOR
-(function(){
-  const c = document.querySelector('.cursor');
-  const d = document.querySelector('.cursor-dot');
-  if (!c) return;
-  let x=0,y=0,tx=0,ty=0;
-  window.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;d.style.transform=`translate(${tx}px,${ty}px) translate(-50%,-50%)`});
-  function tick(){x+=(tx-x)*.18;y+=(ty-y)*.18;c.style.transform=`translate(${x}px,${y}px) translate(-50%,-50%)`;requestAnimationFrame(tick)}
-  tick();
-  document.querySelectorAll('a, button, .case__visual, .thesis__item, .tl__item, .cap, .contact__link').forEach(el=>{
-    el.addEventListener('mouseenter',()=>c.classList.add('is-hover'));
-    el.addEventListener('mouseleave',()=>c.classList.remove('is-hover'));
-  });
-})();
-
-// SCROLL PROGRESS
+// SCROLL PROGRESS + header state
 (function(){
   const prog = document.querySelector('.progress');
+  const header = document.getElementById('header');
   window.addEventListener('scroll',()=>{
     const h = document.documentElement.scrollHeight - window.innerHeight;
     const p = h>0 ? (window.scrollY/h)*100 : 0;
     prog.style.setProperty('--p', p+'%');
+    header.classList.toggle('scrolled', window.scrollY > 12);
   },{passive:true});
-})();
-
-// CLOCK
-(function(){
-  const el = document.getElementById('clock');
-  if (!el) return;
-  function tick(){
-    const d = new Date();
-    const opts = {timeZone:'America/Toronto',hour:'2-digit',minute:'2-digit',hour12:false};
-    el.textContent = d.toLocaleTimeString('en-GB',opts) + '  TOR';
-  }
-  tick();setInterval(tick,1000*15);
 })();
 
 // REVEAL
 (function(){
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add('is-visible');
-        io.unobserve(e.target);
-      }
+      if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
     });
   },{threshold:.12});
-  document.querySelectorAll('.reveal, [data-animate]').forEach(el=>io.observe(el));
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
 
-// TICKER
+// CLOCK + YEAR
 (function(){
-  const container = document.getElementById('ticker-rows');
-  const liveLabel = document.querySelector('.ticker__live');
-  const tc = document.getElementById('tick-count');
-  const bars = document.getElementById('sig-bars');
-  if (!container) return;
-
-  let rows = [];
-  let isLive = false;
-  let tickN = 0;
-
-  // Seed rows for initial render / fallback
-  const SEED = [
-    {sym:'TSX',  name:'S&P/TSX Composite',    price:24812.44, chg:0},
-    {sym:'SPX',  name:'S&P 500',               price:5874.12,  chg:0},
-    {sym:'XIU',  name:'iShares S&P/TSX 60',    price:39.82,    chg:0},
-    {sym:'VFV',  name:'Vanguard S&P 500 CAD',  price:124.07,   chg:0},
-    {sym:'CM',   name:'CIBC',                  price:89.40,    chg:0},
-    {sym:'SHOP', name:'Shopify Inc.',           price:112.68,   chg:0},
-    {sym:'RY',   name:'Royal Bank of Canada',  price:178.90,   chg:0},
-    {sym:'BTC',  name:'Bitcoin / USD',         price:68420.00, chg:0},
-  ];
-  rows = SEED.map(r=>({...r}));
-
-  function fmt(price, sym){
-    if(sym==='TSX'||sym==='SPX') return price.toLocaleString('en-CA',{maximumFractionDigits:2});
-    return price.toFixed(2);
+  const el = document.getElementById('clock');
+  const yr = document.getElementById('year');
+  if(yr) yr.textContent = new Date().getFullYear();
+  if(!el) return;
+  function tick(){
+    const d = new Date();
+    const opts = {timeZone:'America/Toronto',hour:'2-digit',minute:'2-digit',hour12:false};
+    el.textContent = d.toLocaleTimeString('en-GB',opts) + '  TOR';
   }
-
-  function render(){
-    container.innerHTML = rows.map(r=>{
-      const up = r.chg >= 0;
-      return `<div class="t-row">
-        <span class="t-sym">${r.sym}</span>
-        <span class="t-name">${r.name}</span>
-        <span class="t-price">${fmt(r.price, r.sym)}</span>
-        <span class="t-chg ${up?'up':'down'}">${up?'+':''}${r.chg.toFixed(2)}%</span>
-      </div>`;
-    }).join('');
-  }
-
-  // Simulated nudge — applied on top of live prices between refreshes
-  function nudge(){
-    rows.forEach(r=>{
-      const vol = r.sym==='BTC'?0.12:(r.sym==='SPX'||r.sym==='TSX'?0.03:0.06);
-      const delta = (Math.random()-0.5)*vol;
-      r.price = Math.max(0.01, r.price*(1+delta/100));
-      r.chg = r.chg + delta * 0.1;
-    });
-    render();
-    tickN++;
-    if(tc) tc.textContent = 'tick '+String(tickN).padStart(5,'0');
-  }
-
-  // Fetch live quotes from /api/quotes
-  async function fetchLive(){
-    try {
-      const res = await fetch('/api/quotes');
-      if(!res.ok) throw new Error(res.status);
-      const data = await res.json();
-      if(!Array.isArray(data)||!data.length) throw new Error('empty');
-      // Merge live prices into rows, preserving order
-      data.forEach(q=>{
-        const r = rows.find(x=>x.sym===q.sym);
-        if(r){ r.price=q.price; r.chg=q.chg; }
-        else rows.push(q);
-      });
-      isLive = true;
-      if(liveLabel) liveLabel.textContent = 'Live';
-      render();
-    } catch(e){
-      // Stay on simulated data; label already says Synthesizing
-    }
-  }
-
-  // Signal bars
-  if(bars){
-    for(let i=0;i<40;i++){const b=document.createElement('div');b.style.height=(15+Math.random()*70)+'%';b.style.opacity=.25+Math.random()*.55;bars.appendChild(b)}
-    setInterval(()=>{[...bars.children].forEach(b=>{b.style.height=(15+Math.random()*70)+'%';b.style.opacity=.25+Math.random()*.55})},900);
-  }
-
-  render();
-  fetchLive();
-  setInterval(nudge, 1800);
-  setInterval(fetchLive, 30000); // refresh live data every 30s
+  tick(); setInterval(tick, 1000*15);
 })();
 </script>
 
