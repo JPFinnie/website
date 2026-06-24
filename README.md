@@ -10,7 +10,7 @@ Personal portfolio for James Finnie — Senior Product Manager at CIBC Investor'
 
 Single-page portfolio (`index.html`) with no build step, no framework, no dependencies. Served as a static file.
 
-**Sections:** Hero · Thesis · Selected Work · Systems · About · Experience · Currently · Writing · Contact
+**Sections:** Hero · Thesis · Selected Work · Systems · About · Experience · Capabilities · Contact
 
 ---
 
@@ -22,8 +22,11 @@ Single-page portfolio (`index.html`) with no build step, no framework, no depend
 | Styles | Inline CSS — Fraunces (variable serif) + JetBrains Mono + Outfit |
 | Motion | CSS transitions + IntersectionObserver reveals + SVG stroke animation |
 | Hosting | Vercel (static) |
+| Analytics | Vercel Web Analytics + Speed Insights (static-script injection) |
 
 No bundler. No npm install needed to view or edit.
+
+> **Analytics note:** The site injects `/_vercel/insights/script.js` and `/_vercel/speed-insights/script.js`. These resolve only on Vercel — enable **Web Analytics** and **Speed Insights** in the project's dashboard for data to flow. Locally the scripts 404 harmlessly.
 
 ---
 

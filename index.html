@@ -3,8 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>James Finnie — Senior Product Manager</title>
-<meta name="description" content="Building intelligent systems for finance — where data, AI, and human decision-making meet.">
+<title>James Finnie — Senior Product Manager · AI &amp; Fintech</title>
+<meta name="description" content="Senior Product Manager building the agent layer for finance — AI-assisted investing, intelligent systems, and the seam between what a model proposes and what a human decides. Open to new roles.">
+<meta name="author" content="James Finnie">
+<meta name="theme-color" content="#050505">
+<link rel="canonical" href="https://www.james-finnie.com/">
+
+<!-- Open Graph — recruiters & LinkedIn shares -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.james-finnie.com/">
+<meta property="og:title" content="James Finnie — Senior Product Manager · AI &amp; Fintech">
+<meta property="og:description" content="Building the agent layer for finance — AI-assisted investing, intelligent systems, and the seam between what a model proposes and what a human decides. Open to new roles.">
+<meta property="og:image" content="https://www.james-finnie.com/signal.jpg">
+<meta property="og:site_name" content="James Finnie">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="James Finnie — Senior Product Manager · AI &amp; Fintech">
+<meta name="twitter:description" content="Building the agent layer for finance. AI-assisted investing, intelligent systems, decision-support. Open to new roles.">
+<meta name="twitter:image" content="https://www.james-finnie.com/signal.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -78,6 +96,10 @@ main{position:relative;z-index:1}
 .hero__thesis strong{font-style:normal;font-weight:400;color:var(--white);border-bottom:1px solid var(--gold);padding-bottom:2px}
 .hero__role{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--text-2);line-height:1.8}
 .hero__role span{color:var(--white)}
+.hero__status{display:inline-flex;align-items:center;gap:10px;margin-top:28px;padding:9px 16px;border:1px solid var(--line-2);border-radius:100px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text);background:rgba(200,168,124,.04);transition:border-color .3s var(--ease),color .3s var(--ease)}
+.hero__status:hover{border-color:var(--gold);color:var(--white)}
+.hero__status::before{content:'';width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 0 0 rgba(126,163,107,.5);animation:availPulse 2.4s ease-out infinite}
+@keyframes availPulse{0%{box-shadow:0 0 0 0 rgba(126,163,107,.5)}70%{box-shadow:0 0 0 7px rgba(126,163,107,0)}100%{box-shadow:0 0 0 0 rgba(126,163,107,0)}}
 
 /* Hero ticker — right side */
 .ticker{position:relative;border:1px solid var(--line);background:linear-gradient(180deg, var(--ink-1) 0%, var(--ink-2) 100%);padding:28px;font-family:var(--mono);font-size:12px;overflow:hidden;min-height:460px}
@@ -160,6 +182,17 @@ main{position:relative;z-index:1}
 @keyframes pulseOn{0%{opacity:0;r:3}50%{opacity:1;r:5}100%{opacity:0;r:3}}
 .system-card__outcome{padding-top:20px;border-top:1px solid var(--line);font-family:var(--serif);font-style:italic;font-weight:300;font-size:15px;color:var(--gold);font-variation-settings:"opsz" 14}
 
+/* CAPABILITIES */
+.caps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+.cap{padding:36px 32px 36px 0;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cap:last-child{border-right:none}
+.cap__label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.cap__label::before{content:'';width:20px;height:1px;background:var(--gold)}
+.cap__list{display:flex;flex-direction:column;gap:12px}
+.cap__list li{font-size:14px;line-height:1.4;color:var(--text);padding-left:18px;position:relative}
+.cap__list li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border:1px solid var(--text-3);transform:rotate(45deg)}
+.cap__list li strong{color:var(--white);font-weight:400}
+
 /* ABOUT */
 .about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:100px;align-items:start}
 .about__tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
@@ -206,6 +239,8 @@ footer a:hover{color:var(--gold)}
   .sec-head{grid-template-columns:1fr;gap:16px;margin-bottom:48px}
   .thesis{grid-template-columns:1fr 1fr}
   .thesis__item:nth-child(2n){border-right:none}
+  .caps{grid-template-columns:1fr 1fr}
+  .cap:nth-child(2n){border-right:none}
   .case{grid-template-columns:1fr;gap:32px}
   .case__strip{grid-template-columns:1fr 1fr}
   .systems-grid{grid-template-columns:1fr}
@@ -236,6 +271,7 @@ footer a:hover{color:var(--gold)}
     <a href="#work">Work</a>
     <a href="#systems">Systems</a>
     <a href="#about">About</a>
+    <a href="#capabilities">Skills</a>
     <a href="#contact">Contact</a>
   </nav>
   <span class="header__time" id="clock">— — : — —  TOR</span>
@@ -258,6 +294,7 @@ footer a:hover{color:var(--gold)}
       <span>Senior Product Manager</span> &mdash; CIBC Investor&rsquo;s Edge<br>
       Toronto &middot; previously London &middot; building since 2019
     </p>
+    <a href="#contact" class="hero__status reveal reveal-d4">Open to new roles &mdash; AI &amp; fintech product</a>
   </div>
 
   <div class="hero__right reveal reveal-d2">
@@ -496,9 +533,59 @@ footer a:hover{color:var(--gold)}
   </div>
 </section>
 
+<!-- CAPABILITIES -->
+<section class="section" id="capabilities">
+  <div class="sec-head reveal">
+    <span class="sec-num">&sect; 06</span>
+    <h2 class="sec-title">Capabilities <em>&mdash; what I bring.</em></h2>
+  </div>
+  <div class="caps">
+    <div class="cap reveal">
+      <span class="cap__label">Product</span>
+      <ul class="cap__list">
+        <li><strong>0&rarr;1 product</strong> strategy &amp; discovery</li>
+        <li>Roadmapping &amp; prioritisation</li>
+        <li>AI / agent UX design</li>
+        <li>Rapid prototyping</li>
+        <li>Stakeholder &amp; exec alignment</li>
+      </ul>
+    </div>
+    <div class="cap reveal reveal-d1">
+      <span class="cap__label">AI &amp; Data</span>
+      <ul class="cap__list">
+        <li><strong>LLM agents</strong> &amp; tool use</li>
+        <li>RAG &amp; embeddings</li>
+        <li>Prompt &amp; eval design</li>
+        <li>Recommendation systems</li>
+        <li>Analytics &amp; experimentation</li>
+      </ul>
+    </div>
+    <div class="cap reveal reveal-d2">
+      <span class="cap__label">Build</span>
+      <ul class="cap__list">
+        <li><strong>Next.js</strong> / React / TypeScript</li>
+        <li>Supabase &amp; Postgres</li>
+        <li>Vercel edge &amp; serverless</li>
+        <li>Python &amp; data pipelines</li>
+        <li>API &amp; system design</li>
+      </ul>
+    </div>
+    <div class="cap reveal reveal-d3">
+      <span class="cap__label">Domains</span>
+      <ul class="cap__list">
+        <li><strong>Self-directed investing</strong></li>
+        <li>Trading &amp; capital markets</li>
+        <li>Payments &amp; FX</li>
+        <li>Connected &amp; digital health</li>
+        <li>Regulated environments</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <div class="contact__eyebrow reveal">&sect; 06 &mdash; Get in touch</div>
+  <div class="contact__eyebrow reveal">&sect; 07 &mdash; Get in touch</div>
   <h2 class="contact__title reveal reveal-d1">Let&rsquo;s <span style="font-style:normal;color:var(--gold);">build.</span></h2>
   <p class="reveal reveal-d2" style="max-width:540px;margin:0 auto;font-size:15px;color:var(--text-2);line-height:1.7">Open to conversations on agents, fintech, and the edge between what a model proposes and what a human actually trusts.</p>
   <div class="contact__links reveal reveal-d3">
@@ -527,7 +614,7 @@ footer a:hover{color:var(--gold)}
   window.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY;d.style.transform=`translate(${tx}px,${ty}px) translate(-50%,-50%)`});
   function tick(){x+=(tx-x)*.18;y+=(ty-y)*.18;c.style.transform=`translate(${x}px,${y}px) translate(-50%,-50%)`;requestAnimationFrame(tick)}
   tick();
-  document.querySelectorAll('a, button, .case__visual, .thesis__item, .tl__item, .wr-item, .contact__link').forEach(el=>{
+  document.querySelectorAll('a, button, .case__visual, .thesis__item, .tl__item, .cap, .contact__link').forEach(el=>{
     el.addEventListener('mouseenter',()=>c.classList.add('is-hover'));
     el.addEventListener('mouseleave',()=>c.classList.remove('is-hover'));
   });
@@ -656,5 +743,13 @@ footer a:hover{color:var(--gold)}
   setInterval(fetchLive, 30000); // refresh live data every 30s
 })();
 </script>
+
+<!-- Vercel Web Analytics (static-site injection — enable Analytics in project settings) -->
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+
+<!-- Vercel Speed Insights -->
+<script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
