@@ -1,0 +1,8 @@
+# Real conversation logs may contain sensitive material — never commit them.
+# Only the synthetic examples are tracked.
+logs/*.jsonl
+logs/**/*.jsonl
+!logs/examples/*.jsonl
+
+.DS_Store
+node_modules/

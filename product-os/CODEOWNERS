@@ -1,0 +1,10 @@
+# Foundations are leadership-owned: any PR touching foundations/ requires
+# review from the owners below (see foundations/GOVERNANCE.md).
+# Replace the placeholder handles with the real owners' GitHub usernames.
+
+/foundations/business-strategy.md        @jpfinnie  # FILL: exec sponsor
+/foundations/wealth-lobs.md              @jpfinnie  # FILL: LOB leadership delegate
+/foundations/tech-stacks.md              @jpfinnie  # FILL: architecture lead
+/foundations/product-design-practice.md  @jpfinnie  # FILL: head of product/design
+/foundations/practice-frameworks.md      @jpfinnie  # FILL: EDF practice lead
+/foundations/                            @jpfinnie  # catch-all for new foundation files
