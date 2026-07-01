@@ -1,6 +1,6 @@
 # Integration Contract: WealthOS
 
-**Status: stub — retrieval endpoint not yet exposed.** WealthOS is the internal LLM wiki built from SharePoint documents and Jira tickets: documents are vectorized with TF-IDF and organized into topic communities via Louvain clustering, giving the corpus a navigable cluster structure. For Product OS, WealthOS is a **retrieval service**.
+**Status: stub — retrieval endpoint not yet exposed.** WealthOS is the internal LLM wiki built from SharePoint documents and Jira tickets: documents are vectorized with TF-IDF and organized into topic communities via Louvain clustering, giving the corpus a navigable cluster structure. For Product Agents, WealthOS is a **retrieval service**.
 
 ## Capability skills depend on
 

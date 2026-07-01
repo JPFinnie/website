@@ -1,4 +1,4 @@
-# Product OS
+# Product Agents
 
 An agentic operating system for the product team: a set of **foundational knowledge files** owned by leadership, **task skills** that product owners use to get real work done, and **agents** that keep the whole system improving from actual usage.
 

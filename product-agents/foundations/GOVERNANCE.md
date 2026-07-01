@@ -1,6 +1,6 @@
 # Foundations Governance
 
-The files in `foundations/` are the fixed operating context for every skill and agent in Product OS. They change **only** through the process below.
+The files in `foundations/` are the fixed operating context for every skill and agent in Product Agents. They change **only** through the process below.
 
 ## Ownership
 

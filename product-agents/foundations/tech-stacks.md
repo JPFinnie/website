@@ -50,7 +50,7 @@ The `State` field matters most for sense-checking: building on a `sunset` system
 <!-- FILL: warehouses/lakes, BI tooling, data classification rules that constrain what can leave the bank -->
 
 ### AI / LLM infrastructure
-<!-- FILL: approved model providers, the in-house GPT-OSS deployment (endpoint pattern, capacity), data-classification routing rules, and the approval process for new AI use cases. Product OS itself runs on this. -->
+<!-- FILL: approved model providers, the in-house GPT-OSS deployment (endpoint pattern, capacity), data-classification routing rules, and the approval process for new AI use cases. Product Agents itself runs on this. -->
 
 ### Integration & middleware
 <!-- FILL: ESB/API gateway/eventing standards — the "how things are allowed to talk to each other" rules -->

@@ -1,4 +1,4 @@
-# Product OS — Architecture & Roadmap
+# Product Agents — Architecture & Roadmap
 
 This document describes the full system: what exists today (v1), and the phases that turn it into the team cockpit.
 
@@ -64,7 +64,7 @@ Each integration has a contract file in `integrations/` describing exactly what 
 
 ### WealthOS
 
-WealthOS is the internal LLM wiki built from SharePoint documents and Jira tickets, using TF-IDF feature extraction and Louvain community clustering (per Karpathy's approach) to organize the corpus into navigable topic clusters. For Product OS it is a **retrieval service**: query in, top-k excerpts out, each tagged with its cluster label and source link. The `idea-sense-check` and `architecture-explainer` skills use it for prior-art and "what do we actually have" lookups. The contract file defines the exact request/response shape so the wiki side can be built/exposed independently.
+WealthOS is the internal LLM wiki built from SharePoint documents and Jira tickets, using TF-IDF feature extraction and Louvain community clustering (per Karpathy's approach) to organize the corpus into navigable topic clusters. For Product Agents it is a **retrieval service**: query in, top-k excerpts out, each tagged with its cluster label and source link. The `idea-sense-check` and `architecture-explainer` skills use it for prior-art and "what do we actually have" lookups. The contract file defines the exact request/response shape so the wiki side can be built/exposed independently.
 
 ## Provider abstraction (Phase 3)
 
