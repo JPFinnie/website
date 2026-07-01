@@ -6,8 +6,9 @@
 <title>James Finnie — Senior Product Manager · AI &amp; Agentic Product</title>
 <meta name="description" content="Senior Product Manager building AI-native products and deep context systems — agentic engineering, prototype-first delivery, and taste at speed. Toronto.">
 <meta name="author" content="James Finnie">
-<meta name="theme-color" content="#f6f4ee">
+<meta name="theme-color" content="#060809">
 <link rel="canonical" href="https://www.james-finnie.com/">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -15,198 +16,42 @@
 <meta property="og:title" content="James Finnie — Senior Product Manager · AI &amp; Agentic Product">
 <meta property="og:description" content="Building AI-native products and deep context systems — agentic engineering, prototype-first delivery, and taste at speed.">
 <meta property="og:site_name" content="James Finnie">
+<meta property="og:image" content="https://www.james-finnie.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="James Finnie — Senior Product Manager · AI &amp; Agentic Product">
 <meta name="twitter:description" content="AI-native products, deep context systems, agentic engineering, prototype-first delivery, taste at speed.">
+<meta name="twitter:image" content="https://www.james-finnie.com/assets/og.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --paper:#f6f4ee; --surface:#fcfbf7; --surface-2:#f1efe7;
-  --ink:#1b1915; --ink-soft:#56524a; --ink-faint:#8d887c;
-  --line:#e4e0d5; --line-2:#d6d1c3;
-  --accent:#1f3f6b; --accent-2:#15294a; --accent-tint:rgba(31,63,107,.08);
-  --display:'Space Grotesk',sans-serif;
-  --sans:'Inter',sans-serif;
-  --mono:'JetBrains Mono',monospace;
-  --gutter:32px; --max:1240px;
-  --ease:cubic-bezier(.2,.7,.2,1);
+<link rel="preload" href="/assets/fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/Inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/JetBrainsMono.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "James Finnie",
+  "jobTitle": "Senior Product Manager",
+  "description": "Senior Product Manager building AI-native products and deep context systems — agentic engineering, prototype-first delivery, and taste at speed.",
+  "url": "https://www.james-finnie.com/",
+  "email": "mailto:james_finnie@icloud.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Toronto", "addressCountry": "CA" },
+  "worksFor": { "@type": "Organization", "name": "CIBC" },
+  "sameAs": [
+    "https://www.linkedin.com/in/james-finnie/",
+    "https://github.com/JPFinnie"
+  ]
 }
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.6;color:var(--ink);background:var(--paper);overflow-x:hidden;letter-spacing:-.005em}
-img{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
-ul{list-style:none}
-::selection{background:var(--accent);color:#fff}
-em{font-style:normal}
-
-/* Scroll progress */
-.progress{position:fixed;top:0;left:0;right:0;height:2px;background:transparent;z-index:200}
-.progress::after{content:'';position:absolute;top:0;left:0;height:100%;width:var(--p,0%);background:var(--accent);transition:width .05s linear}
-
-/* Header */
-.header{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px var(--gutter);display:flex;justify-content:space-between;align-items:center;
-  background:rgba(246,244,238,.78);backdrop-filter:saturate(140%) blur(12px);-webkit-backdrop-filter:saturate(140%) blur(12px);border-bottom:1px solid transparent;transition:border-color .3s var(--ease)}
-.header.scrolled{border-bottom:1px solid var(--line)}
-.header__id{display:flex;align-items:center;gap:11px;font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:var(--ink)}
-.header__id b{font-weight:500}
-.header__dot{width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 0 0 rgba(31,63,107,.4);animation:pulse 2.8s ease-out infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,63,107,.4)}70%{box-shadow:0 0 0 7px rgba(31,63,107,0)}100%{box-shadow:0 0 0 0 rgba(31,63,107,0)}}
-.header__nav{display:flex;gap:30px;font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:var(--ink-soft)}
-.header__nav a{transition:color .25s var(--ease)}
-.header__nav a:hover{color:var(--accent)}
-.header__cta{font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:var(--accent);border:1px solid var(--line-2);border-radius:100px;padding:7px 15px;transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease)}
-.header__cta:hover{background:var(--accent);border-color:var(--accent);color:#fff}
-
-main{position:relative;z-index:1}
-
-/* Shared section scaffold */
-.section{padding:120px var(--gutter);max-width:var(--max);margin:0 auto;position:relative}
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:12px}
-.eyebrow::before{content:'';width:26px;height:1px;background:var(--accent)}
-.sec-head{margin-bottom:72px}
-.sec-head .eyebrow{margin-bottom:26px}
-.sec-title{font-family:var(--display);font-weight:500;font-size:clamp(2.1rem,4.2vw,3.4rem);letter-spacing:-.03em;line-height:1.05;color:var(--ink);max-width:20ch}
-.sec-title em{color:var(--accent)}
-
-/* HERO */
-.hero{padding:170px var(--gutter) 90px;max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.25fr .9fr;gap:72px;align-items:center;min-height:92vh}
-.hero__eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:30px;display:flex;align-items:center;gap:12px}
-.hero__eyebrow::before{content:'';width:26px;height:1px;background:var(--accent)}
-.hero__title{font-family:var(--display);font-weight:500;font-size:clamp(3.6rem,8vw,7rem);line-height:.92;letter-spacing:-.045em;color:var(--ink);margin-bottom:34px}
-.hero__title em{color:var(--accent)}
-.hero__lede{font-size:clamp(1.15rem,1.7vw,1.45rem);line-height:1.5;color:var(--ink-soft);max-width:38ch;margin-bottom:38px;font-weight:300}
-.hero__lede strong{font-weight:500;color:var(--ink)}
-.hero__actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;letter-spacing:.02em;padding:14px 22px;border-radius:100px;transition:transform .25s var(--ease),background .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease)}
-.btn--primary{background:var(--ink);color:var(--paper)}
-.btn--primary:hover{background:var(--accent);box-shadow:0 10px 30px -12px rgba(31,63,107,.55)}
-.btn--ghost{border:1px solid var(--line-2);color:var(--ink)}
-.btn--ghost:hover{border-color:var(--ink);transform:translateY(-1px)}
-
-/* At-a-glance card */
-.glance{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:30px;box-shadow:0 30px 60px -40px rgba(27,25,21,.35)}
-.glance__head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:8px}
-.glance__head b{color:var(--accent);font-weight:500}
-.glance__row{display:grid;grid-template-columns:84px 1fr;gap:16px;padding:16px 0;border-bottom:1px dashed var(--line);align-items:baseline}
-.glance__row:last-of-type{border-bottom:none}
-.glance__k{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
-.glance__v{font-size:14px;line-height:1.45;color:var(--ink)}
-.glance__v b{font-weight:600}
-
-/* ABOUT */
-.about{display:grid;grid-template-columns:1fr 1.15fr;gap:90px;align-items:start}
-.about__lead{font-family:var(--display);font-weight:400;font-size:clamp(1.55rem,2.4vw,2.15rem);line-height:1.2;letter-spacing:-.025em;color:var(--ink)}
-.about__lead em{color:var(--accent)}
-.about__body{display:flex;flex-direction:column;gap:22px}
-.about__body p{font-size:16px;line-height:1.7;color:var(--ink-soft);font-weight:300}
-.about__body p strong{color:var(--ink);font-weight:500}
-.about__quote{font-family:var(--display);font-weight:400;font-size:1.4rem;line-height:1.3;letter-spacing:-.02em;color:var(--accent-2);padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-
-/* PRINCIPLES */
-.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);margin-top:64px}
-.principle{padding:34px 30px;border-right:1px solid var(--line)}
-.principle:last-child{border-right:none}
-.principle__n{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--accent);margin-bottom:18px}
-.principle__t{font-family:var(--display);font-weight:500;font-size:1.3rem;letter-spacing:-.02em;color:var(--ink);margin-bottom:12px}
-.principle__d{font-size:14.5px;line-height:1.6;color:var(--ink-soft);font-weight:300}
-
-/* FOCUS */
-.focus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.fcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:30px;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease)}
-.fcard:hover{transform:translateY(-4px);box-shadow:0 28px 50px -34px rgba(27,25,21,.4);border-color:var(--line-2)}
-.fcard__n{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-faint);margin-bottom:22px}
-.fcard__t{font-family:var(--display);font-weight:500;font-size:1.35rem;line-height:1.15;letter-spacing:-.02em;color:var(--ink);margin-bottom:14px}
-.fcard__d{font-size:14.5px;line-height:1.6;color:var(--ink-soft);margin-bottom:22px;font-weight:300}
-.fcard__tags{display:flex;flex-wrap:wrap;gap:7px}
-.fcard__tags span{font-family:var(--mono);font-size:10.5px;letter-spacing:.02em;color:var(--accent-2);background:var(--accent-tint);border-radius:100px;padding:4px 11px}
-
-/* EXPERIENCE */
-.exp-band{background:var(--surface-2)}
-.tl{border-top:1px solid var(--line)}
-.tl__item{display:grid;grid-template-columns:150px 1fr auto;gap:44px;padding:38px 12px 38px 0;border-bottom:1px solid var(--line);align-items:baseline;transition:padding .35s var(--ease),background .35s var(--ease)}
-.tl__item:hover{padding-left:20px;background:linear-gradient(90deg,var(--accent-tint),transparent)}
-.tl__date{font-family:var(--mono);font-size:12px;letter-spacing:.02em;color:var(--ink-faint)}
-.tl__co{font-family:var(--display);font-weight:600;font-size:1.4rem;letter-spacing:-.02em;color:var(--ink);margin-bottom:5px}
-.tl__role{font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;color:var(--accent);margin-bottom:14px}
-.tl__desc{font-size:14.5px;color:var(--ink-soft);line-height:1.7;max-width:64ch;font-weight:300}
-.tl__loc{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);white-space:nowrap}
-.edu{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:48px}
-.edu__item{border:1px solid var(--line);border-radius:14px;padding:24px 26px;background:var(--surface)}
-.edu__school{font-family:var(--display);font-weight:600;font-size:1.1rem;letter-spacing:-.01em;color:var(--ink);margin-bottom:4px}
-.edu__deg{font-size:14px;color:var(--ink-soft);font-weight:300}
-.edu__yr{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-faint);margin-top:10px}
-
-/* CAPABILITIES */
-.caps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
-.cap{padding:34px 28px 34px 0;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.cap:last-child{border-right:none}
-.cap__label{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;display:flex;align-items:center;gap:10px}
-.cap__label::before{content:'';width:18px;height:1px;background:var(--accent)}
-.cap__list{display:flex;flex-direction:column;gap:11px}
-.cap__list li{font-size:14px;line-height:1.4;color:var(--ink-soft);padding-left:18px;position:relative;font-weight:300}
-.cap__list li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border:1px solid var(--accent);transform:rotate(45deg)}
-.cap__list li strong{color:var(--ink);font-weight:500}
-
-/* CONTACT */
-.contact{padding:150px var(--gutter) 110px;text-align:center;max-width:var(--max);margin:0 auto}
-.contact .eyebrow{justify-content:center;margin-bottom:30px}
-.contact .eyebrow::after{content:'';width:26px;height:1px;background:var(--accent)}
-.contact__title{font-family:var(--display);font-weight:500;font-size:clamp(3rem,8vw,6rem);line-height:.95;letter-spacing:-.04em;color:var(--ink);margin-bottom:28px}
-.contact__title em{color:var(--accent)}
-.contact__sub{max-width:52ch;margin:0 auto 50px;font-size:16px;color:var(--ink-soft);line-height:1.7;font-weight:300}
-.contact__links{display:flex;justify-content:center;flex-wrap:wrap;gap:14px}
-.contact__link{font-family:var(--mono);font-size:13px;letter-spacing:.02em;padding:15px 26px;border:1px solid var(--line-2);border-radius:100px;color:var(--ink);transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease)}
-.contact__link:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);transform:translateY(-2px)}
-.contact__link.is-mail:hover{background:var(--accent);border-color:var(--accent)}
-
-/* Footer */
-footer{border-top:1px solid var(--line);padding:30px var(--gutter);max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-faint)}
-footer a:hover{color:var(--accent)}
-
-/* Reveal */
-.reveal{opacity:0;transform:translateY(26px);filter:blur(6px);transition:opacity .9s var(--ease),transform .9s var(--ease),filter .9s var(--ease)}
-.reveal.is-visible{opacity:1;transform:translateY(0);filter:blur(0)}
-.reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}.reveal-d3{transition-delay:.24s}.reveal-d4{transition-delay:.32s}
-
-/* Text-generate (hero word streaming) */
-.tg-word{display:inline-block;opacity:0;filter:blur(9px);transform:translateY(6px);transition:opacity .6s var(--ease),filter .6s var(--ease),transform .6s var(--ease)}
-.tg-word.is-in{opacity:1;filter:blur(0);transform:none}
-
-@media(prefers-reduced-motion:reduce){
-  .reveal{transition:none;opacity:1;transform:none;filter:none}
-  .tg-word{transition:none;opacity:1;filter:none;transform:none}
-}
-
-/* Responsive */
-@media(max-width:960px){
-  .header__nav{display:none}
-  .hero{grid-template-columns:1fr;gap:48px;padding-top:130px;min-height:auto}
-  .about{grid-template-columns:1fr;gap:40px}
-  .principles{grid-template-columns:1fr}
-  .principle{border-right:none;border-bottom:1px solid var(--line)}
-  .principle:last-child{border-bottom:none}
-  .focus-grid{grid-template-columns:1fr 1fr}
-  .caps{grid-template-columns:1fr 1fr}
-  .cap:nth-child(2n){border-right:none}
-  .tl__item{grid-template-columns:1fr;gap:8px}
-  .tl__date{order:-1}
-  .tl__loc{display:none}
-  .section{padding:84px var(--gutter)}
-}
-@media(max-width:600px){
-  .focus-grid{grid-template-columns:1fr}
-  .edu{grid-template-columns:1fr}
-  .header__cta{display:none}
-}
-</style>
+</script>
 </head>
 <body>
+
+<a href="#about" class="skip">Skip to content</a>
 
 <div class="progress"></div>
 
@@ -215,21 +60,43 @@ footer a:hover{color:var(--accent)}
     <span class="header__dot"></span>
     <span><b>James Finnie</b> · Senior PM</span>
   </div>
-  <nav class="header__nav">
+  <nav class="header__nav" aria-label="Primary">
     <a href="#about">About</a>
     <a href="#focus">Focus</a>
+    <a href="#projects">Work</a>
     <a href="#experience">Experience</a>
     <a href="#capabilities">Capabilities</a>
   </nav>
-  <a href="#contact" class="header__cta">Get in touch &rarr;</a>
+  <div class="header__right">
+    <a href="#contact" class="header__cta">Get in touch &rarr;</a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </header>
 
-<main>
+<!-- Mobile menu overlay -->
+<div class="menu" id="menu" hidden>
+  <nav class="menu__nav" aria-label="Mobile">
+    <a href="#about"><i>01</i>About</a>
+    <a href="#focus"><i>02</i>Focus</a>
+    <a href="#projects"><i>03</i>Work</a>
+    <a href="#experience"><i>04</i>Experience</a>
+    <a href="#capabilities"><i>05</i>Capabilities</a>
+    <a href="#contact"><i>06</i>Contact</a>
+  </nav>
+  <div class="menu__foot">
+    <span>Toronto, Canada</span>
+    <a href="mailto:james_finnie@icloud.com">james_finnie@icloud.com</a>
+  </div>
+</div>
+
+<main id="top">
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero__left">
-    <div class="hero__eyebrow reveal">Senior Product Manager &middot; AI &amp; Agentic Product</div>
+    <div class="hero__eyebrow reveal"><i>&gt;</i> Senior Product Manager &middot; AI &amp; Agentic Product</div>
     <h1 class="hero__title">James<br><em>Finnie</em></h1>
     <p class="hero__lede">
       I build <strong>AI-native products and deep context systems</strong> &mdash; prototype-first, agents in the loop, and a relentless focus on <strong>what</strong> we&rsquo;re building and <strong>why</strong>.
@@ -240,15 +107,27 @@ footer a:hover{color:var(--accent)}
     </div>
   </div>
 
-  <aside class="hero__right reveal reveal-d2">
-    <div class="glance">
-      <div class="glance__head"><span>At a glance</span><b>2026</b></div>
-      <div class="glance__row"><span class="glance__k">Now</span><span class="glance__v"><b>CIBC Investor&rsquo;s Edge</b> &mdash; wealth &amp; investing technology</span></div>
-      <div class="glance__row"><span class="glance__k">Focus</span><span class="glance__v">AI-native product, agentic engineering, deep context systems</span></div>
-      <div class="glance__row"><span class="glance__k">Approach</span><span class="glance__v">Prototype-first &middot; taste at speed &middot; ask why</span></div>
-      <div class="glance__row"><span class="glance__k">Based</span><span class="glance__v">Toronto, Canada &middot; previously London, UK</span></div>
+  <aside class="hero__right reveal reveal-d2" aria-label="Interactive knowledge graph — a visual of the deep context systems I build">
+    <div class="graph-panel">
+      <div class="graph-panel__head">
+        <span class="graph-panel__dots"><span></span><span></span><span class="is-live"></span></span>
+        <span class="graph-panel__title">context.graph</span>
+        <span class="graph-panel__hint">hover the nodes</span>
+      </div>
+      <canvas id="graph" aria-hidden="true"></canvas>
+      <div class="graph-panel__legend" aria-hidden="true">
+        <span>people</span><span>decisions</span><span>docs</span><span>agents</span><span>data</span>
+      </div>
     </div>
   </aside>
+</section>
+
+<!-- AT A GLANCE STRIP -->
+<section class="glance reveal" aria-label="At a glance">
+  <div class="glance__item"><span class="glance__k">Now</span><span class="glance__v"><b>CIBC Investor&rsquo;s Edge</b> &mdash; wealth &amp; investing technology</span></div>
+  <div class="glance__item"><span class="glance__k">Focus</span><span class="glance__v">AI-native product, agentic engineering, deep context systems</span></div>
+  <div class="glance__item"><span class="glance__k">Approach</span><span class="glance__v">Prototype-first &middot; taste at speed &middot; ask why</span></div>
+  <div class="glance__item"><span class="glance__k">Based</span><span class="glance__v">Toronto, Canada &middot; previously London, UK</span></div>
 </section>
 
 <!-- ABOUT -->
@@ -333,11 +212,60 @@ footer a:hover{color:var(--accent)}
   </div>
 </section>
 
+<!-- PROJECTS / SELECTED WORK -->
+<section class="section" id="projects">
+  <div class="sec-head reveal">
+    <div class="eyebrow">&sect; 03 &mdash; Selected work</div>
+    <h2 class="sec-title">Things I&rsquo;m <em>shipping.</em></h2>
+  </div>
+  <div class="projects">
+    <article class="pcard pcard--featured reveal">
+      <div class="pcard__meta">
+        <span class="pcard__n">P.01</span>
+        <span class="pcard__status pcard__status--active">Active</span>
+      </div>
+      <h3 class="pcard__t">PRISM</h3>
+      <!-- PLACEHOLDER — James: confirm/replace the PRISM description; the repo has no public description. -->
+      <p class="pcard__d">A deep context system &mdash; structured personal and organisational knowledge that agents can actually reason over. The working proof of the personal-LLM-wiki idea: context first, everything else built on top.</p>
+      <div class="pcard__tags"><span>TypeScript</span><span>Context engineering</span><span>Agents</span></div>
+      <div class="pcard__foot">
+        <a href="https://github.com/JPFinnie/PRISM" target="_blank" rel="noopener">view on GitHub &nearr;</a>
+      </div>
+    </article>
+    <article class="pcard reveal reveal-d1">
+      <div class="pcard__meta">
+        <span class="pcard__n">P.02</span>
+        <span class="pcard__status pcard__status--proto">Prototype</span>
+      </div>
+      <h3 class="pcard__t">Organisational context graph</h3>
+      <!-- PLACEHOLDER — James: review copy. Drafted from your stated deep-context / LLM-wiki themes. -->
+      <p class="pcard__d">An Obsidian-style knowledge graph for an organisation &mdash; people, decisions, docs, and data as interconnected clusters that agents traverse for context. The hero of this site is a small live sketch of it.</p>
+      <div class="pcard__tags"><span>Knowledge graphs</span><span>Retrieval</span><span>LLM wiki</span></div>
+      <div class="pcard__foot">
+        <span>writeup coming soon</span>
+      </div>
+    </article>
+    <article class="pcard reveal reveal-d2">
+      <div class="pcard__meta">
+        <span class="pcard__n">P.03</span>
+        <span class="pcard__status pcard__status--explore">Exploring</span>
+      </div>
+      <h3 class="pcard__t">Agentic prototype pipeline</h3>
+      <!-- PLACEHOLDER — James: review copy. Drafted from your PR-FAQ → prototype → production narrative. -->
+      <p class="pcard__d">PR-FAQ in, working prototype out &mdash; agent loops and skills files wired to a design system, with a pipeline that carries the best prototypes through to production.</p>
+      <div class="pcard__tags"><span>Agent loops</span><span>Skills files</span><span>Design systems</span></div>
+      <div class="pcard__foot">
+        <span>in progress at work</span>
+      </div>
+    </article>
+  </div>
+</section>
+
 <!-- EXPERIENCE -->
 <div class="exp-band">
 <section class="section" id="experience">
   <div class="sec-head reveal">
-    <div class="eyebrow">&sect; 03 &mdash; Experience</div>
+    <div class="eyebrow">&sect; 04 &mdash; Experience</div>
     <h2 class="sec-title">The track record, <em>compressed.</em></h2>
   </div>
   <div class="tl">
@@ -397,7 +325,7 @@ footer a:hover{color:var(--accent)}
 <!-- CAPABILITIES -->
 <section class="section" id="capabilities">
   <div class="sec-head reveal">
-    <div class="eyebrow">&sect; 04 &mdash; Capabilities</div>
+    <div class="eyebrow">&sect; 05 &mdash; Capabilities</div>
     <h2 class="sec-title">What I bring <em>to a team.</em></h2>
   </div>
   <div class="caps">
@@ -446,7 +374,7 @@ footer a:hover{color:var(--accent)}
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <div class="eyebrow reveal">&sect; 05 &mdash; Get in touch</div>
+  <div class="eyebrow reveal">&sect; 06 &mdash; Get in touch</div>
   <h2 class="contact__title reveal reveal-d1">Let&rsquo;s <em>build.</em></h2>
   <p class="contact__sub reveal reveal-d2">Always happy to talk AI-native product, agentic engineering, deep context systems, and where investing goes next.</p>
   <div class="contact__links reveal reveal-d3">
@@ -458,94 +386,17 @@ footer a:hover{color:var(--accent)}
 
 <footer>
   <span>&copy; <span id="year">2026</span> James Finnie &middot; Toronto</span>
-  <span id="clock">— — : — —  TOR</span>
+  <span class="footer__clock"><i class="cursor"></i><span id="clock">— — : — —  TOR</span></span>
   <a href="#top">&uarr; Back to top</a>
 </footer>
 
 </main>
 
-<script>
-// SCROLL PROGRESS + header state
-(function(){
-  const prog = document.querySelector('.progress');
-  const header = document.getElementById('header');
-  window.addEventListener('scroll',()=>{
-    const h = document.documentElement.scrollHeight - window.innerHeight;
-    const p = h>0 ? (window.scrollY/h)*100 : 0;
-    prog.style.setProperty('--p', p+'%');
-    header.classList.toggle('scrolled', window.scrollY > 12);
-  },{passive:true});
-})();
+<script defer src="/assets/main.js"></script>
+<script defer src="/assets/graph.js"></script>
 
-// REVEAL
-(function(){
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
-    });
-  },{threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-})();
-
-// CLOCK + YEAR
-(function(){
-  const el = document.getElementById('clock');
-  const yr = document.getElementById('year');
-  if(yr) yr.textContent = new Date().getFullYear();
-  if(!el) return;
-  function tick(){
-    const d = new Date();
-    const opts = {timeZone:'America/Toronto',hour:'2-digit',minute:'2-digit',hour12:false};
-    el.textContent = d.toLocaleTimeString('en-GB',opts) + '  TOR';
-  }
-  tick(); setInterval(tick, 1000*15);
-})();
-
-// HERO TEXT-GENERATE — stream words in from blur (Aceternity-style, vanilla)
-(function(){
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function streamify(root){
-    const spans = [];
-    (function walk(node){
-      [...node.childNodes].forEach(n=>{
-        if(n.nodeType === 3){
-          const frag = document.createDocumentFragment();
-          n.textContent.split(/(\s+)/).forEach(tok=>{
-            if(tok === '' ) return;
-            if(/^\s+$/.test(tok)){ frag.appendChild(document.createTextNode(tok)); return; }
-            const s = document.createElement('span');
-            s.className = 'tg-word';
-            s.textContent = tok;
-            frag.appendChild(s);
-            spans.push(s);
-          });
-          n.replaceWith(frag);
-        } else if(n.nodeType === 1 && n.tagName !== 'BR'){
-          walk(n);
-        }
-      });
-    })(root);
-    return spans;
-  }
-  function run(sel, base, step){
-    const el = document.querySelector(sel);
-    if(!el) return base;
-    const words = streamify(el);
-    if(reduce){ words.forEach(w=>w.classList.add('is-in')); return base; }
-    words.forEach((w,i)=> setTimeout(()=>w.classList.add('is-in'), base + i*step));
-    return base + words.length*step;
-  }
-  const afterTitle = run('.hero__title', 120, 110);
-  run('.hero__lede', afterTitle + 120, 42);
-})();
-</script>
-
-<!-- Vercel Web Analytics (static-site injection — enable Analytics in project settings) -->
-<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<!-- Vercel Web Analytics + Speed Insights (stubs live in main.js; scripts resolve on Vercel only) -->
 <script defer src="/_vercel/insights/script.js"></script>
-
-<!-- Vercel Speed Insights -->
-<script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
