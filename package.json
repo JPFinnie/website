@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "og": "node tools/og-image.mjs",
+    "shots": "node tools/screenshot.mjs"
+  },
   "devDependencies": {
     "puppeteer": "^24.39.1"
   }
