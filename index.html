@@ -74,8 +74,14 @@ body::after{content:'';position:fixed;inset:0;z-index:900;pointer-events:none;op
   width:min(calc(100% - 2*var(--gutter)),calc(var(--max) - 2*var(--gutter)))}
 .guides i{position:absolute;top:0;bottom:0;width:1px;background:rgba(226,233,255,.03)}
 
+/* the particle field — one fixed canvas behind the whole page */
+#field{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block}
+
 .progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:600;pointer-events:none}
 .progress::after{content:'';position:absolute;top:0;left:0;height:100%;width:var(--p,0%);background:var(--signal)}
+.struct{position:fixed;left:18px;bottom:16px;z-index:450;font-family:var(--font-m);font-size:9px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--faint);pointer-events:none}
+.struct b{color:var(--signal);font-weight:400}
 
 /* header */
 .header{position:fixed;top:0;left:0;right:0;z-index:500;padding:16px var(--gutter);display:flex;justify-content:space-between;align-items:center;gap:24px;
@@ -102,27 +108,24 @@ body::after{content:'';position:fixed;inset:0;z-index:900;pointer-events:none;op
 
 main{position:relative;z-index:1}
 
-/* ============ HERO — the entropy centerpiece ============ */
+/* ============ HERO — the field lives behind the whole page; this frames it ============ */
 .hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,2.8vh,28px);
   padding:104px var(--gutter) 72px;position:relative;text-align:center}
 .hero__eyebrow{font-family:var(--font-m);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
 .hero__eyebrow b{color:var(--signal);font-weight:400}
 
-.fig{position:relative;width:min(54vh,84vw,600px);aspect-ratio:1/1;border:1px solid var(--line);flex-shrink:0}
-.fig canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.8s ease .3s;cursor:grab;touch-action:pan-y}
-.fig.is-drag canvas{cursor:grabbing}
-.fig.is-live canvas{opacity:1}
+.fig{position:relative;width:min(54vh,84vw,600px);aspect-ratio:1/1;border:1px solid var(--line);flex-shrink:0;cursor:grab;touch-action:pan-y}
+.fig.is-drag{cursor:grabbing}
 .fig.is-fallback{background-image:radial-gradient(rgba(237,240,247,.4) 1px,transparent 1.4px);background-size:24px 24px}
 .fig__veil{position:absolute;inset:-8%;pointer-events:none;background:radial-gradient(52% 32% at 50% 50%,rgba(5,6,8,.78),rgba(5,6,8,0) 74%)}
-.tick{position:absolute;width:14px;height:14px;border:1px solid var(--line2)}
+.tick{position:absolute;width:14px;height:14px;border:1px solid var(--line2);pointer-events:none}
 .tick--tl{top:-1px;left:-1px;border-right:0;border-bottom:0}
 .tick--tr{top:-1px;right:-1px;border-left:0;border-bottom:0}
 .tick--bl{bottom:-1px;left:-1px;border-right:0;border-top:0}
 .tick--br{bottom:-1px;right:-1px;border-left:0;border-top:0}
-.fig__label{position:absolute;font-family:var(--font-m);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);white-space:nowrap}
+.fig__label{position:absolute;font-family:var(--font-m);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);white-space:nowrap;pointer-events:none}
 .fig__label--order{bottom:12px;left:14px}
 .fig__label--chaos{bottom:12px;right:14px}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
 
 .hero__title{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;white-space:nowrap;pointer-events:none;
   font-family:var(--font-d);font-weight:600;font-size:clamp(3rem,8.4vw,6.4rem);letter-spacing:-.035em;line-height:1;color:var(--ink)}
@@ -195,6 +198,7 @@ main{position:relative;z-index:1}
 .chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-m);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;
   border:1px solid rgba(47,208,126,.35);color:var(--up);padding:3px 8px;margin-left:10px;vertical-align:1px;white-space:nowrap}
 .chip::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--up);animation:pulse 2.2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
 .tl__co{font-family:var(--font-d);font-weight:500;font-size:1.4rem;letter-spacing:-.015em;margin-bottom:5px;transition:color .3s var(--ease)}
 .tl__item:hover .tl__co{color:var(--signal)}
 .tl__role{font-family:var(--font-m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-bottom:14px}
@@ -214,6 +218,15 @@ main{position:relative;z-index:1}
 .cap__list{display:flex;flex-direction:column;gap:12px}
 .cap__list li{font-size:14px;line-height:1.5;color:var(--dim);padding-left:20px;position:relative}
 .cap__list li::before{content:'+';position:absolute;left:0;top:0;font-family:var(--font-m);font-size:12px;color:var(--signal)}
+
+/* projects */
+.proj-grid{grid-template-columns:1fr}
+.proj{display:grid;grid-template-columns:1.5fr auto;gap:48px;align-items:center;background:var(--bg);padding:34px;transition:background .4s var(--ease),box-shadow .4s var(--ease)}
+.proj:hover{background:var(--panel);box-shadow:inset 0 0 0 1px var(--signal-line)}
+.proj .fcard__n{margin-bottom:22px}
+.proj__t{font-family:var(--font-d);font-weight:500;font-size:1.7rem;letter-spacing:-.02em;margin-bottom:13px}
+.proj__side{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.proj__url{font-family:var(--font-m);font-size:12px;letter-spacing:.08em;color:var(--faint)}
 
 /* contact */
 .contact{padding:140px var(--gutter) 120px;text-align:center;max-width:var(--max);margin:0 auto;position:relative}
@@ -241,7 +254,6 @@ footer a:hover{color:var(--ink)}
   html{scroll-behavior:auto}
   .reveal{transition:none;opacity:1;transform:none;filter:none}
   .mword{transition:none;transform:none}
-  .fig canvas{transition:none;opacity:1}
   .hero__scroll .bar{animation:none}
   .chip::before{animation:none}
 }
@@ -249,10 +261,12 @@ footer a:hover{color:var(--ink)}
 @media(max-width:980px){
   .nav{display:none}
   .hclock{display:none}
+  .struct{display:none}
   .about{grid-template-columns:1fr;gap:40px}
   .plist{grid-template-columns:1fr}
   .focus-grid{grid-template-columns:1fr 1fr}
   .caps{grid-template-columns:1fr 1fr}
+  .proj{grid-template-columns:1fr;gap:24px}
   .tl__item{grid-template-columns:1fr;gap:8px}
   .tl__date{order:-1}
   .tl__loc{display:none}
@@ -276,8 +290,10 @@ footer a:hover{color:var(--ink)}
 </head>
 <body id="top">
 
+<canvas id="field" aria-hidden="true" style="opacity:0"></canvas>
 <div class="progress" aria-hidden="true"></div>
 <div class="guides" aria-hidden="true"><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i></div>
+<div class="struct" aria-hidden="true">Structure <b id="structPct">000%</b></div>
 
 <header class="header" id="header">
   <a href="#top" class="brand" aria-label="James Finnie — home">
@@ -289,6 +305,7 @@ footer a:hover{color:var(--ink)}
     <a href="#focus"><i>02</i>Focus</a>
     <a href="#experience"><i>03</i>Experience</a>
     <a href="#capabilities"><i>04</i>Capabilities</a>
+    <a href="#projects"><i>05</i>Projects</a>
   </nav>
   <div class="header__meta">
     <span class="hclock" id="hclock">— — : — —  TOR</span>
@@ -304,8 +321,7 @@ footer a:hover{color:var(--ink)}
     <b>[</b> Senior Product Manager &mdash; AI &amp; Agentic Product &middot; Toronto <b>]</b>
   </p>
 
-  <div class="fig reveal" id="entropy" style="--i:1" role="img" aria-label="Generative particle field — a structured lattice on the left, unstructured particles on the right, divided by a boundary the noise leaks across. Drag to spin it in 3D.">
-    <canvas id="entropyCanvas" aria-hidden="true"></canvas>
+  <div class="fig reveal" id="entropy" style="--i:1" role="img" aria-label="Generative particle field — a structured lattice on the left, unstructured particles on the right, divided by a boundary the noise leaks across. Drag to spin it in 3D; scrolling the page gradually structures the field.">
     <div class="fig__veil" aria-hidden="true"></div>
     <h1 class="hero__title reveal-mask" data-mask>James <em>Finnie</em></h1>
     <b class="tick tick--tl" aria-hidden="true"></b><b class="tick tick--tr" aria-hidden="true"></b>
@@ -530,10 +546,33 @@ footer a:hover{color:var(--ink)}
   </div>
 </section>
 
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <span class="ghost" aria-hidden="true" data-speed="0.12">05</span>
+  <div class="sec-head reveal">
+    <div class="eyebrow"><b>[ 05 ]</b> &mdash; Personal projects</div>
+    <h2 class="sec-title reveal-mask" data-mask>Shipped <em>for fun.</em></h2>
+  </div>
+  <div class="lattice proj-grid">
+    <article class="proj reveal">
+      <div>
+        <div class="fcard__n">P-01 <span>SIDE/BUILD</span></div>
+        <h3 class="proj__t">The Six Cut</h3>
+        <p class="fcard__d">Toronto&rsquo;s independent butcher shops, mapped and scored. Every shop gets a custom <em>Six Cut Score</em> alongside its Google rating &mdash; searchable by specialty, filterable by score, with a look inside before you visit. A small product taken seriously, methodology page and all.</p>
+        <div class="fcard__tags"><span>Next.js</span><span>Interactive map</span><span>Scoring model</span><span>Toronto</span></div>
+      </div>
+      <div class="proj__side">
+        <span class="proj__url">six-cut.vercel.app</span>
+        <a href="https://six-cut.vercel.app/" target="_blank" rel="noopener" class="btn btn--ghost">Visit &rarr;</a>
+      </div>
+    </article>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <span class="ghost" aria-hidden="true" data-speed="0.1" style="right:auto;left:-8px">05</span>
-  <div class="eyebrow reveal"><b>[ 05 ]</b> &mdash; Get in touch</div>
+  <span class="ghost" aria-hidden="true" data-speed="0.1" style="right:auto;left:-8px">06</span>
+  <div class="eyebrow reveal"><b>[ 06 ]</b> &mdash; Get in touch</div>
   <h2 class="contact__title reveal-mask" data-mask style="margin-top:28px">Let&rsquo;s <em>build.</em></h2>
   <p class="contact__sub reveal" style="--i:2">Always happy to talk AI-native product, agentic engineering, deep context systems, and where investing goes next.</p>
   <div class="contact__links reveal" style="--i:3">
@@ -551,7 +590,7 @@ footer a:hover{color:var(--ink)}
 
 </main>
 
-<noscript><style>.reveal{opacity:1;transform:none;filter:none}</style></noscript>
+<noscript><style>.reveal{opacity:1;transform:none;filter:none}#field{display:none}</style></noscript>
 
 <script>
 // reveals, word masks, scroll-driven bits (progress, header, ghost parallax)
@@ -621,32 +660,38 @@ footer a:hover{color:var(--ink)}
 })();
 </script>
 
-<!-- Entropy — faithful Three.js port of 21st.dev xubohuah/entropy:
-     ordered lattice (left) | hard divider | caged chaos (right); chaos leaks
-     influence across the line; lines weave both halves. Calm speeds. -->
+<!-- The field — faithful Three.js port of 21st.dev xubohuah/entropy, promoted to
+     the page's narrative engine: it lives fixed behind everything, framed by the
+     hero at the top, and structures itself as you scroll. The cursor is a lens
+     that locally imposes order on the chaos. The lattice doubles as a dot-matrix
+     display that occasionally prints a word. -->
 <script type="module">
 import * as THREE from 'three';
 
-const holder = document.getElementById('entropy');
-const canvas = document.getElementById('entropyCanvas');
-const countEl = document.getElementById('entropyCount');
+const fig = document.getElementById('entropy');
+const canvas = document.getElementById('field');
+const structEl = document.getElementById('structPct');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clamp=(v,a,b)=>v<a?a:v>b?b:v;
+const smooth=(e0,e1,x)=>{ const t=clamp((x-e0)/(e1-e0),0,1); return t*t*(3-2*t); };
+const mix=(a,b,t)=>a+(b-a)*t;
 
 try{
   const isMobile = innerWidth < 760;
-  const GRID = 25;                       // 25×25, as in the source component
-  const N = GRID*GRID;
-  const HALF = 50, S = (HALF*2)/GRID;    // world spans ±50, cell-centre spacing 4
-  if(countEl) countEl.textContent = 'N = ' + N;
+  const GRID = 25, N = GRID*GRID;
+  const HALF = 50, S = (HALF*2)/GRID;
+  const FOV = 40, CAMZ = 154;
 
   const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 0);
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(40, 1, 1, 600);
-  camera.position.set(0, 0, 154);
+  const camera = new THREE.PerspectiveCamera(FOV, innerWidth/innerHeight, 1, 600);
+  camera.position.set(0, 0, CAMZ);
   camera.lookAt(0, 0, 0);
+  let halfH = Math.tan(THREE.MathUtils.degToRad(FOV/2))*CAMZ;
+  let halfW = halfH*camera.aspect;
 
   const group = new THREE.Group();
   scene.add(group);
@@ -663,20 +708,31 @@ try{
 
   // particle state
   const home  = new Float32Array(N*2);
-  const pos   = new Float32Array(N*3);
+  const pos   = new Float32Array(N*3);   // displayed position
+  const sim   = new Float32Array(N*3);   // raw chaos simulation
   const vel   = new Float32Array(N*3);
   const infl  = new Float32Array(N);     // chaos influence on ordered particles
+  const capT  = new Float32Array(N);     // scroll-capture blend (chaos -> lattice)
+  const capTh = new Float32Array(N);     // per-particle capture threshold
+  const lensT = new Float32Array(N);     // cursor-lens blend
+  const glyphB= new Float32Array(N);     // dot-matrix brightness
   const col   = new Float32Array(N*3);
-  const shade = new Float32Array(N*3);   // base colour per particle
+  const shade = new Float32Array(N*3);
   const order = new Uint8Array(N);
+  const effO  = new Uint8Array(N);       // effectively ordered this frame
+  const SIG = [0.42, 0.62, 1.0];
   for(let i=0;i<GRID;i++) for(let j=0;j<GRID;j++){
     const k = i*GRID + j;
     const hx = -HALF + S*(i+0.5), hy = -HALF + S*(j+0.5);
     home[k*2] = hx; home[k*2+1] = hy;
+    sim[k*3] = hx; sim[k*3+1] = hy; sim[k*3+2] = 0;
     pos[k*3] = hx; pos[k*3+1] = hy; pos[k*3+2] = 0;
     order[k] = hx < 0 ? 1 : 0;
-    if(!order[k]){ vel[k*3] = (Math.random()-0.5)*0.3; vel[k*3+1] = (Math.random()-0.5)*0.3; }
-    if(Math.random() < 0.06){ shade[k*3]=0.42; shade[k*3+1]=0.6; shade[k*3+2]=1.0; }
+    if(!order[k]){
+      vel[k*3] = (Math.random()-0.5)*0.3; vel[k*3+1] = (Math.random()-0.5)*0.3;
+      capTh[k] = clamp(0.06 + 0.85*(hx/HALF) + (Math.random()-0.5)*0.1, 0.03, 0.96);
+    }
+    if(Math.random() < 0.06){ shade[k*3]=SIG[0]; shade[k*3+1]=SIG[1]; shade[k*3+2]=SIG[2]; }
     else { const v = 0.9 + Math.random()*0.1; shade[k*3]=v; shade[k*3+1]=v; shade[k*3+2]=v; }
     col[k*3]=shade[k*3]*0.8; col[k*3+1]=shade[k*3+1]*0.8; col[k*3+2]=shade[k*3+2]*0.8;
   }
@@ -686,16 +742,15 @@ try{
   pGeo.setAttribute('color', new THREE.BufferAttribute(col, 3).setUsage(THREE.DynamicDrawUsage));
   const pMat = new THREE.PointsMaterial({size:0.85, map:sprite, transparent:true, depthWrite:false,
     blending:THREE.AdditiveBlending, vertexColors:true, sizeAttenuation:true});
-  const points = new THREE.Points(pGeo, pMat);
-  group.add(points);
+  group.add(new THREE.Points(pGeo, pMat));
 
-  // the hard divider down the middle (drawn in-scene so it tilts with the field)
+  // hard divider (fades out as the field structures)
   const dGeo = new THREE.BufferGeometry();
   dGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array([0,-HALF,0, 0,HALF,0]), 3));
-  const divider = new THREE.Line(dGeo, new THREE.LineBasicMaterial({color:0xffffff, transparent:true, opacity:0.22}));
-  group.add(divider);
+  const dMat = new THREE.LineBasicMaterial({color:0xffffff, transparent:true, opacity:0.22});
+  group.add(new THREE.Line(dGeo, dMat));
 
-  // connection lines — both halves weave, per the source (order mesh + chaos web)
+  // connection lines
   const MAXSEG = isMobile ? 1500 : 2600;
   const LINKMAX = isMobile ? 4 : 6;
   const lPos = new Float32Array(MAXSEG*2*3);
@@ -706,51 +761,113 @@ try{
   lGeo.setDrawRange(0, 0);
   const lMat = new THREE.LineBasicMaterial({transparent:true, opacity:0.85, depthWrite:false,
     blending:THREE.AdditiveBlending, vertexColors:true});
-  const lines = new THREE.LineSegments(lGeo, lMat);
-  group.add(lines);
+  group.add(new THREE.LineSegments(lGeo, lMat));
 
-  // hover parallax + drag-to-spin (arcball with momentum, all axes)
-  let mx=0, my=0, tx=0, ty=0;
+  // pointer, drag-to-spin (arcball with momentum), cursor lens
+  let mx=0, my=0, tx=0, ty=0, px_=0, py_=0;
   let dragging=false, lastX=0, lastY=0, spinSpeed=0;
   const spinAxis = new THREE.Vector3(0,1,0);
   const dragAxis = new THREE.Vector3();
-  const tmpQ = new THREE.Quaternion(), homeQ = new THREE.Quaternion();
-  const eul = new THREE.Euler();
-  canvas.addEventListener('pointerdown', (e)=>{
+  const tmpQ = new THREE.Quaternion(), homeQ = new THREE.Quaternion(), qInv = new THREE.Quaternion();
+  const eul = new THREE.Euler(), pw = new THREE.Vector3();
+  fig.addEventListener('pointerdown', (e)=>{
     dragging = true; lastX = e.clientX; lastY = e.clientY; spinSpeed = 0;
-    holder.classList.add('is-drag');
-    try{ canvas.setPointerCapture(e.pointerId); }catch(_){}
+    fig.classList.add('is-drag');
+    try{ fig.setPointerCapture(e.pointerId); }catch(_){}
   });
   addEventListener('pointermove', (e)=>{
-    const r = canvas.getBoundingClientRect();
-    if(r.width === 0) return;
-    tx = ((e.clientX - r.left)/r.width)*2 - 1;
-    ty = -(((e.clientY - r.top)/r.height)*2 - 1);
+    tx = (e.clientX/innerWidth)*2 - 1;
+    ty = -((e.clientY/innerHeight)*2 - 1);
+    px_ = e.clientX; py_ = e.clientY;
     if(!dragging) return;
     const dx = e.clientX - lastX, dy = e.clientY - lastY;
     lastX = e.clientX; lastY = e.clientY;
     const mag = Math.hypot(dx, dy);
     if(mag > 0){
-      dragAxis.set(dy, dx, 0).normalize();   // rotate about the axis perpendicular to the drag
+      dragAxis.set(dy, dx, 0).normalize();
       tmpQ.setFromAxisAngle(dragAxis, mag*0.006);
       group.quaternion.premultiply(tmpQ);
       spinAxis.copy(dragAxis); spinSpeed = Math.min(mag*0.006, 0.12);
     }
   }, {passive:true});
-  addEventListener('pointerup', ()=>{ dragging = false; holder.classList.remove('is-drag'); });
+  addEventListener('pointerup', ()=>{ dragging = false; fig.classList.remove('is-drag'); });
 
   const R = 10, R2 = R*R, CELL = R;      // chaos-web line reach
-  const ORTHO2 = 25;                      // order mesh: orthogonal lattice neighbours only
-  const RN = 18;                          // chaos→order influence reach
+  const ORTHO2 = 25;                      // ordered mesh: orthogonal neighbours only
+  const RN = 18;                          // chaos -> order influence reach
+  const LENS_R = 16, LENS_R2 = LENS_R*LENS_R;
   const linkCnt = new Uint8Array(N);
   const nearChaos = new Int32Array(N);
-  let t = 0;
+  let t = 0, fade = 0, lastPct = -1, lastOp = -1;
+
+  // ---- dot-matrix printer: the structured lattice prints a word now and then ----
+  const FONT = {
+    A:[0x0E,0x11,0x11,0x1F,0x11,0x11,0x11], C:[0x0E,0x11,0x10,0x10,0x10,0x11,0x0E],
+    E:[0x1F,0x10,0x10,0x1E,0x10,0x10,0x1F], G:[0x0E,0x11,0x10,0x13,0x11,0x11,0x0F],
+    H:[0x11,0x11,0x11,0x1F,0x11,0x11,0x11], I:[0x0E,0x04,0x04,0x04,0x04,0x04,0x0E],
+    L:[0x10,0x10,0x10,0x10,0x10,0x10,0x1F], N:[0x11,0x19,0x15,0x13,0x11,0x11,0x11],
+    O:[0x0E,0x11,0x11,0x11,0x11,0x11,0x0E], S:[0x0F,0x10,0x10,0x0E,0x01,0x01,0x1E],
+    T:[0x1F,0x04,0x04,0x04,0x04,0x04,0x04], W:[0x11,0x11,0x11,0x15,0x15,0x15,0x0A],
+    X:[0x11,0x11,0x0A,0x04,0x0A,0x11,0x11], Y:[0x11,0x11,0x0A,0x04,0x04,0x04,0x04]
+  };
+  const WORDS = ['SIGNAL','CONTEXT','TASTE','WHY'];
+  let wordIdx = 0, charIdx = 0, slot = 0, nextCharAt = 6;
+  function printChar(ch, sl){
+    const rows = FONT[ch]; if(!rows) return;
+    const top = sl*8, startCol = 3;
+    for(let r=0;r<7;r++) for(let c=0;c<5;c++){
+      if((rows[r]>>(4-c))&1){
+        const i = startCol+c, j = GRID-1-(top+r);
+        if(i>=0 && i<12 && j>=0 && j<GRID) glyphB[i*GRID+j] = 1.3;
+      }
+    }
+  }
+  function printer(){
+    if(t < nextCharAt) return;
+    const word = WORDS[wordIdx];
+    printChar(word[charIdx], slot);
+    slot = (slot+1)%3; charIdx++;
+    if(charIdx >= word.length){
+      charIdx = 0; wordIdx = (wordIdx+1)%WORDS.length;
+      nextCharAt = t + 16;
+    } else nextCharAt = t + 1.15;
+  }
 
   function step(dt){
     t += dt;
-    const fs = dt*60, dampF = Math.pow(0.95, fs), inflDecay = Math.pow(0.99, fs);
+    const fs = dt*60;
+    const dampF = Math.pow(0.95, fs), inflDecay = Math.pow(0.99, fs), glyphDecay = Math.pow(0.982, fs);
+    const vh = innerHeight, sy = scrollY;
+    const docH = document.documentElement.scrollHeight;
 
-    // 1) chaos: random-walk drift, caged in the right half (bounce like the source)
+    // pose: framed by the hero at top -> full-bleed backdrop once you scroll past
+    const poseT = smooth(0.35*vh, 1.05*vh, sy);
+    const r = fig.getBoundingClientRect();
+    const frameScale = (r.height/vh)*(2*halfH)/100;
+    const frameX = (((r.left + r.width/2)/innerWidth)*2 - 1)*halfW;
+    const frameY = -((((r.top + r.height/2)/vh)*2 - 1))*halfH;
+    const freeScale = (Math.max(2*halfW, 2*halfH)/100)*1.08;
+    const gs = mix(frameScale, freeScale, poseT);
+    group.scale.setScalar(gs);
+    group.position.set(mix(frameX, 0, poseT), mix(frameY, 0, poseT), 0);
+
+    // canvas opacity: intro fade x scroll dim (1 -> 0.32 as it goes full-bleed)
+    fade += (1-fade)*Math.min(0.025*fs, 1);
+    const op = fade*(1 - 0.68*poseT);
+    if(Math.abs(op-lastOp) > 0.01){ canvas.style.opacity = op.toFixed(3); lastOp = op; }
+
+    // scroll -> structure: noise is captured into the lattice as you descend
+    const structP = clamp((sy - 0.9*vh)/Math.max(docH - vh - 0.9*vh, 1), 0, 1);
+    const pct = Math.round(structP*100);
+    if(structEl && pct !== lastPct){ structEl.textContent = String(pct).padStart(3,'0')+'%'; lastPct = pct; }
+    dMat.opacity = 0.22*(1-structP);
+
+    // cursor lens position in field-local space
+    qInv.copy(group.quaternion).invert();
+    pw.set(tx*halfW, ty*halfH, 0).sub(group.position).applyQuaternion(qInv).divideScalar(gs);
+    const lensOn = !dragging && !reduce;
+
+    // 1) chaos: random-walk drift caged in the right half; capture + lens blend on top
     let nNear = 0;
     for(let k=0;k<N;k++){
       if(order[k]) continue;
@@ -759,15 +876,40 @@ try{
       vel[o+1] += (Math.random()-0.5)*0.06*fs;
       vel[o+2] += (Math.random()-0.5)*0.024*fs;
       vel[o]*=dampF; vel[o+1]*=dampF; vel[o+2]*=dampF;
-      let px = pos[o] + vel[o]*fs, py = pos[o+1] + vel[o+1]*fs, pz = pos[o+2] + vel[o+2]*fs;
-      if(px < 0.4 || px > HALF){ vel[o] *= -1; px = Math.max(0.4, Math.min(HALF, px)); }
-      if(py < -HALF || py > HALF){ vel[o+1] *= -1; py = Math.max(-HALF, Math.min(HALF, py)); }
-      if(pz < -6 || pz > 6){ vel[o+2] *= -1; pz = Math.max(-6, Math.min(6, pz)); }
-      pos[o]=px; pos[o+1]=py; pos[o+2]=pz;
-      if(px < RN) nearChaos[nNear++] = k;   // candidates to infect the order side
+      let sx = sim[o] + vel[o]*fs, sy2 = sim[o+1] + vel[o+1]*fs, sz = sim[o+2] + vel[o+2]*fs;
+      if(sx < 0.4 || sx > HALF){ vel[o] *= -1; sx = clamp(sx, 0.4, HALF); }
+      if(sy2 < -HALF || sy2 > HALF){ vel[o+1] *= -1; sy2 = clamp(sy2, -HALF, HALF); }
+      if(sz < -6 || sz > 6){ vel[o+2] *= -1; sz = clamp(sz, -6, 6); }
+      sim[o]=sx; sim[o+1]=sy2; sim[o+2]=sz;
+
+      capT[k] += ((structP > capTh[k] ? 1 : 0) - capT[k])*Math.min(0.03*fs, 1);
+      const ce = capT[k]*capT[k]*(3-2*capT[k]);
+      let bx = mix(sx, home[k*2], ce), by = mix(sy2, home[k*2+1], ce), bz = sz*(1-ce);
+
+      // the cursor imposes order: nearby chaos snaps toward the local grid
+      let lt = lensT[k];
+      if(lensOn){
+        const dx = bx-pw.x, dy = by-pw.y, d2 = dx*dx+dy*dy;
+        const tgt = d2 < LENS_R2 ? (1 - d2/LENS_R2) : 0;
+        lt += (tgt-lt)*Math.min(0.12*fs, 1);
+      } else lt *= Math.pow(0.94, fs);
+      lensT[k] = lt;
+      if(lt > 0.01){
+        const ni = clamp(Math.round((bx+HALF)/S - 0.5), 0, GRID-1);
+        const nj = clamp(Math.round((by+HALF)/S - 0.5), 0, GRID-1);
+        const w = lt*0.9;
+        bx = mix(bx, -HALF+S*(ni+0.5), w);
+        by = mix(by, -HALF+S*(nj+0.5), w);
+        bz *= (1-lt*0.8);
+      }
+      pos[o]=bx; pos[o+1]=by; pos[o+2]=bz;
+      effO[k] = (capT[k] > 0.6 || lt > 0.6) ? 1 : 0;
+      const a = 0.8 + 0.28*lt;
+      col[o]=shade[o]*a; col[o+1]=shade[o+1]*a; col[o+2]=shade[o+2]*a;
+      if(sx < RN && capT[k] < 0.5) nearChaos[nNear++] = k;
     }
 
-    // 2) order: spring home, but chaos within reach drags it (influence leak)
+    // 2) order: spring home, dragged by uncaptured chaos across the divider; dot-matrix glow
     for(let k=0;k<N;k++){
       if(!order[k]) continue;
       const o = k*3, hx = home[k*2], hy = home[k*2+1];
@@ -778,7 +920,7 @@ try{
           const dx = pos[o]-pos[jo], dy = pos[o+1]-pos[jo+1];
           const d = Math.hypot(dx, dy);
           if(d < RN){
-            const st = 1 - d/RN;
+            const st = (1 - d/RN)*(1-structP);
             ix += vel[jo]*st; iy += vel[jo+1]*st;
             if(st > best) best = st;
           }
@@ -786,20 +928,28 @@ try{
         if(best > infl[k]) infl[k] = best;
       }
       const f = infl[k];
-      if(ix >  0.6) ix =  0.6; if(ix < -0.6) ix = -0.6;
-      if(iy >  0.6) iy =  0.6; if(iy < -0.6) iy = -0.6;
+      ix = clamp(ix, -0.6, 0.6); iy = clamp(iy, -0.6, 0.6);
       pos[o]   += (hx - pos[o])*0.05*(1-f)*fs + ix*f*fs;
       pos[o+1] += (hy - pos[o+1])*0.05*(1-f)*fs + iy*f*fs;
       pos[o+2] += (0 - pos[o+2])*0.05*fs;
       infl[k] *= inflDecay;
-      // infected order dims, as in the source (0.8 → 0.3)
+      effO[k] = 1;
+      const g = Math.min(glyphB[k], 1);
+      glyphB[k] *= glyphDecay;
       const a = 0.8 - f*0.5;
-      col[o]=shade[o]*a; col[o+1]=shade[o+1]*a; col[o+2]=shade[o+2]*a;
+      if(g > 0.01){
+        col[o]   = mix(shade[o]*a,   SIG[0]*1.5, g);
+        col[o+1] = mix(shade[o+1]*a, SIG[1]*1.4, g);
+        col[o+2] = mix(shade[o+2]*a, SIG[2]*1.3, g);
+      } else {
+        col[o]=shade[o]*a; col[o+1]=shade[o+1]*a; col[o+2]=shade[o+2]*a;
+      }
     }
     pGeo.attributes.position.needsUpdate = true;
     pGeo.attributes.color.needsUpdate = true;
+    if(!reduce) printer();
 
-    // 3) lines: any pair within reach, both halves, spatial hash + per-particle cap
+    // 3) lines: ordered/captured/lensed particles weave orthogonally, chaos webs freely
     const cells = new Map();
     for(let k=0;k<N;k++){
       const o = k*3;
@@ -825,7 +975,7 @@ try{
           const jo = j*3;
           const dx=pos[o]-pos[jo], dy=pos[o+1]-pos[jo+1], dz=pos[o+2]-pos[jo+2];
           const d2 = dx*dx+dy*dy+dz*dz;
-          if(d2 < (order[i] && order[j] ? ORTHO2 : R2)){
+          if(d2 < (effO[i] && effO[j] ? ORTHO2 : R2)){
             const w = (1 - Math.sqrt(d2)/R)*0.16;
             const s6 = seg*6;
             lPos[s6]=pos[o];    lPos[s6+1]=pos[o+1]; lPos[s6+2]=pos[o+2];
@@ -843,7 +993,7 @@ try{
     lGeo.attributes.position.needsUpdate = true;
     lGeo.attributes.color.needsUpdate = true;
 
-    // 4) free 3D spin: momentum carries after a drag, then ease home to hover parallax
+    // 4) free 3D spin: momentum after a drag, then ease home to hover parallax
     if(!dragging){
       if(spinSpeed > 0.0002){
         tmpQ.setFromAxisAngle(spinAxis, spinSpeed*fs);
@@ -851,44 +1001,45 @@ try{
         spinSpeed *= Math.pow(0.985, fs);
       } else {
         mx += (tx - mx)*0.05; my += (ty - my)*0.05;
-        homeQ.setFromEuler(eul.set(-my*0.10, mx*0.14 + Math.sin(t*0.05)*0.02, 0));
+        const damp = 1 - poseT*0.7; // subtler parallax once full-bleed
+        homeQ.setFromEuler(eul.set(-my*0.10*damp, (mx*0.14 + Math.sin(t*0.05)*0.02)*damp, 0));
         group.quaternion.slerp(homeQ, 0.03);
       }
     }
   }
 
   function size(){
-    const w = holder.clientWidth || 600;
-    renderer.setSize(w, w, false);
+    renderer.setSize(innerWidth, innerHeight, false);
+    camera.aspect = innerWidth/innerHeight;
+    camera.updateProjectionMatrix();
+    halfH = Math.tan(THREE.MathUtils.degToRad(FOV/2))*CAMZ;
+    halfW = halfH*camera.aspect;
   }
   size();
-  if('ResizeObserver' in window) new ResizeObserver(size).observe(holder);
-  else addEventListener('resize', size);
+  addEventListener('resize', size, {passive:true});
 
   if(reduce){
     for(let k=0;k<420;k++) step(0.016);
     renderer.render(scene, camera);
-    holder.classList.add('is-live');
+    canvas.style.opacity = '';
   } else {
-    let raf = null, onScreen = true, last = performance.now();
+    let raf = null, last = performance.now();
     function loop(now){
       raf = null;
-      if(!onScreen || document.hidden) return;
+      if(document.hidden) return;
       const dt = Math.min((now-last)/1000, 0.05); last = now;
       step(dt);
       renderer.render(scene, camera);
       raf = requestAnimationFrame(loop);
     }
-    function kick(){ if(raf===null && onScreen && !document.hidden){ last = performance.now(); raf = requestAnimationFrame(loop); } }
-    new IntersectionObserver((e)=>{ onScreen = e[0].isIntersecting; kick(); }).observe(holder);
+    function kick(){ if(raf===null && !document.hidden){ last = performance.now(); raf = requestAnimationFrame(loop); } }
     document.addEventListener('visibilitychange', kick);
-    holder.classList.add('is-live');
     kick();
   }
 }catch(err){
-  console.error('[entropy] init failed, showing static fallback:', err);
+  console.error('[field] init failed, showing static fallback:', err);
   if(canvas) canvas.style.display = 'none';
-  if(holder) holder.classList.add('is-fallback');
+  if(fig) fig.classList.add('is-fallback');
 }
 </script>
 
