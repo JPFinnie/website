@@ -1,0 +1,13 @@
+{
+  "duration": 24.5,
+  "assertions": [
+    { "kind": "appearsBy", "selector": "#hk-l2", "bySec": 4.6 },
+    { "kind": "appearsBy", "selector": "#nm-title", "bySec": 9.6 },
+    { "kind": "before", "a": "#fc-card1", "b": "#fc-card2" },
+    { "kind": "before", "a": "#fc-card2", "b": "#fc-card3" },
+    { "kind": "before", "a": "#dt-c1", "b": "#dt-c4" },
+    { "kind": "appearsBy", "selector": "#ot-title", "bySec": 22.1 },
+    { "kind": "staysInFrame", "selector": "#dt-strip" },
+    { "kind": "keepsMoving" }
+  ]
+}

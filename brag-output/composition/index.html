@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>James Finnie — Signal, found.</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      /* ---- fonts: the site's exact typefaces, vendored locally ---- */
+      @font-face { font-family: 'General Sans'; src: url('assets/fonts/GeneralSans-500.woff2') format('woff2'); font-weight: 500; font-display: block; }
+      @font-face { font-family: 'General Sans'; src: url('assets/fonts/GeneralSans-600.woff2') format('woff2'); font-weight: 600; font-display: block; }
+      @font-face { font-family: 'Switzer'; src: url('assets/fonts/Switzer-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+      @font-face { font-family: 'Switzer'; src: url('assets/fonts/Switzer-500.woff2') format('woff2'); font-weight: 500; font-display: block; }
+      @font-face { font-family: 'IBM Plex Mono'; src: url('assets/fonts/IBMPlexMono-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+      @font-face { font-family: 'IBM Plex Mono'; src: url('assets/fonts/IBMPlexMono-500.woff2') format('woff2'); font-weight: 500; font-display: block; }
+
+      /* ---- design tokens from james-finnie.com index.html :root ---- */
+      :root {
+        --bg: #050608;
+        --panel: #0A0D13;
+        --ink: #EDF0F7;
+        --dim: #A2AABB;
+        --faint: #97A0B2; /* site --faint lifted for video contrast */
+        --line: rgba(226, 233, 255, 0.09);
+        --line2: rgba(226, 233, 255, 0.2);
+        --signal: #5E8BFF;
+        --up: #2FD07E;
+        --font-d: 'General Sans', ui-sans-serif, system-ui, sans-serif;
+        --font-b: 'Switzer', ui-sans-serif, system-ui, sans-serif;
+        --font-m: 'IBM Plex Mono', ui-monospace, monospace;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      body { font-family: var(--font-b); color: var(--ink); }
+
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+
+      /* ---- persistent atmosphere (site body::before / grain / guides) ---- */
+      #bgfill { position: absolute; inset: 0; background: var(--bg); z-index: 0; }
+      #field { position: absolute; inset: 0; z-index: 1; }
+      #veil { position: absolute; inset: 0; z-index: 2; pointer-events: none;
+        background: radial-gradient(46% 34% at 50% 50%, rgba(5, 6, 8, 0.82), rgba(5, 6, 8, 0) 76%); }
+      #atmo { position: absolute; inset: -10%; z-index: 3; pointer-events: none; opacity: 0.85;
+        background: radial-gradient(44% 32% at 50% 4%, rgba(94, 139, 255, 0.09), transparent 64%),
+                    radial-gradient(30% 24% at 85% 96%, rgba(94, 139, 255, 0.05), transparent 62%); }
+      #guides { position: absolute; top: 0; bottom: 0; left: 392px; width: 1136px; z-index: 4; pointer-events: none; }
+      #guides i { position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(226, 233, 255, 0.03); }
+      #vig { position: absolute; inset: 0; z-index: 5; pointer-events: none;
+        background: radial-gradient(120% 90% at 50% 50%, transparent 62%, rgba(3, 4, 6, 0.55) 100%); }
+      #grain { position: absolute; inset: 0; z-index: 40; pointer-events: none; opacity: 0.05;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="7" stitchTiles="stitch"/></filter><rect width="160" height="160" filter="url(%23n)" opacity="0.55"/></svg>'); }
+      #progress { position: absolute; top: 0; left: 0; width: 1920px; height: 3px; z-index: 30; }
+      #progress-bar { display: block; width: 100%; height: 100%; background: var(--signal); transform-origin: left center; transform: scaleX(0); }
+
+      /* ---- scene shells ---- */
+      section.clip { position: absolute; inset: 0; z-index: 10; display: block; }
+      .wrap { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+      .eyebrow { font-family: var(--font-m); font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim); }
+      .eyebrow b { color: var(--signal); font-weight: 400; }
+
+      /* ---- scene 1-2: hook ---- */
+      #hk-corner { position: absolute; top: 44px; left: 48px; font-size: 15px; }
+      #hk-stack { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; }
+      #hk-l1wrap { font-family: var(--font-m); font-size: 33px; letter-spacing: 0.02em; color: #C9D1E3; display: flex; align-items: baseline; }
+      #hk-cursor { display: inline-block; width: 17px; height: 38px; margin-left: 6px; background: var(--signal); transform: translateY(4px); opacity: 0; }
+      #hk-l2 { font-family: var(--font-d); font-weight: 500; font-size: 62px; letter-spacing: -0.02em; color: var(--ink); }
+      .fig-label { position: absolute; font-family: var(--font-m); font-size: 15px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint); }
+      #hk-lab-order { left: 520px; top: 952px; }
+      #hk-lab-chaos { right: 520px; top: 952px; }
+
+      /* ---- scene 3: name ---- */
+      #nm-eyebrow { position: absolute; top: 330px; left: 0; right: 0; text-align: center; font-size: 17px; }
+      #nm-title { position: absolute; top: 408px; left: 0; right: 0; text-align: center;
+        font-family: var(--font-d); font-weight: 600; font-size: 152px; letter-spacing: -0.035em; line-height: 1; color: var(--ink); }
+      #nm-title .mask { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.06em 0.06em 0.14em; margin: -0.06em -0.06em -0.14em; }
+      #nm-title .mword { display: inline-block; }
+      #nm-fin { color: rgba(237, 240, 247, 0.16); -webkit-text-fill-color: rgba(237, 240, 247, 0.16); -webkit-text-stroke: 2.5px var(--ink); }
+      #nm-lede { position: absolute; top: 630px; left: 0; right: 0; text-align: center;
+        font-family: var(--font-b); font-weight: 400; font-size: 24px; color: var(--dim); letter-spacing: 0.01em; }
+      .tick { position: absolute; width: 20px; height: 20px; border: 1.5px solid var(--line2); }
+      #tick-tl { left: 500px; top: 86px; border-right: 0; border-bottom: 0; transform-origin: top left; }
+      #tick-tr { right: 500px; top: 86px; border-left: 0; border-bottom: 0; transform-origin: top right; }
+      #tick-bl { left: 500px; bottom: 76px; border-right: 0; border-top: 0; transform-origin: bottom left; }
+      #tick-br { right: 500px; bottom: 76px; border-left: 0; border-top: 0; transform-origin: bottom right; }
+
+      /* ---- scene 4: focus cards ---- */
+      .ghostnum { position: absolute; top: 40px; right: -20px; z-index: 0; font-family: var(--font-d); font-weight: 600;
+        font-size: 340px; line-height: 0.8; color: rgba(226, 233, 255, 0.028); -webkit-text-stroke: 1px rgba(226, 233, 255, 0.055); }
+      #fc-eyebrow { position: absolute; top: 252px; left: 0; right: 0; text-align: center; font-size: 16px; }
+      #fc-title { position: absolute; top: 306px; left: 0; right: 0; text-align: center;
+        font-family: var(--font-d); font-weight: 500; font-size: 46px; letter-spacing: -0.03em; color: var(--ink); }
+      #fc-title em { font-style: normal; color: var(--signal); }
+      #fc-grid { position: absolute; top: 440px; left: 340px; width: 1240px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+      .fcard { background: rgba(10, 13, 19, 0.88); box-shadow: 0 0 0 1px var(--line); padding: 32px 30px 38px; }
+      .fcard__n { display: flex; justify-content: space-between; font-family: var(--font-m); font-size: 13px; letter-spacing: 0.18em; color: var(--faint); margin-bottom: 26px; }
+      .fcard__t { font-family: var(--font-d); font-weight: 500; font-size: 28px; letter-spacing: -0.015em; line-height: 1.15; color: var(--ink); }
+
+      /* ---- scene 5: datastrip ---- */
+      #dt-label { position: absolute; top: 356px; left: 0; right: 0; text-align: center; font-size: 16px; }
+      #dt-strip { position: absolute; top: 452px; left: 370px; width: 1180px; display: grid; grid-template-columns: 1fr 1fr 1.35fr 1fr; gap: 2px; }
+      .dcell { background: rgba(10, 13, 19, 0.88); box-shadow: 0 0 0 1px var(--line); padding: 30px 18px; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+      .dcell .k { font-family: var(--font-m); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint); }
+      .dcell .v { font-family: var(--font-m); font-size: 22px; letter-spacing: 0.06em; color: var(--ink); }
+      #dt-c3 .v { font-size: 18px; letter-spacing: 0.04em; }
+      .dcell .v b { color: var(--up); font-weight: 400; }
+
+      /* ---- scene 6: outro ---- */
+      #ot-stack { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 44px; }
+      #ot-title { font-family: var(--font-d); font-weight: 500; font-size: 136px; letter-spacing: -0.035em; line-height: 0.95; color: var(--ink); }
+      #ot-title em { font-style: normal; color: var(--signal); text-shadow: 0 0 var(--gl, 0px) rgba(94, 139, 255, 0.5); }
+      #ot-row { display: flex; align-items: center; gap: 34px; }
+      #ot-url { font-family: var(--font-m); font-size: 16px; letter-spacing: 0.3em; color: var(--faint); }
+      #ot-btn { font-family: var(--font-m); font-size: 14px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+        padding: 17px 28px; border: 1px solid var(--line2); color: var(--ink); }
+
+      /* ---- HUD ---- */
+      #hud { position: absolute; left: 48px; bottom: 40px; z-index: 20; font-family: var(--font-m); font-size: 14px;
+        letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint); }
+      #hud b { color: var(--signal); font-weight: 400; }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="24.5"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="bgfill"></div>
+
+      <!-- the entropy field — one continuous canvas behind the whole video -->
+      <canvas id="field" class="clip" width="1920" height="1080" data-start="0" data-duration="24.5" data-track-index="1"></canvas>
+
+      <div id="veil"></div>
+      <div id="atmo"></div>
+      <div id="guides"><i style="left: 25%"></i><i style="left: 50%"></i><i style="left: 75%"></i></div>
+      <div id="vig"></div>
+
+      <!-- scene 1+2: hook — noise, the typed claim -->
+      <section id="sc-hook" class="clip" data-start="0" data-duration="7.6" data-track-index="2">
+        <div class="wrap" id="hk-wrap">
+          <div id="hk-corner" class="eyebrow"><b>[ 00 ]</b> — Signal / Noise</div>
+          <div id="hk-stack">
+            <div id="hk-l1wrap"><span id="hk-l1"></span><span id="hk-cursor"></span></div>
+            <div id="hk-l2">taste and judgement are the moat.</div>
+          </div>
+          <span class="fig-label" id="hk-lab-order">Structured</span>
+          <span class="fig-label" id="hk-lab-chaos">Unstructured</span>
+        </div>
+      </section>
+
+      <!-- scene 3: the name -->
+      <section id="sc-name" class="clip" data-start="7.4" data-duration="5.5" data-track-index="3">
+        <div class="wrap" id="nm-wrap">
+          <b class="tick" id="tick-tl"></b><b class="tick" id="tick-tr"></b>
+          <b class="tick" id="tick-bl"></b><b class="tick" id="tick-br"></b>
+          <div id="nm-eyebrow" class="eyebrow"><b>[</b> Senior Product Manager — AI &amp; Agentic Product · Toronto <b>]</b></div>
+          <h1 id="nm-title"><span class="mask"><span class="mword" id="nm-w1">James</span></span> <span class="mask"><span class="mword" id="nm-w2"><span id="nm-fin">Finnie</span></span></span></h1>
+          <p id="nm-lede">AI-native products &amp; deep context systems.</p>
+        </div>
+      </section>
+
+      <!-- scene 4: focus modules -->
+      <section id="sc-focus" class="clip" data-start="12.6" data-duration="5.0" data-track-index="2">
+        <div class="wrap" id="fc-wrap">
+          <div class="ghostnum" data-layout-ignore>02</div>
+          <div id="fc-eyebrow" class="eyebrow"><b>[ 02 ]</b> — Focus areas</div>
+          <h2 id="fc-title">What I’m <em>building toward.</em></h2>
+          <div id="fc-grid">
+            <article class="fcard" id="fc-card1">
+              <div class="fcard__n"><span>01</span><span>SYS/CTX</span></div>
+              <h3 class="fcard__t">Deep context systems</h3>
+            </article>
+            <article class="fcard" id="fc-card2">
+              <div class="fcard__n"><span>02</span><span>SYS/AGENT</span></div>
+              <h3 class="fcard__t">Agentic engineering</h3>
+            </article>
+            <article class="fcard" id="fc-card3">
+              <div class="fcard__n"><span>03</span><span>SYS/SHIP</span></div>
+              <h3 class="fcard__t">Prototype → production</h3>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- scene 5: the datastrip -->
+      <section id="sc-data" class="clip" data-start="17.4" data-duration="3.7" data-track-index="3">
+        <div class="wrap" id="dt-wrap">
+          <div class="ghostnum" data-layout-ignore>03</div>
+          <div id="dt-label" class="eyebrow"><b>[ 03 ]</b> — The track record, compressed.</div>
+          <div id="dt-strip">
+            <div class="dcell" id="dt-c1"><span class="k">Product craft</span><span class="v"><span id="dt-v1">00</span> YRS</span></div>
+            <div class="dcell" id="dt-c2"><span class="k">Orgs shipped</span><span class="v" id="dt-v2">00</span></div>
+            <div class="dcell" id="dt-c3"><span class="k">Now</span><span class="v">CIBC INVESTOR’S EDGE</span></div>
+            <div class="dcell" id="dt-c4"><span class="k">Focus</span><span class="v">AI-NATIVE <b>▲</b></span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- scene 6: let's build. -->
+      <section id="sc-outro" class="clip" data-start="20.9" data-duration="3.6" data-track-index="2">
+        <div class="wrap" id="ot-wrap">
+          <div id="ot-stack">
+            <h2 id="ot-title">Let’s <em>build.</em></h2>
+            <div id="ot-row">
+              <span id="ot-url">JAMES-FINNIE.COM</span>
+              <span id="ot-btn">Get in touch →</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- structure HUD (the site's scroll readout) -->
+      <div id="hud" class="clip" data-start="4.0" data-duration="8.6" data-track-index="4">Structure <b id="hud-pct">000%</b></div>
+
+      <div id="progress"><span id="progress-bar"></span></div>
+      <div id="grain"></div>
+
+      <!-- ============ audio ============ -->
+      <!-- music bed: vol-12 "steady and clean" — fades handled on the timeline -->
+      <audio id="bgm" src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3" data-start="0" data-duration="24.5" data-track-index="10" data-volume="0.35"></audio>
+
+      <!-- typing ticks (alternating tracks so clips never overlap) -->
+      <audio id="key-1" src="assets/sfx/keyboard/keypress-001.wav" data-start="0.70" data-duration="0.25" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="key-2" src="assets/sfx/keyboard/keypress-009.wav" data-start="0.85" data-duration="0.25" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="key-3" src="assets/sfx/keyboard/keypress-017.wav" data-start="1.00" data-duration="0.25" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="key-4" src="assets/sfx/keyboard/keypress-025.wav" data-start="1.15" data-duration="0.25" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="key-5" src="assets/sfx/keyboard/keypress-005.wav" data-start="1.30" data-duration="0.25" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="key-6" src="assets/sfx/keyboard/keypress-013.wav" data-start="1.45" data-duration="0.25" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="key-7" src="assets/sfx/keyboard/keypress-021.wav" data-start="1.60" data-duration="0.25" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="key-8" src="assets/sfx/keyboard/keypress-029.wav" data-start="1.75" data-duration="0.25" data-track-index="12" data-volume="0.4"></audio>
+
+      <!-- accents (sequential on one track) -->
+      <audio id="sfx-name-bell" src="assets/sfx/impact/impactBell_heavy_000.ogg" data-start="8.70" data-duration="1.48" data-track-index="13" data-volume="0.7"></audio>
+      <!-- beat-grid: cards at 13.11 / 14.20 / 15.29s -->
+      <audio id="sfx-card-1" src="assets/sfx/casino/card-place-1.ogg" data-start="13.11" data-duration="0.69" data-track-index="13" data-volume="0.6"></audio>
+      <audio id="sfx-card-2" src="assets/sfx/casino/card-place-2.ogg" data-start="14.20" data-duration="0.46" data-track-index="13" data-volume="0.6"></audio>
+      <audio id="sfx-card-3" src="assets/sfx/casino/card-place-3.ogg" data-start="15.29" data-duration="0.88" data-track-index="13" data-volume="0.6"></audio>
+      <!-- beat-grid: datastrip cells at 17.47 / 18.02 / 18.56 / 19.10s -->
+      <audio id="sfx-cell-1" src="assets/sfx/interface/drop_002.ogg" data-start="17.47" data-duration="0.19" data-track-index="13" data-volume="0.5"></audio>
+      <audio id="sfx-cell-2" src="assets/sfx/interface/drop_002.ogg" data-start="18.02" data-duration="0.19" data-track-index="13" data-volume="0.5"></audio>
+      <audio id="sfx-cell-3" src="assets/sfx/interface/drop_002.ogg" data-start="18.56" data-duration="0.19" data-track-index="13" data-volume="0.5"></audio>
+      <audio id="sfx-cell-4" src="assets/sfx/interface/drop_002.ogg" data-start="19.10" data-duration="0.19" data-track-index="13" data-volume="0.5"></audio>
+      <!-- beat-locked: outro settle at 22.93s -->
+      <audio id="sfx-outro-bell" src="assets/sfx/impact/impactBell_heavy_003.ogg" data-start="22.88" data-duration="0.65" data-track-index="13" data-volume="0.65"></audio>
+    </div>
+
+    <script>
+      /* =====================================================================
+         James Finnie — "Signal, found."  (brag video composition)
+         One paused GSAP timeline; the entropy field is a Canvas 2D recreation
+         of the site's Three.js hero, drawn per-frame as a pure function of
+         time (seeded PRNG params, sinusoidal pseudo-chaos — no integration,
+         no clocks, no unseeded randomness).
+         ===================================================================== */
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+
+      var DUR = 24.5, FPS = 30, FRAMES = Math.round(DUR * FPS); // 735
+
+      /* ---------- deterministic PRNG ---------- */
+      function mulberry32(a) {
+        return function () {
+          a |= 0; a = (a + 0x6D2B79F5) | 0;
+          var t = Math.imul(a ^ (a >>> 15), 1 | a);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+      var rand = mulberry32(0x5e8bff);
+      function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+      function smooth(e0, e1, x) { var t = clamp((x - e0) / (e1 - e0), 0, 1); return t * t * (3 - 2 * t); }
+      function mix(a, b, t) { return a + (b - a) * t; }
+
+      /* ---------- audio-reactive data (pre-extracted; sync XHR) ---------- */
+      var AUDIO_DATA = { fps: 30, totalFrames: 0, frames: [] };
+      try {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'assets/audio-data.json', false);
+        xhr.send();
+        if (xhr.status === 200 || xhr.status === 0) AUDIO_DATA = JSON.parse(xhr.responseText);
+      } catch (e) { /* silent — field just breathes less */ }
+      function rmsAt(f) {
+        if (!AUDIO_DATA.totalFrames) return 0.5;
+        var i = clamp(f, 0, AUDIO_DATA.totalFrames - 1);
+        return AUDIO_DATA.frames[i].rms;
+      }
+
+      /* ---------- field model (mirrors the site's 25x25 lattice) ---------- */
+      var GRID = 25, N = GRID * GRID, HALF = 50, S = (HALF * 2) / GRID;
+      var homeX = new Float32Array(N), homeY = new Float32Array(N);
+      var ordered = new Uint8Array(N), capTh = new Float32Array(N);
+      var cageX = new Float32Array(N), cageY = new Float32Array(N);
+      var a1 = new Float32Array(N), a2 = new Float32Array(N), b1 = new Float32Array(N), b2 = new Float32Array(N);
+      var w1 = new Float32Array(N), w2 = new Float32Array(N), w3 = new Float32Array(N), w4 = new Float32Array(N), wz = new Float32Array(N);
+      var p1 = new Float32Array(N), p2 = new Float32Array(N), p3 = new Float32Array(N), p4 = new Float32Array(N), pz = new Float32Array(N);
+      var wobA = new Float32Array(N), wobW = new Float32Array(N), wobP = new Float32Array(N);
+      var isSignal = new Uint8Array(N), shade = new Float32Array(N);
+
+      for (var i = 0; i < GRID; i++) {
+        for (var j = 0; j < GRID; j++) {
+          var k = i * GRID + j;
+          var hx = -HALF + S * (i + 0.5), hy = -HALF + S * (j + 0.5);
+          homeX[k] = hx; homeY[k] = hy;
+          ordered[k] = hx < 0 ? 1 : 0;
+          if (!ordered[k]) {
+            /* chaos cage centre + bounded sinusoid amplitudes (pure f(t)) */
+            var ampX = 4 + rand() * 7, ampX2 = 1.5 + rand() * 3;
+            var ampY = 5 + rand() * 9, ampY2 = 1.5 + rand() * 3;
+            var m = ampX + ampX2 + 1;
+            cageX[k] = clamp(2 + rand() * (HALF - 4), m, HALF - m + 6);
+            var my = ampY + ampY2 + 1;
+            cageY[k] = clamp(-HALF + rand() * (2 * HALF), -HALF + my, HALF - my);
+            a1[k] = ampX; a2[k] = ampX2; b1[k] = ampY; b2[k] = ampY2;
+            w1[k] = 0.22 + rand() * 0.5; w2[k] = 0.35 + rand() * 0.7;
+            w3[k] = 0.2 + rand() * 0.45; w4[k] = 0.3 + rand() * 0.65;
+            wz[k] = 0.3 + rand() * 0.5;
+            p1[k] = rand() * 6.283; p2[k] = rand() * 6.283; p3[k] = rand() * 6.283; p4[k] = rand() * 6.283; pz[k] = rand() * 6.283;
+            capTh[k] = clamp(0.06 + 0.85 * (cageX[k] / HALF) + (rand() - 0.5) * 0.12, 0.03, 0.96);
+          } else {
+            wobA[k] = 0.5 + rand() * 0.7; wobW[k] = 0.35 + rand() * 0.5; wobP[k] = rand() * 6.283;
+          }
+          isSignal[k] = rand() < 0.06 ? 1 : 0;
+          shade[k] = 0.88 + rand() * 0.12;
+        }
+      }
+
+      /* orthogonal lattice pairs (right + up neighbours) for the ordered weave */
+      var pairs = [];
+      for (var pi = 0; pi < GRID; pi++) {
+        for (var pj = 0; pj < GRID; pj++) {
+          var pk = pi * GRID + pj;
+          if (pi < GRID - 1) pairs.push(pk, pk + GRID);
+          if (pj < GRID - 1) pairs.push(pk, pk + 1);
+        }
+      }
+
+      /* soft round dot sprite (deterministic offscreen canvas) */
+      var sprite = document.createElement('canvas'); sprite.width = sprite.height = 64;
+      (function () {
+        var g = sprite.getContext('2d');
+        var grad = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+        grad.addColorStop(0, 'rgba(255,255,255,1)');
+        grad.addColorStop(0.35, 'rgba(255,255,255,0.85)');
+        grad.addColorStop(1, 'rgba(255,255,255,0)');
+        g.fillStyle = grad; g.fillRect(0, 0, 64, 64);
+      })();
+      var spriteB = document.createElement('canvas'); spriteB.width = spriteB.height = 64;
+      (function () {
+        var g = spriteB.getContext('2d');
+        var grad = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+        grad.addColorStop(0, 'rgba(160,192,255,1)');
+        grad.addColorStop(0.35, 'rgba(126,164,255,0.9)');
+        grad.addColorStop(1, 'rgba(94,139,255,0)');
+        g.fillStyle = grad; g.fillRect(0, 0, 64, 64);
+      })();
+
+      /* ---------- pose curves (pure functions of time) ---------- */
+      function structP(t) { return smooth(4.2, 9.4, t); }                       /* the scroll → order mechanic */
+      function zoomK(t) { return mix(9.2, 15.2, smooth(12.3, 13.4, t)); }       /* hero pose → full-bleed backdrop */
+      function fieldAlpha(t) {
+        var a = mix(1, 0.6, smooth(12.3, 13.4, t));                             /* dim once it becomes a backdrop */
+        a = mix(a, 0.38, smooth(20.9, 21.9, t));                                /* settle for the outro */
+        return a * smooth(0.0, 0.9, t + 0.001);                                 /* intro fade-in */
+      }
+      function rotY(t) { return 0.10 * Math.sin(t * 0.21) + 0.04 * Math.sin(t * 0.127 + 0.8); }
+      function rotX(t) { return 0.05 * Math.sin(t * 0.166 + 1.3); }
+
+      /* ---------- the draw (called once per frame from the timeline) ---------- */
+      var canvas = document.getElementById('field');
+      var ctx = canvas.getContext('2d');
+      var atmoEl = document.getElementById('atmo');
+      var hudPct = document.getElementById('hud-pct');
+      var pxk = new Float32Array(N), pyk = new Float32Array(N), pzk = new Float32Array(N), effk = new Float32Array(N);
+      var CELL = 10, HASHW = 16; /* world-space hash for the chaos web */
+
+      function drawFrame(f) {
+        var t = f / FPS;
+        var s = structP(t), K = zoomK(t), FA = fieldAlpha(t);
+        var rms = rmsAt(f);
+        var glow = 1 + rms * 0.35;
+        var cy = Math.cos(rotY(t)), sy = Math.sin(rotY(t));
+        var cx = Math.cos(rotX(t)), sx = Math.sin(rotX(t));
+        var persp = 260;
+
+        /* particle positions (pure f(t)) */
+        for (var k = 0; k < N; k++) {
+          var X, Y, Z;
+          if (ordered[k]) {
+            var w = wobA[k] * (1 - 0.9 * s);
+            X = homeX[k] + w * Math.sin(wobW[k] * t + wobP[k]);
+            Y = homeY[k] + w * Math.sin(wobW[k] * 1.31 * t + wobP[k] * 1.7);
+            Z = 1.4 * (1 - 0.9 * s) * Math.sin(wobW[k] * 0.9 * t + wobP[k] * 0.6);
+            effk[k] = 1;
+          } else {
+            var cxx = cageX[k] + a1[k] * Math.sin(w1[k] * t + p1[k]) + a2[k] * Math.sin(w2[k] * t * 1.7 + p2[k]);
+            var cyy = cageY[k] + b1[k] * Math.sin(w3[k] * t + p3[k]) + b2[k] * Math.sin(w4[k] * t * 1.3 + p4[k]);
+            var czz = 4.5 * Math.sin(wz[k] * t + pz[k]);
+            var e = smooth(0, 1, clamp((s - capTh[k]) / 0.12, 0, 1));
+            X = mix(cxx, homeX[k], e);
+            Y = mix(cyy, homeY[k], e);
+            Z = czz * (1 - e);
+            effk[k] = e;
+          }
+          /* rotate + perspective */
+          var x1 = X * cy + Z * sy, z1 = -X * sy + Z * cy;
+          var y1 = Y * cx + z1 * sx, z2 = -Y * sx + z1 * cx;
+          var ps = persp / (persp - z2);
+          pxk[k] = 960 + x1 * K * ps;
+          pyk[k] = 545 - y1 * K * ps;
+          pzk[k] = ps;
+        }
+
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, 1920, 1080);
+        ctx.globalCompositeOperation = 'lighter';
+
+        /* divider (fades as the field structures) */
+        var dA = 0.22 * (1 - s) * FA;
+        if (dA > 0.004) {
+          ctx.strokeStyle = 'rgba(255,255,255,' + dA.toFixed(3) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          /* project the divider endpoints like particles (x=0, z=0) */
+          var ty1 = HALF * cx, ty2 = -HALF * cx;
+          var pta = persp / (persp - (-HALF * sx)), ptb = persp / (persp - (HALF * sx));
+          ctx.moveTo(960, 545 - ty1 * K * pta);
+          ctx.lineTo(960, 545 - ty2 * K * ptb);
+          ctx.stroke();
+        }
+
+        /* ordered weave — orthogonal neighbours, gated by capture blend */
+        ctx.lineWidth = 1;
+        for (var q = 0; q < pairs.length; q += 2) {
+          var ia = pairs[q], ib = pairs[q + 1];
+          var ea = effk[ia], eb = effk[ib];
+          var g2 = Math.min(ea, eb);
+          if (g2 < 0.55) continue;
+          var al = 0.13 * g2 * FA * glow;
+          ctx.strokeStyle = 'rgba(210,222,255,' + al.toFixed(3) + ')';
+          ctx.beginPath(); ctx.moveTo(pxk[ia], pyk[ia]); ctx.lineTo(pxk[ib], pyk[ib]); ctx.stroke();
+        }
+
+        /* chaos web — world-space neighbourhood, hashed */
+        var cells = {};
+        for (var k2 = 0; k2 < N; k2++) {
+          if (ordered[k2] || effk[k2] > 0.7) continue;
+          /* world pos back-of-envelope: reuse screen but hash on world via cage estimate — use projected/K for world approx */
+          var wx = (pxk[k2] - 960) / K, wy = (545 - pyk[k2]) / K;
+          var key = ((wx + 64) / CELL | 0) * 1000 + ((wy + 64) / CELL | 0);
+          (cells[key] || (cells[key] = [])).push(k2);
+        }
+        var seg = 0, MAXSEG = 2400;
+        outer:
+        for (var kk in cells) {
+          var arr = cells[kk];
+          var kxi = (kk / 1000) | 0, kyi = kk % 1000;
+          for (var ai = 0; ai < arr.length; ai++) {
+            var A = arr[ai];
+            var awx = (pxk[A] - 960) / K, awy = (545 - pyk[A]) / K;
+            for (var nx = kxi - 1; nx <= kxi + 1; nx++) {
+              for (var ny = kyi - 1; ny <= kyi + 1; ny++) {
+                var brr = cells[nx * 1000 + ny];
+                if (!brr) continue;
+                for (var bi = 0; bi < brr.length; bi++) {
+                  var B = brr[bi];
+                  if (B <= A) continue;
+                  var bwx = (pxk[B] - 960) / K, bwy = (545 - pyk[B]) / K;
+                  var ddx = awx - bwx, ddy = awy - bwy;
+                  var d2 = ddx * ddx + ddy * ddy;
+                  if (d2 < 100) {
+                    var wgt = (1 - Math.sqrt(d2) / 10) * 0.15 * FA * glow;
+                    ctx.strokeStyle = 'rgba(226,233,255,' + wgt.toFixed(3) + ')';
+                    ctx.beginPath(); ctx.moveTo(pxk[A], pyk[A]); ctx.lineTo(pxk[B], pyk[B]); ctx.stroke();
+                    if (++seg >= MAXSEG) break outer;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        /* dots */
+        for (var k3 = 0; k3 < N; k3++) {
+          var r = 3.1 * (K / 9.2) * pzk[k3];
+          var aD = (0.72 + 0.2 * effk[k3]) * shade[k3] * FA * (1 + rms * 0.18);
+          ctx.globalAlpha = clamp(aD, 0, 1);
+          ctx.drawImage(isSignal[k3] ? spriteB : sprite, pxk[k3] - r, pyk[k3] - r, r * 2, r * 2);
+        }
+        ctx.globalAlpha = 1;
+        ctx.globalCompositeOperation = 'source-over';
+
+        /* HUD + atmosphere breathe (t-gated, pure f(t)) */
+        if (t >= 4.0 && t <= 12.6) {
+          hudPct.textContent = String(Math.round(s * 100)).padStart(3, '0') + '%';
+        }
+        atmoEl.style.opacity = (0.72 + rms * 0.28).toFixed(3);
+      }
+
+      /* per-frame sampling — the hyperframes audio-visualizer pattern */
+      for (var f = 0; f < FRAMES; f++) {
+        tl.call((function (ff) { return function () { drawFrame(ff); }; })(f), [], f / FPS);
+      }
+
+      /* =====================================================================
+         DOM scenes
+         ===================================================================== */
+      var EXPO = 'expo.out', P3 = 'power3.out';
+
+      /* ---- music: fade in, hold at 0.35, fade out under the outro ---- */
+      tl.fromTo('#bgm', { volume: 0 }, { volume: 0.35, duration: 0.8, ease: 'power1.out' }, 0);
+      tl.to('#bgm', { volume: 0.0, duration: 1.9, ease: 'power1.in' }, 22.5);
+
+      /* ---- progress hairline (the site's scroll progress) ---- */
+      tl.fromTo('#progress-bar', { scaleX: 0 }, { scaleX: 1, duration: DUR, ease: 'none' }, 0);
+
+      /* ---- scene 1+2: hook ---- */
+      tl.fromTo('#hk-corner', { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.5, ease: P3 }, 0.25);
+      tl.fromTo('#hk-lab-order', { opacity: 0 }, { opacity: 1, duration: 0.6, ease: P3 }, 0.45);
+      tl.fromTo('#hk-lab-chaos', { opacity: 0 }, { opacity: 1, duration: 0.6, ease: P3 }, 0.55);
+
+      /* typed line — per-character calls (deterministic, no TextPlugin) */
+      var L1 = 'When building is cheap,';
+      var T0 = 0.70, CPS = 19;
+      tl.set('#hk-cursor', { opacity: 1 }, 0.5);
+      (function () {
+        var el = document.getElementById('hk-l1');
+        for (var c = 1; c <= L1.length; c++) {
+          tl.call((function (n) { return function () { el.textContent = L1.slice(0, n); }; })(c), [], T0 + c / CPS);
+        }
+        /* seeks that land before typing must reset the text */
+        tl.call(function () { el.textContent = ''; }, [], 0.01);
+      })();
+      var TEND = T0 + L1.length / CPS; /* ≈1.91 */
+      /* cursor blink after typing (exact set calls — deterministic) */
+      tl.set('#hk-cursor', { opacity: 0 }, TEND + 0.42);
+      tl.set('#hk-cursor', { opacity: 1 }, TEND + 0.84);
+      tl.set('#hk-cursor', { opacity: 0 }, TEND + 1.26);
+      tl.set('#hk-cursor', { opacity: 1 }, TEND + 1.68);
+      tl.set('#hk-cursor', { opacity: 0 }, 3.75);
+
+      /* the claim lands — fast-in, long hold */
+      tl.fromTo('#hk-l2', { opacity: 0, y: 30, scale: 0.985 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: P3 }, 3.78);
+      /* scene exit */
+      tl.to('#hk-wrap', { opacity: 0, y: -16, duration: 0.45, ease: 'power2.in' }, 7.1);
+
+      /* ---- HUD ---- */
+      tl.fromTo('#hud', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: P3 }, 4.0);
+      tl.to('#hud', { opacity: 0, duration: 0.4, ease: 'power2.in' }, 12.1);
+
+      /* ---- scene 3: name ---- */
+      tl.fromTo('#nm-eyebrow', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.55, ease: P3 }, 7.95);
+      /* corner ticks draw in */
+      tl.fromTo('#tick-tl', { opacity: 0, scale: 0.55 }, { opacity: 1, scale: 1, duration: 0.45, ease: P3 }, 8.30);
+      tl.fromTo('#tick-tr', { opacity: 0, scale: 0.55 }, { opacity: 1, scale: 1, duration: 0.45, ease: P3 }, 8.36);
+      tl.fromTo('#tick-bl', { opacity: 0, scale: 0.55 }, { opacity: 1, scale: 1, duration: 0.45, ease: P3 }, 8.42);
+      tl.fromTo('#tick-br', { opacity: 0, scale: 0.55 }, { opacity: 1, scale: 1, duration: 0.45, ease: P3 }, 8.48);
+      /* the word-mask rise — beat-locked: lands on the 8.74s strong cue */
+      tl.fromTo('#nm-w1', { yPercent: 130 }, { yPercent: 0, duration: 0.85, ease: EXPO }, 8.45);
+      tl.fromTo('#nm-w2', { yPercent: 130 }, { yPercent: 0, duration: 0.85, ease: EXPO }, 8.62);
+      tl.fromTo('#nm-lede', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.55, ease: P3 }, 10.35);
+      tl.to('#nm-wrap', { opacity: 0, y: -16, duration: 0.42, ease: 'power2.in' }, 12.45);
+
+      /* ---- scene 4: focus cards ---- */
+      tl.fromTo('#fc-eyebrow', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: P3 }, 12.85);
+      tl.fromTo('#fc-title', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.55, ease: P3 }, 12.95);
+      /* beat-grid: card 1 at 13.11s, card 2 at 14.20s, card 3 at 15.29s */
+      tl.fromTo('#fc-card1', { opacity: 0, y: 36, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: P3 }, 13.11);
+      tl.fromTo('#fc-card2', { opacity: 0, y: 36, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: P3 }, 14.20);
+      tl.fromTo('#fc-card3', { opacity: 0, y: 36, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: P3 }, 15.29);
+      tl.fromTo('#sc-focus .ghostnum', { opacity: 0 }, { opacity: 1, duration: 0.8, ease: 'none' }, 13.0);
+      tl.to('#fc-wrap', { opacity: 0, y: -16, duration: 0.42, ease: 'power2.in' }, 17.15);
+
+      /* ---- scene 5: datastrip ---- */
+      tl.fromTo('#dt-label', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: P3 }, 17.45);
+      /* beat-locked: first cell on the 17.47s strong cue; then consecutive beats */
+      tl.fromTo('#dt-c1', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.38, ease: P3 }, 17.47);
+      tl.fromTo('#dt-c2', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.38, ease: P3 }, 18.02);
+      tl.fromTo('#dt-c3', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.38, ease: P3 }, 18.56);
+      tl.fromTo('#dt-c4', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.38, ease: P3 }, 19.10);
+      tl.fromTo('#sc-data .ghostnum', { opacity: 0 }, { opacity: 1, duration: 0.8, ease: 'none' }, 17.6);
+      /* counters (proxy tweens — deterministic) */
+      (function () {
+        var v1 = { craft: 0 }, e1 = document.getElementById('dt-v1');
+        tl.to(v1, { craft: 5, duration: 0.7, ease: 'power1.out', onUpdate: function () { e1.textContent = String(Math.round(v1.craft)).padStart(2, '0'); } }, 17.55);
+        var v2 = { orgs: 0 }, e2 = document.getElementById('dt-v2');
+        tl.to(v2, { orgs: 4, duration: 0.7, ease: 'power1.out', onUpdate: function () { e2.textContent = String(Math.round(v2.orgs)).padStart(2, '0'); } }, 18.10);
+      })();
+      tl.to('#dt-wrap', { opacity: 0, y: -16, duration: 0.42, ease: 'power2.in' }, 20.68);
+
+      /* ---- scene 6: outro ---- */
+      tl.fromTo('#ot-title', { opacity: 0, y: 44, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: P3 }, 21.05);
+      /* beat-grid: url + button on the 22.37s beat */
+      tl.fromTo('#ot-row', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: P3 }, 22.37);
+      /* beat-locked: settle glow on "build." at the 22.93s strong cue */
+      tl.fromTo('#ot-title', { '--gl': '0px' }, { '--gl': '22px', duration: 0.28, ease: 'power2.out' }, 22.88);
+      tl.to('#ot-title', { '--gl': '9px', duration: 0.9, ease: 'power2.out' }, 23.16);
+
+      window.__timelines['main'] = tl;
+    </script>
+  </body>
+</html>
