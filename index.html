@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>James Finnie — Senior Product Manager · AI &amp; Agentic Product</title>
-<meta name="description" content="Senior Product Manager building AI-native products and deep context systems — agentic engineering, prototype-first delivery, and taste at speed. Toronto.">
+<title>James Finnie — Senior Product Manager · AI-Native Products</title>
+<meta name="description" content="Senior Product Manager in Toronto turning complex ideas into clear product decisions and working software — across AI, investing, and connected systems.">
 <meta name="author" content="James Finnie">
 <meta name="theme-color" content="#050608">
 <link rel="canonical" href="https://www.james-finnie.com/">
@@ -13,14 +13,42 @@
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.james-finnie.com/">
-<meta property="og:title" content="James Finnie — Senior Product Manager · AI &amp; Agentic Product">
-<meta property="og:description" content="Building AI-native products and deep context systems — agentic engineering, prototype-first delivery, and taste at speed.">
+<meta property="og:title" content="James Finnie — Senior Product Manager · AI-Native Products">
+<meta property="og:description" content="Turning complex ideas into clear product decisions and working software — across AI, investing, and connected systems.">
 <meta property="og:site_name" content="James Finnie">
+<meta property="og:image" content="https://www.james-finnie.com/assets/og.png">
+<meta property="og:image:alt" content="James Finnie — Senior Product Manager building AI-native products">
 
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="James Finnie — Senior Product Manager · AI &amp; Agentic Product">
-<meta name="twitter:description" content="AI-native products, deep context systems, agentic engineering, prototype-first delivery, taste at speed.">
+<meta name="twitter:title" content="James Finnie — Senior Product Manager · AI-Native Products">
+<meta name="twitter:description" content="Clear product decisions and working software across AI, investing, and connected systems.">
+<meta name="twitter:image" content="https://www.james-finnie.com/assets/og.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "James Finnie",
+  "url": "https://www.james-finnie.com/",
+  "jobTitle": "Senior Product Manager",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Toronto",
+    "addressCountry": "CA"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/james-finnie/",
+    "https://github.com/JPFinnie"
+  ],
+  "knowsAbout": [
+    "AI product management",
+    "Agentic engineering",
+    "Self-directed investing",
+    "Connected products"
+  ]
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,6 +88,9 @@ a{color:inherit;text-decoration:none}
 ul{list-style:none}
 ::selection{background:var(--signal);color:var(--signal-ink)}
 :focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.skip-link{position:fixed;top:-80px;left:16px;z-index:1000;padding:10px 14px;background:var(--signal);color:var(--signal-ink);
+  font-family:var(--font-m);font-size:11px;letter-spacing:.12em;text-transform:uppercase;transition:top .2s var(--ease)}
+.skip-link:focus{top:16px}
 em{font-style:italic}
 strong{font-weight:500;color:var(--ink)}
 .sec-title em,.about__lead em,.about__quote em,.contact__title em{font-style:normal;color:var(--signal)}
@@ -274,7 +305,9 @@ footer a:hover{color:var(--ink)}
 }
 @media(max-width:640px){
   :root{--gutter:20px}
-  .header .btn{display:none}
+  .header{gap:10px}
+  .brand small{display:none}
+  .header .btn{padding:9px 11px;font-size:9px;letter-spacing:.12em}
   .guides{display:none}
   .section{padding:88px var(--gutter)}
   .focus-grid{grid-template-columns:1fr}
@@ -290,6 +323,7 @@ footer a:hover{color:var(--ink)}
 </head>
 <body id="top">
 
+<a href="#main" class="skip-link">Skip to content</a>
 <canvas id="field" aria-hidden="true" style="opacity:0"></canvas>
 <div class="progress" aria-hidden="true"></div>
 <div class="guides" aria-hidden="true"><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i></div>
@@ -313,12 +347,12 @@ footer a:hover{color:var(--ink)}
   </div>
 </header>
 
-<main>
+<main id="main">
 
 <!-- HERO -->
 <section class="hero" id="hero">
   <p class="hero__eyebrow reveal">
-    <b>[</b> Senior Product Manager &mdash; AI &amp; Agentic Product &middot; Toronto <b>]</b>
+    <b>[</b> Senior Product Manager &mdash; AI Product &middot; Wealth Technology &middot; Toronto <b>]</b>
   </p>
 
   <div class="fig reveal" id="entropy" style="--i:1" role="img" aria-label="Generative particle field — a structured lattice on the left, unstructured particles on the right, divided by a boundary the noise leaks across. Drag to spin it in 3D; scrolling the page gradually structures the field.">
@@ -331,20 +365,20 @@ footer a:hover{color:var(--ink)}
   </div>
 
   <p class="hero__lede reveal" style="--i:2">
-    I build <strong>AI-native products and deep context systems</strong> &mdash; prototype-first, with agents in the loop,
-    and a clear view of <strong>what</strong> to build and <strong>why</strong>.
+    I turn <strong>complex product problems</strong> into clear decisions and working software &mdash; using AI-native workflows
+    to move from <strong>discovery to production</strong> faster.
   </p>
 
   <div class="hero__actions reveal" style="--i:3">
-    <a href="#contact" class="btn btn--primary">Let&rsquo;s talk &rarr;</a>
-    <a href="#focus" class="btn btn--ghost">See my focus</a>
+    <a href="#contact" class="btn btn--primary">Start a conversation &rarr;</a>
+    <a href="#projects" class="btn btn--ghost">See selected work</a>
   </div>
 
-  <div class="datastrip reveal" style="--i:4" aria-label="Career data summary">
-    <div><span class="k">Product craft</span><span class="v">05 YRS</span></div>
+  <div class="datastrip reveal" style="--i:4" aria-label="Professional summary">
+    <div><span class="k">Product experience</span><span class="v">05+ YRS</span></div>
     <div><span class="k">Orgs shipped</span><span class="v">04</span></div>
     <div><span class="k">Base</span><span class="v">TOR 43.65&deg;N</span></div>
-    <div><span class="k">Focus</span><span class="v">AI-NATIVE <b>&#9650;</b></span></div>
+    <div><span class="k">Mode</span><span class="v">PROTOTYPE-FIRST <b>&#9650;</b></span></div>
   </div>
 
   <div class="hero__scroll" aria-hidden="true">
@@ -361,13 +395,13 @@ footer a:hover{color:var(--ink)}
   </div>
   <div class="about">
     <div class="reveal">
-      <p class="about__lead">An <em>AI-native</em> product leader &mdash; prototype-first, agents in the loop, and one question held constant: what are we building, and <em>why</em>?</p>
+      <h2 class="about__lead">I work where <em>product judgement</em>, AI, and complex systems meet &mdash; turning ambiguity into something a team can test and ship.</h2>
     </div>
     <div class="about__body reveal" style="--i:1">
-      <p>I&rsquo;m a Senior Product Manager in Toronto, working on <strong>AI-native product and agentic engineering</strong>. I build <strong>deep context systems</strong> &mdash; structured knowledge that agents can genuinely reason over &mdash; for my team, and as a personal LLM wiki.</p>
-      <p>At CIBC Investor&rsquo;s Edge, I lead product for self-directed investing and am changing how the team ships: <strong>working prototypes in place of heavyweight specs</strong>, agent-assisted discovery, and design systems wired into agentically built prototypes &mdash; with pipelines that carry the work through to production.</p>
-      <p class="about__quote">When building is cheap, taste and judgement are the moat. Knowing <em>what</em> to build &mdash; and <em>why</em> &mdash; is the hard part.</p>
-      <p>The product conviction: investing at an incumbent bank shouldn&rsquo;t feel generic. It should feel like the institution genuinely <strong>works for you</strong> &mdash; timely insight, and nudges in the right direction where they&rsquo;re appropriate.</p>
+      <p>I&rsquo;m a Senior Product Manager in Toronto. I turn ambiguous opportunities into products teams can <strong>test, trust, and ship</strong> &mdash; especially across investing, AI, and connected systems.</p>
+      <p>At CIBC Investor&rsquo;s Edge, I lead product for self-directed investing. I use <strong>working prototypes to make strategy tangible</strong>, bring agents into discovery, and connect design systems to delivery &mdash; so teams learn sooner and commit with confidence.</p>
+      <p class="about__quote">AI makes building faster. The advantage is choosing the right problem, setting a clear quality bar, and knowing <em>why</em> the product should exist.</p>
+      <p>That conviction shapes my work in wealth. Personalisation should make investing more relevant and timely without weakening <strong>trust, agency, or control</strong>.</p>
     </div>
   </div>
 
@@ -375,17 +409,17 @@ footer a:hover{color:var(--ink)}
     <div class="principle reveal">
       <div class="principle__n">I.</div>
       <h3 class="principle__t">Taste at speed</h3>
-      <p class="principle__d">When anyone can build anything, judgement is the moat. Ship fast &mdash; and know which of a thousand possible paths deserves to exist.</p>
+      <p class="principle__d">Speed creates more choices, not better ones. Set a clear quality bar and spend time on the few decisions users will actually feel.</p>
     </div>
     <div class="principle reveal" style="--i:1">
       <div class="principle__n">II.</div>
       <h3 class="principle__t">Ask why, relentlessly</h3>
-      <p class="principle__d">Cheap building makes the <em>what</em> and the <em>why</em> the hard part. Conviction and discovery come before code.</p>
+      <p class="principle__d">Start with the user, the constraint, and the change that matters. A crisp problem beats a polished backlog.</p>
     </div>
     <div class="principle reveal" style="--i:2">
       <div class="principle__n">III.</div>
       <h3 class="principle__t">Prototype-first</h3>
-      <p class="principle__d">Agent loops, skills files, and working prototypes over specs and decks. Build the thing, then decide.</p>
+      <p class="principle__d">Use working software to test the riskiest assumptions. Let teams react to something real before locking in the roadmap.</p>
     </div>
   </div>
 </section>
@@ -395,44 +429,44 @@ footer a:hover{color:var(--ink)}
   <span class="ghost" aria-hidden="true" data-speed="0.12">02</span>
   <div class="sec-head reveal">
     <div class="eyebrow"><b>[ 02 ]</b> &mdash; Focus areas</div>
-    <h2 class="sec-title reveal-mask" data-mask>What I&rsquo;m <em>building toward.</em></h2>
+    <h2 class="sec-title reveal-mask" data-mask>Where I do my <em>best work.</em></h2>
   </div>
   <div class="lattice focus-grid">
     <article class="fcard reveal">
       <div class="fcard__n">01 <span>SYS/CTX</span></div>
       <h3 class="fcard__t">Deep context systems</h3>
-      <p class="fcard__d">Structured knowledge that agents can reason over &mdash; a personal LLM wiki for work and life, built with an eye on open standards like Google&rsquo;s <em>Open Knowledge Format (OKF)</em>.</p>
-      <div class="fcard__tags"><span>Context engineering</span><span>OKF &amp; open standards</span><span>Retrieval</span></div>
+      <p class="fcard__d">Turn scattered research, decisions, and product knowledge into durable context that teams and agents can retrieve, connect, and act on.</p>
+      <div class="fcard__tags"><span>Context engineering</span><span>Knowledge systems</span><span>Retrieval</span></div>
     </article>
     <article class="fcard reveal" style="--i:1">
       <div class="fcard__n">02 <span>SYS/AGENT</span></div>
       <h3 class="fcard__t">Agentic engineering</h3>
-      <p class="fcard__d">Prototype-first delivery built on agent loops and skills files &mdash; working software in place of static specs and long documents.</p>
-      <div class="fcard__tags"><span>Agent loops</span><span>Skills files</span><span>Prototype-first</span></div>
+      <p class="fcard__d">Design human-directed agent workflows that expand a team&rsquo;s range while keeping goals, judgement, and accountability clear.</p>
+      <div class="fcard__tags"><span>Agent workflows</span><span>Skills files</span><span>Human-in-the-loop</span></div>
     </article>
     <article class="fcard reveal" style="--i:2">
       <div class="fcard__n">03 <span>SYS/PM</span></div>
-      <h3 class="fcard__t">Agentic product management</h3>
-      <p class="fcard__d">Agents inside the discovery loop &mdash; sharper questions, faster validation, and working artefacts in place of heavyweight requirement docs.</p>
-      <div class="fcard__tags"><span>Discovery</span><span>Validation</span><span>Product mindset</span></div>
+      <h3 class="fcard__t">Prototype-led product</h3>
+      <p class="fcard__d">Turn research and strategy into working artefacts early, so teams can test the riskiest assumptions before locking in a roadmap.</p>
+      <div class="fcard__tags"><span>Discovery</span><span>Validation</span><span>Product strategy</span></div>
     </article>
     <article class="fcard reveal">
       <div class="fcard__n">04 <span>SYS/TASTE</span></div>
-      <h3 class="fcard__t">Taste at speed</h3>
-      <p class="fcard__d">When anyone can build anything, taste decides what ships. Speed <em>and</em> judgement &mdash; not speed alone &mdash; is the edge.</p>
+      <h3 class="fcard__t">Product judgement at AI speed</h3>
+      <p class="fcard__d">Use faster building to explore more possibilities, while raising the bar for what earns attention and what ships.</p>
       <div class="fcard__tags"><span>Judgement</span><span>Curation</span><span>Velocity</span></div>
     </article>
     <article class="fcard reveal" style="--i:1">
       <div class="fcard__n">05 <span>SYS/PRSNL</span></div>
-      <h3 class="fcard__t">Personalisation, done right</h3>
-      <p class="fcard__d">Investing that feels like it works for you &mdash; timely insight and nudges in the right direction, where it&rsquo;s appropriate to give them.</p>
-      <div class="fcard__tags"><span>Personalisation</span><span>Insight</span><span>Nudges</span></div>
+      <h3 class="fcard__t">Trusted personalisation</h3>
+      <p class="fcard__d">Make investing experiences more timely and relevant without crossing the line into noise, pressure, or overreach.</p>
+      <div class="fcard__tags"><span>Personalisation</span><span>Relevance</span><span>Trust</span></div>
     </article>
     <article class="fcard reveal" style="--i:2">
       <div class="fcard__n">06 <span>SYS/SHIP</span></div>
       <h3 class="fcard__t">Prototype &rarr; production</h3>
-      <p class="fcard__d">Design systems feeding agentically built prototypes, with pipelines that carry work end to end &mdash; from first sketch to shipped.</p>
-      <div class="fcard__tags"><span>Design systems</span><span>E2E pipelines</span><span>Delivery</span></div>
+      <p class="fcard__d">Connect design systems, engineering constraints, and delivery pipelines so validated ideas survive the journey into production.</p>
+      <div class="fcard__tags"><span>Design systems</span><span>Delivery pipelines</span><span>Production</span></div>
     </article>
   </div>
 </section>
@@ -442,7 +476,7 @@ footer a:hover{color:var(--ink)}
   <span class="ghost" aria-hidden="true" data-speed="0.1">03</span>
   <div class="sec-head reveal">
     <div class="eyebrow"><b>[ 03 ]</b> &mdash; Experience</div>
-    <h2 class="sec-title reveal-mask" data-mask>The track record, <em>compressed.</em></h2>
+    <h2 class="sec-title reveal-mask" data-mask>A track record across <em>complex products.</em></h2>
   </div>
   <div class="tl">
     <div class="tl__item reveal">
@@ -450,7 +484,7 @@ footer a:hover{color:var(--ink)}
       <div class="tl__body">
         <div class="tl__co">CIBC Investor&rsquo;s Edge</div>
         <p class="tl__role">Senior Product Manager / Product Owner</p>
-        <p class="tl__desc">Leading AI-native product for self-directed investing &mdash; agentic engineering, deep context systems, and personalisation &mdash; and driving the team&rsquo;s shift to prototype-first discovery and delivery.</p>
+        <p class="tl__desc">Leading product for self-directed investing, with a focus on AI-enabled experiences, personalisation, and faster discovery-to-delivery. Introducing prototype-led ways of working to align teams and test direction earlier.</p>
       </div>
       <span class="tl__loc">Toronto</span>
     </div>
@@ -459,7 +493,7 @@ footer a:hover{color:var(--ink)}
       <div class="tl__body">
         <div class="tl__co">Trudell Medical International</div>
         <p class="tl__role">Manager &middot; IoT &amp; Intelligent Systems</p>
-        <p class="tl__desc">Led product for a connected-device platform &mdash; device data, companion mobile apps, and product strategy across a complex hardware-and-software business.</p>
+        <p class="tl__desc">Led product direction for a connected-device platform spanning device data, companion apps, and internal capabilities &mdash; aligning hardware, software, and commercial priorities.</p>
       </div>
       <span class="tl__loc">London, ON</span>
     </div>
@@ -468,7 +502,7 @@ footer a:hover{color:var(--ink)}
       <div class="tl__body">
         <div class="tl__co">StoneX</div>
         <p class="tl__role">Product Analyst / Associate Product Manager</p>
-        <p class="tl__desc">Product across trading and brokerage &mdash; mobile trading and share dealing, including reliability work that sharply reduced crashes on a mobile-first platform.</p>
+        <p class="tl__desc">Worked across trading and brokerage products, including mobile trading, share dealing, and a reliability programme that materially reduced crashes on a mobile-first platform.</p>
       </div>
       <span class="tl__loc">London</span>
     </div>
@@ -477,7 +511,7 @@ footer a:hover{color:var(--ink)}
       <div class="tl__body">
         <div class="tl__co">Equals Money</div>
         <p class="tl__role">Product Analyst</p>
-        <p class="tl__desc">Fintech product and operations &mdash; onboarding, identity verification, internal tooling, and customer-journey improvements across payments and FX.</p>
+        <p class="tl__desc">Improved onboarding and operations across payments and FX, including identity verification, internal tools, and the end-to-end customer journey.</p>
       </div>
       <span class="tl__loc">London</span>
     </div>
@@ -500,37 +534,37 @@ footer a:hover{color:var(--ink)}
   <span class="ghost" aria-hidden="true" data-speed="0.12">04</span>
   <div class="sec-head reveal">
     <div class="eyebrow"><b>[ 04 ]</b> &mdash; Capabilities</div>
-    <h2 class="sec-title reveal-mask" data-mask>What I bring <em>to a team.</em></h2>
+    <h2 class="sec-title reveal-mask" data-mask>How I help teams <em>move.</em></h2>
   </div>
   <div class="lattice caps">
     <div class="cap reveal">
-      <span class="cap__label">Product</span>
+      <span class="cap__label">Product Leadership</span>
       <ul class="cap__list">
         <li><strong>AI-native product</strong> strategy</li>
-        <li>Discovery &amp; product mindset</li>
-        <li>PR-FAQs &amp; narrative specs</li>
+        <li>Discovery &amp; validation</li>
         <li>Roadmapping &amp; prioritisation</li>
-        <li>Executive communication</li>
+        <li>PR-FAQs &amp; narrative specs</li>
+        <li>Executive alignment</li>
       </ul>
     </div>
     <div class="cap reveal" style="--i:1">
-      <span class="cap__label">Agentic Engineering</span>
+      <span class="cap__label">AI-Enabled Delivery</span>
       <ul class="cap__list">
         <li><strong>Prototype-first</strong> delivery</li>
-        <li>Agent loops &amp; skills files</li>
-        <li>Agentically built prototypes</li>
-        <li>Design-system-driven prototyping</li>
-        <li>E2E pipelines to production</li>
+        <li>Agent workflows &amp; skills files</li>
+        <li>Design-system prototypes</li>
+        <li>Evaluation &amp; feedback loops</li>
+        <li>Production handoff</li>
       </ul>
     </div>
     <div class="cap reveal" style="--i:2">
       <span class="cap__label">AI &amp; Context</span>
       <ul class="cap__list">
         <li><strong>Deep context systems</strong></li>
+        <li>Knowledge architecture</li>
         <li>RAG &amp; retrieval</li>
         <li>Evals &amp; prompt design</li>
         <li>LLM tooling &amp; agents</li>
-        <li>AI product operations</li>
       </ul>
     </div>
     <div class="cap reveal" style="--i:3">
@@ -551,14 +585,14 @@ footer a:hover{color:var(--ink)}
   <span class="ghost" aria-hidden="true" data-speed="0.12">05</span>
   <div class="sec-head reveal">
     <div class="eyebrow"><b>[ 05 ]</b> &mdash; Personal projects</div>
-    <h2 class="sec-title reveal-mask" data-mask>Shipped <em>for fun.</em></h2>
+    <h2 class="sec-title reveal-mask" data-mask>Proof, <em>not promises.</em></h2>
   </div>
   <div class="lattice proj-grid">
     <article class="proj reveal">
       <div>
         <div class="fcard__n">P-01 <span>SIDE/BUILD</span></div>
         <h3 class="proj__t">The Six Cut</h3>
-        <p class="fcard__d">Toronto&rsquo;s independent butcher shops, mapped and scored. Every shop gets a custom <em>Six Cut Score</em> alongside its Google rating &mdash; searchable by specialty, filterable by score, with a look inside before you visit. A small product taken seriously, methodology page and all.</p>
+        <p class="fcard__d">A discovery tool for Toronto&rsquo;s independent butcher shops. It combines Google ratings with a transparent <em>Six Cut Score</em>, then lets people search by specialty, filter by score, and preview each shop. I built it end to end &mdash; from scoring method to map experience.</p>
         <div class="fcard__tags"><span>Next.js</span><span>Interactive map</span><span>Scoring model</span><span>Toronto</span></div>
       </div>
       <div class="proj__side">
@@ -570,7 +604,7 @@ footer a:hover{color:var(--ink)}
       <div>
         <div class="fcard__n">P-02 <span>SIDE/BUILD</span></div>
         <h3 class="proj__t">FinanceHermes</h3>
-        <p class="fcard__d">A financial research agent that answers questions on market moves, earnings, analyst sentiment, and central bank activity &mdash; live web search fused with real-time reasoning, streamed step by step so you can watch the agent think. Research and education only, not investment advice.</p>
+        <p class="fcard__d">A research agent for market moves, earnings, analyst sentiment, and central bank activity. It searches current sources, synthesises the findings, and streams its research progress so the trail stays visible. An experiment in useful, inspectable agent workflows.</p>
         <div class="fcard__tags"><span>Agentic search</span><span>LLM reasoning</span><span>Hermes 4</span><span>Vercel</span></div>
       </div>
       <div class="proj__side">
@@ -585,8 +619,8 @@ footer a:hover{color:var(--ink)}
 <section class="contact" id="contact">
   <span class="ghost" aria-hidden="true" data-speed="0.1" style="right:auto;left:-8px">06</span>
   <div class="eyebrow reveal"><b>[ 06 ]</b> &mdash; Get in touch</div>
-  <h2 class="contact__title reveal-mask" data-mask style="margin-top:28px">Let&rsquo;s <em>build.</em></h2>
-  <p class="contact__sub reveal" style="--i:2">Always happy to talk AI-native product, agentic engineering, deep context systems, and where investing goes next.</p>
+  <h2 class="contact__title reveal-mask" data-mask style="margin-top:28px">Let&rsquo;s make it <em>real.</em></h2>
+  <p class="contact__sub reveal" style="--i:2">Have an ambitious product problem? I&rsquo;m always glad to compare notes on AI-enabled product, investing experiences, and turning an early idea into something testable.</p>
   <div class="contact__links reveal" style="--i:3">
     <a href="mailto:james_finnie@icloud.com" class="btn btn--primary">Email &rarr;</a>
     <a href="https://www.linkedin.com/in/james-finnie/" target="_blank" rel="noopener" class="btn btn--ghost">LinkedIn &rarr;</a>
