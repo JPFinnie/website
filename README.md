@@ -1,74 +1,64 @@
 # james-finnie.com
 
-Personal portfolio for James Finnie — Senior Product Manager focused on AI-native product, agentic engineering, and deep context systems.
+James Finnie’s personal portfolio: product judgement, hands-on building, and work across AI, investing, and connected systems.
 
-**Live:** [james-finnie.com](https://www.james-finnie.com)
+**Live:** [www.james-finnie.com](https://www.james-finnie.com/)
 
----
+## Structure
 
-## What's here
+A static, responsive site with no build step and no runtime dependencies.
 
-Single-page portfolio with no build step, no framework, no runtime dependencies. Served as static files.
+- `index.html` — content, navigation, search metadata, and structured data.
+- `assets/styles.css` — shared design tokens, responsive layouts, motion, and print styles.
+- `assets/main.js` — mobile navigation, Toronto time, scroll progress, and Vercel analytics.
+- `assets/fonts/` — self-hosted Space Grotesk, Inter, and JetBrains Mono.
+- `assets/six-cut.webp`, `assets/finance-hermes.webp` — screenshots of the public project story and research interface.
+- `assets/favicon.svg`, `assets/og.png` — identity and social preview.
+- `tools/screenshot.mjs` — responsive screenshots and interaction checks.
+- `tools/og-image.mjs` — social preview generator.
+- `vercel.json` — security and caching headers.
 
-**Sections:** Hero (interactive knowledge graph) · At a glance · About · Focus areas · Selected work · Experience · Capabilities · Contact
+The Six Cut card leads to its working project story. Its original app link is retained; the live directory displayed an empty-data state during the September 2026 review.
 
-```
-index.html           markup + meta + JSON-LD
-assets/styles.css    all styles (design tokens in :root)
-assets/main.js       interactions — nav, reveals, spotlight, clock
-assets/graph.js      hero knowledge-graph canvas (vanilla, zero deps)
-assets/favicon.svg   favicon
-assets/og.png        social share image (generated)
-tools/og-image.mjs   one-off OG image generator (npm run og)
-tools/screenshot.mjs verification screenshots (npm run shots)
-vercel.json          security + caching headers
-```
-
----
-
-## Stack
-
-| Layer | Choice |
-|---|---|
-| Markup | Vanilla HTML |
-| Styles | Single stylesheet — CSS custom properties, no preprocessor |
-| Motion | CSS transitions + IntersectionObserver reveals + canvas graph |
-| Hosting | Vercel (static) |
-| Analytics | Vercel Web Analytics + Speed Insights (static-script injection) |
-
-No bundler. No npm install needed to view or edit. The only devDependency (puppeteer) is for the optional `og`/`shots` tooling scripts.
-
-> **Analytics note:** The site injects `/_vercel/insights/script.js` and `/_vercel/speed-insights/script.js`. These resolve only on Vercel — enable **Web Analytics** and **Speed Insights** in the project's dashboard for data to flow. Locally the scripts 404 harmlessly.
-
----
+The page leads with selected projects, then covers approach, focus areas, experience, education, and contact. Existing section links, including `#focus` and `#capabilities`, remain usable. Employer content stays at the level of public roles and approach; the showcased products are independent projects.
 
 ## Design
 
-- **Palette:** Dark-first, technical — blue-tinted near-black layers (`#060809` → `#161b23`) with signal-cyan accent (`#22d3ee`); all text tokens contrast-checked AA+
-- **Type:** Space Grotesk (geometric display) + Inter (body) + JetBrains Mono (labels/UI)
-- **Textures:** CSS dot grid (with cursor-proximity glow), radial gradient mesh behind the hero, inline-SVG film grain
-- **Hero:** Interactive "obsidian brain" knowledge graph — 5 organisational clusters (people / decisions / docs / agents / data) on a vanilla-canvas force layout; hover a node to light up its connections
-- **Motion:** Hero word-streaming "text-generate" reveal, blur-in scroll reveals, card spotlight hovers, scroll progress bar — all vanilla, no libraries, `prefers-reduced-motion` respected throughout
+Oversized geometric type with an italic serif accent, neutral paper, dark ink, and vivid orange. Real project screenshots carry the work section; alternating light, dark, and orange sections give the page a clear rhythm. Motion is limited to a short entrance and hover feedback, with reduced-motion support. Core content is visible without JavaScript.
 
-> Positioning is AI-native product / agentic engineering. Content is written in generalities to respect employer IP — approach and capability themes, not internal specifics.
+All fonts, CSS, JavaScript, and project screenshots are served locally. There is no CDN, WebGL, or animation-library dependency.
 
----
-
-## Running locally
+## Run locally
 
 ```bash
-# Python (no install)
 python3 -m http.server 8080
-
-# Or just open index.html directly in a browser
 ```
 
-> Note: absolute asset paths (`/assets/...`) require serving from the repo root (as above) rather than opening via `file://`.
+Open `http://localhost:8080`. Serve from the repository root so absolute asset paths resolve correctly.
 
-## Tooling (optional)
+## Verify
 
 ```bash
-npm install        # puppeteer, only needed for the scripts below
-npm run og         # regenerate assets/og.png (1200x630 social card)
-npm run shots      # screenshots at mobile/tablet/desktop widths for review
+npm install
+npm run shots
 ```
+
+The browser check starts its own server, applies the production content-security policy, and checks mobile, tablet, and desktop layouts; page errors; missing assets; internal links; mobile-menu behaviour; focus return; disclosures; reduced motion; and JavaScript-disabled content. Screenshots go to the ignored `shots/` directory.
+
+Optional environment variables:
+
+- `CHROME_PATH` — use an existing Chromium executable.
+- `CHROME_ARGS` — JSON array of additional browser launch arguments, for constrained environments.
+- `SHOTS_DIR` — choose the screenshot destination.
+
+```bash
+npm run og
+```
+
+Regenerates the existing social preview at 1200 × 630.
+
+## Deploy
+
+The existing Vercel project serves the repository root directly; no framework migration, environment variables, or build command is needed. Branch deployments can be reviewed before merging into the production branch.
+
+Vercel Web Analytics and Speed Insights are retained and loaded only on HTTPS hosts. Enable those products in Vercel for their endpoints to resolve; they are not requested from the local preview server.

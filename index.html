@@ -1,1100 +1,653 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>James Finnie — Senior Product Manager · AI-Native Products</title>
-<meta name="description" content="Senior Product Manager in Toronto turning complex ideas into clear product decisions and working software — across AI, investing, and connected systems.">
-<meta name="author" content="James Finnie">
-<meta name="theme-color" content="#050608">
-<link rel="canonical" href="https://www.james-finnie.com/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='2.5' y='2.5' width='11' height='11' fill='none' stroke='%235E8BFF' stroke-width='2'/%3E%3C/svg%3E">
-
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.james-finnie.com/">
-<meta property="og:title" content="James Finnie — Senior Product Manager · AI-Native Products">
-<meta property="og:description" content="Turning complex ideas into clear product decisions and working software — across AI, investing, and connected systems.">
-<meta property="og:site_name" content="James Finnie">
-<meta property="og:image" content="https://www.james-finnie.com/assets/og.png">
-<meta property="og:image:alt" content="James Finnie — Senior Product Manager building AI-native products">
-
-<!-- Twitter / X -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="James Finnie — Senior Product Manager · AI-Native Products">
-<meta name="twitter:description" content="Clear product decisions and working software across AI, investing, and connected systems.">
-<meta name="twitter:image" content="https://www.james-finnie.com/assets/og.png">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "James Finnie",
-  "url": "https://www.james-finnie.com/",
-  "jobTitle": "Senior Product Manager",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Toronto",
-    "addressCountry": "CA"
-  },
-  "sameAs": [
-    "https://www.linkedin.com/in/james-finnie/",
-    "https://github.com/JPFinnie"
-  ],
-  "knowsAbout": [
-    "AI product management",
-    "Agentic engineering",
-    "Self-directed investing",
-    "Connected products"
-  ]
-}
-</script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&f[]=switzer@400,401,500&display=swap" rel="stylesheet">
-
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
-  }
-}
-</script>
-
-<style>
-:root{
-  --bg:#050608; --panel:#0A0D13;
-  --ink:#EDF0F7; --dim:#A2AABB; --faint:#5F6878;
-  --line:rgba(226,233,255,.09); --line2:rgba(226,233,255,.2);
-  --signal:#5E8BFF; --signal-ink:#04060C;
-  --signal-tint:rgba(94,139,255,.07); --signal-line:rgba(94,139,255,.45);
-  --up:#2FD07E; --down:#F0546C;
-  --font-d:'General Sans','Switzer',ui-sans-serif,system-ui,sans-serif;
-  --font-b:'Switzer',ui-sans-serif,system-ui,-apple-system,sans-serif;
-  --font-m:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
-  --gutter:32px; --max:1200px;
-  --ease:cubic-bezier(.22,.7,.16,1);
-  --ease-out:cubic-bezier(.16,1,.3,1);
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;scroll-behavior:smooth;scroll-padding-top:92px}
-body{font-family:var(--font-b);font-weight:400;font-size:16px;line-height:1.6;color:var(--ink);background:var(--bg);overflow-x:hidden}
-img{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
-ul{list-style:none}
-::selection{background:var(--signal);color:var(--signal-ink)}
-:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
-.skip-link{position:fixed;top:-80px;left:16px;z-index:1000;padding:10px 14px;background:var(--signal);color:var(--signal-ink);
-  font-family:var(--font-m);font-size:11px;letter-spacing:.12em;text-transform:uppercase;transition:top .2s var(--ease)}
-.skip-link:focus{top:16px}
-em{font-style:italic}
-strong{font-weight:500;color:var(--ink)}
-.sec-title em,.about__lead em,.about__quote em,.contact__title em{font-style:normal;color:var(--signal)}
-
-/* atmosphere: glow + film grain + blueprint column guides */
-body::before{content:'';position:fixed;inset:-20%;z-index:-1;pointer-events:none;
-  background:radial-gradient(44% 32% at 50% 6%,rgba(94,139,255,.085),transparent 64%),
-             radial-gradient(30% 24% at 84% 92%,rgba(94,139,255,.05),transparent 62%)}
-body::after{content:'';position:fixed;inset:0;z-index:900;pointer-events:none;opacity:.05;
-  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="160" height="160" filter="url(%23n)" opacity="0.55"/></svg>')}
-.guides{position:fixed;top:0;bottom:0;left:50%;transform:translateX(-50%);z-index:0;pointer-events:none;
-  width:min(calc(100% - 2*var(--gutter)),calc(var(--max) - 2*var(--gutter)))}
-.guides i{position:absolute;top:0;bottom:0;width:1px;background:rgba(226,233,255,.03)}
-
-/* the particle field — one fixed canvas behind the whole page */
-#field{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block}
-
-.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:600;pointer-events:none}
-.progress::after{content:'';position:absolute;top:0;left:0;height:100%;width:var(--p,0%);background:var(--signal)}
-.struct{position:fixed;left:18px;bottom:16px;z-index:450;font-family:var(--font-m);font-size:9px;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--faint);pointer-events:none}
-.struct b{color:var(--signal);font-weight:400}
-
-/* header */
-.header{position:fixed;top:0;left:0;right:0;z-index:500;padding:16px var(--gutter);display:flex;justify-content:space-between;align-items:center;gap:24px;
-  background:rgba(5,6,8,.5);backdrop-filter:saturate(140%) blur(14px);-webkit-backdrop-filter:saturate(140%) blur(14px);
-  border-bottom:1px solid transparent;transition:border-color .35s var(--ease),background .35s var(--ease)}
-.header.scrolled{border-bottom:1px solid var(--line);background:rgba(5,6,8,.74)}
-.brand{display:flex;align-items:center;gap:12px;font-family:var(--font-d);font-size:15px;font-weight:500;letter-spacing:.01em}
-.brand small{font-family:var(--font-m);font-weight:400;color:var(--faint);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
-.nav{display:flex;gap:26px;font-family:var(--font-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-.nav a{transition:color .25s var(--ease)}
-.nav a i{font-style:normal;color:var(--faint);margin-right:7px;transition:color .25s var(--ease)}
-.nav a:hover{color:var(--ink)}
-.nav a:hover i{color:var(--signal)}
-.header__meta{display:flex;align-items:center;gap:18px}
-.hclock{font-family:var(--font-m);font-size:10px;letter-spacing:.14em;color:var(--faint);white-space:nowrap}
-
-.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-m);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
-  padding:15px 24px;border:1px solid var(--line2);color:var(--ink);
-  transition:transform .25s var(--ease),filter .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease),background .25s var(--ease)}
-.btn--primary{background:var(--signal);border-color:var(--signal);color:var(--signal-ink)}
-.btn--primary:hover{filter:brightness(1.14);transform:translateY(-1px)}
-.btn--ghost:hover{border-color:var(--signal);color:var(--signal);transform:translateY(-1px)}
-.header .btn{padding:11px 18px}
-
-main{position:relative;z-index:1}
-
-/* ============ HERO — the field lives behind the whole page; this frames it ============ */
-.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,2.8vh,28px);
-  padding:104px var(--gutter) 72px;position:relative;text-align:center}
-.hero__eyebrow{font-family:var(--font-m);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
-.hero__eyebrow b{color:var(--signal);font-weight:400}
-
-.fig{position:relative;width:min(54vh,84vw,600px);aspect-ratio:1/1;border:1px solid var(--line);flex-shrink:0;cursor:grab;touch-action:pan-y}
-.fig.is-drag{cursor:grabbing}
-.fig.is-fallback{background-image:radial-gradient(rgba(237,240,247,.4) 1px,transparent 1.4px);background-size:24px 24px}
-.fig__veil{position:absolute;inset:-8%;pointer-events:none;background:radial-gradient(52% 32% at 50% 50%,rgba(5,6,8,.78),rgba(5,6,8,0) 74%)}
-.tick{position:absolute;width:14px;height:14px;border:1px solid var(--line2);pointer-events:none}
-.tick--tl{top:-1px;left:-1px;border-right:0;border-bottom:0}
-.tick--tr{top:-1px;right:-1px;border-left:0;border-bottom:0}
-.tick--bl{bottom:-1px;left:-1px;border-right:0;border-top:0}
-.tick--br{bottom:-1px;right:-1px;border-left:0;border-top:0}
-.fig__label{position:absolute;font-family:var(--font-m);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);white-space:nowrap;pointer-events:none}
-.fig__label--order{bottom:12px;left:14px}
-.fig__label--chaos{bottom:12px;right:14px}
-
-.hero__title{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;white-space:nowrap;pointer-events:none;
-  font-family:var(--font-d);font-weight:600;font-size:clamp(3rem,8.4vw,6.4rem);letter-spacing:-.035em;line-height:1;color:var(--ink)}
-.hero__title em{font-style:normal;font-weight:500;color:transparent;-webkit-text-stroke:1.5px var(--ink)}
-@supports not (-webkit-text-stroke:1px #000){.hero__title em{color:var(--signal)}}
-
-.hero__lede{max-width:56ch;color:var(--dim);font-size:15.5px;line-height:1.65;letter-spacing:.01em}
-.hero__actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-
-.datastrip{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);width:min(760px,92vw);background:rgba(10,13,19,.4)}
-.datastrip div{padding:13px 10px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:5px;align-items:center}
-.datastrip div:last-child{border-right:none}
-.datastrip .k{font-family:var(--font-m);font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint)}
-.datastrip .v{font-family:var(--font-m);font-size:12px;letter-spacing:.08em;color:var(--ink)}
-.datastrip .v b{color:var(--up);font-weight:400}
-
-.hero__scroll{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;
-  font-family:var(--font-m);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);pointer-events:none}
-.hero__scroll .bar{width:1px;height:34px;background:linear-gradient(var(--faint),transparent);animation:cue 2.2s var(--ease) infinite}
-@keyframes cue{0%{opacity:.2;transform:scaleY(.4);transform-origin:top}50%{opacity:1}100%{opacity:.2;transform:scaleY(1);transform-origin:top}}
-
-/* ============ sections ============ */
-.section{position:relative;max-width:var(--max);margin:0 auto;padding:116px var(--gutter)}
-.section::before{content:'';position:absolute;top:0;left:var(--gutter);right:var(--gutter);height:1px;background:var(--line)}
-.ghost{position:absolute;top:56px;right:-8px;z-index:-1;font-family:var(--font-d);font-weight:600;line-height:.8;
-  font-size:clamp(9rem,20vw,15rem);color:rgba(226,233,255,.028);-webkit-text-stroke:1px rgba(226,233,255,.055);
-  user-select:none;pointer-events:none;will-change:transform}
-.eyebrow{font-family:var(--font-m);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
-.eyebrow b{color:var(--signal);font-weight:400}
-.sec-head{margin-bottom:64px}
-.sec-head .eyebrow{margin-bottom:22px}
-.sec-title{font-family:var(--font-d);font-weight:500;font-size:clamp(2.3rem,4.8vw,3.4rem);letter-spacing:-.03em;line-height:1.04;max-width:20ch}
-
-/* about */
-.about{display:grid;grid-template-columns:1fr 1.15fr;gap:64px;align-items:start}
-.about__lead{font-family:var(--font-d);font-weight:400;font-size:clamp(1.7rem,2.8vw,2.35rem);line-height:1.18;letter-spacing:-.02em}
-.about__body{display:flex;flex-direction:column;gap:20px}
-.about__body p{font-size:15.5px;line-height:1.7;letter-spacing:.01em;color:var(--dim)}
-.about__quote{font-family:var(--font-d);font-weight:400;font-size:1.5rem;line-height:1.3;letter-spacing:-.015em;color:var(--ink);
-  padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-
-.lattice{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
-.plist{grid-template-columns:repeat(3,1fr);margin-top:56px}
-.principle{background:var(--bg);padding:30px;transition:background .4s var(--ease)}
-.principle:hover{background:var(--panel)}
-.principle__n{font-family:var(--font-m);font-size:11px;letter-spacing:.14em;color:var(--signal);margin-bottom:20px}
-.principle__t{font-family:var(--font-d);font-weight:500;font-size:1.3rem;letter-spacing:-.015em;margin-bottom:12px}
-.principle__d{font-size:14px;line-height:1.65;color:var(--dim)}
-.principle__d em{color:var(--ink)}
-
-/* focus */
-.focus-grid{grid-template-columns:repeat(3,1fr)}
-.fcard{background:var(--bg);padding:28px;position:relative;transition:background .4s var(--ease),box-shadow .4s var(--ease)}
-.fcard:hover{background:var(--panel);box-shadow:inset 0 0 0 1px var(--signal-line)}
-.fcard__n{font-family:var(--font-m);font-size:10px;letter-spacing:.18em;color:var(--faint);margin-bottom:26px;display:flex;justify-content:space-between;transition:color .3s var(--ease)}
-.fcard__n span{color:var(--faint);opacity:.7}
-.fcard:hover .fcard__n{color:var(--signal)}
-.fcard__t{font-family:var(--font-d);font-weight:500;font-size:1.3rem;line-height:1.15;letter-spacing:-.015em;margin-bottom:13px}
-.fcard__d{font-size:14px;line-height:1.65;color:var(--dim);margin-bottom:24px}
-.fcard__d em{color:var(--ink)}
-.fcard__tags{display:flex;flex-wrap:wrap;gap:7px}
-.fcard__tags span{font-family:var(--font-m);font-size:10px;letter-spacing:.04em;color:var(--dim);border:1px solid var(--line);padding:5px 10px}
-
-/* experience */
-.tl{border-top:1px solid var(--line)}
-.tl__item{display:grid;grid-template-columns:150px 1fr auto;gap:40px;padding:34px 12px 34px 0;border-bottom:1px solid var(--line);align-items:baseline;
-  transition:padding .35s var(--ease),background .35s var(--ease)}
-.tl__item:hover{padding-left:20px;background:var(--signal-tint)}
-.tl__date{font-family:var(--font-m);font-size:11px;letter-spacing:.08em;color:var(--faint)}
-.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-m);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;
-  border:1px solid rgba(47,208,126,.35);color:var(--up);padding:3px 8px;margin-left:10px;vertical-align:1px;white-space:nowrap}
-.chip::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--up);animation:pulse 2.2s ease infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
-.tl__co{font-family:var(--font-d);font-weight:500;font-size:1.4rem;letter-spacing:-.015em;margin-bottom:5px;transition:color .3s var(--ease)}
-.tl__item:hover .tl__co{color:var(--signal)}
-.tl__role{font-family:var(--font-m);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal);margin-bottom:14px}
-.tl__desc{font-size:14px;color:var(--dim);line-height:1.7;max-width:64ch}
-.tl__loc{font-family:var(--font-m);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);white-space:nowrap}
-.edu{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:56px}
-.edu__item{border:1px solid var(--line);padding:26px;transition:border-color .35s var(--ease)}
-.edu__item:hover{border-color:var(--line2)}
-.edu__school{font-family:var(--font-d);font-weight:500;font-size:1.1rem;margin-bottom:4px}
-.edu__deg{font-size:14px;color:var(--dim)}
-
-/* capabilities */
-.caps{grid-template-columns:repeat(4,1fr)}
-.cap{background:var(--bg);padding:28px;transition:background .4s var(--ease)}
-.cap:hover{background:var(--panel)}
-.cap__label{font-family:var(--font-m);font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--signal);margin-bottom:24px;display:block}
-.cap__list{display:flex;flex-direction:column;gap:12px}
-.cap__list li{font-size:14px;line-height:1.5;color:var(--dim);padding-left:20px;position:relative}
-.cap__list li::before{content:'+';position:absolute;left:0;top:0;font-family:var(--font-m);font-size:12px;color:var(--signal)}
-
-/* projects */
-.proj-grid{grid-template-columns:1fr}
-.proj{display:grid;grid-template-columns:1.5fr auto;gap:48px;align-items:center;background:var(--bg);padding:34px;transition:background .4s var(--ease),box-shadow .4s var(--ease)}
-.proj:hover{background:var(--panel);box-shadow:inset 0 0 0 1px var(--signal-line)}
-.proj .fcard__n{margin-bottom:22px}
-.proj__t{font-family:var(--font-d);font-weight:500;font-size:1.7rem;letter-spacing:-.02em;margin-bottom:13px}
-.proj__side{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
-.proj__url{font-family:var(--font-m);font-size:12px;letter-spacing:.08em;color:var(--faint)}
-
-/* contact */
-.contact{padding:140px var(--gutter) 120px;text-align:center;max-width:var(--max);margin:0 auto;position:relative}
-.contact::before{content:'';position:absolute;top:0;left:var(--gutter);right:var(--gutter);height:1px;background:var(--line)}
-.contact .eyebrow{margin-bottom:28px}
-.contact__title{font-family:var(--font-d);font-weight:500;font-size:clamp(3.2rem,8.5vw,6.4rem);line-height:.95;letter-spacing:-.035em;margin-bottom:30px}
-.contact__sub{max-width:52ch;margin:0 auto 46px;font-size:15.5px;color:var(--dim);line-height:1.7}
-.contact__links{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
-
-footer{border-top:1px solid var(--line);padding:28px var(--gutter);max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;
-  font-family:var(--font-m);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
-footer a:hover{color:var(--ink)}
-
-/* ============ progressive reveal system ============ */
-.reveal{opacity:0;transform:translateY(28px);filter:blur(10px);
-  transition:opacity 1s var(--ease) calc(var(--i,0)*90ms),transform 1s var(--ease) calc(var(--i,0)*90ms),filter 1s var(--ease) calc(var(--i,0)*90ms)}
-.reveal.is-visible{opacity:1;transform:none;filter:blur(0)}
-
-.mask{display:inline-block;overflow:hidden;vertical-align:top;padding:.1em .08em .16em;margin:-.1em -.08em -.16em}
-.mword{display:inline-block;transform:translateY(130%);transition:transform 1.1s var(--ease-out) calc(var(--wd,0)*70ms)}
-.reveal-mask.is-visible .mword{transform:none}
-.hero__title .mword{transition-delay:calc(.35s + var(--wd,0)*.16s)}
-
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .reveal{transition:none;opacity:1;transform:none;filter:none}
-  .mword{transition:none;transform:none}
-  .hero__scroll .bar{animation:none}
-  .chip::before{animation:none}
-}
-
-@media(max-width:980px){
-  .nav{display:none}
-  .hclock{display:none}
-  .struct{display:none}
-  .about{grid-template-columns:1fr;gap:40px}
-  .plist{grid-template-columns:1fr}
-  .focus-grid{grid-template-columns:1fr 1fr}
-  .caps{grid-template-columns:1fr 1fr}
-  .proj{grid-template-columns:1fr;gap:24px}
-  .tl__item{grid-template-columns:1fr;gap:8px}
-  .tl__date{order:-1}
-  .tl__loc{display:none}
-  .ghost{font-size:clamp(7rem,18vw,11rem)}
-}
-@media(max-width:640px){
-  :root{--gutter:20px}
-  .header{gap:10px}
-  .brand small{display:none}
-  .header .btn{padding:9px 11px;font-size:9px;letter-spacing:.12em}
-  .guides{display:none}
-  .section{padding:88px var(--gutter)}
-  .focus-grid{grid-template-columns:1fr}
-  .caps{grid-template-columns:1fr}
-  .edu{grid-template-columns:1fr}
-  .hero{padding-top:92px}
-  .hero__eyebrow{font-size:9px;letter-spacing:.18em;max-width:90vw;white-space:normal}
-  .datastrip{grid-template-columns:1fr 1fr}
-  .datastrip div:nth-child(2){border-right:none}
-  .datastrip div:nth-child(-n+2){border-bottom:1px solid var(--line)}
-}
-</style>
-</head>
-<body id="top">
-
-<a href="#main" class="skip-link">Skip to content</a>
-<canvas id="field" aria-hidden="true" style="opacity:0"></canvas>
-<div class="progress" aria-hidden="true"></div>
-<div class="guides" aria-hidden="true"><i style="left:25%"></i><i style="left:50%"></i><i style="left:75%"></i></div>
-<div class="struct" aria-hidden="true">Structure <b id="structPct">000%</b></div>
-
-<header class="header" id="header">
-  <a href="#top" class="brand" aria-label="James Finnie — home">
-    <span>James Finnie</span>
-    <small>Senior PM</small>
-  </a>
-  <nav class="nav" aria-label="Primary">
-    <a href="#about"><i>01</i>About</a>
-    <a href="#focus"><i>02</i>Focus</a>
-    <a href="#experience"><i>03</i>Experience</a>
-    <a href="#capabilities"><i>04</i>Capabilities</a>
-    <a href="#projects"><i>05</i>Projects</a>
-  </nav>
-  <div class="header__meta">
-    <span class="hclock" id="hclock">— — : — —  TOR</span>
-    <a href="#contact" class="btn btn--primary">Get in touch</a>
-  </div>
-</header>
-
-<main id="main">
-
-<!-- HERO -->
-<section class="hero" id="hero">
-  <p class="hero__eyebrow reveal">
-    <b>[</b> Senior Product Manager &mdash; AI Product &middot; Wealth Technology &middot; Toronto <b>]</b>
-  </p>
-
-  <div class="fig reveal" id="entropy" style="--i:1" role="img" aria-label="Generative particle field — a structured lattice on the left, unstructured particles on the right, divided by a boundary the noise leaks across. Drag to spin it in 3D; scrolling the page gradually structures the field.">
-    <div class="fig__veil" aria-hidden="true"></div>
-    <h1 class="hero__title reveal-mask" data-mask>James <em>Finnie</em></h1>
-    <b class="tick tick--tl" aria-hidden="true"></b><b class="tick tick--tr" aria-hidden="true"></b>
-    <b class="tick tick--bl" aria-hidden="true"></b><b class="tick tick--br" aria-hidden="true"></b>
-    <span class="fig__label fig__label--order" aria-hidden="true">Structured</span>
-    <span class="fig__label fig__label--chaos" aria-hidden="true">Unstructured</span>
-  </div>
-
-  <p class="hero__lede reveal" style="--i:2">
-    I turn <strong>complex product problems</strong> into clear decisions and working software &mdash; using AI-native workflows
-    to move from <strong>discovery to production</strong> faster.
-  </p>
-
-  <div class="hero__actions reveal" style="--i:3">
-    <a href="#contact" class="btn btn--primary">Start a conversation &rarr;</a>
-    <a href="#projects" class="btn btn--ghost">See selected work</a>
-  </div>
-
-  <div class="datastrip reveal" style="--i:4" aria-label="Professional summary">
-    <div><span class="k">Product experience</span><span class="v">05+ YRS</span></div>
-    <div><span class="k">Orgs shipped</span><span class="v">04</span></div>
-    <div><span class="k">Base</span><span class="v">TOR 43.65&deg;N</span></div>
-    <div><span class="k">Mode</span><span class="v">PROTOTYPE-FIRST <b>&#9650;</b></span></div>
-  </div>
-
-  <div class="hero__scroll" aria-hidden="true">
-    <span>Scroll</span>
-    <span class="bar"></span>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="section" id="about">
-  <span class="ghost" aria-hidden="true" data-speed="0.1">01</span>
-  <div class="sec-head reveal">
-    <div class="eyebrow"><b>[ 01 ]</b> &mdash; About</div>
-  </div>
-  <div class="about">
-    <div class="reveal">
-      <h2 class="about__lead">I work where <em>product judgement</em>, AI, and complex systems meet &mdash; turning ambiguity into something a team can test and ship.</h2>
-    </div>
-    <div class="about__body reveal" style="--i:1">
-      <p>I&rsquo;m a Senior Product Manager in Toronto. I turn ambiguous opportunities into products teams can <strong>test, trust, and ship</strong> &mdash; especially across investing, AI, and connected systems.</p>
-      <p>At CIBC Investor&rsquo;s Edge, I lead product for self-directed investing. I use <strong>working prototypes to make strategy tangible</strong>, bring agents into discovery, and connect design systems to delivery &mdash; so teams learn sooner and commit with confidence.</p>
-      <p class="about__quote">AI makes building faster. The advantage is choosing the right problem, setting a clear quality bar, and knowing <em>why</em> the product should exist.</p>
-      <p>That conviction shapes my work in wealth. Personalisation should make investing more relevant and timely without weakening <strong>trust, agency, or control</strong>.</p>
-    </div>
-  </div>
-
-  <div class="lattice plist">
-    <div class="principle reveal">
-      <div class="principle__n">I.</div>
-      <h3 class="principle__t">Taste at speed</h3>
-      <p class="principle__d">Speed creates more choices, not better ones. Set a clear quality bar and spend time on the few decisions users will actually feel.</p>
-    </div>
-    <div class="principle reveal" style="--i:1">
-      <div class="principle__n">II.</div>
-      <h3 class="principle__t">Ask why, relentlessly</h3>
-      <p class="principle__d">Start with the user, the constraint, and the change that matters. A crisp problem beats a polished backlog.</p>
-    </div>
-    <div class="principle reveal" style="--i:2">
-      <div class="principle__n">III.</div>
-      <h3 class="principle__t">Prototype-first</h3>
-      <p class="principle__d">Use working software to test the riskiest assumptions. Let teams react to something real before locking in the roadmap.</p>
-    </div>
-  </div>
-</section>
-
-<!-- FOCUS -->
-<section class="section" id="focus">
-  <span class="ghost" aria-hidden="true" data-speed="0.12">02</span>
-  <div class="sec-head reveal">
-    <div class="eyebrow"><b>[ 02 ]</b> &mdash; Focus areas</div>
-    <h2 class="sec-title reveal-mask" data-mask>Where I do my <em>best work.</em></h2>
-  </div>
-  <div class="lattice focus-grid">
-    <article class="fcard reveal">
-      <div class="fcard__n">01 <span>SYS/CTX</span></div>
-      <h3 class="fcard__t">Deep context systems</h3>
-      <p class="fcard__d">Turn scattered research, decisions, and product knowledge into durable context that teams and agents can retrieve, connect, and act on.</p>
-      <div class="fcard__tags"><span>Context engineering</span><span>Knowledge systems</span><span>Retrieval</span></div>
-    </article>
-    <article class="fcard reveal" style="--i:1">
-      <div class="fcard__n">02 <span>SYS/AGENT</span></div>
-      <h3 class="fcard__t">Agentic engineering</h3>
-      <p class="fcard__d">Design human-directed agent workflows that expand a team&rsquo;s range while keeping goals, judgement, and accountability clear.</p>
-      <div class="fcard__tags"><span>Agent workflows</span><span>Skills files</span><span>Human-in-the-loop</span></div>
-    </article>
-    <article class="fcard reveal" style="--i:2">
-      <div class="fcard__n">03 <span>SYS/PM</span></div>
-      <h3 class="fcard__t">Prototype-led product</h3>
-      <p class="fcard__d">Turn research and strategy into working artefacts early, so teams can test the riskiest assumptions before locking in a roadmap.</p>
-      <div class="fcard__tags"><span>Discovery</span><span>Validation</span><span>Product strategy</span></div>
-    </article>
-    <article class="fcard reveal">
-      <div class="fcard__n">04 <span>SYS/TASTE</span></div>
-      <h3 class="fcard__t">Product judgement at AI speed</h3>
-      <p class="fcard__d">Use faster building to explore more possibilities, while raising the bar for what earns attention and what ships.</p>
-      <div class="fcard__tags"><span>Judgement</span><span>Curation</span><span>Velocity</span></div>
-    </article>
-    <article class="fcard reveal" style="--i:1">
-      <div class="fcard__n">05 <span>SYS/PRSNL</span></div>
-      <h3 class="fcard__t">Trusted personalisation</h3>
-      <p class="fcard__d">Make investing experiences more timely and relevant without crossing the line into noise, pressure, or overreach.</p>
-      <div class="fcard__tags"><span>Personalisation</span><span>Relevance</span><span>Trust</span></div>
-    </article>
-    <article class="fcard reveal" style="--i:2">
-      <div class="fcard__n">06 <span>SYS/SHIP</span></div>
-      <h3 class="fcard__t">Prototype &rarr; production</h3>
-      <p class="fcard__d">Connect design systems, engineering constraints, and delivery pipelines so validated ideas survive the journey into production.</p>
-      <div class="fcard__tags"><span>Design systems</span><span>Delivery pipelines</span><span>Production</span></div>
-    </article>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section class="section" id="experience">
-  <span class="ghost" aria-hidden="true" data-speed="0.1">03</span>
-  <div class="sec-head reveal">
-    <div class="eyebrow"><b>[ 03 ]</b> &mdash; Experience</div>
-    <h2 class="sec-title reveal-mask" data-mask>A track record across <em>complex products.</em></h2>
-  </div>
-  <div class="tl">
-    <div class="tl__item reveal">
-      <span class="tl__date">2025 &mdash; Now<span class="chip">Current</span></span>
-      <div class="tl__body">
-        <div class="tl__co">CIBC Investor&rsquo;s Edge</div>
-        <p class="tl__role">Senior Product Manager / Product Owner</p>
-        <p class="tl__desc">Leading product for self-directed investing, with a focus on AI-enabled experiences, personalisation, and faster discovery-to-delivery. Introducing prototype-led ways of working to align teams and test direction earlier.</p>
-      </div>
-      <span class="tl__loc">Toronto</span>
-    </div>
-    <div class="tl__item reveal">
-      <span class="tl__date">2023 &mdash; 2025</span>
-      <div class="tl__body">
-        <div class="tl__co">Trudell Medical International</div>
-        <p class="tl__role">Manager &middot; IoT &amp; Intelligent Systems</p>
-        <p class="tl__desc">Led product direction for a connected-device platform spanning device data, companion apps, and internal capabilities &mdash; aligning hardware, software, and commercial priorities.</p>
-      </div>
-      <span class="tl__loc">London, ON</span>
-    </div>
-    <div class="tl__item reveal">
-      <span class="tl__date">2022 &mdash; 2023</span>
-      <div class="tl__body">
-        <div class="tl__co">StoneX</div>
-        <p class="tl__role">Product Analyst / Associate Product Manager</p>
-        <p class="tl__desc">Worked across trading and brokerage products, including mobile trading, share dealing, and a reliability programme that materially reduced crashes on a mobile-first platform.</p>
-      </div>
-      <span class="tl__loc">London</span>
-    </div>
-    <div class="tl__item reveal">
-      <span class="tl__date">2021 &mdash; 2022</span>
-      <div class="tl__body">
-        <div class="tl__co">Equals Money</div>
-        <p class="tl__role">Product Analyst</p>
-        <p class="tl__desc">Improved onboarding and operations across payments and FX, including identity verification, internal tools, and the end-to-end customer journey.</p>
-      </div>
-      <span class="tl__loc">London</span>
-    </div>
-  </div>
-
-  <div class="edu">
-    <div class="edu__item reveal">
-      <div class="edu__school">SOAS, University of London</div>
-      <div class="edu__deg">MA International Studies &amp; Diplomacy &mdash; Merit</div>
-    </div>
-    <div class="edu__item reveal" style="--i:1">
-      <div class="edu__school">University of Glasgow</div>
-      <div class="edu__deg">MA (SocSci) Business &amp; Management &mdash; 2:1</div>
-    </div>
-  </div>
-</section>
-
-<!-- CAPABILITIES -->
-<section class="section" id="capabilities">
-  <span class="ghost" aria-hidden="true" data-speed="0.12">04</span>
-  <div class="sec-head reveal">
-    <div class="eyebrow"><b>[ 04 ]</b> &mdash; Capabilities</div>
-    <h2 class="sec-title reveal-mask" data-mask>How I help teams <em>move.</em></h2>
-  </div>
-  <div class="lattice caps">
-    <div class="cap reveal">
-      <span class="cap__label">Product Leadership</span>
-      <ul class="cap__list">
-        <li><strong>AI-native product</strong> strategy</li>
-        <li>Discovery &amp; validation</li>
-        <li>Roadmapping &amp; prioritisation</li>
-        <li>PR-FAQs &amp; narrative specs</li>
-        <li>Executive alignment</li>
-      </ul>
-    </div>
-    <div class="cap reveal" style="--i:1">
-      <span class="cap__label">AI-Enabled Delivery</span>
-      <ul class="cap__list">
-        <li><strong>Prototype-first</strong> delivery</li>
-        <li>Agent workflows &amp; skills files</li>
-        <li>Design-system prototypes</li>
-        <li>Evaluation &amp; feedback loops</li>
-        <li>Production handoff</li>
-      </ul>
-    </div>
-    <div class="cap reveal" style="--i:2">
-      <span class="cap__label">AI &amp; Context</span>
-      <ul class="cap__list">
-        <li><strong>Deep context systems</strong></li>
-        <li>Knowledge architecture</li>
-        <li>RAG &amp; retrieval</li>
-        <li>Evals &amp; prompt design</li>
-        <li>LLM tooling &amp; agents</li>
-      </ul>
-    </div>
-    <div class="cap reveal" style="--i:3">
-      <span class="cap__label">WealthTech &amp; Commercial</span>
-      <ul class="cap__list">
-        <li><strong>Self-directed investing</strong></li>
-        <li>Personalisation &amp; nudges</li>
-        <li>Financial modelling &amp; sizing</li>
-        <li>Build-versus-buy analysis</li>
-        <li>Vendor evaluation</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section class="section" id="projects">
-  <span class="ghost" aria-hidden="true" data-speed="0.12">05</span>
-  <div class="sec-head reveal">
-    <div class="eyebrow"><b>[ 05 ]</b> &mdash; Personal projects</div>
-    <h2 class="sec-title reveal-mask" data-mask>Proof, <em>not promises.</em></h2>
-  </div>
-  <div class="lattice proj-grid">
-    <article class="proj reveal">
-      <div>
-        <div class="fcard__n">P-01 <span>SIDE/BUILD</span></div>
-        <h3 class="proj__t">The Six Cut</h3>
-        <p class="fcard__d">A discovery tool for Toronto&rsquo;s independent butcher shops. It combines Google ratings with a transparent <em>Six Cut Score</em>, then lets people search by specialty, filter by score, and preview each shop. I built it end to end &mdash; from scoring method to map experience.</p>
-        <div class="fcard__tags"><span>Next.js</span><span>Interactive map</span><span>Scoring model</span><span>Toronto</span></div>
-      </div>
-      <div class="proj__side">
-        <span class="proj__url">six-cut.vercel.app</span>
-        <a href="https://six-cut.vercel.app/" target="_blank" rel="noopener" class="btn btn--ghost">Visit &rarr;</a>
-      </div>
-    </article>
-    <article class="proj reveal">
-      <div>
-        <div class="fcard__n">P-02 <span>SIDE/BUILD</span></div>
-        <h3 class="proj__t">FinanceHermes</h3>
-        <p class="fcard__d">A research agent for market moves, earnings, analyst sentiment, and central bank activity. It searches current sources, synthesises the findings, and streams its research progress so the trail stays visible. An experiment in useful, inspectable agent workflows.</p>
-        <div class="fcard__tags"><span>Agentic search</span><span>LLM reasoning</span><span>Hermes 4</span><span>Vercel</span></div>
-      </div>
-      <div class="proj__side">
-        <span class="proj__url">finance-hermes.vercel.app</span>
-        <a href="https://finance-hermes.vercel.app/" target="_blank" rel="noopener" class="btn btn--ghost">Visit &rarr;</a>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <span class="ghost" aria-hidden="true" data-speed="0.1" style="right:auto;left:-8px">06</span>
-  <div class="eyebrow reveal"><b>[ 06 ]</b> &mdash; Get in touch</div>
-  <h2 class="contact__title reveal-mask" data-mask style="margin-top:28px">Let&rsquo;s make it <em>real.</em></h2>
-  <p class="contact__sub reveal" style="--i:2">Have an ambitious product problem? I&rsquo;m always glad to compare notes on AI-enabled product, investing experiences, and turning an early idea into something testable.</p>
-  <div class="contact__links reveal" style="--i:3">
-    <a href="mailto:james_finnie@icloud.com" class="btn btn--primary">Email &rarr;</a>
-    <a href="https://www.linkedin.com/in/james-finnie/" target="_blank" rel="noopener" class="btn btn--ghost">LinkedIn &rarr;</a>
-    <a href="https://github.com/JPFinnie" target="_blank" rel="noopener" class="btn btn--ghost">GitHub &rarr;</a>
-  </div>
-</section>
-
-<footer>
-  <span>&copy; <span id="year">2026</span> James Finnie &middot; Toronto</span>
-  <span id="clock">— — : — —  TOR</span>
-  <a href="#top">&uarr; Back to top</a>
-</footer>
-
-</main>
-
-<noscript><style>.reveal{opacity:1;transform:none;filter:none}#field{display:none}</style></noscript>
-
-<script>
-// reveals, word masks, scroll-driven bits (progress, header, ghost parallax)
-(function(){
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const yr = document.getElementById('year');
-  if(yr) yr.textContent = new Date().getFullYear();
-  const clk = document.getElementById('clock'), hclk = document.getElementById('hclock');
-  function tick(){ const d=new Date();
-    const s = d.toLocaleTimeString('en-GB',{timeZone:'America/Toronto',hour:'2-digit',minute:'2-digit',hour12:false}) + '  TOR';
-    if(clk) clk.textContent = s;
-    if(hclk) hclk.textContent = s; }
-  tick(); setInterval(tick, 15000);
-
-  // split headings into masked words for the staggered rise
-  if(!reduce){
-    document.querySelectorAll('[data-mask]').forEach(el=>{
-      let w = 0;
-      (function walk(node){
-        [...node.childNodes].forEach(n=>{
-          if(n.nodeType===3){
-            const frag=document.createDocumentFragment();
-            n.textContent.split(/(\s+)/).forEach(tok=>{
-              if(!tok) return;
-              if(/^\s+$/.test(tok)){ frag.appendChild(document.createTextNode(' ')); return; }
-              const m=document.createElement('span'); m.className='mask';
-              const s=document.createElement('span'); s.className='mword';
-              s.style.setProperty('--wd', w++); s.textContent=tok;
-              m.appendChild(s); frag.appendChild(m);
-            });
-            n.replaceWith(frag);
-          } else if(n.nodeType===1 && n.tagName!=='BR'){ walk(n); }
-        });
-      })(el);
-    });
-  }
-
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
-  },{threshold:.15, rootMargin:'0px 0px -8% 0px'});
-  document.querySelectorAll('.reveal, .reveal-mask').forEach(el=>io.observe(el));
-
-  // scroll: progress hairline, header border, ghost numeral parallax
-  const prog = document.querySelector('.progress');
-  const header = document.getElementById('header');
-  const ghosts = [...document.querySelectorAll('.ghost')].map(el=>({el, speed:+el.dataset.speed||0.1, top:0, h:0}));
-  function measure(){ ghosts.forEach(g=>{ const r=g.el.parentElement.getBoundingClientRect(); g.top=r.top+scrollY; g.h=r.height; }); }
-  let raf=null;
-  function onScroll(){
-    if(raf) return;
-    raf=requestAnimationFrame(()=>{
-      raf=null;
-      const max = document.documentElement.scrollHeight - innerHeight;
-      prog.style.setProperty('--p', (max>0 ? (scrollY/max)*100 : 0)+'%');
-      header.classList.toggle('scrolled', scrollY > 12);
-      if(!reduce){
-        const mid = scrollY + innerHeight*0.5;
-        ghosts.forEach(g=>{ g.el.style.transform = 'translate3d(0,'+((mid-(g.top+g.h*0.5))*g.speed).toFixed(1)+'px,0)'; });
-      }
-    });
-  }
-  addEventListener('scroll', onScroll, {passive:true});
-  addEventListener('resize', ()=>{ measure(); onScroll(); }, {passive:true});
-  measure(); onScroll();
-  setTimeout(measure, 700); // re-measure after webfonts settle
-})();
-</script>
-
-<!-- The field — faithful Three.js port of 21st.dev xubohuah/entropy, promoted to
-     the page's narrative engine: it lives fixed behind everything, framed by the
-     hero at the top, and structures itself as you scroll. The cursor is a lens
-     that locally imposes order on the chaos. The lattice doubles as a dot-matrix
-     display that occasionally prints a word. -->
-<script type="module">
-import * as THREE from 'three';
-
-const fig = document.getElementById('entropy');
-const canvas = document.getElementById('field');
-const structEl = document.getElementById('structPct');
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const clamp=(v,a,b)=>v<a?a:v>b?b:v;
-const smooth=(e0,e1,x)=>{ const t=clamp((x-e0)/(e1-e0),0,1); return t*t*(3-2*t); };
-const mix=(a,b,t)=>a+(b-a)*t;
-
-try{
-  const isMobile = innerWidth < 760;
-  const GRID = 25, N = GRID*GRID;
-  const HALF = 50, S = (HALF*2)/GRID;
-  const FOV = 40, CAMZ = 154;
-
-  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, powerPreference:'high-performance'});
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 0);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(FOV, innerWidth/innerHeight, 1, 600);
-  camera.position.set(0, 0, CAMZ);
-  camera.lookAt(0, 0, 0);
-  let halfH = Math.tan(THREE.MathUtils.degToRad(FOV/2))*CAMZ;
-  let halfW = halfH*camera.aspect;
-
-  const group = new THREE.Group();
-  scene.add(group);
-
-  // soft round sprite for glow points
-  const ts = 64, tc = document.createElement('canvas'); tc.width = tc.height = ts;
-  const tg = tc.getContext('2d');
-  const grad = tg.createRadialGradient(ts/2, ts/2, 0, ts/2, ts/2, ts/2);
-  grad.addColorStop(0, 'rgba(255,255,255,1)');
-  grad.addColorStop(0.35, 'rgba(255,255,255,.85)');
-  grad.addColorStop(1, 'rgba(255,255,255,0)');
-  tg.fillStyle = grad; tg.fillRect(0, 0, ts, ts);
-  const sprite = new THREE.CanvasTexture(tc);
-
-  // particle state
-  const home  = new Float32Array(N*2);
-  const pos   = new Float32Array(N*3);   // displayed position
-  const sim   = new Float32Array(N*3);   // raw chaos simulation
-  const vel   = new Float32Array(N*3);
-  const infl  = new Float32Array(N);     // chaos influence on ordered particles
-  const capT  = new Float32Array(N);     // scroll-capture blend (chaos -> lattice)
-  const capTh = new Float32Array(N);     // per-particle capture threshold
-  const lensT = new Float32Array(N);     // cursor-lens blend
-  const glyphB= new Float32Array(N);     // dot-matrix brightness
-  const col   = new Float32Array(N*3);
-  const shade = new Float32Array(N*3);
-  const order = new Uint8Array(N);
-  const effO  = new Uint8Array(N);       // effectively ordered this frame
-  const SIG = [0.42, 0.62, 1.0];
-  for(let i=0;i<GRID;i++) for(let j=0;j<GRID;j++){
-    const k = i*GRID + j;
-    const hx = -HALF + S*(i+0.5), hy = -HALF + S*(j+0.5);
-    home[k*2] = hx; home[k*2+1] = hy;
-    sim[k*3] = hx; sim[k*3+1] = hy; sim[k*3+2] = 0;
-    pos[k*3] = hx; pos[k*3+1] = hy; pos[k*3+2] = 0;
-    order[k] = hx < 0 ? 1 : 0;
-    if(!order[k]){
-      vel[k*3] = (Math.random()-0.5)*0.3; vel[k*3+1] = (Math.random()-0.5)*0.3;
-      capTh[k] = clamp(0.06 + 0.85*(hx/HALF) + (Math.random()-0.5)*0.1, 0.03, 0.96);
-    }
-    if(Math.random() < 0.06){ shade[k*3]=SIG[0]; shade[k*3+1]=SIG[1]; shade[k*3+2]=SIG[2]; }
-    else { const v = 0.9 + Math.random()*0.1; shade[k*3]=v; shade[k*3+1]=v; shade[k*3+2]=v; }
-    col[k*3]=shade[k*3]*0.8; col[k*3+1]=shade[k*3+1]*0.8; col[k*3+2]=shade[k*3+2]*0.8;
-  }
-
-  const pGeo = new THREE.BufferGeometry();
-  pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3).setUsage(THREE.DynamicDrawUsage));
-  pGeo.setAttribute('color', new THREE.BufferAttribute(col, 3).setUsage(THREE.DynamicDrawUsage));
-  const pMat = new THREE.PointsMaterial({size:0.85, map:sprite, transparent:true, depthWrite:false,
-    blending:THREE.AdditiveBlending, vertexColors:true, sizeAttenuation:true});
-  group.add(new THREE.Points(pGeo, pMat));
-
-  // hard divider (fades out as the field structures)
-  const dGeo = new THREE.BufferGeometry();
-  dGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array([0,-HALF,0, 0,HALF,0]), 3));
-  const dMat = new THREE.LineBasicMaterial({color:0xffffff, transparent:true, opacity:0.22});
-  group.add(new THREE.Line(dGeo, dMat));
-
-  // connection lines
-  const MAXSEG = isMobile ? 1500 : 2600;
-  const LINKMAX = isMobile ? 4 : 6;
-  const lPos = new Float32Array(MAXSEG*2*3);
-  const lCol = new Float32Array(MAXSEG*2*3);
-  const lGeo = new THREE.BufferGeometry();
-  lGeo.setAttribute('position', new THREE.BufferAttribute(lPos, 3).setUsage(THREE.DynamicDrawUsage));
-  lGeo.setAttribute('color', new THREE.BufferAttribute(lCol, 3).setUsage(THREE.DynamicDrawUsage));
-  lGeo.setDrawRange(0, 0);
-  const lMat = new THREE.LineBasicMaterial({transparent:true, opacity:0.85, depthWrite:false,
-    blending:THREE.AdditiveBlending, vertexColors:true});
-  group.add(new THREE.LineSegments(lGeo, lMat));
-
-  // pointer, drag-to-spin (arcball with momentum), cursor lens
-  let mx=0, my=0, tx=0, ty=0, px_=0, py_=0;
-  let dragging=false, lastX=0, lastY=0, spinSpeed=0;
-  const spinAxis = new THREE.Vector3(0,1,0);
-  const dragAxis = new THREE.Vector3();
-  const tmpQ = new THREE.Quaternion(), homeQ = new THREE.Quaternion(), qInv = new THREE.Quaternion();
-  const eul = new THREE.Euler(), pw = new THREE.Vector3();
-  fig.addEventListener('pointerdown', (e)=>{
-    dragging = true; lastX = e.clientX; lastY = e.clientY; spinSpeed = 0;
-    fig.classList.add('is-drag');
-    try{ fig.setPointerCapture(e.pointerId); }catch(_){}
-  });
-  addEventListener('pointermove', (e)=>{
-    tx = (e.clientX/innerWidth)*2 - 1;
-    ty = -((e.clientY/innerHeight)*2 - 1);
-    px_ = e.clientX; py_ = e.clientY;
-    if(!dragging) return;
-    const dx = e.clientX - lastX, dy = e.clientY - lastY;
-    lastX = e.clientX; lastY = e.clientY;
-    const mag = Math.hypot(dx, dy);
-    if(mag > 0){
-      dragAxis.set(dy, dx, 0).normalize();
-      tmpQ.setFromAxisAngle(dragAxis, mag*0.006);
-      group.quaternion.premultiply(tmpQ);
-      spinAxis.copy(dragAxis); spinSpeed = Math.min(mag*0.006, 0.12);
-    }
-  }, {passive:true});
-  addEventListener('pointerup', ()=>{ dragging = false; fig.classList.remove('is-drag'); });
-
-  const R = 10, R2 = R*R, CELL = R;      // chaos-web line reach
-  const ORTHO2 = 25;                      // ordered mesh: orthogonal neighbours only
-  const RN = 18;                          // chaos -> order influence reach
-  const LENS_R = 16, LENS_R2 = LENS_R*LENS_R;
-  const linkCnt = new Uint8Array(N);
-  const nearChaos = new Int32Array(N);
-  let t = 0, fade = 0, lastPct = -1, lastOp = -1;
-
-  // ---- dot-matrix printer: the structured lattice prints a word now and then ----
-  const FONT = {
-    A:[0x0E,0x11,0x11,0x1F,0x11,0x11,0x11], C:[0x0E,0x11,0x10,0x10,0x10,0x11,0x0E],
-    E:[0x1F,0x10,0x10,0x1E,0x10,0x10,0x1F], G:[0x0E,0x11,0x10,0x13,0x11,0x11,0x0F],
-    H:[0x11,0x11,0x11,0x1F,0x11,0x11,0x11], I:[0x0E,0x04,0x04,0x04,0x04,0x04,0x0E],
-    L:[0x10,0x10,0x10,0x10,0x10,0x10,0x1F], N:[0x11,0x19,0x15,0x13,0x11,0x11,0x11],
-    O:[0x0E,0x11,0x11,0x11,0x11,0x11,0x0E], S:[0x0F,0x10,0x10,0x0E,0x01,0x01,0x1E],
-    T:[0x1F,0x04,0x04,0x04,0x04,0x04,0x04], W:[0x11,0x11,0x11,0x15,0x15,0x15,0x0A],
-    X:[0x11,0x11,0x0A,0x04,0x0A,0x11,0x11], Y:[0x11,0x11,0x0A,0x04,0x04,0x04,0x04]
-  };
-  const WORDS = ['SIGNAL','CONTEXT','TASTE','WHY'];
-  let wordIdx = 0, charIdx = 0, slot = 0, nextCharAt = 6;
-  function printChar(ch, sl){
-    const rows = FONT[ch]; if(!rows) return;
-    const top = sl*8, startCol = 3;
-    for(let r=0;r<7;r++) for(let c=0;c<5;c++){
-      if((rows[r]>>(4-c))&1){
-        const i = startCol+c, j = GRID-1-(top+r);
-        if(i>=0 && i<12 && j>=0 && j<GRID) glyphB[i*GRID+j] = 1.3;
-      }
-    }
-  }
-  function printer(){
-    if(t < nextCharAt) return;
-    const word = WORDS[wordIdx];
-    printChar(word[charIdx], slot);
-    slot = (slot+1)%3; charIdx++;
-    if(charIdx >= word.length){
-      charIdx = 0; wordIdx = (wordIdx+1)%WORDS.length;
-      nextCharAt = t + 16;
-    } else nextCharAt = t + 1.15;
-  }
-
-  function step(dt){
-    t += dt;
-    const fs = dt*60;
-    const dampF = Math.pow(0.95, fs), inflDecay = Math.pow(0.99, fs), glyphDecay = Math.pow(0.982, fs);
-    const vh = innerHeight, sy = scrollY;
-    const docH = document.documentElement.scrollHeight;
-
-    // pose: framed by the hero at top -> full-bleed backdrop once you scroll past
-    const poseT = smooth(0.35*vh, 1.05*vh, sy);
-    const r = fig.getBoundingClientRect();
-    const frameScale = (r.height/vh)*(2*halfH)/100;
-    const frameX = (((r.left + r.width/2)/innerWidth)*2 - 1)*halfW;
-    const frameY = -((((r.top + r.height/2)/vh)*2 - 1))*halfH;
-    const freeScale = (Math.max(2*halfW, 2*halfH)/100)*1.08;
-    const gs = mix(frameScale, freeScale, poseT);
-    group.scale.setScalar(gs);
-    group.position.set(mix(frameX, 0, poseT), mix(frameY, 0, poseT), 0);
-
-    // canvas opacity: intro fade x scroll dim (1 -> 0.32 as it goes full-bleed)
-    fade += (1-fade)*Math.min(0.025*fs, 1);
-    const op = fade*(1 - 0.68*poseT);
-    if(Math.abs(op-lastOp) > 0.01){ canvas.style.opacity = op.toFixed(3); lastOp = op; }
-
-    // scroll -> structure: noise is captured into the lattice as you descend
-    const structP = clamp((sy - 0.9*vh)/Math.max(docH - vh - 0.9*vh, 1), 0, 1);
-    const pct = Math.round(structP*100);
-    if(structEl && pct !== lastPct){ structEl.textContent = String(pct).padStart(3,'0')+'%'; lastPct = pct; }
-    dMat.opacity = 0.22*(1-structP);
-
-    // cursor lens position in field-local space
-    qInv.copy(group.quaternion).invert();
-    pw.set(tx*halfW, ty*halfH, 0).sub(group.position).applyQuaternion(qInv).divideScalar(gs);
-    const lensOn = !dragging && !reduce;
-
-    // 1) chaos: random-walk drift caged in the right half; capture + lens blend on top
-    let nNear = 0;
-    for(let k=0;k<N;k++){
-      if(order[k]) continue;
-      const o = k*3;
-      vel[o]   += (Math.random()-0.5)*0.06*fs;
-      vel[o+1] += (Math.random()-0.5)*0.06*fs;
-      vel[o+2] += (Math.random()-0.5)*0.024*fs;
-      vel[o]*=dampF; vel[o+1]*=dampF; vel[o+2]*=dampF;
-      let sx = sim[o] + vel[o]*fs, sy2 = sim[o+1] + vel[o+1]*fs, sz = sim[o+2] + vel[o+2]*fs;
-      if(sx < 0.4 || sx > HALF){ vel[o] *= -1; sx = clamp(sx, 0.4, HALF); }
-      if(sy2 < -HALF || sy2 > HALF){ vel[o+1] *= -1; sy2 = clamp(sy2, -HALF, HALF); }
-      if(sz < -6 || sz > 6){ vel[o+2] *= -1; sz = clamp(sz, -6, 6); }
-      sim[o]=sx; sim[o+1]=sy2; sim[o+2]=sz;
-
-      capT[k] += ((structP > capTh[k] ? 1 : 0) - capT[k])*Math.min(0.03*fs, 1);
-      const ce = capT[k]*capT[k]*(3-2*capT[k]);
-      let bx = mix(sx, home[k*2], ce), by = mix(sy2, home[k*2+1], ce), bz = sz*(1-ce);
-
-      // the cursor imposes order: nearby chaos snaps toward the local grid
-      let lt = lensT[k];
-      if(lensOn){
-        const dx = bx-pw.x, dy = by-pw.y, d2 = dx*dx+dy*dy;
-        const tgt = d2 < LENS_R2 ? (1 - d2/LENS_R2) : 0;
-        lt += (tgt-lt)*Math.min(0.12*fs, 1);
-      } else lt *= Math.pow(0.94, fs);
-      lensT[k] = lt;
-      if(lt > 0.01){
-        const ni = clamp(Math.round((bx+HALF)/S - 0.5), 0, GRID-1);
-        const nj = clamp(Math.round((by+HALF)/S - 0.5), 0, GRID-1);
-        const w = lt*0.9;
-        bx = mix(bx, -HALF+S*(ni+0.5), w);
-        by = mix(by, -HALF+S*(nj+0.5), w);
-        bz *= (1-lt*0.8);
-      }
-      pos[o]=bx; pos[o+1]=by; pos[o+2]=bz;
-      effO[k] = (capT[k] > 0.6 || lt > 0.6) ? 1 : 0;
-      const a = 0.8 + 0.28*lt;
-      col[o]=shade[o]*a; col[o+1]=shade[o+1]*a; col[o+2]=shade[o+2]*a;
-      if(sx < RN && capT[k] < 0.5) nearChaos[nNear++] = k;
-    }
-
-    // 2) order: spring home, dragged by uncaptured chaos across the divider; dot-matrix glow
-    for(let k=0;k<N;k++){
-      if(!order[k]) continue;
-      const o = k*3, hx = home[k*2], hy = home[k*2+1];
-      let ix = 0, iy = 0, best = 0;
-      if(hx > -RN){
-        for(let q=0;q<nNear;q++){
-          const j = nearChaos[q], jo = j*3;
-          const dx = pos[o]-pos[jo], dy = pos[o+1]-pos[jo+1];
-          const d = Math.hypot(dx, dy);
-          if(d < RN){
-            const st = (1 - d/RN)*(1-structP);
-            ix += vel[jo]*st; iy += vel[jo+1]*st;
-            if(st > best) best = st;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>James Finnie — Product judgement. Builder’s instinct.</title>
+    <meta
+      name="description"
+      content="James Finnie is a Senior Product Manager in Toronto, turning complex problems into clear decisions and working products across AI, investing, and connected systems."
+    />
+    <meta name="author" content="James Finnie" />
+    <meta name="theme-color" content="#f5f5f5" />
+    <link rel="canonical" href="https://www.james-finnie.com/" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.james-finnie.com/" />
+    <meta
+      property="og:title"
+      content="James Finnie — Product judgement. Builder’s instinct."
+    />
+    <meta
+      property="og:description"
+      content="Clear decisions. Working products. Senior Product Manager working across AI, investing, and connected systems."
+    />
+    <meta property="og:site_name" content="James Finnie" />
+    <meta
+      property="og:image"
+      content="https://www.james-finnie.com/assets/og.png"
+    />
+    <meta
+      property="og:image:alt"
+      content="James Finnie — Senior Product Manager"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="James Finnie — Product judgement. Builder’s instinct."
+    />
+    <meta
+      name="twitter:description"
+      content="Clear decisions and working products across AI, investing, and connected systems."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.james-finnie.com/assets/og.png"
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/SpaceGrotesk.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/Inter.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <script defer src="/assets/main.js"></script>
+    <noscript>
+      <style>
+        .hero h1,
+        .hero-bottom {
+          animation: none !important;
+        }
+        .menu-button {
+          display: none !important;
+        }
+        @media (max-width: 800px) {
+          .header {
+            height: auto;
+            flex-wrap: wrap;
+            padding-block: 18px;
+          }
+          .nav {
+            display: flex;
+            position: static;
+            flex-direction: row;
+            flex-wrap: wrap;
+            box-shadow: none;
+            gap: 10px 20px;
+            border: 0;
+            padding: 0;
+            width: 100%;
+          }
+          .nav > a {
+            font-size: 0.875rem;
+            padding: 8px 0;
+          }
+          .nav > .nav-contact {
+            margin: 0;
+            padding: 8px 13px;
+            gap: 20px;
           }
         }
-        if(best > infl[k]) infl[k] = best;
+      </style>
+    </noscript>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "James Finnie",
+        "url": "https://www.james-finnie.com/",
+        "jobTitle": "Senior Product Manager",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Toronto",
+          "addressCountry": "CA"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/james-finnie/",
+          "https://github.com/JPFinnie"
+        ],
+        "knowsAbout": [
+          "AI product management",
+          "Self-directed investing",
+          "Connected products",
+          "Product strategy"
+        ]
       }
-      const f = infl[k];
-      ix = clamp(ix, -0.6, 0.6); iy = clamp(iy, -0.6, 0.6);
-      pos[o]   += (hx - pos[o])*0.05*(1-f)*fs + ix*f*fs;
-      pos[o+1] += (hy - pos[o+1])*0.05*(1-f)*fs + iy*f*fs;
-      pos[o+2] += (0 - pos[o+2])*0.05*fs;
-      infl[k] *= inflDecay;
-      effO[k] = 1;
-      const g = Math.min(glyphB[k], 1);
-      glyphB[k] *= glyphDecay;
-      const a = 0.8 - f*0.5;
-      if(g > 0.01){
-        col[o]   = mix(shade[o]*a,   SIG[0]*1.5, g);
-        col[o+1] = mix(shade[o+1]*a, SIG[1]*1.4, g);
-        col[o+2] = mix(shade[o+2]*a, SIG[2]*1.3, g);
-      } else {
-        col[o]=shade[o]*a; col[o+1]=shade[o+1]*a; col[o+2]=shade[o+2]*a;
-      }
-    }
-    pGeo.attributes.position.needsUpdate = true;
-    pGeo.attributes.color.needsUpdate = true;
-    if(!reduce) printer();
+    </script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="progress" aria-hidden="true"></div>
+    <header class="header" id="header">
+      <a class="brand" href="#top" aria-label="James Finnie, home"
+        >jf<span class="brand-dot">.</span></a
+      >
+      <a class="header-name" href="#top"
+        >James Finnie<span>Senior Product Manager</span></a
+      >
+      <button
+        class="menu-button"
+        id="menu-btn"
+        type="button"
+        aria-expanded="false"
+        aria-controls="navigation"
+        aria-label="Open navigation"
+      >
+        <span></span><span></span>
+      </button>
+      <nav class="nav" id="navigation" aria-label="Main navigation">
+        <a href="#projects">Selected work</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact" class="nav-contact"
+          >Let’s talk <span aria-hidden="true">↗</span></a
+        >
+      </nav>
+    </header>
 
-    // 3) lines: ordered/captured/lensed particles weave orthogonally, chaos webs freely
-    const cells = new Map();
-    for(let k=0;k<N;k++){
-      const o = k*3;
-      const key = (((pos[o]+64)/CELL)|0)*1000 + (((pos[o+1]+64)/CELL)|0);
-      let arr = cells.get(key);
-      if(!arr){ arr=[]; cells.set(key, arr); }
-      arr.push(k);
-    }
-    let seg = 0;
-    linkCnt.fill(0);
-    outer:
-    for(let i=0;i<N;i++){
-      if(linkCnt[i] >= LINKMAX) continue;
-      const o = i*3;
-      const cx = ((pos[o]+64)/CELL)|0, cy = ((pos[o+1]+64)/CELL)|0;
-      scan:
-      for(let nx=cx-1; nx<=cx+1; nx++) for(let ny=cy-1; ny<=cy+1; ny++){
-        const arr = cells.get(nx*1000+ny);
-        if(!arr) continue;
-        for(let a=0;a<arr.length;a++){
-          const j = arr[a];
-          if(j <= i || linkCnt[j] >= LINKMAX) continue;
-          const jo = j*3;
-          const dx=pos[o]-pos[jo], dy=pos[o+1]-pos[jo+1], dz=pos[o+2]-pos[jo+2];
-          const d2 = dx*dx+dy*dy+dz*dz;
-          if(d2 < (effO[i] && effO[j] ? ORTHO2 : R2)){
-            const w = (1 - Math.sqrt(d2)/R)*0.16;
-            const s6 = seg*6;
-            lPos[s6]=pos[o];    lPos[s6+1]=pos[o+1]; lPos[s6+2]=pos[o+2];
-            lPos[s6+3]=pos[jo]; lPos[s6+4]=pos[jo+1];lPos[s6+5]=pos[jo+2];
-            lCol[s6]=w; lCol[s6+1]=w; lCol[s6+2]=w+0.03;
-            lCol[s6+3]=w; lCol[s6+4]=w; lCol[s6+5]=w+0.03;
-            linkCnt[i]++; linkCnt[j]++;
-            if(++seg >= MAXSEG) break outer;
-            if(linkCnt[i] >= LINKMAX) break scan;
-          }
-        }
-      }
-    }
-    lGeo.setDrawRange(0, seg*2);
-    lGeo.attributes.position.needsUpdate = true;
-    lGeo.attributes.color.needsUpdate = true;
+    <main id="main">
+      <section class="hero wrap" aria-labelledby="hero-title">
+        <div class="hero-top">
+          <p class="eyebrow">Senior Product Manager</p>
+          <p class="eyebrow hero-location">
+            Toronto, Canada <span class="clock" data-clock></span>
+          </p>
+        </div>
+        <h1 id="hero-title">
+          Product judgement.<br />Builder’s <em>instinct.</em>
+        </h1>
+        <div class="hero-bottom">
+          <div class="hero-intro">
+            <p>
+              I’m James. I turn complex problems into clear decisions and
+              working products — across AI, investing, and connected systems.
+            </p>
+            <a class="button button-dark" href="#projects"
+              >Explore my work <span aria-hidden="true">↘</span></a
+            >
+          </div>
+          <div class="hero-note">
+            <span class="eyebrow">Currently</span>
+            <p>CIBC Investor’s Edge</p>
+            <span>Building better investing experiences.</span
+            ><a class="text-link" href="#about"
+              >A little more about me <span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </div>
+        <div
+          class="experience-strip"
+          aria-label="Experience across four organisations"
+        >
+          <span class="eyebrow"
+            >A few places<br />
+            I’ve built with</span
+          ><span class="company-wordmark cibc"
+            >CIBC<span class="cibc-mark" aria-hidden="true">◇</span></span
+          ><span class="company-wordmark trudell"
+            >Trudell<span>Medical International</span></span
+          ><span class="company-wordmark stonex"
+            >StoneX<span class="stonex-mark" aria-hidden="true">.</span></span
+          ><span class="company-wordmark equals">equals<span>money</span></span>
+        </div>
+      </section>
 
-    // 4) free 3D spin: momentum after a drag, then ease home to hover parallax
-    if(!dragging){
-      if(spinSpeed > 0.0002){
-        tmpQ.setFromAxisAngle(spinAxis, spinSpeed*fs);
-        group.quaternion.premultiply(tmpQ);
-        spinSpeed *= Math.pow(0.985, fs);
-      } else {
-        mx += (tx - mx)*0.05; my += (ty - my)*0.05;
-        const damp = 1 - poseT*0.7; // subtler parallax once full-bleed
-        homeQ.setFromEuler(eul.set(-my*0.10*damp, (mx*0.14 + Math.sin(t*0.05)*0.02)*damp, 0));
-        group.quaternion.slerp(homeQ, 0.03);
-      }
-    }
-  }
+      <section
+        class="work section wrap"
+        id="projects"
+        aria-labelledby="work-title"
+      >
+        <div class="section-top">
+          <p class="eyebrow">
+            <span class="section-index">01 /</span> Selected work
+          </p>
+          <span class="eyebrow section-aside">Independent builds</span>
+        </div>
+        <div class="section-heading">
+          <h2 id="work-title">
+            Ideas are good.<br /><em>Making them real is better.</em>
+          </h2>
+          <p>
+            A couple of things I’ve taken from a question to a working product.
+          </p>
+        </div>
+        <div class="projects-grid">
+          <article class="project project-six">
+            <a
+              class="project-visual"
+              href="https://six-cut.vercel.app/about"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Read The Six Cut project story, opens in a new tab"
+            >
+              <div class="project-visual-top">
+                <span>THE SIX CUT</span><span>Local discovery / 01</span>
+              </div>
+              <div class="project-screen">
+                <img
+                  src="/assets/six-cut.webp"
+                  alt="The Six Cut project story: Your butcher is closer than you think."
+                  width="1280"
+                  height="900"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <span class="project-open" aria-hidden="true">↗</span>
+            </a>
+            <div class="project-meta">
+              <span class="eyebrow">Local discovery · Toronto</span
+              ><span class="project-number">01</span>
+            </div>
+            <h3>
+              <a
+                href="https://six-cut.vercel.app/about"
+                target="_blank"
+                rel="noopener noreferrer"
+                >The Six Cut <span aria-hidden="true">↗</span></a
+              >
+            </h3>
+            <p>
+              Find a better butcher. A map-based guide to Toronto’s independent
+              shops, pairing Google ratings with a transparent Six Cut Score.
+            </p>
+            <p class="project-role">
+              Built end to end: scoring method, search, filters, and map
+              experience.
+            </p>
+            <div class="project-links">
+              <a
+                href="https://six-cut.vercel.app/about"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Project story <span aria-hidden="true">↗</span></a
+              ><a
+                href="https://six-cut.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Open the app <span aria-hidden="true">↗</span></a
+              >
+            </div>
+            <ul class="tags" aria-label="The Six Cut technologies">
+              <li>Next.js</li>
+              <li>Interactive maps</li>
+              <li>Scoring model</li>
+            </ul>
+          </article>
+          <article class="project project-hermes">
+            <a
+              class="project-visual"
+              href="https://finance-hermes.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Explore FinanceHermes, opens in a new tab"
+            >
+              <div class="project-visual-top">
+                <span>FINANCE HERMES</span><span>Research agent / 02</span>
+              </div>
+              <div class="project-screen">
+                <img
+                  src="/assets/finance-hermes.webp"
+                  alt="FinanceHermes research interface with Research and Learn modes and a market question input."
+                  width="1280"
+                  height="900"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <span class="project-open" aria-hidden="true">↗</span>
+            </a>
+            <div class="project-meta">
+              <span class="eyebrow">AI · Financial research</span
+              ><span class="project-number">02</span>
+            </div>
+            <h3>
+              <a
+                href="https://finance-hermes.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >FinanceHermes <span aria-hidden="true">↗</span></a
+              >
+            </h3>
+            <p>
+              Follow the research, not just the answer. An agent that searches
+              current sources and synthesises market moves, earnings, and
+              central bank activity.
+            </p>
+            <p class="project-role">
+              An experiment in useful, inspectable workflows, with research
+              progress streamed as it happens.
+            </p>
+            <ul class="tags" aria-label="FinanceHermes technologies">
+              <li>Agentic search</li>
+              <li>LLM reasoning</li>
+              <li>Vercel</li>
+            </ul>
+          </article>
+        </div>
+      </section>
 
-  function size(){
-    renderer.setSize(innerWidth, innerHeight, false);
-    camera.aspect = innerWidth/innerHeight;
-    camera.updateProjectionMatrix();
-    halfH = Math.tan(THREE.MathUtils.degToRad(FOV/2))*CAMZ;
-    halfW = halfH*camera.aspect;
-  }
-  size();
-  addEventListener('resize', size, {passive:true});
+      <section
+        class="about dark-section"
+        id="about"
+        aria-labelledby="about-title"
+      >
+        <div class="wrap">
+          <div class="section-top">
+            <p class="eyebrow">
+              <span class="section-index">02 /</span> The way I work
+            </p>
+            <span class="eyebrow section-aside">Curious by default</span>
+          </div>
+          <div class="about-grid">
+            <div>
+              <h2 id="about-title">
+                The right question<br />changes<br /><em>everything.</em>
+              </h2>
+              <div class="about-signature">
+                James Finnie<span>Product thinker. Hands-on builder.</span>
+              </div>
+            </div>
+            <div class="about-copy">
+              <p class="about-lead">
+                I’m most useful where the problem is complicated, the path isn’t
+                obvious, and a team needs something real to react to.
+              </p>
+              <p>
+                At CIBC Investor’s Edge, I lead product for self-directed
+                investing. I use working prototypes to make strategy tangible,
+                bring agents into discovery, and help teams test direction
+                earlier.
+              </p>
+              <p>
+                Before that: connected medical devices, trading platforms,
+                payments, and FX. Different industries; the same work of
+                connecting people, technology, and commercial reality.
+              </p>
+              <p>
+                AI makes building faster. The advantage is choosing the right
+                problem, setting a clear quality bar, and knowing why the
+                product should exist.
+              </p>
+              <a class="text-link" href="#experience"
+                >The experience behind the approach
+                <span aria-hidden="true">↘</span></a
+              >
+            </div>
+          </div>
+          <div class="principles">
+            <article>
+              <span class="eyebrow">01 — Judgement</span>
+              <h3>Taste at speed.</h3>
+              <p>
+                More possibilities call for a clearer quality bar. Spend time on
+                the decisions people will actually feel.
+              </p>
+            </article>
+            <article>
+              <span class="eyebrow">02 — Curiosity</span>
+              <h3>Ask why. Then why again.</h3>
+              <p>
+                Start with the person, the constraint, and the change that
+                matters. Make the problem clear before solving it.
+              </p>
+            </article>
+            <article>
+              <span class="eyebrow">03 — Practice</span>
+              <h3>Make it tangible.</h3>
+              <p>
+                Test the riskiest assumption with working software. Give people
+                something real to challenge and improve.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
 
-  if(reduce){
-    for(let k=0;k<420;k++) step(0.016);
-    renderer.render(scene, camera);
-    canvas.style.opacity = '';
-  } else {
-    let raf = null, last = performance.now();
-    function loop(now){
-      raf = null;
-      if(document.hidden) return;
-      const dt = Math.min((now-last)/1000, 0.05); last = now;
-      step(dt);
-      renderer.render(scene, camera);
-      raf = requestAnimationFrame(loop);
-    }
-    function kick(){ if(raf===null && !document.hidden){ last = performance.now(); raf = requestAnimationFrame(loop); } }
-    document.addEventListener('visibilitychange', kick);
-    kick();
-  }
-}catch(err){
-  console.error('[field] init failed, showing static fallback:', err);
-  if(canvas) canvas.style.display = 'none';
-  if(fig) fig.classList.add('is-fallback');
-}
-</script>
+      <section
+        class="focus section wrap"
+        id="focus"
+        aria-labelledby="focus-title"
+      >
+        <div class="section-top">
+          <p class="eyebrow">
+            <span class="section-index">03 /</span> Focus &amp; capabilities
+          </p>
+        </div>
+        <div class="focus-grid">
+          <div class="focus-heading">
+            <h2 id="focus-title">Complexity in.<br /><em>Clarity out.</em></h2>
+            <p>The work I keep coming back to.</p>
+          </div>
+          <div class="focus-list">
+            <details open>
+              <summary>
+                <span class="focus-num">01</span>
+                <h3>AI &amp; context systems</h3>
+                <span class="details-icon" aria-hidden="true"></span>
+              </summary>
+              <div class="focus-detail">
+                <p>
+                  Connect research, decisions, and product knowledge into
+                  context teams and agents can use. Design human-directed
+                  workflows with clear goals, evaluation, and accountability.
+                </p>
+                <ul class="tags">
+                  <li>Knowledge architecture</li>
+                  <li>RAG &amp; retrieval</li>
+                  <li>Agent workflows</li>
+                  <li>Evals</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>
+                <span class="focus-num">02</span>
+                <h3>Prototype-led product</h3>
+                <span class="details-icon" aria-hidden="true"></span>
+              </summary>
+              <div class="focus-detail">
+                <p>
+                  Turn research and strategy into working software early. Test
+                  the important assumptions, align a team around what it learns,
+                  and connect validated ideas to production.
+                </p>
+                <ul class="tags">
+                  <li>Discovery</li>
+                  <li>Design systems</li>
+                  <li>Prototyping</li>
+                  <li>Delivery</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>
+                <span class="focus-num">03</span>
+                <h3>Investing &amp; personalisation</h3>
+                <span class="details-icon" aria-hidden="true"></span>
+              </summary>
+              <div class="focus-detail">
+                <p>
+                  Make investing experiences more relevant and timely while
+                  protecting trust, agency, and control. Connect customer needs
+                  with commercial opportunity.
+                </p>
+                <ul class="tags">
+                  <li>Wealth technology</li>
+                  <li>Personalisation</li>
+                  <li>Financial modelling</li>
+                  <li>Vendor evaluation</li>
+                </ul>
+              </div>
+            </details>
+            <details id="capabilities">
+              <summary>
+                <span class="focus-num">04</span>
+                <h3>Product leadership</h3>
+                <span class="details-icon" aria-hidden="true"></span>
+              </summary>
+              <div class="focus-detail">
+                <p>
+                  Bring a clear narrative to an ambiguous opportunity. Set
+                  priorities, explain the trade-offs, and help product, design,
+                  engineering, and leadership move in the same direction.
+                </p>
+                <ul class="tags">
+                  <li>Strategy &amp; roadmaps</li>
+                  <li>Narrative specs</li>
+                  <li>Executive alignment</li>
+                  <li>Build vs. buy</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
 
-<!-- Vercel Web Analytics (static-site injection — enable Analytics in project settings) -->
-<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
-<script defer src="/_vercel/insights/script.js"></script>
+      <section
+        class="experience section wrap"
+        id="experience"
+        aria-labelledby="experience-title"
+      >
+        <div class="section-top">
+          <p class="eyebrow">
+            <span class="section-index">04 /</span> Experience
+          </p>
+          <span class="eyebrow section-aside">London → Toronto</span>
+        </div>
+        <div class="section-heading">
+          <h2 id="experience-title">
+            Different worlds.<br /><em>One product instinct.</em>
+          </h2>
+          <p>
+            From money movement to connected health and the future of investing.
+          </p>
+        </div>
+        <div class="timeline">
+          <article class="role">
+            <div class="role-date">
+              2025 — Present<span class="current-label">Current</span>
+            </div>
+            <div class="role-body">
+              <h3>CIBC Investor’s Edge</h3>
+              <p class="role-title">Senior Product Manager / Product Owner</p>
+              <p>
+                Leading product for self-directed investing, with a focus on
+                AI-enabled experiences, personalisation, and faster
+                discovery-to-delivery.
+              </p>
+            </div>
+            <span class="role-location">Toronto</span>
+          </article>
+          <article class="role">
+            <div class="role-date">2023 — 2025</div>
+            <div class="role-body">
+              <h3>Trudell Medical International</h3>
+              <p class="role-title">Manager, IoT &amp; Intelligent Systems</p>
+              <p>
+                Led product direction across a connected-device platform,
+                companion apps, and device data — bringing hardware, software,
+                and commercial priorities together.
+              </p>
+            </div>
+            <span class="role-location">London, ON</span>
+          </article>
+          <article class="role">
+            <div class="role-date">2022 — 2023</div>
+            <div class="role-body">
+              <h3>StoneX</h3>
+              <p class="role-title">
+                Product Analyst / Associate Product Manager
+              </p>
+              <p>
+                Worked across mobile trading and share dealing, including a
+                reliability programme that materially reduced crashes on a
+                mobile-first platform.
+              </p>
+            </div>
+            <span class="role-location">London, UK</span>
+          </article>
+          <article class="role">
+            <div class="role-date">2021 — 2022</div>
+            <div class="role-body">
+              <h3>Equals Money</h3>
+              <p class="role-title">Product Analyst</p>
+              <p>
+                Improved payments and FX onboarding, identity verification,
+                internal tools, and the end-to-end customer journey.
+              </p>
+            </div>
+            <span class="role-location">London, UK</span>
+          </article>
+        </div>
+        <div class="education">
+          <span class="eyebrow">Education</span>
+          <div>
+            <h3>SOAS, University of London</h3>
+            <p>MA International Studies &amp; Diplomacy · Merit</p>
+          </div>
+          <div>
+            <h3>University of Glasgow</h3>
+            <p>MA (SocSci) Business &amp; Management · 2:1</p>
+          </div>
+        </div>
+      </section>
 
-<!-- Vercel Speed Insights -->
-<script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
-<script defer src="/_vercel/speed-insights/script.js"></script>
-</body>
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="wrap">
+          <div class="section-top">
+            <p class="eyebrow">
+              <span class="section-index">05 /</span> Start a conversation
+            </p>
+            <span class="eyebrow section-aside"
+              >Good things start with a question</span
+            >
+          </div>
+          <a class="contact-main" href="mailto:james_finnie@icloud.com"
+            ><h2 id="contact-title">What are<br />you <em>working on?</em></h2>
+            <span class="contact-arrow" aria-hidden="true">↗</span></a
+          >
+          <div class="contact-bottom">
+            <p>
+              Big product questions, early ideas, or just a good
+              conversation.<br /><a href="mailto:james_finnie@icloud.com"
+                >james_finnie@icloud.com</a
+              >
+            </p>
+            <div class="social-links">
+              <a
+                href="https://www.linkedin.com/in/james-finnie/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >LinkedIn <span aria-hidden="true">↗</span></a
+              ><a
+                href="https://github.com/JPFinnie"
+                target="_blank"
+                rel="noopener noreferrer"
+                >GitHub <span aria-hidden="true">↗</span></a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer wrap">
+      <a class="brand" href="#top" aria-label="James Finnie, back to top"
+        >jf<span class="brand-dot">.</span></a
+      >
+      <p>© <span id="year">2026</span> James Finnie</p>
+      <p class="footer-place">Made with intention. Based in Toronto.</p>
+      <a class="back-top" href="#top"
+        >Back to top <span aria-hidden="true">↑</span></a
+      >
+    </footer>
+  </body>
 </html>
