@@ -65,7 +65,13 @@ async function openPage(width, height, options = {}) {
     if (response.status() >= 400)
       errors.push(`${response.status()} ${response.url()}`);
   });
-  await page.setViewport({ width, height, deviceScaleFactor: 1 });
+  await page.setViewport({
+    width,
+    height,
+    deviceScaleFactor: 1,
+    hasTouch: Boolean(options.touch),
+    isMobile: Boolean(options.touch),
+  });
   if (options.noJS) await page.setJavaScriptEnabled(false);
   if (options.reduced)
     await page.emulateMediaFeatures([
@@ -140,6 +146,126 @@ try {
     await page.close();
     console.log(`PASS layout ${width}px`);
   }
+
+  const explorer = await openPage(1440, 1000);
+  await explorer.click('#map-nodes [data-select="hermes"]');
+  assert.equal(
+    await explorer.$eval("#map-detail-title", (e) => e.textContent),
+    "FinanceHermes",
+  );
+  await explorer.click('#detail-body [data-select="context"]');
+  assert.equal(
+    await explorer.$eval("#map-detail-title", (e) => e.textContent),
+    "Context systems",
+  );
+  await explorer.click('[data-map-filter="project"]');
+  await explorer.click('[data-map-view="list"]');
+  assert.equal(
+    await explorer.$$eval(".map-list-item", (items) => items.length),
+    2,
+  );
+  await explorer.type("#map-search", "unfindable-word");
+  assert.equal(await explorer.$eval("#map-empty", (e) => e.hidden), false);
+  await explorer.keyboard.press("Escape");
+  await explorer.type("#map-search", "six cut");
+  await explorer.keyboard.press("Enter");
+  assert.equal(
+    await explorer.$eval("#map-detail-title", (e) => e.textContent),
+    "The Six Cut",
+  );
+  await explorer.click('[data-map-filter="all"]');
+  await explorer.click('[data-map-view="map"]');
+  await explorer.click('[data-trail="ai"]');
+  assert.equal(
+    await explorer.$eval("#map-detail-title", (e) => e.textContent),
+    "Context systems",
+  );
+  assert.equal(
+    await explorer.$eval("#trail-position", (e) => e.textContent),
+    "1 / 3",
+  );
+  await explorer.click("#trail-next");
+  assert.equal(
+    await explorer.$eval("#map-detail-title", (e) => e.textContent),
+    "Agent workflows",
+  );
+  await explorer.click("#trail-next");
+  assert.equal(
+    await explorer.$eval("#map-detail-title", (e) => e.textContent),
+    "FinanceHermes",
+  );
+  assert.equal(await explorer.$eval("#trail-next", (e) => e.disabled), true);
+  await explorer.screenshot({
+    path: path.join(outDir, "explorer-selected.png"),
+  });
+  await explorer.click("#trail-prev");
+  assert.equal(
+    await explorer.$eval("#map-detail-title", (e) => e.textContent),
+    "Agent workflows",
+  );
+  await explorer.click("#trail-close");
+  assert.equal(await explorer.$eval("#trail-controls", (e) => e.hidden), true);
+  await explorer.click('#map-nodes [data-select="james"]');
+  const dragNode = await explorer.$('#map-nodes [data-select="prototype"]');
+  const before = await dragNode.evaluate((e) => parseFloat(e.style.left));
+  const box = await dragNode.boundingBox();
+  await explorer.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await explorer.mouse.down();
+  await explorer.mouse.move(
+    box.x + box.width / 2 + 35,
+    box.y + box.height / 2 + 20,
+    { steps: 6 },
+  );
+  await explorer.mouse.up();
+  assert.ok(
+    await dragNode.evaluate(
+      (e, start) => parseFloat(e.style.left) > start + 25,
+      before,
+    ),
+    "Node should move when dragged",
+  );
+  assert.equal(
+    await explorer.$eval("#map-detail-title", (e) => e.textContent),
+    "James Finnie",
+    "Dragging should not select a different node",
+  );
+  await explorer.click("#map-zoom-in");
+  assert.ok(
+    await explorer.$eval("#map-world", (e) =>
+      e.style.transform.includes("1.15"),
+    ),
+  );
+  await explorer.click("#map-reset");
+  assert.ok(
+    await explorer.$eval("#map-world", (e) =>
+      e.style.transform.includes("scale(1)"),
+    ),
+  );
+  await explorer.close();
+  console.log(
+    "PASS explorer nodes, related connections, filters, search, list view, guided trails, dragging, and zoom",
+  );
+
+  const mobileExplorer = await openPage(390, 844, { touch: true });
+  await mobileExplorer.tap('[data-map-filter="project"]');
+  await mobileExplorer.tap('#map-nodes [data-select="hermes"]');
+  assert.equal(
+    await mobileExplorer.$eval("#map-detail-title", (e) => e.textContent),
+    "FinanceHermes",
+  );
+  assert.equal(
+    await mobileExplorer.evaluate(() => document.activeElement.id),
+    "map-detail-title",
+  );
+  await mobileExplorer.tap('#detail-body [data-select="context"]');
+  assert.equal(
+    await mobileExplorer.$eval("#map-detail-title", (e) => e.textContent),
+    "Context systems",
+  );
+  await mobileExplorer.close();
+  console.log(
+    "PASS mobile explorer selection, focus, and connection navigation",
+  );
 
   const mobile = await openPage(390, 844);
   await mobile.click("#menu-btn");
