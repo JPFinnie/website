@@ -24,6 +24,8 @@ media.addEventListener?.('change', updateMotion);
 updateMotion();
 function setRoute(hash) { try { const url = new URL(location.href); url.hash = hash; history.replaceState(null,'',url.href); } catch {} }
 details.forEach(item => item.addEventListener('toggle', () => {
+  // The default-open disclosure must not rewrite the opening scene's URL.
+  if (document.querySelector('#desktop').getAttribute('aria-hidden') === 'true') return;
   if (item.open) {
     details.forEach(other => { if (other !== item) other.open = false; });
     setRoute(`about/${item.id}`);
@@ -33,7 +35,7 @@ function syncRoute() {
   const hash = location.hash;
   if (['#about','#desktop','#about/experience','#about/approach','#about/background','#about/practice'].includes(hash)) {
     scene.enter(true);
-    const id = hash.endsWith('/background') ? 'experience' : hash.endsWith('/practice') ? 'approach' : hash.split('/')[1];
+    const id = hash.endsWith('/background') ? 'experience' : hash.endsWith('/practice') ? 'approach' : (hash.split('/')[1] || 'experience');
     details.forEach(item => { item.open = item.id === id; });
   }
 }

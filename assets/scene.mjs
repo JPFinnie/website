@@ -7,7 +7,8 @@ export const followScroll = (current, target, milliseconds) => target + (current
 export const aperture = Object.freeze({ x: 691 / 1672, y: 479 / 940, width: 298 / 1672, height: 159 / 940, aspect: 1672 / 940 });
 export function sceneFrame(progress, width, height, still = false, screen = aperture) {
   const p = clamp(progress);
-  const imageWidth = Math.max(width, height * screen.aspect);
+  // Begin with a wider view of the desk and landscape, including on phones.
+  const imageWidth = Math.max(width * .94, Math.min(width * 1.8, height * screen.aspect * .82));
   const imageHeight = imageWidth / screen.aspect;
   const left = (width - imageWidth) / 2;
   const top = (height - imageHeight) / 2;
