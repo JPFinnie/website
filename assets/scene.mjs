@@ -20,15 +20,16 @@ export function sceneFrame(progress, width, height, still = false, screen = aper
   const mobile = width <= 760;
   const inset = mobile ? 0 : clamp(width * .035, 28, 64);
   const final = { x: inset, y: mobile ? 72 : 104, width: width - inset * 2, height: Math.max(200, height - (mobile ? 72 : 158)) };
-  // Arrive at the final panel width instead of overshooting and shrinking back.
-  const finalScale = Math.max(1, final.width / sw);
-  const travel = still ? 0 : smooth(.06, .98, p);
+  // First move the camera toward the physical monitor. Keep its aperture locked
+  // to the artwork until the approach is complete; only then open the page.
+  const finalScale = Math.max(1, final.width * .92 / sw);
+  const travel = still ? 0 : smooth(.03, .68, p);
   const scale = still ? 1 : Math.exp(Math.log(finalScale) * travel);
   const focusX = mix(cx, width / 2, travel);
   const focusY = mix(cy, height / 2, travel);
   const imageX = focusX - (screen.x + screen.width / 2) * imageWidth * scale;
   const imageY = focusY - (screen.y + screen.height / 2) * imageHeight * scale;
-  const takeover = still ? (p >= .5 ? 1 : 0) : smooth(mobile ? .28 : .48, 1, p);
+  const takeover = still ? (p >= .5 ? 1 : 0) : smooth(.70, 1, p);
   const shell = {
     x: mix(focusX - sw * scale / 2, final.x, takeover),
     y: mix(focusY - sh * scale / 2, final.y, takeover),
@@ -38,10 +39,10 @@ export function sceneFrame(progress, width, height, still = false, screen = aper
   return {
     imageWidth, imageHeight, imageX: still ? left : imageX, imageY: still ? top : imageY, scale,
     shell, final, hero: still ? (p < .5 ? 1 : 0) : 1 - smooth(.01, .19, p),
-    scenery: still ? (p < .5 ? 1 : 0) : 1 - smooth(.83, .99, p),
-    desktop: still ? (p >= .5 ? 1 : 0) : smooth(.72, .91, p),
-    mini: still ? (p < .5 ? 1 : 0) : 1 - smooth(.68, .85, p),
-    ready: still ? p >= .5 : p >= .96
+    scenery: still ? (p < .5 ? 1 : 0) : 1 - smooth(.72, .98, p),
+    desktop: still ? (p >= .5 ? 1 : 0) : smooth(.86, .995, p),
+    mini: still ? (p < .5 ? 1 : 0) : 1 - smooth(.86, .995, p),
+    ready: still ? p >= .5 : p >= .995
   };
 }
 

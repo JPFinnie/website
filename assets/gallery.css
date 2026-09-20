@@ -49,3 +49,13 @@ html[data-motion=quiet]{scroll-behavior:auto}html[data-motion=quiet] *,html[data
 }
 @media(prefers-reduced-motion:reduce){.has-js .journey{height:200svh}}
 html.is-still .journey{height:200svh}
+
+/* A crisp, code-native abstract color field inside the physical monitor. */
+.abstract-wallpaper{position:absolute;inset:0;background:radial-gradient(ellipse at 12% 4%,#faff93 0%,transparent 43%),radial-gradient(ellipse at 90% 90%,#ff6635 0%,transparent 48%),radial-gradient(ellipse at 100% 0%,#ef56cb 0%,transparent 55%),radial-gradient(ellipse at 10% 100%,#403ce9 0%,transparent 60%),#a698ed}
+.screen-invitation{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#17132b;line-height:1.12;letter-spacing:-.045em;font-size:5cqw;padding:8%;text-shadow:0 1px 12px #ffffff38}
+.screen-invitation strong{font-size:11cqw;font-weight:500;letter-spacing:-.06em;margin-top:2%}
+.screen-invitation .screen-arrow{font-size:5cqw;line-height:1;margin-top:5%}
+.has-js .journey{height:270svh}
+@media(max-width:760px){.has-js .journey{height:250svh}}
+@media(prefers-reduced-motion:reduce){.has-js .journey{height:200svh}}
+html.is-still .journey{height:200svh}

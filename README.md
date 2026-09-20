@@ -2,7 +2,7 @@
 
 Personal website at https://www.james-finnie.com/.
 
-This repository contains James's portfolio with the original mountain-lake studio artwork, personal photographs, locally hosted fonts, and the scroll-to-computer interaction. About and contact are directly accessible; experience and approach use native disclosures. Reduced motion is supported. No Pace or initials logo appears in the page. The computer wallpaper uses James’s original landscape portrait.
+This repository contains James's portfolio with the original mountain-lake studio artwork, personal photographs, locally hosted fonts, and the scroll-to-computer interaction. About and contact are directly accessible; experience and approach use native disclosures. Reduced motion is supported. No Pace or initials logo appears in the page. The computer displays an abstract color field with “Scroll down to meet James.” The camera first approaches the physical monitor, then the screen expands and reveals About. James’s portrait appears in About.
 
 ## Run
 

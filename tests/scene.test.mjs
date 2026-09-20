@@ -9,11 +9,21 @@ test('scroll damping is refresh-rate independent and converges without overshoot
   let p=1;
   for(let i=0;i<60;i++){const next=followScroll(p,0,1000/60);assert.ok(next>=0&&next<=p);p=next;}
 });
-test('the camera arrives at the panel width without a late zoom overshoot',()=>{
+test('the camera approaches the monitor before the screen expands into About',()=>{
   for(const [w,h] of viewports){
     const end=sceneFrame(1,w,h);
     const cameraWidth=end.imageWidth*aperture.width*end.scale;
-    assert.ok(Math.abs(cameraWidth-end.final.width)<1e-7);
+    assert.ok(Math.abs(cameraWidth-end.final.width*.92)<1e-7);
+    for(const p of [.1,.3,.5,.68,.70]){
+      const f=sceneFrame(p,w,h);
+      assert.ok(Math.abs(f.shell.x-(f.imageX+f.imageWidth*aperture.x*f.scale))<1e-7);
+      assert.ok(Math.abs(f.shell.y-(f.imageY+f.imageHeight*aperture.y*f.scale))<1e-7);
+      assert.ok(Math.abs(f.shell.width-f.imageWidth*aperture.width*f.scale)<1e-7);
+      assert.ok(Math.abs(f.shell.height-f.imageHeight*aperture.height*f.scale)<1e-7);
+      assert.equal(f.desktop,0);assert.equal(f.mini,1);
+    }
+    assert.equal(sceneFrame(.68,w,h).scale,sceneFrame(.85,w,h).scale);
+    assert.equal(sceneFrame(.85,w,h).desktop,0);
     if(w<=760){assert.equal(end.final.x,0);assert.equal(end.final.width,w);}
   }
 });
