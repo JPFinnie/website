@@ -2,8 +2,6 @@ import { mountScene } from './scene.mjs';
 const root = document.documentElement;
 const media = window.matchMedia('(prefers-reduced-motion: reduce)');
 const motionButton = document.querySelector('#motion-toggle');
-const photo = document.querySelector('#photo-dialog');
-const photoButton = document.querySelector('#view-photo');
 const details = [...document.querySelectorAll('.disclosures details')];
 root.dataset.motion = new URLSearchParams(location.search).get('motion') === 'quiet' ? 'quiet' : 'full';
 root.classList.add('has-js');
@@ -42,7 +40,3 @@ function syncRoute() {
 window.addEventListener('popstate',syncRoute);
 window.addEventListener('hashchange',syncRoute);
 syncRoute();
-photoButton.addEventListener('click', () => { if (typeof photo.showModal === 'function') { photo.showModal(); document.body.classList.add('photo-open'); } });
-document.querySelector('#close-photo').addEventListener('click', () => photo.close());
-photo.addEventListener('click', event => { if (event.target === photo) photo.close(); });
-photo.addEventListener('close', () => { document.body.classList.remove('photo-open'); photoButton.focus({preventScroll:true}); });

@@ -2,7 +2,7 @@
 
 Personal website at https://www.james-finnie.com/.
 
-This repository contains James's portfolio with the original mountain-lake studio artwork, personal photographs, locally hosted fonts, and the scroll-to-computer interaction. About and contact are directly accessible; experience and approach use native disclosures. Reduced motion is supported. No Pace or initials logo appears in the page. The Toronto photograph remains available through “Toronto, through my lens”.
+This repository contains James's portfolio with the original mountain-lake studio artwork, personal photographs, locally hosted fonts, and the scroll-to-computer interaction. About and contact are directly accessible; experience and approach use native disclosures. Reduced motion is supported. No Pace or initials logo appears in the page. The computer wallpaper uses James’s original landscape portrait.
 
 ## Run
 
@@ -22,7 +22,7 @@ Production source: `main` in `JPFinnie/website`. The root `index.html` and `asse
 
 - `index.html`: content and metadata.
 - `assets/gallery.css`: responsive layout and motion preferences.
-- `assets/gallery.js`: disclosures, photo dialog, and navigation.
+- `assets/gallery.js`: disclosures and navigation.
 - `assets/scene.mjs`: scroll transition and focus handling.
 - `assets/toronto-james-finnie.jpeg`: original Toronto photograph.
 - `assets/james-portrait.jpeg`: original portrait.
