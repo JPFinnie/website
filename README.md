@@ -1,74 +1,31 @@
-# james-finnie.com
+# James Finnie
 
-Personal portfolio for James Finnie — Senior Product Manager focused on AI-native product, agentic engineering, and deep context systems.
+Personal website at https://www.james-finnie.com/.
 
-**Live:** [james-finnie.com](https://www.james-finnie.com)
+This repository contains the complete Toronto portfolio: original photographs, locally hosted fonts, and the scroll-to-computer interaction. About and contact are directly accessible; experience and approach use native disclosures. Reduced motion is supported. No Pace or initials logo appears in the page.
 
----
+## Run
 
-## What's here
+Serve the repository root with `python3 -m http.server 8080`, then open http://localhost:8080. No install or build step is needed.
 
-Single-page portfolio with no build step, no framework, no runtime dependencies. Served as static files.
+## Verify
 
-**Sections:** Hero (interactive knowledge graph) · At a glance · About · Focus areas · Selected work · Experience · Capabilities · Contact
+Run `node --test tests/*.test.mjs` for responsive geometry and reduced-motion checks.
 
-```
-index.html           markup + meta + JSON-LD
-assets/styles.css    all styles (design tokens in :root)
-assets/main.js       interactions — nav, reveals, spotlight, clock
-assets/graph.js      hero knowledge-graph canvas (vanilla, zero deps)
-assets/favicon.svg   favicon
-assets/og.png        social share image (generated)
-tools/og-image.mjs   one-off OG image generator (npm run og)
-tools/screenshot.mjs verification screenshots (npm run shots)
-vercel.json          security + caching headers
-```
+## Publish
 
----
+Production source: `main` in `JPFinnie/website`. The root `index.html` and `assets/` contain the actual site; there is no dependency on ChatGPT Sites or its sign-in service.
 
-## Stack
+`vercel.json` selects a static deployment from the repository root, without an install or build step. It contains security and revalidation headers and no external redirects. A connected host should deploy the latest `main` commit.
 
-| Layer | Choice |
-|---|---|
-| Markup | Vanilla HTML |
-| Styles | Single stylesheet — CSS custom properties, no preprocessor |
-| Motion | CSS transitions + IntersectionObserver reveals + canvas graph |
-| Hosting | Vercel (static) |
-| Analytics | Vercel Web Analytics + Speed Insights (static-script injection) |
+## Files
 
-No bundler. No npm install needed to view or edit. The only devDependency (puppeteer) is for the optional `og`/`shots` tooling scripts.
+- `index.html`: content and metadata.
+- `assets/gallery.css`: responsive layout and motion preferences.
+- `assets/gallery.js`: disclosures, photo dialog, and navigation.
+- `assets/scene.mjs`: scroll transition and focus handling.
+- `assets/toronto-james-finnie.jpeg`: original Toronto photograph.
+- `assets/james-portrait.jpeg`: original portrait.
+- `assets/studio-foreground.png`: monitor foreground.
 
-> **Analytics note:** The site injects `/_vercel/insights/script.js` and `/_vercel/speed-insights/script.js`. These resolve only on Vercel — enable **Web Analytics** and **Speed Insights** in the project's dashboard for data to flow. Locally the scripts 404 harmlessly.
-
----
-
-## Design
-
-- **Palette:** Dark-first, technical — blue-tinted near-black layers (`#060809` → `#161b23`) with signal-cyan accent (`#22d3ee`); all text tokens contrast-checked AA+
-- **Type:** Space Grotesk (geometric display) + Inter (body) + JetBrains Mono (labels/UI)
-- **Textures:** CSS dot grid (with cursor-proximity glow), radial gradient mesh behind the hero, inline-SVG film grain
-- **Hero:** Interactive "obsidian brain" knowledge graph — 5 organisational clusters (people / decisions / docs / agents / data) on a vanilla-canvas force layout; hover a node to light up its connections
-- **Motion:** Hero word-streaming "text-generate" reveal, blur-in scroll reveals, card spotlight hovers, scroll progress bar — all vanilla, no libraries, `prefers-reduced-motion` respected throughout
-
-> Positioning is AI-native product / agentic engineering. Content is written in generalities to respect employer IP — approach and capability themes, not internal specifics.
-
----
-
-## Running locally
-
-```bash
-# Python (no install)
-python3 -m http.server 8080
-
-# Or just open index.html directly in a browser
-```
-
-> Note: absolute asset paths (`/assets/...`) require serving from the repo root (as above) rather than opening via `file://`.
-
-## Tooling (optional)
-
-```bash
-npm install        # puppeteer, only needed for the scripts below
-npm run og         # regenerate assets/og.png (1200x630 social card)
-npm run shots      # screenshots at mobile/tablet/desktop widths for review
-```
+Legacy assets and optional tooling are retained but are not loaded by the current page.
