@@ -1,7 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {sceneFrame,aperture} from '../assets/scene.mjs';
+import {sceneFrame,aperture,followScroll} from '../assets/scene.mjs';
 const viewports=[[1440,900],[1920,1080],[1024,768],[390,844],[320,568],[844,390]];
+test('scroll damping is refresh-rate independent and converges without overshoot',()=>{
+  const advance=hz=>{let p=0;for(let i=0;i<hz;i++)p=followScroll(p,1,1000/hz);return p;};
+  assert.ok(Math.abs(advance(60)-advance(120))<1e-10);
+  assert.ok(advance(60)>.9999);
+  let p=1;
+  for(let i=0;i<60;i++){const next=followScroll(p,0,1000/60);assert.ok(next>=0&&next<=p);p=next;}
+});
+test('the camera arrives at the panel width without a late zoom overshoot',()=>{
+  for(const [w,h] of viewports){
+    const end=sceneFrame(1,w,h);
+    const cameraWidth=end.imageWidth*aperture.width*end.scale;
+    assert.ok(Math.abs(cameraWidth-end.final.width)<1e-7);
+    if(w<=760){assert.equal(end.final.x,0);assert.equal(end.final.width,w);}
+  }
+});
 test('the initial live screen matches the measured monitor aperture at every aspect ratio',()=>{
   for(const [w,h] of viewports){
     const f=sceneFrame(0,w,h);
