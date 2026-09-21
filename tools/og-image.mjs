@@ -1,69 +1,58 @@
-/* One-off generator for assets/og.png (1200x630 social card).
-   Usage: npm run og   (CHROME_PATH env var overrides the browser binary) */
+/* Generates assets/og.jpg (1200x630 social card) from the site's own fonts
+   and artwork, so the card and the page stay in step.
+   Usage: npm run og    (CHROME_PATH overrides the browser binary) */
 
-import puppeteer from 'puppeteer';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { chromium } from 'playwright-core';
+import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
-import os from 'node:os';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const asset = f => 'file://' + path.join(root, 'assets', f);
+// Fonts go in as data URIs: Chromium will not fetch file:// fonts reliably,
+// and a silent fallback to a system face would ship the wrong card.
+const fontData = f => 'data:font/woff2;base64,' + fs.readFileSync(path.join(root, 'assets', 'fonts', f)).toString('base64');
 
-const fontsDir = path.join(root, 'assets', 'fonts');
-const fontUrl = (f) => 'file://' + path.join(fontsDir, f);
-
-const html = `<!DOCTYPE html>
-<html><head>
-<meta charset="UTF-8">
-<style>
-  @font-face{font-family:'Space Grotesk';src:url('${fontUrl('SpaceGrotesk.woff2')}') format('woff2');font-weight:300 700}
-  @font-face{font-family:'Inter';src:url('${fontUrl('Inter.woff2')}') format('woff2');font-weight:100 900}
-  @font-face{font-family:'JetBrains Mono';src:url('${fontUrl('JetBrainsMono.woff2')}') format('woff2');font-weight:100 800}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{width:1200px;height:630px;background:#060809;color:#edf1f7;font-family:'Inter',sans-serif;position:relative;overflow:hidden}
-  .grid{position:absolute;inset:0;background-image:radial-gradient(rgba(168,179,194,.08) 1.5px,transparent 1.5px);background-size:34px 34px;
-    -webkit-mask-image:linear-gradient(135deg,#000 30%,transparent 85%)}
-  .mesh{position:absolute;inset:0;background:
-    radial-gradient(560px 400px at 78% 22%,rgba(34,211,238,.14),transparent 70%),
-    radial-gradient(500px 420px at 12% 88%,rgba(99,102,241,.10),transparent 70%)}
-  .wrap{position:absolute;inset:0;padding:84px 90px;display:flex;flex-direction:column;justify-content:space-between}
-  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:20px;letter-spacing:.14em;text-transform:uppercase;color:#22d3ee}
-  .eyebrow i{font-style:normal;color:#67e8f9;margin-right:12px}
-  h1{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:128px;line-height:.95;letter-spacing:-.045em}
-  h1 em{font-style:normal;color:#22d3ee;text-shadow:0 0 60px rgba(34,211,238,.4)}
-  .sub{font-size:26px;color:#a8b3c2;max-width:640px;line-height:1.45}
-  .sub strong{color:#edf1f7;font-weight:500}
-  .foot{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:18px;letter-spacing:.04em;color:#7d8a9b}
-  .foot b{color:#22d3ee;font-weight:400}
-  .rule{position:absolute;left:90px;right:90px;bottom:150px;height:1px;background:#1c222b}
-</style></head>
-<body>
-  <div class="grid"></div>
-  <div class="mesh"></div>
-  <div class="wrap">
-    <div>
-      <div class="eyebrow" style="margin-bottom:42px"><i>&gt;</i>Senior Product Manager &middot; AI &amp; Agentic Product</div>
-      <h1>James <em>Finnie</em></h1>
-    </div>
-    <div class="sub">Building <strong>AI-native products and deep context systems</strong> &mdash; prototype-first, agents in the loop.</div>
-    <div class="rule"></div>
-    <div class="foot"><span><b>james-finnie.com</b></span><span>Toronto, Canada</span></div>
-  </div>
+const html = `<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:'Space Grotesk';src:url('${fontData('SpaceGrotesk.woff2')}') format('woff2');font-weight:300 700}
+@font-face{font-family:Inter;src:url('${fontData('Inter.woff2')}') format('woff2');font-weight:100 900}
+*{margin:0;box-sizing:border-box}
+body{width:1200px;height:630px;overflow:hidden;position:relative;background:#14151b;color:#fff;font-family:Inter,sans-serif}
+.art{position:absolute;inset:0;background:url('${asset('studio-world.png')}') center 62%/cover no-repeat}
+.scrim{position:absolute;inset:0;background:linear-gradient(100deg,#0b0e14f7 0%,#0b0e14e8 42%,#0b0e1480 100%)}
+.body{position:relative;padding:86px 84px;height:100%;display:flex;flex-direction:column;justify-content:center}
+.rule{width:64px;height:4px;background:#ff6635;margin-bottom:26px}
+.kicker{font-size:22px;letter-spacing:.17em;text-transform:uppercase;color:#ff9a76;font-weight:500}
+h1{font-family:'Space Grotesk',sans-serif;font-size:104px;font-weight:400;letter-spacing:-.042em;line-height:1;margin:26px 0 30px}
+.line{font-size:36px;line-height:1.35;color:#e3e6ec;letter-spacing:-.012em}
+.meta{font-size:26px;color:#9ba0ab;margin-top:14px}
+.url{position:absolute;left:84px;bottom:56px;font-size:26px;color:#b8bcc6;letter-spacing:.02em}
+</style></head><body>
+<div class="art"></div><div class="scrim"></div>
+<div class="body">
+  <div class="rule"></div>
+  <div class="kicker">Product Manager &middot; AI Agents, Fintech &amp; Growth</div>
+  <h1>James Finnie</h1>
+  <div class="line">Product thinking. Working software.</div>
+  <div class="meta">Toronto, ON</div>
+</div>
+<div class="url">james-finnie.com</div>
 </body></html>`;
 
-const browser = await puppeteer.launch({
+const browser = await chromium.launch({
   executablePath: process.env.CHROME_PATH || undefined,
-  args: ['--no-sandbox', '--disable-dev-shm-usage'],
+  args: ['--no-sandbox', '--allow-file-access-from-files']
 });
-const page = await browser.newPage();
-await page.setViewport({ width: 1200, height: 630, deviceScaleFactor: 2 });
-// load via file:// so the local @font-face urls are allowed to resolve
-const tmp = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'og-')), 'og.html');
-fs.writeFileSync(tmp, html);
-await page.goto(pathToFileURL(tmp).href, { waitUntil: 'networkidle0' });
+const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
+// The card is written to disk and loaded over file://: a document created with
+// setContent() sits on about:blank, and Chromium refuses its file:// fonts and art.
+const scratch = path.join(root, 'tools', '.og-card.html');
+fs.writeFileSync(scratch, html);
+await page.goto('file://' + scratch, { waitUntil: 'load' });
 await page.evaluate(() => document.fonts.ready);
-const out = path.join(root, 'assets', 'og.png');
-await page.screenshot({ path: out });
+await page.waitForTimeout(250);
+const out = path.join(root, 'assets', 'og.jpg');
+await page.screenshot({ path: out, type: 'jpeg', quality: 88 });
 await browser.close();
-fs.rmSync(path.dirname(tmp), { recursive: true, force: true });
-console.log('wrote', out);
+fs.unlinkSync(scratch);
+console.log(`wrote ${path.relative(root, out)} (${(fs.statSync(out).size / 1024).toFixed(0)} KB)`);

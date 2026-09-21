@@ -1,0 +1,7 @@
+# Originals and tooling stay in the repository but are not deployed.
+assets/studio-world.png
+assets/james-portrait.jpeg
+tools/
+tests/
+package.json
+README.md

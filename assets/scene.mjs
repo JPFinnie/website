@@ -1,49 +1,67 @@
+// The opening scene: the camera flies toward the monitor in the artwork, then
+// the screen detaches and opens out to fill the viewport, becoming the page.
+// The page's content is never inside the scene — it simply follows it.
 export const clamp = (n, low = 0, high = 1) => Math.max(low, Math.min(high, n));
 const mix = (a, b, t) => a + (b - a) * t;
 export const smooth = (start, end, n) => { const t = clamp((n - start) / (end - start)); return t * t * (3 - 2 * t); };
 // Time-based damping feels the same on 60 Hz and 120 Hz displays.
 export const followScroll = (current, target, milliseconds) => target + (current - target) * Math.exp(-milliseconds / 90);
-// Measured display aperture in the original artwork. Kept separate from camera math.
+// Measured display aperture in the original artwork.
 export const aperture = Object.freeze({ x: 691 / 1672, y: 479 / 940, width: 298 / 1672, height: 159 / 940, aspect: 1672 / 940 });
+
+// The two acts. The screen only starts opening once the approach has finished,
+// so the frame never tears away from the monitor it is supposed to be.
+const APPROACH = Object.freeze({ start: 0, end: .58 });
+const OPEN = Object.freeze({ start: .58, end: 1 });
+
 export function sceneFrame(progress, width, height, still = false, screen = aperture) {
   const p = clamp(progress);
-  // Begin with a wider view of the desk and landscape, including on phones.
-  const imageWidth = Math.max(width * .94, Math.min(width * 1.8, height * screen.aspect * .82));
+  // Cover the stage with the artwork, never letting it letterbox.
+  const imageWidth = Math.max(width, height * screen.aspect);
   const imageHeight = imageWidth / screen.aspect;
   const left = (width - imageWidth) / 2;
   const top = (height - imageHeight) / 2;
-  const sx = left + imageWidth * screen.x;
-  const sy = top + imageHeight * screen.y;
-  const sw = imageWidth * screen.width;
-  const sh = imageHeight * screen.height;
-  const cx = sx + sw / 2;
-  const cy = sy + sh / 2;
-  const mobile = width <= 760;
-  const inset = mobile ? 0 : clamp(width * .035, 28, 64);
-  const final = { x: inset, y: mobile ? 72 : 104, width: width - inset * 2, height: Math.max(200, height - (mobile ? 72 : 158)) };
-  // First move the camera toward the physical monitor. Keep its aperture locked
-  // to the artwork until the approach is complete; only then open the page.
-  const finalScale = Math.max(1, final.width * .92 / sw);
-  const travel = still ? 0 : smooth(.03, .68, p);
-  const scale = still ? 1 : Math.exp(Math.log(finalScale) * travel);
-  const focusX = mix(cx, width / 2, travel);
-  const focusY = mix(cy, height / 2, travel);
-  const imageX = focusX - (screen.x + screen.width / 2) * imageWidth * scale;
-  const imageY = focusY - (screen.y + screen.height / 2) * imageHeight * scale;
-  const takeover = still ? (p >= .5 ? 1 : 0) : smooth(.70, 1, p);
+  // Fly in until the monitor reads as a screen rather than a detail.
+  const share = width <= 760 ? .84 : .62;
+  const maxScale = clamp(share * width / (imageWidth * screen.width), 1, 6);
+  const travel = still ? 0 : smooth(APPROACH.start, APPROACH.end, p);
+  const scale = still ? 1 : mix(1, maxScale, travel);
+  // Anchor point: the middle of the display, drawn toward the middle of the stage.
+  const anchorX = screen.x + screen.width / 2;
+  const anchorY = screen.y + screen.height / 2;
+  const restX = left + imageWidth * anchorX;
+  const restY = top + imageHeight * anchorY;
+  const focusX = still ? restX : mix(restX, width / 2, travel);
+  const focusY = still ? restY : mix(restY, height * .46, travel);
+  // Panning must never expose an edge, so the plane is held against the stage.
+  const imageX = still ? left : clamp(focusX - anchorX * imageWidth * scale, width - imageWidth * scale, 0);
+  const imageY = still ? top : clamp(focusY - anchorY * imageHeight * scale, height - imageHeight * scale, 0);
+  // Where the display sits in the artwork, at this moment, in stage pixels.
+  const lens = {
+    x: imageX + imageWidth * screen.x * scale,
+    y: imageY + imageHeight * screen.y * scale,
+    width: imageWidth * screen.width * scale,
+    height: imageHeight * screen.height * scale
+  };
+  // Act two: that same rectangle grows into the whole viewport.
+  const open = still ? 0 : smooth(OPEN.start, OPEN.end, p);
   const shell = {
-    x: mix(focusX - sw * scale / 2, final.x, takeover),
-    y: mix(focusY - sh * scale / 2, final.y, takeover),
-    width: mix(sw * scale, final.width, takeover),
-    height: mix(sh * scale, final.height, takeover)
+    x: mix(lens.x, 0, open),
+    y: mix(lens.y, 0, open),
+    width: mix(lens.width, width, open),
+    height: mix(lens.height, height, open),
+    radius: mix(width <= 760 ? 3 : 5, 0, open)
   };
   return {
-    imageWidth, imageHeight, imageX: still ? left : imageX, imageY: still ? top : imageY, scale,
-    shell, final, hero: still ? (p < .5 ? 1 : 0) : 1 - smooth(.01, .19, p),
-    scenery: still ? (p < .5 ? 1 : 0) : 1 - smooth(.72, .98, p),
-    desktop: still ? (p >= .5 ? 1 : 0) : smooth(.86, .995, p),
-    mini: still ? (p < .5 ? 1 : 0) : 1 - smooth(.86, .995, p),
-    ready: still ? p >= .5 : p >= .995
+    imageWidth, imageHeight, imageX, imageY, scale, lens, shell, open,
+    hero: still ? 1 : 1 - smooth(.03, .26, p),
+    // The wallpaper lights up on approach, then burns off to reveal the surface.
+    face: still ? 1 : smooth(.12, .42, p) * (1 - smooth(.72, .95, p)),
+    // What is on the screen once it has opened.
+    surface: still ? 0 : smooth(.74, .96, p),
+    // Once the screen owns the viewport the landscape behind it is redundant.
+    scenery: still ? 1 : 1 - smooth(.62, .94, p),
+    opened: p >= OPEN.end - 1e-9
   };
 }
 
@@ -52,35 +70,32 @@ export function mountScene() {
   const journey = document.querySelector('#journey');
   const stage = document.querySelector('#scene-stage');
   const world = document.querySelector('#world-plane');
+  const frame = document.querySelector('.world-frame');
   const shell = document.querySelector('#screen-shell');
-  const desktop = document.querySelector('#desktop');
+  const face = document.querySelector('.screen-face');
+  const surface = document.querySelector('.screen-page');
   const copy = document.querySelector('.hero-copy');
-  const mini = document.querySelector('.screen-preview');
   const cue = document.querySelector('.scroll-cue');
   const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let scheduled = false;
-  let progress = 0;
-  let active = false;
-  let focusInside = false;
-  let focusOutside = false;
-  let dimensionsDirty = true;
+  let scheduled = false, progress = 0, dirty = true, snapNext = true, lastTime = null;
   let width = 0, height = 0, range = 1, journeyTop = 0;
-  let lastTime = null;
-  let snapNext = true;
   const quiet = () => media.matches || root.dataset.motion === 'quiet';
+
   function paint(time) {
     scheduled = false;
-    if (dimensionsDirty) {
+    if (dirty) {
       width = stage.clientWidth;
       height = stage.clientHeight;
       range = Math.max(1, journey.offsetHeight - height);
       journeyTop = window.scrollY + journey.getBoundingClientRect().top;
-      const layout = sceneFrame(1, width, height, quiet());
+      const layout = sceneFrame(0, width, height, quiet());
       world.style.width = `${layout.imageWidth}px`;
       world.style.height = `${layout.imageHeight}px`;
-      desktop.style.width = `${layout.final.width}px`;
-      desktop.style.height = `${layout.final.height}px`;
-      dimensionsDirty = false;
+      // The screen's contents are laid out at full size and scaled down into
+      // the monitor, so type reflows once at load rather than on every frame.
+      surface.style.width = `${width}px`;
+      surface.style.height = `${height}px`;
+      dirty = false;
     }
     if (!width || !height) return;
     const target = clamp((window.scrollY - journeyTop) / range);
@@ -89,62 +104,44 @@ export function mountScene() {
     progress = snapNext || quiet() ? target : followScroll(progress, target, elapsed);
     snapNext = false;
     if (Math.abs(target - progress) < .0001) progress = target;
-    const frame = sceneFrame(progress, width, height, quiet());
-    world.style.transform = `translate3d(${frame.imageX}px,${frame.imageY}px,0) scale(${frame.scale})`;
-    world.parentElement.style.opacity = String(frame.scenery);
-    shell.style.transform = `translate3d(${frame.shell.x}px,${frame.shell.y}px,0)`;
-    shell.style.width = `${frame.shell.width}px`;
-    shell.style.height = `${frame.shell.height}px`;
-    shell.style.borderRadius = `${width <= 760 ? 4 * (1 - smooth(.7, 1, progress)) : 4 + 10 * smooth(.7, 1, progress)}px`;
-    desktop.style.transform = `scale(${frame.shell.width / frame.final.width})`;
-    desktop.style.opacity = String(frame.desktop);
-    mini.style.opacity = String(frame.mini);
-    copy.style.opacity = String(frame.hero);
-    copy.style.transform = `translateY(${quiet() ? 0 : -progress * 80}px)`;
-    copy.inert = frame.hero < .1;
-    cue.style.opacity = String(frame.hero);
-    cue.inert = frame.hero < .1;
-    root.classList.toggle('in-desktop', frame.ready);
-    root.classList.toggle('past-intro', progress > .16);
-    desktop.inert = !frame.ready;
-    desktop.setAttribute('aria-hidden', String(!frame.ready));
-    shell.classList.toggle('is-ready', frame.ready);
-    // Returning to the scene must not leave keyboard focus inside a now-inert desktop.
-    if (active && !frame.ready && desktop.contains(document.activeElement)) document.querySelector('.identity').focus({ preventScroll: true });
-    if (frame.ready && focusInside) { desktop.querySelector('#about').focus({ preventScroll: true }); focusInside = false; }
-    if (frame.hero > .9 && focusOutside) { document.querySelector('#enter-studio').focus({ preventScroll: true }); focusOutside = false; }
-    active = frame.ready;
-    if (progress !== target) update();
-    else lastTime = null;
+    const f = sceneFrame(progress, width, height, quiet());
+    world.style.transform = `translate3d(${f.imageX}px,${f.imageY}px,0) scale(${f.scale})`;
+    frame.style.opacity = String(f.scenery);
+    shell.style.transform = `translate3d(${f.shell.x}px,${f.shell.y}px,0)`;
+    shell.style.width = `${f.shell.width}px`;
+    shell.style.height = `${f.shell.height}px`;
+    shell.style.borderRadius = `${f.shell.radius}px`;
+    shell.style.opacity = String(f.open > 0 ? 1 : Math.max(f.face, 0) > 0 ? 1 : 0);
+    face.style.opacity = String(f.face);
+    surface.style.transform = `scale(${f.shell.width / width})`;
+    surface.style.opacity = String(f.surface);
+    surface.inert = f.surface < .6;
+    copy.style.opacity = String(f.hero);
+    copy.style.transform = quiet() ? 'none' : `translate3d(0,${-progress * 70}px,0)`;
+    copy.inert = f.hero < .1;
+    cue.style.opacity = String(f.hero);
+    cue.inert = f.hero < .1;
+    root.classList.toggle('past-intro', progress > .12);
+    root.classList.toggle('screen-open', f.open > .55);
+    if (progress !== target) update(); else lastTime = null;
   }
   function update() { if (!scheduled) { scheduled = true; requestAnimationFrame(paint); } }
-  function refresh() { root.classList.toggle('is-still', quiet()); dimensionsDirty = true; snapNext = true; update(); }
-  function enter(instant = false, focus = false) {
-    focusInside = focus;
-    if (instant || quiet()) snapNext = true;
-    const top = window.scrollY + journey.getBoundingClientRect().top + journey.offsetHeight - stage.clientHeight;
-    window.scrollTo({ top, behavior: instant || quiet() ? 'instant' : 'smooth' });
-  }
-  document.querySelectorAll('[data-enter]').forEach(button => button.addEventListener('click', event => {
-    document.querySelector('#about').scrollTop = 0;
-    document.querySelector('#experience').open = true;
-    try { const url = new URL(location.href); url.hash = 'about'; history.replaceState(null,'',url.href); } catch {}
-    event.preventDefault(); enter(button.dataset.instant === 'true', event.detail === 0);
+  function refresh() { root.classList.toggle('is-still', quiet()); dirty = true; snapNext = true; update(); }
+
+  // "Scroll to open" should work as a click for anyone who would rather not.
+  document.querySelectorAll('[data-open-screen]').forEach(control => control.addEventListener('click', event => {
+    // With motion off there is no screen to open, so the link does what it says
+    // it does and takes the reader to the section itself.
+    if (quiet()) return;
+    event.preventDefault();
+    window.scrollTo({ top: journeyTop + range, behavior: 'smooth' });
   }));
-  function returnToPhoto(event) {
-    event?.preventDefault();
-    focusOutside = true;
-    window.scrollTo({ top: window.scrollY + journey.getBoundingClientRect().top, behavior: quiet() ? 'instant' : 'smooth' });
-    try { const url = new URL(location.href); url.hash = ''; history.replaceState(null,'',url.href); } catch {}
-  }
-  document.querySelector('#return-world').addEventListener('click', returnToPhoto);
-  document.querySelector('[data-return]').addEventListener('click', returnToPhoto);
+
   window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', () => { dimensionsDirty = true; update(); }, { passive: true });
+  window.addEventListener('resize', () => { dirty = true; update(); }, { passive: true });
   media.addEventListener?.('change', refresh);
   document.addEventListener('studio:configuration', refresh);
-  document.addEventListener('studio:enter', () => enter(true));
-  if ('ResizeObserver' in window) new ResizeObserver(() => { dimensionsDirty = true; update(); }).observe(stage);
+  if ('ResizeObserver' in window) new ResizeObserver(() => { dirty = true; update(); }).observe(stage);
   refresh();
-  return { update, enter, get progress() { return progress; } };
+  return { update, refresh, get progress() { return progress; } };
 }

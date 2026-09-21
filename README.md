@@ -1,31 +1,67 @@
 # James Finnie
 
-Personal website at https://www.james-finnie.com/.
+Personal site at <https://www.james-finnie.com/>.
 
-This repository contains James's portfolio with the original mountain-lake studio artwork, personal photographs, locally hosted fonts, and the scroll-to-computer interaction. About and contact are directly accessible; experience and approach use native disclosures. Reduced motion is supported. No Pace or initials logo appears in the page. The computer displays an abstract color field with “Scroll down to meet James.” The camera first approaches the physical monitor, then the screen expands and reveals About. James’s portrait appears in About.
+A single static page. The opening scene flies the camera into the monitor in
+the original mountain-lake studio artwork; the screen then opens out to fill
+the viewport and shows an index of the site, and scrolling on carries you
+straight into the page — about, selected work, experience, toolkit, contact.
+
+The scene is a scene, not a container. Every section lives in ordinary
+document flow after it, with no nested scroller, no `inert` content and no
+disclosure widgets, so the page reads the same to a visitor, a crawler, a
+screen reader and a printer. With motion off it is a still frame and the
+links go straight to their sections.
+
+No build step, no framework, no third-party requests. Fonts, images and the
+résumé are served from this repository.
 
 ## Run
 
-Serve the repository root with `python3 -m http.server 8080`, then open http://localhost:8080. No install or build step is needed.
+```
+python3 -m http.server 8080
+```
+
+Then open <http://localhost:8080>. There is nothing to install.
 
 ## Verify
 
-Run `node --test tests/*.test.mjs` for responsive geometry and reduced-motion checks.
+```
+node --test tests/*.test.mjs
+```
+
+The suite covers the opening scene's geometry in both acts: the artwork covers
+the stage at every aspect ratio, the screen stays welded to the measured
+monitor aperture until the approach finishes, it then opens to exactly the
+viewport without overshooting or shrinking, the camera never reverses, the
+wallpaper is always gone before the screen's own page is readable, and
+reduced motion holds everything still.
+
+## Structure
+
+- `index.html` — the whole page, plus metadata and Person structured data.
+- `assets/site.css` — layout, type scale, responsive rules, motion and print.
+- `assets/site.js` — motion preference, the current-section indicator, the year.
+- `assets/scene.mjs` — the two-act scene geometry and its scroll loop.
+- `assets/studio-world.webp` — the original studio artwork (master: `studio-world.png`).
+- `assets/james-portrait.webp` — portrait (master: `james-portrait.jpeg`).
+- `assets/James-Finnie-Resume.pdf` — the résumé linked from the page.
+- `assets/og.jpg` — the social card. Regenerate with `npm run og`.
+- `robots.txt`, `sitemap.xml`, `404.html`.
+
+## Motion
+
+Motion follows `prefers-reduced-motion`. Visitors can also turn it off from the
+footer, which sets `?motion=quiet` so the preference survives a shared link.
+With motion off the journey collapses to one viewport, the scene is a still
+frame of the lit monitor, and the page is a plain document.
 
 ## Publish
 
-Production source: `main` in `JPFinnie/website`. The root `index.html` and `assets/` contain the actual site; there is no dependency on ChatGPT Sites or its sign-in service.
+Production is `main` in `JPFinnie/website`, deployed by Vercel.
 
-`vercel.json` selects a static deployment from the repository root, without an install or build step. It contains security and revalidation headers and no external redirects. A connected host should deploy the latest `main` commit.
-
-## Files
-
-- `index.html`: content and metadata.
-- `assets/gallery.css`: responsive layout and motion preferences.
-- `assets/gallery.js`: disclosures and navigation.
-- `assets/scene.mjs`: scroll transition and focus handling.
-- `assets/toronto-james-finnie.jpeg`: original Toronto photograph.
-- `assets/james-portrait.jpeg`: original portrait.
-- `assets/studio-world.png`: original mountain-lake studio artwork, including the monitor.
-
-Legacy assets and optional tooling are retained but are not loaded by the current page.
+`vercel.json` serves the repository root with no install or build step. It sets
+a Content-Security-Policy that allows no third-party origins — the inline
+structured-data block is allowed by its `sha256` hash, so **editing that block
+means recomputing the hash** in `vercel.json`. `.vercelignore` keeps image
+masters and tooling out of the deployment.

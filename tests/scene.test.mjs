@@ -1,65 +1,119 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {sceneFrame,aperture,followScroll} from '../assets/scene.mjs';
-const viewports=[[1440,900],[1920,1080],[1024,768],[390,844],[320,568],[844,390]];
-test('scroll damping is refresh-rate independent and converges without overshoot',()=>{
-  const advance=hz=>{let p=0;for(let i=0;i<hz;i++)p=followScroll(p,1,1000/hz);return p;};
-  assert.ok(Math.abs(advance(60)-advance(120))<1e-10);
-  assert.ok(advance(60)>.9999);
-  let p=1;
-  for(let i=0;i<60;i++){const next=followScroll(p,0,1000/60);assert.ok(next>=0&&next<=p);p=next;}
+import { sceneFrame, aperture, followScroll, smooth, clamp } from '../assets/scene.mjs';
+
+const viewports = [[1440, 900], [1920, 1080], [1024, 768], [390, 844], [320, 568], [844, 390], [2560, 1440]];
+const walk = (w, h, still = false) => Array.from({ length: 41 }, (_, i) => sceneFrame(i / 40, w, h, still));
+
+test('scroll damping is refresh-rate independent and converges without overshoot', () => {
+  const advance = hz => { let p = 0; for (let i = 0; i < hz; i++) p = followScroll(p, 1, 1000 / hz); return p; };
+  assert.ok(Math.abs(advance(60) - advance(120)) < 1e-10);
+  assert.ok(advance(60) > .9999);
+  let p = 1;
+  for (let i = 0; i < 60; i++) { const next = followScroll(p, 0, 1000 / 60); assert.ok(next >= 0 && next <= p); p = next; }
 });
-test('the camera approaches the monitor before the screen expands into About',()=>{
-  for(const [w,h] of viewports){
-    const end=sceneFrame(1,w,h);
-    const cameraWidth=end.imageWidth*aperture.width*end.scale;
-    assert.ok(Math.abs(cameraWidth-end.final.width*.92)<1e-7);
-    for(const p of [.1,.3,.5,.68,.70]){
-      const f=sceneFrame(p,w,h);
-      assert.ok(Math.abs(f.shell.x-(f.imageX+f.imageWidth*aperture.x*f.scale))<1e-7);
-      assert.ok(Math.abs(f.shell.y-(f.imageY+f.imageHeight*aperture.y*f.scale))<1e-7);
-      assert.ok(Math.abs(f.shell.width-f.imageWidth*aperture.width*f.scale)<1e-7);
-      assert.ok(Math.abs(f.shell.height-f.imageHeight*aperture.height*f.scale)<1e-7);
-      assert.equal(f.desktop,0);assert.equal(f.mini,1);
+
+test('the artwork always covers the stage, at every aspect ratio', () => {
+  for (const [w, h] of viewports) {
+    for (const f of walk(w, h)) {
+      assert.ok(f.imageWidth * f.scale >= w - 1e-9, `width covers at ${w}x${h}`);
+      assert.ok(f.imageHeight * f.scale >= h - 1e-9, `height covers at ${w}x${h}`);
+      assert.ok(f.imageX <= 1e-9 && f.imageY <= 1e-9, `no gap at the top-left at ${w}x${h}`);
+      assert.ok(f.imageX + f.imageWidth * f.scale >= w - 1e-9);
+      assert.ok(f.imageY + f.imageHeight * f.scale >= h - 1e-9);
     }
-    assert.equal(sceneFrame(.68,w,h).scale,sceneFrame(.85,w,h).scale);
-    assert.equal(sceneFrame(.85,w,h).desktop,0);
-    if(w<=760){assert.equal(end.final.x,0);assert.equal(end.final.width,w);}
   }
 });
-test('the initial live screen matches the measured monitor aperture at every aspect ratio',()=>{
-  for(const [w,h] of viewports){
-    const f=sceneFrame(0,w,h);
-    assert.equal(f.scale,1);
-    assert.ok(Math.abs(f.shell.x-(f.imageX+f.imageWidth*aperture.x))<1e-8);
-    assert.ok(Math.abs(f.shell.y-(f.imageY+f.imageHeight*aperture.y))<1e-8);
-    assert.equal(f.shell.width,f.imageWidth*aperture.width);
-    assert.equal(f.desktop,0);assert.equal(f.hero,1);assert.equal(f.ready,false);
-  }
-});
-test('arrival is a crisp, fully visible desktop with finite geometry through the journey',()=>{
-  for(const [w,h] of viewports){
-    let previous=0;
-    for(let i=0;i<=100;i++){
-      const f=sceneFrame(i/100,w,h);
-      assert.ok(f.scale>=previous);previous=f.scale;
-      for(const v of [...Object.values(f.shell),f.scale,f.imageX,f.imageY])assert.ok(Number.isFinite(v));
-      assert.ok(f.shell.width>0&&f.shell.height>0);
+
+test('the lens stays locked to the measured monitor aperture throughout', () => {
+  for (const [w, h] of viewports) {
+    for (const f of walk(w, h)) {
+      assert.ok(Math.abs(f.lens.x - (f.imageX + f.imageWidth * aperture.x * f.scale)) < 1e-9);
+      assert.ok(Math.abs(f.lens.y - (f.imageY + f.imageHeight * aperture.y * f.scale)) < 1e-9);
+      assert.ok(Math.abs(f.lens.width - f.imageWidth * aperture.width * f.scale) < 1e-9);
+      assert.ok(Math.abs(f.lens.height / f.lens.width - aperture.height / (aperture.width * aperture.aspect)) < 1e-9);
     }
-    const f=sceneFrame(1,w,h);
-    for(const key of Object.keys(f.final))assert.ok(Math.abs(f.shell[key]-f.final[key])<1e-8);
-    assert.ok(f.shell.x>=0&&f.shell.x+f.shell.width<=w);
-    assert.ok(f.shell.y>=0&&f.shell.y+f.shell.height<=h);
-    assert.equal(f.ready,true);assert.equal(f.desktop,1);assert.equal(f.scenery,0);assert.equal(f.hero,0);
   }
 });
-test('reduced motion never zooms and gives direct access to the same desktop',()=>{
-  for(const [w,h] of viewports){
-    for(const p of [0,.1,.3,.49,.5,.8,1])assert.equal(sceneFrame(p,w,h,true).scale,1);
-    assert.equal(sceneFrame(.49,w,h,true).desktop,0);
-    assert.deepEqual(sceneFrame(.49,w,h,true).shell,sceneFrame(0,w,h,true).shell);
-    const f=sceneFrame(.5,w,h,true);assert.equal(f.desktop,1);assert.equal(f.ready,true);for(const key of Object.keys(f.final))assert.ok(Math.abs(f.shell[key]-f.final[key])<1e-8);
-    assert.deepEqual(sceneFrame(9,w,h),sceneFrame(1,w,h));
-    assert.deepEqual(sceneFrame(-9,w,h),sceneFrame(0,w,h));
+
+test('act one: the screen sits exactly on the monitor until the approach is done', () => {
+  for (const [w, h] of viewports) {
+    for (const p of [0, .15, .3, .45, .58]) {
+      const f = sceneFrame(p, w, h);
+      assert.equal(f.open, 0, `the screen has not started opening at ${p}`);
+      assert.deepEqual(
+        [f.shell.x, f.shell.y, f.shell.width, f.shell.height],
+        [f.lens.x, f.lens.y, f.lens.width, f.lens.height],
+        `the screen is still the monitor at ${p} on ${w}x${h}`);
+    }
+    // The approach is finished before the opening begins, so it never tears away.
+    assert.equal(sceneFrame(.58, w, h).scale, sceneFrame(1, w, h).scale);
   }
+});
+
+test('act two: the screen opens out to exactly the viewport', () => {
+  for (const [w, h] of viewports) {
+    const end = sceneFrame(1, w, h);
+    assert.ok(end.opened);
+    assert.deepEqual([end.shell.x, end.shell.y, end.shell.width, end.shell.height], [0, 0, w, h]);
+    assert.equal(end.shell.radius, 0);
+    let width = 0;
+    for (const f of walk(w, h)) {
+      assert.ok(f.shell.width >= width - 1e-9, 'the screen never shrinks');
+      assert.ok(f.shell.width <= w + 1e-9 && f.shell.height <= h + 1e-9, 'it never overshoots the viewport');
+      width = f.shell.width;
+    }
+    assert.ok(!sceneFrame(.99, w, h).opened);
+  }
+});
+
+test('the camera only ever moves toward the monitor', () => {
+  for (const [w, h] of viewports) {
+    let previous = 0;
+    for (const f of walk(w, h)) { assert.ok(f.scale >= previous - 1e-9); previous = f.scale; }
+    assert.ok(sceneFrame(1, w, h).scale <= 6 + 1e-9);
+  }
+});
+
+test('the hero hands off to the screen, and nothing is on top of nothing', () => {
+  for (const [w, h] of viewports) {
+    let hero = 1;
+    for (const f of walk(w, h)) {
+      for (const v of [f.hero, f.face, f.surface, f.scenery, f.open]) assert.ok(v >= 0 && v <= 1);
+      assert.ok(f.hero <= hero + 1e-9, 'the hero copy only fades out');
+      // The wallpaper must be gone before the screen's own page is readable.
+      if (f.surface > .5) assert.ok(f.face < .5, 'the page is not read through the wallpaper');
+      hero = f.hero;
+    }
+    assert.equal(sceneFrame(0, w, h).hero, 1);
+    assert.equal(sceneFrame(0, w, h).surface, 0);
+    assert.equal(sceneFrame(1, w, h).hero, 0);
+    assert.equal(sceneFrame(1, w, h).face, 0);
+    assert.equal(sceneFrame(1, w, h).surface, 1);
+    assert.equal(sceneFrame(1, w, h).scenery, 0);
+  }
+});
+
+test('reduced motion holds the scene still, with the screen closed', () => {
+  for (const [w, h] of viewports) {
+    for (const f of walk(w, h, true)) {
+      assert.equal(f.scale, 1);
+      assert.equal(f.hero, 1);
+      assert.equal(f.open, 0);
+      assert.equal(f.surface, 0);
+      assert.equal(f.scenery, 1);
+      assert.equal(f.imageX, (w - f.imageWidth) / 2);
+      assert.equal(f.imageY, (h - f.imageHeight) / 2);
+      assert.deepEqual([f.shell.x, f.shell.width], [f.lens.x, f.lens.width]);
+    }
+  }
+});
+
+test('progress outside 0..1 is clamped rather than extrapolated', () => {
+  const [w, h] = [1440, 900];
+  assert.deepEqual(sceneFrame(-3, w, h), sceneFrame(0, w, h));
+  assert.deepEqual(sceneFrame(9, w, h), sceneFrame(1, w, h));
+  assert.equal(clamp(5), 1);
+  assert.equal(smooth(.2, .8, .2), 0);
+  assert.equal(smooth(.2, .8, .8), 1);
 });
