@@ -33,7 +33,7 @@ h1{font-family:'Space Grotesk',sans-serif;font-size:104px;font-weight:400;letter
   <div class="rule"></div>
   <div class="kicker">Product Manager &middot; AI Agents, Fintech &amp; Growth</div>
   <h1>James Finnie</h1>
-  <div class="line">Product thinking. Working software.</div>
+  <div class="line">I build the thing before I pitch it.</div>
   <div class="meta">Toronto, ON</div>
 </div>
 <div class="url">james-finnie.com</div>
