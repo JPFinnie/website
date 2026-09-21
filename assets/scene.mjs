@@ -16,13 +16,17 @@ const OPEN = Object.freeze({ start: .58, end: 1 });
 
 export function sceneFrame(progress, width, height, still = false, screen = aperture) {
   const p = clamp(progress);
-  // Cover the stage with the artwork, never letting it letterbox.
-  const imageWidth = Math.max(width, height * screen.aspect);
+  // Cover the stage with the artwork, never letting it letterbox. A phone held
+  // upright gets a tighter crop: fitting this landscape to a tall viewport
+  // otherwise spends most of the screen on empty sky.
+  const tall = height / width > 1.4;
+  const cover = Math.max(width, height * screen.aspect);
+  const imageWidth = tall ? cover * 1.15 : cover;
   const imageHeight = imageWidth / screen.aspect;
   const left = (width - imageWidth) / 2;
   const top = (height - imageHeight) / 2;
   // Fly in until the monitor reads as a screen rather than a detail.
-  const share = width <= 760 ? .84 : .62;
+  const share = tall ? .95 : width <= 760 ? .88 : .62;
   const maxScale = clamp(share * width / (imageWidth * screen.width), 1, 6);
   const travel = still ? 0 : smooth(APPROACH.start, APPROACH.end, p);
   const scale = still ? 1 : mix(1, maxScale, travel);
@@ -30,9 +34,12 @@ export function sceneFrame(progress, width, height, still = false, screen = aper
   const anchorX = screen.x + screen.width / 2;
   const anchorY = screen.y + screen.height / 2;
   const restX = left + imageWidth * anchorX;
-  const restY = top + imageHeight * anchorY;
+  const naturalY = top + imageHeight * anchorY;
+  // On a tall crop there is vertical room to spare, so the desk is framed on
+  // the monitor from the first frame instead of drifting up from the skyline.
+  const restY = tall ? height * .54 : naturalY;
   const focusX = still ? restX : mix(restX, width / 2, travel);
-  const focusY = still ? restY : mix(restY, height * .46, travel);
+  const focusY = still ? naturalY : mix(restY, height * .46, travel);
   // Panning must never expose an edge, so the plane is held against the stage.
   const imageX = still ? left : clamp(focusX - anchorX * imageWidth * scale, width - imageWidth * scale, 0);
   const imageY = still ? top : clamp(focusY - anchorY * imageHeight * scale, height - imageHeight * scale, 0);
