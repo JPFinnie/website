@@ -75,32 +75,34 @@ test('the camera only ever moves toward the monitor', () => {
   }
 });
 
-test('the hero hands off to the screen, and nothing is on top of nothing', () => {
+test('the instruction is lit from the first frame and hands off to the page', () => {
   for (const [w, h] of viewports) {
-    let hero = 1;
+    let face = 1, surface = 0;
     for (const f of walk(w, h)) {
-      for (const v of [f.hero, f.face, f.surface, f.scenery, f.open]) assert.ok(v >= 0 && v <= 1);
-      assert.ok(f.hero <= hero + 1e-9, 'the hero copy only fades out');
-      // The wallpaper must be gone before the screen's own page is readable.
+      for (const v of [f.face, f.surface, f.scenery, f.open]) assert.ok(v >= 0 && v <= 1);
+      assert.ok(f.face <= face + 1e-9, 'the instruction only fades out');
+      assert.ok(f.surface >= surface - 1e-9, 'the page only fades in');
+      // The wallpaper must be gone before the page behind it is readable.
       if (f.surface > .5) assert.ok(f.face < .5, 'the page is not read through the wallpaper');
-      hero = f.hero;
+      face = f.face; surface = f.surface;
     }
-    assert.equal(sceneFrame(0, w, h).hero, 1);
+    // The desk opens with its instruction on, and nothing else on top of it.
+    assert.equal(sceneFrame(0, w, h).face, 1);
     assert.equal(sceneFrame(0, w, h).surface, 0);
-    assert.equal(sceneFrame(1, w, h).hero, 0);
+    assert.equal(sceneFrame(0, w, h).scenery, 1);
     assert.equal(sceneFrame(1, w, h).face, 0);
     assert.equal(sceneFrame(1, w, h).surface, 1);
     assert.equal(sceneFrame(1, w, h).scenery, 0);
   }
 });
 
-test('reduced motion holds the scene still, with the screen closed', () => {
+test('reduced motion holds the scene still, with the page simply shown', () => {
   for (const [w, h] of viewports) {
     for (const f of walk(w, h, true)) {
       assert.equal(f.scale, 1);
-      assert.equal(f.hero, 1);
       assert.equal(f.open, 0);
-      assert.equal(f.surface, 0);
+      assert.equal(f.face, 1);
+      assert.equal(f.surface, 1);
       assert.equal(f.scenery, 1);
       assert.equal(f.imageX, (w - f.imageWidth) / 2);
       assert.equal(f.imageY, (h - f.imageHeight) / 2);

@@ -54,11 +54,11 @@ export function sceneFrame(progress, width, height, still = false, screen = aper
   };
   return {
     imageWidth, imageHeight, imageX, imageY, scale, lens, shell, open,
-    hero: still ? 1 : 1 - smooth(.03, .26, p),
-    // The wallpaper lights up on approach, then burns off to reveal the surface.
-    face: still ? 1 : smooth(.12, .42, p) * (1 - smooth(.72, .95, p)),
-    // What is on the screen once it has opened.
-    surface: still ? 0 : smooth(.74, .96, p),
+    // The wallpaper and its instruction are lit from the first frame, and burn
+    // off as the screen opens onto the page.
+    face: still ? 1 : 1 - smooth(.60, .86, p),
+    // The page the screen opens onto.
+    surface: still ? 1 : smooth(.66, .94, p),
     // Once the screen owns the viewport the landscape behind it is redundant.
     scenery: still ? 1 : 1 - smooth(.62, .94, p),
     opened: p >= OPEN.end - 1e-9
@@ -73,9 +73,7 @@ export function mountScene() {
   const frame = document.querySelector('.world-frame');
   const shell = document.querySelector('#screen-shell');
   const face = document.querySelector('.screen-face');
-  const surface = document.querySelector('.screen-page');
-  const copy = document.querySelector('.hero-copy');
-  const cue = document.querySelector('.scroll-cue');
+  const page = document.querySelector('.screen-page');
   const media = window.matchMedia('(prefers-reduced-motion: reduce)');
   let scheduled = false, progress = 0, dirty = true, snapNext = true, lastTime = null;
   let width = 0, height = 0, range = 1, journeyTop = 0;
@@ -93,8 +91,8 @@ export function mountScene() {
       world.style.height = `${layout.imageHeight}px`;
       // The screen's contents are laid out at full size and scaled down into
       // the monitor, so type reflows once at load rather than on every frame.
-      surface.style.width = `${width}px`;
-      surface.style.height = `${height}px`;
+      page.style.width = `${width}px`;
+      page.style.height = `${height}px`;
       dirty = false;
     }
     if (!width || !height) return;
@@ -113,14 +111,10 @@ export function mountScene() {
     shell.style.borderRadius = `${f.shell.radius}px`;
     shell.style.opacity = String(f.open > 0 ? 1 : Math.max(f.face, 0) > 0 ? 1 : 0);
     face.style.opacity = String(f.face);
-    surface.style.transform = `scale(${f.shell.width / width})`;
-    surface.style.opacity = String(f.surface);
-    surface.inert = f.surface < .6;
-    copy.style.opacity = String(f.hero);
-    copy.style.transform = quiet() ? 'none' : `translate3d(0,${-progress * 70}px,0)`;
-    copy.inert = f.hero < .1;
-    cue.style.opacity = String(f.hero);
-    cue.inert = f.hero < .1;
+    // The instruction stops being a target the moment it stops being legible.
+    face.style.pointerEvents = f.face > .5 ? 'auto' : 'none';
+    page.style.transform = `scale(${f.shell.width / width})`;
+    page.style.opacity = String(f.surface);
     root.classList.toggle('past-intro', progress > .12);
     root.classList.toggle('screen-open', f.open > .55);
     if (progress !== target) update(); else lastTime = null;
@@ -128,13 +122,19 @@ export function mountScene() {
   function update() { if (!scheduled) { scheduled = true; requestAnimationFrame(paint); } }
   function refresh() { root.classList.toggle('is-still', quiet()); dirty = true; snapNext = true; update(); }
 
-  // "Scroll to open" should work as a click for anyone who would rather not.
+  function openScreen(instant = false) {
+    window.scrollTo({ top: journeyTop + range, behavior: instant || quiet() ? 'instant' : 'smooth' });
+  }
+  // Tabbing into the page behind the wallpaper opens the screen, so focus is
+  // never sitting on something the reader cannot see.
+  page.addEventListener('focusin', () => { if (!quiet() && progress < .9) openScreen(true); });
+  // The instruction on the screen is a real link: clicking the monitor works too.
   document.querySelectorAll('[data-open-screen]').forEach(control => control.addEventListener('click', event => {
     // With motion off there is no screen to open, so the link does what it says
     // it does and takes the reader to the section itself.
     if (quiet()) return;
     event.preventDefault();
-    window.scrollTo({ top: journeyTop + range, behavior: 'smooth' });
+    openScreen();
   }));
 
   window.addEventListener('scroll', update, { passive: true });

@@ -2,16 +2,24 @@
 
 Personal site at <https://www.james-finnie.com/>.
 
-A single static page. The opening scene flies the camera into the monitor in
-the original mountain-lake studio artwork; the screen then opens out to fill
-the viewport and shows an index of the site, and scrolling on carries you
-straight into the page — about, selected work, experience, toolkit, contact.
+A single static page, opening on a desk.
 
-The scene is a scene, not a container. Every section lives in ordinary
-document flow after it, with no nested scroller, no `inert` content and no
-disclosure widgets, so the page reads the same to a visitor, a crawler, a
-screen reader and a printer. With motion off it is a still frame and the
-links go straight to their sections.
+You arrive at the studio artwork: a monitor on an oak desk above a mountain
+lake, with the instruction written on the screen. Scroll and the camera flies
+into that monitor; once it has arrived, the screen opens out to fill the
+viewport and you are on the page. Keep scrolling and it runs on through
+about, selected work, experience, toolkit and contact.
+
+The scene is a scene, not a container. Only the page's own opening lives
+inside the screen; every section after it is in ordinary document flow, with
+no nested scroller, no `inert` content and no disclosure widgets, so the page
+reads the same to a visitor, a crawler, a screen reader and a printer. The
+instruction on the monitor is a real link, so the screen opens on a click as
+well as on a scroll, and tabbing into the page behind it opens the screen too
+— focus never lands on something that cannot be seen.
+
+With motion off there is no camera: the desk becomes a banner and the page
+below it is a plain document.
 
 No build step, no framework, no third-party requests. Fonts, images and the
 résumé are served from this repository.
@@ -30,12 +38,12 @@ Then open <http://localhost:8080>. There is nothing to install.
 node --test tests/*.test.mjs
 ```
 
-The suite covers the opening scene's geometry in both acts: the artwork covers
-the stage at every aspect ratio, the screen stays welded to the measured
-monitor aperture until the approach finishes, it then opens to exactly the
-viewport without overshooting or shrinking, the camera never reverses, the
-wallpaper is always gone before the screen's own page is readable, and
-reduced motion holds everything still.
+The suite covers the scene's geometry in both acts: the artwork covers the
+stage at every aspect ratio, the screen stays welded to the measured monitor
+aperture until the approach finishes, it then opens to exactly the viewport
+without overshooting or shrinking, the camera never reverses, the wallpaper is
+always gone before the page behind it is readable, and reduced motion holds
+everything still.
 
 ## Structure
 

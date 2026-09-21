@@ -38,7 +38,8 @@ button:disabled{cursor:default;opacity:.55}
 .skip:focus{transform:none}
 
 /* ---------- Masthead ---------- */
-.masthead{position:fixed;z-index:40;top:0;inset-inline:0;height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding-inline:var(--edge);color:#fff;transition:background .25s ease,color .25s ease,box-shadow .25s ease}
+.masthead{position:fixed;z-index:40;top:0;inset-inline:0;height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding-inline:var(--edge);color:#fff;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease,background .25s ease,box-shadow .25s ease}
+.screen-open .masthead,.is-still .masthead,html:not(.has-js) .masthead{opacity:1;visibility:visible}
 .identity{font-family:var(--display);font-size:1.0625rem;font-weight:500;letter-spacing:-.02em;white-space:nowrap}
 .masthead nav{display:flex;align-items:center;gap:clamp(14px,2.2vw,30px);font-size:.875rem}
 .masthead nav a{display:inline-flex;align-items:center;min-height:44px;border-bottom:1px solid transparent;transition:border-color .2s,opacity .2s}
@@ -54,44 +55,34 @@ html:not(.has-js) .masthead,.past-intro .masthead{background:#14151bf2;backdrop-
 .world-frame{position:absolute;inset:0;pointer-events:none;will-change:opacity}
 .world-plane{position:absolute;top:0;left:0;transform-origin:0 0;will-change:transform}
 .world-art{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}
-.world-shade{position:absolute;inset:0;background:linear-gradient(180deg,#0d1017cc 0%,#0d1017a6 34%,#10141c66 58%,#0b0e14e6 100%)}
-.screen-shell{position:absolute;z-index:2;top:0;left:0;overflow:hidden;border-radius:3px;background:var(--paper);pointer-events:none;will-change:transform;box-shadow:0 30px 120px #05070b66}
-.screen-open .screen-shell{pointer-events:auto}
+.world-shade{position:absolute;inset:0;background:linear-gradient(180deg,#0d1017a6 0%,#0d101761 38%,#0d10174d 62%,#0b0e14cc 100%)}
+
+/* The monitor. Its contents are measured against its own width, so the
+   instruction reads as something written on the screen at any distance. */
+.screen-shell{position:absolute;z-index:2;top:0;left:0;overflow:hidden;border-radius:3px;background:var(--paper);container-type:inline-size;will-change:transform;box-shadow:0 30px 120px #05070b73}
 .screen-face{position:absolute;inset:0;will-change:opacity}
 .abstract-wallpaper{position:absolute;inset:0;background:
   radial-gradient(ellipse at 12% 4%,#faff93 0%,transparent 43%),
   radial-gradient(ellipse at 90% 90%,#ff6635 0%,transparent 48%),
   radial-gradient(ellipse at 100% 0%,#ef56cb 0%,transparent 55%),
   radial-gradient(ellipse at 10% 100%,#403ce9 0%,transparent 60%),#a698ed}
+.screen-invite{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:2cqw;color:#17132b;font-size:5cqw;line-height:1.12;letter-spacing:-.04em;padding:8%;text-shadow:0 1px 12px #ffffff3d}
+.screen-invite strong{font-family:var(--display);font-size:11cqw;font-weight:500;letter-spacing:-.055em}
+.screen-invite .screen-arrow{font-size:5cqw;line-height:1;margin-top:2cqw;transition:translate .25s}
+.screen-invite:hover .screen-arrow{translate:0 6px}
 
-/* The screen's own page. Laid out at full size, scaled into the monitor. */
-.screen-page{position:absolute;top:0;left:0;transform-origin:0 0;display:flex;flex-direction:column;background:var(--paper);color:var(--ink);opacity:0;will-change:transform,opacity}
-.screen-body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:clamp(18px,3.5svh,34px);padding:clamp(20px,4svh,44px) var(--edge);max-width:var(--shell);width:100%;margin-inline:auto}
-.screen-hello{font-family:var(--display);font-size:clamp(1.1rem,2.3vw,1.9rem);font-weight:400;letter-spacing:-.03em;line-height:1.25;color:var(--ink);max-width:24ch;text-wrap:balance}
-.screen-index{display:grid;gap:2px;border-top:1px solid var(--line)}
-.screen-index li{border-bottom:1px solid var(--line)}
-.screen-index a{display:flex;align-items:baseline;gap:clamp(14px,2vw,26px);padding-block:clamp(7px,1.5svh,15px);font-family:var(--display);font-size:clamp(1.05rem,2.6vw,1.9rem);font-weight:400;letter-spacing:-.025em;transition:color .18s,padding-left .18s}
-.screen-index a span{font-family:Inter,sans-serif;font-size:.6875rem;letter-spacing:.14em;color:#9a9da4;font-weight:500}
-.screen-index a:hover{color:var(--accent-ink);padding-left:10px}
-.screen-index a:hover span{color:var(--accent-ink)}
-.screen-links{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:.8125rem;color:var(--ink-soft)}
-.screen-links a{border-bottom:1px solid var(--line);padding-bottom:2px}
+/* The page the screen opens onto. Laid out at full size, scaled into the
+   monitor, so its type never reflows during the zoom. */
+.screen-page{position:absolute;top:0;left:0;transform-origin:0 0;display:flex;align-items:center;background:var(--paper);color:var(--ink);opacity:0;will-change:transform,opacity}
+.screen-body{display:flex;flex-direction:column;justify-content:center;gap:clamp(14px,2.4svh,26px);width:100%;max-width:var(--shell);margin-inline:auto;padding:clamp(20px,5svh,56px) var(--edge)}
+.screen-kicker{font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.screen-page h1{font-family:var(--display);font-size:clamp(2.3rem,6.4vw,5rem);font-weight:400;line-height:1.04;letter-spacing:-.04em;text-wrap:balance}
+.screen-lead{font-size:clamp(1rem,1.5vw,1.25rem);line-height:1.55;color:#42454b;max-width:44ch}
+.screen-links{display:flex;flex-wrap:wrap;gap:10px 26px;font-size:.9375rem}
+.screen-links a{display:inline-flex;align-items:center;min-height:44px;border-bottom:1px solid var(--line);font-weight:500}
 .screen-links a:hover{border-color:var(--accent-ink);color:var(--accent-ink)}
-
-.hero-copy{position:absolute;z-index:4;left:0;right:0;top:50%;translate:0 -50%;padding-inline:var(--edge);max-width:var(--shell);margin-inline:auto;will-change:opacity,transform}
-.hero-kicker{font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:#d4d6dd;margin-bottom:22px}
-.hero-copy h1{font-family:var(--display);font-size:clamp(2.55rem,7vw,5.25rem);font-weight:400;line-height:1.03;letter-spacing:-.035em;text-wrap:balance;text-shadow:0 2px 40px #05070bb3}
-.hero-lead{margin-top:24px;max-width:33rem;font-size:clamp(1rem,1.35vw,1.1875rem);line-height:1.6;color:#e7e8ec;text-shadow:0 1px 18px #05070b99}
-.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
-
-.button{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 24px;border:1px solid #ffffff59;border-radius:999px;font-size:.9375rem;font-weight:500;transition:background .2s,border-color .2s,color .2s,translate .2s}
-.button:hover{background:#ffffff1f;border-color:#fff;translate:0 -1px}
-.button.primary{background:var(--paper);border-color:var(--paper);color:var(--ink)}
-.button.primary:hover{background:#fff;border-color:#fff}
-.scroll-cue{position:absolute;z-index:5;bottom:20px;left:50%;translate:-50% 0;display:inline-flex;align-items:center;gap:12px;min-height:44px;padding-inline:14px;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:#d7d9e0;text-shadow:0 1px 12px #0009;transition:color .2s}
-.scroll-cue:hover{color:#fff}
-.scroll-cue span{animation:nudge 2.1s ease-in-out infinite}
-@keyframes nudge{0%,100%{translate:0 0}50%{translate:0 5px}}
+.screen-more a{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:.8125rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.screen-more a:hover{color:var(--ink)}
 
 /* ---------- Sections ---------- */
 .band{padding-block:clamp(72px,10vw,132px)}
@@ -152,6 +143,10 @@ html:not(.has-js) .masthead,.past-intro .masthead{background:#14151bf2;backdrop-
 .contact h2{color:#fff}
 .contact .section-lead{color:#c8cbd3}
 .contact-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.button{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 24px;border:1px solid #ffffff59;border-radius:999px;font-size:.9375rem;font-weight:500;color:#fff;transition:background .2s,border-color .2s,color .2s,translate .2s}
+.button:hover{background:#ffffff1f;border-color:#fff;translate:0 -1px}
+.button.primary{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+.button.primary:hover{background:#fff;border-color:#fff}
 
 .site-footer{background:var(--night);color:#8d919b;padding-bottom:clamp(28px,4vw,44px);font-size:.8125rem}
 .footer-grid{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding-top:26px;border-top:1px solid #ffffff1a}
@@ -172,13 +167,13 @@ html:not(.has-js) .masthead,.past-intro .masthead{background:#14151bf2;backdrop-
   .identity{font-size:.9375rem}
   .masthead nav{gap:14px;font-size:.8125rem}
   .masthead nav a.cta{padding:7px 13px}
-  .hero-copy{top:auto;bottom:118px;translate:0 0}
-  .hero-kicker{margin-bottom:16px;font-size:.6875rem;letter-spacing:.13em}
-  .hero-lead{margin-top:18px;font-size:1rem}
-  .hero-actions{margin-top:26px;gap:10px}
   .button{min-height:46px;padding:0 20px;font-size:.875rem}
-  .scroll-cue{bottom:max(22px,env(safe-area-inset-bottom))}
   .has-js .journey{height:260svh}
+  .screen-body{gap:14px;padding-block:24px}
+  .screen-page h1{font-size:clamp(1.9rem,8.4vw,2.8rem);line-height:1.08}
+  .screen-lead{font-size:1rem}
+  .screen-links{gap:6px 20px;font-size:.875rem}
+  .screen-links a{min-height:40px}
   .cards{grid-template-columns:1fr;gap:16px}
   .card{padding:24px}
   .facts li{grid-template-columns:1fr;gap:2px}
@@ -186,16 +181,23 @@ html:not(.has-js) .masthead,.past-intro .masthead{background:#14151bf2;backdrop-
 }
 @media(max-width:400px){
   .masthead nav a[href="#toolkit"]{display:none}
-  .hero-copy h1{font-size:2.35rem}
+  .screen-page h1{font-size:2.05rem}
 }
-@media(max-height:560px){
-  .hero-copy{top:auto;bottom:70px;translate:0 0}
-  .hero-lead{display:none}
-  .scroll-cue{display:none}
+@media(max-height:620px){
+  .screen-lead{display:none}
+  .screen-body{gap:12px}
 }
 
 /* ---------- Motion preferences ---------- */
-.is-still .journey,html[data-motion=quiet] .journey{height:100svh!important}
+/* With motion off there is no camera and no zoom: the desk becomes a banner
+   and the screen's page is just the first section of the document. */
+.is-still .journey{height:auto!important}
+.is-still .scene-stage{position:static;height:auto;overflow:visible}
+.is-still .world-frame{position:relative;height:min(46svh,380px);opacity:1!important}
+.is-still .world-plane{position:absolute;inset:0;width:100%!important;height:100%!important;transform:none!important}
+.is-still .screen-shell{position:static;width:100%!important;height:auto!important;border-radius:0!important;transform:none!important;box-shadow:none;container-type:normal}
+.is-still .screen-face{display:none}
+.is-still .screen-page{position:static;width:100%!important;height:auto!important;transform:none!important;opacity:1!important;min-height:min(60svh,520px)}
 html[data-motion=quiet]{scroll-behavior:auto}
 html[data-motion=quiet] *,html[data-motion=quiet] *::before,html[data-motion=quiet] *::after{animation:none!important;transition:none!important}
 @media(prefers-reduced-motion:reduce){
@@ -208,7 +210,7 @@ html[data-motion=quiet] *,html[data-motion=quiet] *::before,html[data-motion=qui
 @media print{
   :root{--edge:0}
   body{background:#fff;color:#000;font-size:11pt}
-  .masthead,.journey,.skip,.site-footer,.scroll-cue,.contact-actions,.links{display:none!important}
+  .masthead,.journey,.skip,.site-footer,
   .band{padding-block:18pt;border:0}
   .band h2{font-size:16pt}
   .portrait{display:none}
