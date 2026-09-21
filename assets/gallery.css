@@ -62,3 +62,37 @@ html.is-still .journey{height:200svh}
 .detail-body article{margin-bottom:30px}
 .detail-body article>p{font-size:1rem;line-height:1.7}
 .detail-body article>.role-title{font-size:.875rem;font-weight:500;color:var(--ink);margin:4px 0 10px}
+
+/* Keep identity and contact alongside a readable career history. */
+.profile-layout{grid-template-columns:minmax(230px,.75fr) minmax(0,1.65fr);gap:clamp(40px,5vw,72px);max-width:1100px}
+.profile-sidebar{position:sticky;top:0;align-self:start}
+.profile-sidebar .profile-photo{width:140px;max-width:140px;margin-bottom:24px}
+.profile-sidebar .profile-photo img{aspect-ratio:1;object-position:50% 28%;border-radius:8px}
+.profile-sidebar .profile-copy{padding:0}
+.profile-sidebar h2{font-size:clamp(2.2rem,3vw,3rem);margin-bottom:14px}
+.profile-sidebar .profile-lead{font-size:1.1rem!important;margin-bottom:14px!important}
+.profile-sidebar .profile-links{gap:20px;margin-top:18px}
+.career-copy{min-width:0}
+.career-copy .disclosures{margin-top:0;border-top:0}
+.career-copy summary{font-size:1.25rem;font-weight:500;padding:8px 0 22px;min-height:52px}
+.career-copy #approach summary{padding-top:22px}
+.career-copy .detail-body{padding-top:0}
+.career-copy article{padding:24px 0;margin:0;border-top:1px solid var(--line)}
+.career-copy article>span{font-size:.875rem;color:#64666c}
+.career-copy h3{font-size:1.25rem;line-height:1.35;margin:8px 0}
+.career-copy article>.role-title{font-size:.9375rem;line-height:1.5;margin-bottom:12px}
+.career-copy .education{font-size:.9375rem;line-height:1.8;margin-top:8px}
+.desktop-scroll{scrollbar-gutter:stable;overscroll-behavior-y:contain}
+.in-desktop .journey-footer{visibility:hidden;pointer-events:none}
+@media(max-width:760px){
+  .profile-layout{display:block}
+  .profile-sidebar{position:static;margin-bottom:36px}
+  .profile-sidebar .profile-photo{float:right;width:80px;max-width:80px;margin:0 0 12px 20px}
+  .profile-sidebar h2{padding-top:0;font-size:2.25rem}
+  .profile-sidebar .profile-links{clear:both;gap:24px}
+  .career-copy .disclosures{clear:both}
+  .career-copy summary{font-size:1.15rem}
+  .career-copy h3{font-size:1.15rem}
+  .desktop-scroll{padding-inline:20px}
+}
+@media(max-height:700px) and (min-width:761px){.profile-sidebar{position:static}.profile-sidebar .profile-photo{width:96px;margin-bottom:16px}}

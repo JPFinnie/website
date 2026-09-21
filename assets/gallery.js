@@ -27,7 +27,6 @@ details.forEach(item => item.addEventListener('toggle', () => {
   // The default-open disclosure must not rewrite the opening scene's URL.
   if (document.querySelector('#desktop').getAttribute('aria-hidden') === 'true') return;
   if (item.open) {
-    details.forEach(other => { if (other !== item) other.open = false; });
     setRoute(`about/${item.id}`);
   } else if (location.hash === `#about/${item.id}`) setRoute('about');
 }));
@@ -37,6 +36,14 @@ function syncRoute() {
     scene.enter(true);
     const id = hash.endsWith('/background') ? 'experience' : hash.endsWith('/practice') ? 'approach' : (hash.split('/')[1] || 'experience');
     details.forEach(item => { item.open = item.id === id; });
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const container = document.querySelector('#about');
+      const target = document.getElementById(id);
+      if (!target) return;
+      const offset = target.getBoundingClientRect().top - container.getBoundingClientRect().top;
+      container.scrollTo({top: Math.max(0, container.scrollTop + offset - 24), behavior:'instant'});
+      target.querySelector('summary').focus({preventScroll:true});
+    }));
   }
 }
 window.addEventListener('popstate',syncRoute);

@@ -126,6 +126,9 @@ export function mountScene() {
     window.scrollTo({ top, behavior: instant || quiet() ? 'instant' : 'smooth' });
   }
   document.querySelectorAll('[data-enter]').forEach(button => button.addEventListener('click', event => {
+    document.querySelector('#about').scrollTop = 0;
+    document.querySelector('#experience').open = true;
+    try { const url = new URL(location.href); url.hash = 'about'; history.replaceState(null,'',url.href); } catch {}
     event.preventDefault(); enter(button.dataset.instant === 'true', event.detail === 0);
   }));
   function returnToPhoto(event) {
