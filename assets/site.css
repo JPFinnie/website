@@ -114,8 +114,6 @@ html:not(.has-js) .masthead,.past-intro .masthead{background:#14151bf2;backdrop-
 .card h3 a:hover{border-color:var(--accent-ink);color:var(--accent-ink)}
 .card>p{font-size:.9375rem;line-height:1.65}
 .card .card-meta{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-size:.8125rem!important;color:#6b6e75!important;display:flex;flex-wrap:wrap;gap:6px 18px}
-.stat{display:inline-flex;align-items:baseline;gap:6px}
-.stat b{font-family:var(--display);font-size:1.0625rem;font-weight:500;color:var(--ink)}
 
 .roles{margin-top:48px;border-top:1px solid var(--line)}
 .role{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:clamp(20px,4vw,56px);padding-block:36px;border-bottom:1px solid var(--line)}

@@ -21,8 +21,8 @@ well as on a scroll, and tabbing into the page behind it opens the screen too
 With motion off there is no camera: the desk becomes a banner and the page
 below it is a plain document.
 
-No build step, no framework, no third-party requests. Fonts, images and the
-résumé are served from this repository.
+No build step, no framework, no third-party requests. Fonts and images are
+served from this repository.
 
 ## Run
 
@@ -53,7 +53,6 @@ everything still.
 - `assets/scene.mjs` — the two-act scene geometry and its scroll loop.
 - `assets/studio-world.webp` — the original studio artwork (master: `studio-world.png`).
 - `assets/james-portrait.webp` — portrait (master: `james-portrait.jpeg`).
-- `assets/James-Finnie-Resume.pdf` — the résumé linked from the page.
 - `assets/og.jpg` — the social card. Regenerate with `npm run og`.
 - `robots.txt`, `sitemap.xml`, `404.html`.
 
