@@ -48,7 +48,13 @@
       <div class="world-plane" id="world-plane">
         <img class="world-art" src="/assets/studio-world.webp" alt="An imagined open-air studio overlooking a mountain lake, with a computer on an oak desk." width="1672" height="940" fetchpriority="high" decoding="async">
       </div>
+      <div class="world-light"></div>
       <div class="world-shade"></div>
+      <div class="world-plane world-lights" aria-hidden="true">
+        <div class="world-sky"></div>
+        <div class="lamp-glow"></div>
+      </div>
+      <div class="monitor-glow"></div>
     </div>
     <div class="screen-shell" id="screen-shell">
       <div class="screen-page">
@@ -67,6 +73,7 @@
       <div class="screen-face">
         <div class="abstract-wallpaper" aria-hidden="true"></div>
         <a class="screen-invite" href="#about" data-open-screen>
+          <span class="screen-greeting"></span>
           <span>Scroll down to</span>
           <strong>meet James.</strong>
           <span class="screen-arrow" aria-hidden="true">&darr;</span>
@@ -256,13 +263,17 @@
 
 </main>
 
-<section class="outro" id="outro" aria-label="Sign-off">
+<section class="outro" id="outro" aria-label="Sign-off" data-daypart="dusk">
   <div class="scene-stage">
     <div class="world-frame">
       <div class="world-plane">
         <img class="world-art" src="/assets/studio-world.webp" alt="" width="1672" height="940" loading="lazy" decoding="async">
       </div>
-      <div class="world-dusk"></div>
+      <div class="world-light"></div>
+      <div class="world-plane world-lights" aria-hidden="true">
+        <div class="world-sky"></div>
+        <div class="lamp-glow"></div>
+      </div>
       <div class="monitor-glow"></div>
     </div>
     <div class="screen-shell">
@@ -287,7 +298,10 @@
 <footer class="site-footer">
   <div class="shell footer-grid">
     <p>&copy; <span id="year">2026</span> James Finnie · Toronto, ON</p>
-    <button id="motion-toggle" type="button" aria-pressed="false">Reduce motion</button>
+    <div class="footer-controls">
+      <button id="daylight-toggle" type="button" hidden>Desk light</button>
+      <button id="motion-toggle" type="button" aria-pressed="false">Reduce motion</button>
+    </div>
   </div>
 </footer>
 </body>

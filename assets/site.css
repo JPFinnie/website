@@ -107,11 +107,50 @@ html:not(.has-js) .masthead,.past-intro .masthead{background:#14151bf2;backdrop-
 .outro-kicker{display:flex;align-items:center;gap:12px;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:#9fa3ad}
 .outro-kicker::before{content:'';width:28px;height:1px;background:var(--accent)}
 .outro-line{font-family:var(--display);font-size:clamp(2.4rem,7vw,5.5rem);font-weight:400;line-height:1;letter-spacing:-.045em}
-.outro .world-art{filter:brightness(.66) saturate(1.2) contrast(1.06)}
-.world-dusk{position:absolute;inset:0;background:linear-gradient(180deg,#2c2f7a 0%,#6a4f9e 26%,#e9876a 50%,#5a3f63 70%,#191a2e 100%);mix-blend-mode:multiply;opacity:.78}
-.world-dusk::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 30% at 50% 47%,#ff8a4c40,transparent 70%),linear-gradient(180deg,#0b0e1b8c 0%,transparent 30%,transparent 72%,#07080fcc 100%);mix-blend-mode:screen}
-.world-dusk::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#07080f99 0%,transparent 34%,transparent 70%,#07080fb3 100%)}
-.monitor-glow{position:absolute;top:0;left:0;border-radius:50%;background:radial-gradient(closest-side,#c7b8ffa6 0%,#a698ed59 32%,#ff66352e 58%,transparent 100%);mix-blend-mode:screen;pointer-events:none;will-change:transform}
+
+/* ---------- Time of day ---------- */
+/* Both scenes share one set of light layers; each part of the day is only a
+   set of values for them. The opening follows the visitor's clock and the
+   ending is one step later. Day is the artwork as painted. */
+[data-daypart=dawn]{--art-filter:brightness(.9) saturate(1.06) contrast(1.02) hue-rotate(-6deg);--light:.5;--lamp:0;--stars:.18;--glow:.35;
+  --sky-tint:linear-gradient(180deg,#7d86d6 0%,#c9a6cc 26%,#ffc6aa 48%,#ecdcd8 70%,#a2a6c4 100%);
+  --sky-glow:radial-gradient(ellipse 80% 30% at 50% 46%,#ffb38a66,transparent 70%);
+  --sky-shade:linear-gradient(180deg,#1a1d3a47 0%,transparent 30%)}
+[data-daypart=dusk]{--art-filter:brightness(.66) saturate(1.2) contrast(1.06);--light:.78;--lamp:.55;--stars:.3;--glow:.85;
+  --sky-tint:linear-gradient(180deg,#2c2f7a 0%,#6a4f9e 26%,#e9876a 50%,#5a3f63 70%,#191a2e 100%);
+  --sky-glow:radial-gradient(ellipse 70% 30% at 50% 47%,#ff8a4c40,transparent 70%),linear-gradient(180deg,#0b0e1b8c 0%,transparent 30%,transparent 72%,#07080fcc 100%);
+  --sky-shade:linear-gradient(180deg,#07080f99 0%,transparent 34%,transparent 70%,#07080fb3 100%)}
+[data-daypart=night]{--art-filter:brightness(.62) saturate(.8) contrast(1.1) hue-rotate(6deg);--light:.8;--lamp:1;--stars:1;--glow:.9;
+  --sky-tint:linear-gradient(180deg,#27317a 0%,#3a4a9a 34%,#5a64a8 54%,#2c3060 74%,#121427 100%);
+  --sky-glow:radial-gradient(ellipse 60% 26% at 50% 50%,#8fa0ff2e,transparent 70%);
+  --sky-shade:linear-gradient(180deg,#05060d66 0%,transparent 34%,transparent 70%,#05060dbf 100%);
+  --glow-light:radial-gradient(closest-side,#d8d0ffb3 0%,#9a90ff4d 32%,#5360d01f 60%,transparent 100%)}
+.world-art{filter:var(--art-filter,none);transition:filter 1.8s ease}
+.world-light{position:absolute;inset:0;background:var(--sky-tint,none);mix-blend-mode:multiply;opacity:var(--light,0);transition:opacity 1.8s ease}
+.world-light::after{content:'';position:absolute;inset:0;background:var(--sky-glow,none);mix-blend-mode:screen}
+.world-light::before{content:'';position:absolute;inset:0;background:var(--sky-shade,none)}
+/* The sky and the lamp live on the artwork itself, so the camera carries them. */
+.world-lights{pointer-events:none}
+.world-sky{position:absolute;top:1%;left:19%;right:15%;height:31%;opacity:var(--stars,0);transition:opacity 2.4s ease;pointer-events:none;
+  background:
+    radial-gradient(1.2px 1.2px at 12% 18%,#fff,transparent),radial-gradient(1px 1px at 27% 42%,#fff,transparent),
+    radial-gradient(1.4px 1.4px at 38% 12%,#fff,transparent),radial-gradient(1px 1px at 46% 58%,#ffffffd0,transparent),
+    radial-gradient(1.1px 1.1px at 58% 26%,#fff,transparent),radial-gradient(1px 1px at 66% 70%,#ffffffb0,transparent),
+    radial-gradient(1.5px 1.5px at 74% 9%,#fff,transparent),radial-gradient(1px 1px at 83% 38%,#fff,transparent),
+    radial-gradient(1.2px 1.2px at 91% 64%,#ffffffc0,transparent),radial-gradient(1px 1px at 6% 66%,#ffffffb0,transparent),
+    radial-gradient(1px 1px at 19% 84%,#ffffff90,transparent),radial-gradient(1.1px 1.1px at 52% 88%,#ffffff80,transparent);
+  -webkit-mask-image:linear-gradient(180deg,#000 40%,transparent);mask-image:linear-gradient(180deg,#000 40%,transparent)}
+.world-sky::after{content:'';position:absolute;inset:0;animation:twinkle 5.5s ease-in-out infinite alternate;
+  background:radial-gradient(1.3px 1.3px at 33% 30%,#fff,transparent),radial-gradient(1px 1px at 62% 48%,#fff,transparent),
+    radial-gradient(1.2px 1.2px at 79% 22%,#fff,transparent),radial-gradient(1px 1px at 15% 50%,#fff,transparent),
+    radial-gradient(1.4px 1.4px at 88% 80%,#ffffffd0,transparent),radial-gradient(1px 1px at 44% 74%,#ffffffc0,transparent)}
+@keyframes twinkle{0%{opacity:.25}50%{opacity:1}100%{opacity:.45}}
+.lamp-glow{position:absolute;left:65.9%;top:64.8%;width:24%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;pointer-events:none;mix-blend-mode:screen;opacity:var(--lamp,0);transition:opacity 1.2s ease 1s;
+  background:radial-gradient(closest-side,#fff2d6 0%,#ffcf8fd9 7%,#ffac5f73 22%,#ff8a4c2e 48%,transparent 100%)}
+.monitor-glow{position:absolute;top:0;left:0;border-radius:50%;background:var(--glow-light,radial-gradient(closest-side,#c7b8ffa6 0%,#a698ed59 32%,#ff66352e 58%,transparent 100%));mix-blend-mode:screen;pointer-events:none;will-change:transform;opacity:var(--glow,0);transition:opacity 1.8s ease}
+.is-still .world-lights,.is-still .monitor-glow{display:none}
+.screen-greeting{font-size:3.4cqw;letter-spacing:-.02em;opacity:.72}
+.screen-greeting:empty{display:none}
 .outro .screen-invite .screen-arrow{animation-name:bob-up}
 @keyframes bob-up{0%,100%{transform:translateY(0)}45%{transform:translateY(-.35em)}}
 
@@ -271,6 +310,9 @@ html:not(.has-js) .masthead,.past-intro .masthead{background:#14151bf2;backdrop-
 .site-footer{background:var(--night);color:#8d919b;padding-bottom:clamp(28px,4vw,44px);font-size:.8125rem}
 .footer-grid{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding-top:26px;border-top:1px solid #ffffff1a}
 .footer-grid p{color:inherit}
+.footer-controls{display:flex;flex-wrap:wrap;gap:4px 22px}
+#daylight-toggle{min-height:44px;font-size:.8125rem;border-bottom:1px solid transparent}
+#daylight-toggle:hover{color:#fff;border-color:#fff}
 #motion-toggle{min-height:44px;font-size:.8125rem;border-bottom:1px solid transparent}
 #motion-toggle:hover:not(:disabled){color:#fff;border-color:#fff}
 

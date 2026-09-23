@@ -78,11 +78,13 @@ export function sceneFrame(progress, width, height, still = false, screen = aper
 export function driveScene({ section, glide, reverse = false, onFrame }) {
   const root = document.documentElement;
   const stage = section.querySelector('.scene-stage');
-  const world = section.querySelector('.world-plane');
+  // The artwork, and the lights that sit on it above the tint, move as one.
+  const planes = [...section.querySelectorAll('.world-plane')];
   const frame = section.querySelector('.world-frame');
   const shell = section.querySelector('.screen-shell');
   const face = section.querySelector('.screen-face');
   const page = section.querySelector('.screen-page');
+  const glow = section.querySelector('.monitor-glow');
   const media = window.matchMedia('(prefers-reduced-motion: reduce)');
   let scheduled = false, progress = 0, dirty = true, snapNext = true, lastTime = null;
   let width = 0, height = 0, range = 1, top = 0;
@@ -96,8 +98,10 @@ export function driveScene({ section, glide, reverse = false, onFrame }) {
       range = Math.max(1, section.offsetHeight - height);
       top = window.scrollY + section.getBoundingClientRect().top;
       const layout = sceneFrame(0, width, height, quiet());
-      world.style.width = `${layout.imageWidth}px`;
-      world.style.height = `${layout.imageHeight}px`;
+      planes.forEach(plane => {
+        plane.style.width = `${layout.imageWidth}px`;
+        plane.style.height = `${layout.imageHeight}px`;
+      });
       // The screen's contents are laid out at full size and scaled down into
       // the monitor, so type reflows once at load rather than on every frame.
       page.style.width = `${width}px`;
@@ -114,7 +118,8 @@ export function driveScene({ section, glide, reverse = false, onFrame }) {
     snapNext = false;
     if (Math.abs(target - progress) < .0001) progress = target;
     const f = sceneFrame(reverse ? 1 - progress : progress, width, height, quiet());
-    world.style.transform = `translate3d(${f.imageX}px,${f.imageY}px,0) scale(${f.scale})`;
+    const camera = `translate3d(${f.imageX}px,${f.imageY}px,0) scale(${f.scale})`;
+    planes.forEach(plane => { plane.style.transform = camera; });
     frame.style.opacity = String(f.scenery);
     shell.style.transform = `translate3d(${f.shell.x}px,${f.shell.y}px,0)`;
     shell.style.width = `${f.shell.width}px`;
@@ -126,6 +131,13 @@ export function driveScene({ section, glide, reverse = false, onFrame }) {
     face.style.pointerEvents = f.face > .5 ? 'auto' : 'none';
     page.style.transform = `scale(${f.shell.width / width})`;
     page.style.opacity = String(f.surface);
+    // The lit screen spills light onto the desk around it.
+    if (glow) {
+      const size = f.lens.width * 2.6;
+      glow.style.width = `${size}px`;
+      glow.style.height = `${size}px`;
+      glow.style.transform = `translate3d(${f.lens.x + f.lens.width / 2 - size / 2}px,${f.lens.y + f.lens.height / 2 - size / 2}px,0)`;
+    }
     onFrame?.(progress, f);
     if (progress !== target) update(); else lastTime = null;
   }
@@ -181,21 +193,15 @@ export function mountScene({ glide } = {}) {
 }
 
 // The ending: past Contact the page shrinks back into the monitor and the
-// camera pulls away from the desk, now at dusk, with the screen still lit.
+// camera pulls away from the desk, a little later in the day than it opened.
 export function mountOutro({ glide } = {}) {
   const root = document.documentElement;
   const section = document.querySelector('#outro');
   if (!section) return null;
-  const glow = section.querySelector('.monitor-glow');
-  const scene = driveScene({ section, glide, reverse: true, onFrame(progress, f) {
+  const scene = driveScene({ section, glide, reverse: true, onFrame(progress) {
     // The masthead and rail belong to the page; once the page has folded back
     // into the monitor they step out of the frame.
     root.classList.toggle('in-outro', progress > .06);
-    // The screen lights the desk around it.
-    const size = f.lens.width * 2.6;
-    glow.style.width = `${size}px`;
-    glow.style.height = `${size}px`;
-    glow.style.transform = `translate3d(${f.lens.x + f.lens.width / 2 - size / 2}px,${f.lens.y + f.lens.height / 2 - size / 2}px,0)`;
   } });
   // Tabbing to the sign-off link brings the monitor into view first.
   section.querySelector('.screen-face').addEventListener('focusin', () => {

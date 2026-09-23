@@ -3,6 +3,7 @@ import { mountGlide } from './glide.mjs';
 import { mountEffects } from './effects.mjs';
 import { mountViewer } from './viewer.mjs';
 import { mountCursor } from './cursor.mjs';
+import { mountDaylight } from './daylight.mjs';
 
 const root = document.documentElement;
 const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -13,6 +14,7 @@ root.dataset.motion = new URLSearchParams(location.search).get('motion') === 'qu
 root.classList.add('has-js');
 
 const quiet = () => media.matches || root.dataset.motion === 'quiet';
+mountDaylight();
 const glide = mountGlide({ quiet });
 mountScene({ glide });
 mountEffects({ glide, quiet });
