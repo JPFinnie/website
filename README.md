@@ -60,12 +60,12 @@ Past the scene, the page reacts to where the reader is and how they move:
   camera pulls away from the desk — now at dusk, with the screen lighting the
   room. The monitor signs off, and clicking it flies back to the top.
 
-- **The desk keeps your hours.** The opening scene is lit for the visitor's
-  local time — dawn, day, dusk or night, with stars over the lake and the
-  desk lamp switched on after dark — and the monitor greets them for the
-  hour. The ending is one step later (day to dusk, dusk to night, night to
-  first light), so time passes while they read. A footer switch tries the
-  other lights, and `?light=night` (or `dawn`, `day`, `dusk`) shares one.
+- **The desk keeps your hours.** The opening and the ending are both lit for
+  the visitor's local time — dawn, day, dusk or night, with stars over the
+  lake and the desk lamp switched on after dark — so the desk they leave is
+  the one they arrived at. The monitor greets them for the hour. A footer
+  switch tries the other lights, and `?light=night` (or `dawn`, `day`,
+  `dusk`) shares one.
 
 Nothing is hidden without JavaScript, and split headings keep their text
 whole for screen readers.
@@ -99,8 +99,8 @@ everything still. It also covers the scroll engine: easing that is identical
 at 60 and 120 Hz and never overshoots, normalised wheel deltas, bounded
 section flights, and the reading line that decides which section is current;
 the ending folding from full screen back to the desk; the viewer's clip and
-wrap-around; the pointer glow's labels; and the time-of-day hours, the
-ending's later light and the footer switch's cycle.
+wrap-around; the pointer glow's labels; and the time-of-day hours and
+the footer switch's cycle.
 
 ## Structure
 

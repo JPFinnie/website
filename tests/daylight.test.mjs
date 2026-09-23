@@ -9,11 +9,11 @@ test('every hour of the day has exactly one light', () => {
   assert.deepEqual([daypartAt(16), daypartAt(17), daypartAt(19), daypartAt(20), daypartAt(0)], ['day', 'dusk', 'dusk', 'night', 'night']);
 });
 
-test('the ending is always one step later than the opening', () => {
+test('each light steps to the next, wrapping from night to dawn', () => {
   assert.equal(laterThan('dawn'), 'day');
   assert.equal(laterThan('day'), 'dusk');
   assert.equal(laterThan('dusk'), 'night');
-  assert.equal(laterThan('night'), 'dawn', 'reading all night ends at first light');
+  assert.equal(laterThan('night'), 'dawn');
 });
 
 test('the monitor greets the visitor for their hour', () => {

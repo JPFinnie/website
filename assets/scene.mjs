@@ -193,7 +193,7 @@ export function mountScene({ glide } = {}) {
 }
 
 // The ending: past Contact the page shrinks back into the monitor and the
-// camera pulls away from the desk, a little later in the day than it opened.
+// camera pulls away from the desk, lit the same as it was when they arrived.
 export function mountOutro({ glide } = {}) {
   const root = document.documentElement;
   const section = document.querySelector('#outro');
