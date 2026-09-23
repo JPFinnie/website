@@ -1,4 +1,8 @@
-import { mountScene } from './scene.mjs';
+import { mountScene, mountOutro } from './scene.mjs';
+import { mountGlide } from './glide.mjs';
+import { mountEffects } from './effects.mjs';
+import { mountViewer } from './viewer.mjs';
+import { mountCursor } from './cursor.mjs';
 
 const root = document.documentElement;
 const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -8,7 +12,13 @@ const motionButton = document.querySelector('#motion-toggle');
 root.dataset.motion = new URLSearchParams(location.search).get('motion') === 'quiet' ? 'quiet' : 'full';
 root.classList.add('has-js');
 
-mountScene();
+const quiet = () => media.matches || root.dataset.motion === 'quiet';
+const glide = mountGlide({ quiet });
+mountScene({ glide });
+mountEffects({ glide, quiet });
+mountOutro({ glide });
+const cursor = mountCursor({ quiet });
+mountViewer({ glide, quiet, cursor });
 
 function updateMotion() {
   const quiet = media.matches || root.dataset.motion === 'quiet';
@@ -31,16 +41,3 @@ media.addEventListener?.('change', updateMotion);
 updateMotion();
 
 document.querySelector('#year').textContent = String(new Date().getFullYear());
-
-// Mark the section currently in view so the masthead reads as navigation.
-const sections = [...document.querySelectorAll('main .band')];
-const navLinks = new Map([...document.querySelectorAll('.masthead nav a[href^="#"]')].map(a => [a.hash.slice(1), a]));
-if ('IntersectionObserver' in window && sections.length) {
-  const seen = new Set();
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => entry.isIntersecting ? seen.add(entry.target.id) : seen.delete(entry.target.id));
-    const current = sections.find(section => seen.has(section.id));
-    navLinks.forEach((link, id) => link.setAttribute('aria-current', current && current.id === id ? 'true' : 'false'));
-  }, { rootMargin: '-45% 0px -45% 0px' });
-  sections.forEach(section => observer.observe(section));
-}

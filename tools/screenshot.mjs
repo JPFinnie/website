@@ -53,6 +53,13 @@ for (const [name, width, height, opts] of [
     await page.waitForTimeout(350);
     await page.screenshot({ path: path.join(outDir, `${name}-${id}.png`) });
   }
+  // The ending: the page folds back into the monitor, at dusk.
+  const outro = await page.evaluate(() => { const s = document.querySelector('#outro'); return s && getComputedStyle(s).display !== 'none' ? { top: s.offsetTop, range: s.offsetHeight - innerHeight } : null; });
+  if (outro) for (const step of [.5, 1]) {
+    await page.evaluate(y => window.scrollTo(0, y), outro.top + outro.range * step);
+    await page.waitForTimeout(600);
+    await page.screenshot({ path: path.join(outDir, `${name}-outro-${String(step).replace('.', '')}.png`) });
+  }
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   if (overflow > 1) problems.push(`${name}: ${overflow}px of horizontal overflow`);
 

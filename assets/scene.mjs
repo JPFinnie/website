@@ -5,7 +5,7 @@ export const clamp = (n, low = 0, high = 1) => Math.max(low, Math.min(high, n));
 const mix = (a, b, t) => a + (b - a) * t;
 export const smooth = (start, end, n) => { const t = clamp((n - start) / (end - start)); return t * t * (3 - 2 * t); };
 // Time-based damping feels the same on 60 Hz and 120 Hz displays.
-export const followScroll = (current, target, milliseconds) => target + (current - target) * Math.exp(-milliseconds / 90);
+export const followScroll = (current, target, milliseconds, tau = 90) => target + (current - target) * Math.exp(-milliseconds / tau);
 // Measured display aperture in the original artwork.
 export const aperture = Object.freeze({ x: 691 / 1672, y: 479 / 940, width: 298 / 1672, height: 159 / 940, aspect: 1672 / 940 });
 
@@ -72,18 +72,20 @@ export function sceneFrame(progress, width, height, still = false, screen = aper
   };
 }
 
-export function mountScene() {
+// Drives one staging of the scene from the page's scroll position. The opening
+// plays it forwards — desk to page — and the ending plays it backwards, so the
+// page folds back into the monitor and the camera pulls away from the desk.
+export function driveScene({ section, glide, reverse = false, onFrame }) {
   const root = document.documentElement;
-  const journey = document.querySelector('#journey');
-  const stage = document.querySelector('#scene-stage');
-  const world = document.querySelector('#world-plane');
-  const frame = document.querySelector('.world-frame');
-  const shell = document.querySelector('#screen-shell');
-  const face = document.querySelector('.screen-face');
-  const page = document.querySelector('.screen-page');
+  const stage = section.querySelector('.scene-stage');
+  const world = section.querySelector('.world-plane');
+  const frame = section.querySelector('.world-frame');
+  const shell = section.querySelector('.screen-shell');
+  const face = section.querySelector('.screen-face');
+  const page = section.querySelector('.screen-page');
   const media = window.matchMedia('(prefers-reduced-motion: reduce)');
   let scheduled = false, progress = 0, dirty = true, snapNext = true, lastTime = null;
-  let width = 0, height = 0, range = 1, journeyTop = 0;
+  let width = 0, height = 0, range = 1, top = 0;
   const quiet = () => media.matches || root.dataset.motion === 'quiet';
 
   function paint(time) {
@@ -91,8 +93,8 @@ export function mountScene() {
     if (dirty) {
       width = stage.clientWidth;
       height = stage.clientHeight;
-      range = Math.max(1, journey.offsetHeight - height);
-      journeyTop = window.scrollY + journey.getBoundingClientRect().top;
+      range = Math.max(1, section.offsetHeight - height);
+      top = window.scrollY + section.getBoundingClientRect().top;
       const layout = sceneFrame(0, width, height, quiet());
       world.style.width = `${layout.imageWidth}px`;
       world.style.height = `${layout.imageHeight}px`;
@@ -103,13 +105,15 @@ export function mountScene() {
       dirty = false;
     }
     if (!width || !height) return;
-    const target = clamp((window.scrollY - journeyTop) / range);
+    const target = clamp((window.scrollY - top) / range);
     const elapsed = lastTime === null ? 16.67 : clamp(time - lastTime, 0, 64);
     lastTime = time;
-    progress = snapNext || quiet() ? target : followScroll(progress, target, elapsed);
+    // When the scroll engine is already easing the wheel, the camera follows
+    // it closely instead of adding a second, laggier layer of smoothing.
+    progress = snapNext || quiet() ? target : followScroll(progress, target, elapsed, glide?.smoothing ? 28 : 90);
     snapNext = false;
     if (Math.abs(target - progress) < .0001) progress = target;
-    const f = sceneFrame(progress, width, height, quiet());
+    const f = sceneFrame(reverse ? 1 - progress : progress, width, height, quiet());
     world.style.transform = `translate3d(${f.imageX}px,${f.imageY}px,0) scale(${f.scale})`;
     frame.style.opacity = String(f.scenery);
     shell.style.transform = `translate3d(${f.shell.x}px,${f.shell.y}px,0)`;
@@ -118,23 +122,53 @@ export function mountScene() {
     shell.style.borderRadius = `${f.shell.radius}px`;
     shell.style.opacity = String(f.open > 0 ? 1 : Math.max(f.face, 0) > 0 ? 1 : 0);
     face.style.opacity = String(f.face);
-    // The instruction stops being a target the moment it stops being legible.
+    // The wallpaper's link stops being a target the moment it stops being legible.
     face.style.pointerEvents = f.face > .5 ? 'auto' : 'none';
     page.style.transform = `scale(${f.shell.width / width})`;
     page.style.opacity = String(f.surface);
-    root.classList.toggle('past-intro', progress > .12);
-    root.classList.toggle('screen-open', f.open > .55);
+    onFrame?.(progress, f);
     if (progress !== target) update(); else lastTime = null;
   }
   function update() { if (!scheduled) { scheduled = true; requestAnimationFrame(paint); } }
-  function refresh() { root.classList.toggle('is-still', quiet()); dirty = true; snapNext = true; update(); }
+  function refresh() { dirty = true; snapNext = true; update(); }
+  // Where the scroll must be for the screen to fill the viewport: the end of
+  // the opening, or the start of the ending.
+  const fullScreen = () => reverse ? top : top + range;
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', () => { dirty = true; update(); }, { passive: true });
+  media.addEventListener?.('change', refresh);
+  document.addEventListener('studio:configuration', refresh);
+  if ('ResizeObserver' in window) {
+    const observer = new ResizeObserver(() => { dirty = true; update(); });
+    observer.observe(stage);
+    observer.observe(document.body);
+  }
+  refresh();
+  return { update, refresh, page, quiet, get progress() { return progress; }, get top() { return top; }, get range() { return range; }, fullScreen };
+}
+
+export function mountScene({ glide } = {}) {
+  const root = document.documentElement;
+  const section = document.querySelector('#journey');
+  const scene = driveScene({ section, glide, onFrame(progress, f) {
+    root.classList.toggle('past-intro', progress > .12);
+    root.classList.toggle('screen-open', f.open > .55);
+  } });
+  const { page, quiet } = scene;
+  const sync = () => root.classList.toggle('is-still', quiet());
+  document.addEventListener('studio:configuration', sync);
+  window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change', sync);
+  sync();
 
   function openScreen(instant = false) {
-    window.scrollTo({ top: journeyTop + range, behavior: instant || quiet() ? 'instant' : 'smooth' });
+    const top = scene.fullScreen();
+    if (glide) glide.to(top, { instant: instant || quiet() });
+    else window.scrollTo({ top, behavior: instant || quiet() ? 'instant' : 'smooth' });
   }
   // Tabbing into the page behind the wallpaper opens the screen, so focus is
   // never sitting on something the reader cannot see.
-  page.addEventListener('focusin', () => { if (!quiet() && progress < .9) openScreen(true); });
+  page.addEventListener('focusin', () => { if (!quiet() && scene.progress < .9) openScreen(true); });
   // The instruction on the screen is a real link: clicking the monitor works too.
   document.querySelectorAll('[data-open-screen]').forEach(control => control.addEventListener('click', event => {
     // With motion off there is no screen to open, so the link does what it says
@@ -143,12 +177,31 @@ export function mountScene() {
     event.preventDefault();
     openScreen();
   }));
+  return scene;
+}
 
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', () => { dirty = true; update(); }, { passive: true });
-  media.addEventListener?.('change', refresh);
-  document.addEventListener('studio:configuration', refresh);
-  if ('ResizeObserver' in window) new ResizeObserver(() => { dirty = true; update(); }).observe(stage);
-  refresh();
-  return { update, refresh, get progress() { return progress; } };
+// The ending: past Contact the page shrinks back into the monitor and the
+// camera pulls away from the desk, now at dusk, with the screen still lit.
+export function mountOutro({ glide } = {}) {
+  const root = document.documentElement;
+  const section = document.querySelector('#outro');
+  if (!section) return null;
+  const glow = section.querySelector('.monitor-glow');
+  const scene = driveScene({ section, glide, reverse: true, onFrame(progress, f) {
+    // The masthead and rail belong to the page; once the page has folded back
+    // into the monitor they step out of the frame.
+    root.classList.toggle('in-outro', progress > .06);
+    // The screen lights the desk around it.
+    const size = f.lens.width * 2.6;
+    glow.style.width = `${size}px`;
+    glow.style.height = `${size}px`;
+    glow.style.transform = `translate3d(${f.lens.x + f.lens.width / 2 - size / 2}px,${f.lens.y + f.lens.height / 2 - size / 2}px,0)`;
+  } });
+  // Tabbing to the sign-off link brings the monitor into view first.
+  section.querySelector('.screen-face').addEventListener('focusin', () => {
+    if (scene.quiet() || scene.progress > .95) return;
+    const end = scene.top + scene.range;
+    if (glide) glide.to(end, { instant: true }); else window.scrollTo(0, end);
+  });
+  return scene;
 }
