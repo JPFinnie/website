@@ -69,7 +69,7 @@ export function mountGlide({ quiet }) {
   function stop() { flight = null; running = false; last = null; current = target = window.scrollY; }
 
   window.addEventListener('wheel', event => {
-    if (!smoothWheel() || event.ctrlKey || event.defaultPrevented) return;
+    if (!smoothWheel() || event.ctrlKey || event.defaultPrevented || root.classList.contains('sheet-open')) return;
     // Sideways gestures and anything inside its own scroller stay native.
     if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
     if (scrollsItself(event.target, event.deltaY)) return;

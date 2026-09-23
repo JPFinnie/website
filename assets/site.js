@@ -1,6 +1,8 @@
-import { mountScene } from './scene.mjs';
+import { mountScene, mountOutro } from './scene.mjs';
 import { mountGlide } from './glide.mjs';
 import { mountEffects } from './effects.mjs';
+import { mountViewer } from './viewer.mjs';
+import { mountCursor } from './cursor.mjs';
 
 const root = document.documentElement;
 const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -14,6 +16,9 @@ const quiet = () => media.matches || root.dataset.motion === 'quiet';
 const glide = mountGlide({ quiet });
 mountScene({ glide });
 mountEffects({ glide, quiet });
+mountOutro({ glide });
+const cursor = mountCursor({ quiet });
+mountViewer({ glide, quiet, cursor });
 
 function updateMotion() {
   const quiet = media.matches || root.dataset.motion === 'quiet';

@@ -47,6 +47,19 @@ Past the scene, the page reacts to where the reader is and how they move:
   headline lights letter by letter as it arrives, and the buttons lean toward
   the pointer.
 
+- **Project viewer.** Any card opens the way the monitor did: its own
+  rectangle grows until it fills the screen, with the project laid out large.
+  Arrow keys or Previous / Next step through whatever the filter is showing;
+  Escape folds the sheet back into the card it came from. It is a real modal
+  `<dialog>`, so focus is held inside it and returned to the card after.
+- **Pointer glow.** A small piece of the monitor's wallpaper follows the
+  mouse, picking up its violet, orange and pink as it crosses the screen. It
+  swells over anything clickable and says what a click will do — Open, Visit,
+  Email, Next. The system cursor is never hidden, and touch never sees it.
+- **The ending.** Past Contact the page folds back into the monitor and the
+  camera pulls away from the desk — now at dusk, with the screen lighting the
+  room. The monitor signs off, and clicking it flies back to the top.
+
 Nothing is hidden without JavaScript, and split headings keep their text
 whole for screen readers.
 
@@ -77,16 +90,20 @@ without overshooting or shrinking, the camera never reverses, the wallpaper is
 always gone before the page behind it is readable, and reduced motion holds
 everything still. It also covers the scroll engine: easing that is identical
 at 60 and 120 Hz and never overshoots, normalised wheel deltas, bounded
-section flights, and the reading line that decides which section is current.
+section flights, and the reading line that decides which section is current;
+the ending folding from full screen back to the desk; the viewer's clip and
+wrap-around; and the pointer glow's labels.
 
 ## Structure
 
 - `index.html` — the whole page, plus metadata and Person structured data.
 - `assets/site.css` — layout, type scale, responsive rules, motion and print.
 - `assets/site.js` — motion preference, wiring, the year.
-- `assets/scene.mjs` — the two-act scene geometry and its scroll loop.
+- `assets/scene.mjs` — the two-act scene geometry, and the scroll loop that plays it forwards for the opening and backwards for the ending.
 - `assets/glide.mjs` — the scroll engine: eased wheel, section flights, scroll velocity.
 - `assets/effects.mjs` — rail, masthead pill, reveals, filter, timeline, toolkit and contact.
+- `assets/viewer.mjs` — the project viewer.
+- `assets/cursor.mjs` — the pointer glow.
 - `assets/studio-world.webp` — the original studio artwork (master: `studio-world.png`).
 - `assets/james-portrait.webp` — portrait (master: `james-portrait.jpeg`).
 - `assets/og.jpg` — the social card. Regenerate with `npm run og`.

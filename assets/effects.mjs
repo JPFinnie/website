@@ -38,7 +38,6 @@ export function mountEffects({ glide, quiet }) {
   const timeline = buildTimeline();
   const contact = buildContact();
   const portrait = document.querySelector('.portrait img');
-  const footer = document.querySelector('.site-footer');
   splitHeadings();
   const reveals = mountReveals();
   const filter = mountFilter();
@@ -104,7 +103,6 @@ export function mountEffects({ glide, quiet }) {
       const radius = ((1 - rise) * 36).toFixed(2);
       const clip = rise >= 1 ? 'none' : `inset(0 ${inset}px 0 ${inset}px round ${radius}px ${radius}px 0 0)`;
       set(contact.section, 'clip-path', clip);
-      set(footer, 'clip-path', rise >= 1 ? 'none' : `inset(0 ${inset}px)`);
       const lit = still ? 1 : clamp((y + vh * .82 - top) / (vh * .42));
       const count = Math.round(lit * contact.chars.length);
       if (count !== contact.count) {
@@ -430,7 +428,7 @@ export function mountEffects({ glide, quiet }) {
   function mountKeyboard() {
     document.addEventListener('keydown', event => {
       if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey || event.repeat) return;
-      if (event.target.closest?.('input, textarea, select, [contenteditable=""], [contenteditable="true"]')) return;
+      if (event.target.closest?.('input, textarea, select, dialog, [contenteditable=""], [contenteditable="true"]')) return;
       const key = event.key.toLowerCase();
       if (key !== 'j' && key !== 'k') return;
       const y = window.scrollY;
