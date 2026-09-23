@@ -60,6 +60,13 @@ Past the scene, the page reacts to where the reader is and how they move:
   camera pulls away from the desk — now at dusk, with the screen lighting the
   room. The monitor signs off, and clicking it flies back to the top.
 
+- **The desk keeps your hours.** The opening scene is lit for the visitor's
+  local time — dawn, day, dusk or night, with stars over the lake and the
+  desk lamp switched on after dark — and the monitor greets them for the
+  hour. The ending is one step later (day to dusk, dusk to night, night to
+  first light), so time passes while they read. A footer switch tries the
+  other lights, and `?light=night` (or `dawn`, `day`, `dusk`) shares one.
+
 Nothing is hidden without JavaScript, and split headings keep their text
 whole for screen readers.
 
@@ -92,7 +99,8 @@ everything still. It also covers the scroll engine: easing that is identical
 at 60 and 120 Hz and never overshoots, normalised wheel deltas, bounded
 section flights, and the reading line that decides which section is current;
 the ending folding from full screen back to the desk; the viewer's clip and
-wrap-around; and the pointer glow's labels.
+wrap-around; the pointer glow's labels; and the time-of-day hours, the
+ending's later light and the footer switch's cycle.
 
 ## Structure
 
@@ -104,6 +112,7 @@ wrap-around; and the pointer glow's labels.
 - `assets/effects.mjs` — rail, masthead pill, reveals, filter, timeline, toolkit and contact.
 - `assets/viewer.mjs` — the project viewer.
 - `assets/cursor.mjs` — the pointer glow.
+- `assets/daylight.mjs` — the time-of-day lighting and its footer switch.
 - `assets/studio-world.webp` — the original studio artwork (master: `studio-world.png`).
 - `assets/james-portrait.webp` — portrait (master: `james-portrait.jpeg`).
 - `assets/og.jpg` — the social card. Regenerate with `npm run og`.
