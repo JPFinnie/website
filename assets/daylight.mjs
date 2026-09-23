@@ -1,7 +1,7 @@
-// The desk keeps the visitor's hours. The opening scene is lit for the time
-// where they are — dawn, day, dusk or night — and the ending is a little later
-// again, so time passes while they read. A footer switch tries the others, and
-// ?light=night (or dawn, day, dusk) shares a particular hour.
+// The desk keeps the visitor's hours. Both scenes — the opening and the
+// ending — are lit for the time where they are: dawn, day, dusk or night, so
+// the desk they leave is the desk they arrived at. A footer switch tries the
+// others, and ?light=night (or dawn, day, dusk) shares a particular hour.
 export const DAYPARTS = Object.freeze(['dawn', 'day', 'dusk', 'night']);
 const NAMES = { dawn: 'dawn', day: 'daytime', dusk: 'dusk', night: 'night' };
 // An hour that stands for each part, for greeting a visitor who picked one.
@@ -13,6 +13,7 @@ export function daypartAt(hour) {
   if (hour >= 17 && hour < 20) return 'dusk';
   return 'night';
 }
+// The light after this one, for the footer switch.
 export const laterThan = part => DAYPARTS[(DAYPARTS.indexOf(part) + 1) % DAYPARTS.length];
 
 export function greetingAt(hour) {
@@ -37,7 +38,7 @@ export function mountDaylight() {
     const hour = new Date().getHours();
     const part = choice === 'auto' ? daypartAt(hour) : choice;
     if (opening) opening.dataset.daypart = part;
-    if (ending) ending.dataset.daypart = laterThan(part);
+    if (ending) ending.dataset.daypart = part;
     if (greeting) greeting.textContent = greetingAt(choice === 'auto' ? hour : TYPICAL[part]);
     if (button) button.textContent = choice === 'auto' ? `Desk light: ${NAMES[part]} (your time)` : `Desk light: ${NAMES[part]}`;
   }
