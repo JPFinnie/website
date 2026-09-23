@@ -108,38 +108,46 @@
       <h2 id="work-title">Things I&rsquo;ve built and shipped.</h2>
       <p class="section-lead">Three at the bank, three on my own time. All of them are running software, not decks.</p>
 
+      <div class="filter" role="group" aria-label="Show projects" hidden>
+        <span class="filter-thumb" aria-hidden="true"></span>
+        <button type="button" data-filter="all" aria-pressed="true">All <span class="filter-count">6</span></button>
+        <button type="button" data-filter="bank" aria-pressed="false">At the bank <span class="filter-count">3</span></button>
+        <button type="button" data-filter="indie" aria-pressed="false">Independent <span class="filter-count">3</span></button>
+      </div>
+      <p class="visually-hidden" id="work-status" aria-live="polite"></p>
+
       <ol class="cards">
-        <li class="card">
+        <li class="card" data-kind="bank">
           <p class="card-tag">CIBC Investor&rsquo;s Edge</p>
           <h3>An agentic product-development platform</h3>
           <p>An internal platform where product managers converse with the bank&rsquo;s AI to go from question to artifact: it spins up lightweight working prototypes, pulls context from the corporate second brain and agent skills files, connects to Figma, and drafts PR-FAQs and BRDs. It also mines years of historical engineering estimates against the BRDs that produced them, so new proposals come back with evidence-based effort estimates.</p>
           <p class="card-meta">Agent harnesses · tool loops · Figma integration · estimate mining</p>
         </li>
-        <li class="card">
+        <li class="card" data-kind="bank">
           <p class="card-tag">CIBC Investor&rsquo;s Edge</p>
           <h3>A second brain on Open Knowledge Format</h3>
           <p>Karpathy&rsquo;s LLM-wiki pattern made concrete on Google&rsquo;s Open Knowledge Format: the corporate document corpus indexed into a densely cross-linked graph of markdown notes. Agents retrieve by embedding against the chunked question, loading precise context from the corpus rather than overloading the window with attached files.</p>
           <p class="card-meta">OKF &middot; embeddings &middot; chunked retrieval &middot; agent context</p>
         </li>
-        <li class="card">
+        <li class="card" data-kind="bank">
           <p class="card-tag">CIBC Investor&rsquo;s Edge</p>
           <h3>ML personalization for direct investing</h3>
           <p>Propensity models score every new client — options, ETFs, FHSA/RRSP — into Braze and Contentstack journeys, with closed-loop retraining lifting both model accuracy and conversion over time.</p>
           <p class="card-meta">Propensity modeling · Braze · Contentstack · closed-loop retraining</p>
         </li>
-        <li class="card">
+        <li class="card" data-kind="indie">
           <p class="card-tag">Independent · live</p>
           <h3><a href="https://finance-hermes.vercel.app" target="_blank" rel="noopener noreferrer">FinanceHermes <span aria-hidden="true">&#8599;</span></a></h3>
           <p>A financial-research agent on a hand-built harness: a streaming tool-call loop over live web search, visible reasoning traces, server-side citation enforcement and a two-tier freemium gate. Zero-dependency serverless deploy, demoed live to rooms of investment advisors.</p>
           <p class="card-meta">SSE streaming · tool loop · citation enforcement · serverless</p>
         </li>
-        <li class="card">
+        <li class="card" data-kind="indie">
           <p class="card-tag">Independent</p>
           <h3>Personal OKF knowledge base</h3>
           <p>The same LLM-wiki pattern run at home: a cross-linked markdown knowledge graph used as shared context by Claude Code and the other agents I work with day to day.</p>
           <p class="card-meta">OKF · embeddings · agent context</p>
         </li>
-        <li class="card">
+        <li class="card" data-kind="indie">
           <p class="card-tag">Independent · live</p>
           <h3><a href="https://six-cut.vercel.app" target="_blank" rel="noopener noreferrer">The Six Cut <span aria-hidden="true">&#8599;</span></a></h3>
           <p>A Next.js discovery product that ranks Toronto&rsquo;s independent butchers against a proprietary scoring methodology.</p>
@@ -216,16 +224,16 @@
     <div class="shell">
       <p class="eyebrow">Toolkit</p>
       <h2 id="toolkit-title">What I work with.</h2>
-      <div class="toolkit-grid">
-        <div>
+      <div class="toolkit-rows">
+        <div class="toolkit-row">
           <h3>AI &amp; agents</h3>
           <ul class="tags"><li>Claude API</li><li>Claude Code &amp; agent skills</li><li>Agent harnesses</li><li>Tool loops</li><li>SSE streaming</li><li>Evals</li><li>RAG / OKF knowledge bases</li><li>Hermes 4</li><li>Ollama</li><li>Mistral</li></ul>
         </div>
-        <div>
+        <div class="toolkit-row">
           <h3>Growth &amp; data</h3>
           <ul class="tags"><li>Propensity modeling</li><li>A/B testing</li><li>Funnel optimization</li><li>Braze</li><li>Contentstack</li><li>Amplitude</li><li>FullStory</li><li>Google Analytics</li></ul>
         </div>
-        <div>
+        <div class="toolkit-row">
           <h3>Delivery</h3>
           <ul class="tags"><li>Prototype-first</li><li>PR-FAQs &amp; six-pagers</li><li>Jira</li><li>Confluence</li><li>Figma</li><li>Vercel</li><li>Next.js</li><li>Scrum</li></ul>
         </div>

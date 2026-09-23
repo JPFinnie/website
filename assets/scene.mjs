@@ -5,7 +5,7 @@ export const clamp = (n, low = 0, high = 1) => Math.max(low, Math.min(high, n));
 const mix = (a, b, t) => a + (b - a) * t;
 export const smooth = (start, end, n) => { const t = clamp((n - start) / (end - start)); return t * t * (3 - 2 * t); };
 // Time-based damping feels the same on 60 Hz and 120 Hz displays.
-export const followScroll = (current, target, milliseconds) => target + (current - target) * Math.exp(-milliseconds / 90);
+export const followScroll = (current, target, milliseconds, tau = 90) => target + (current - target) * Math.exp(-milliseconds / tau);
 // Measured display aperture in the original artwork.
 export const aperture = Object.freeze({ x: 691 / 1672, y: 479 / 940, width: 298 / 1672, height: 159 / 940, aspect: 1672 / 940 });
 
@@ -72,7 +72,7 @@ export function sceneFrame(progress, width, height, still = false, screen = aper
   };
 }
 
-export function mountScene() {
+export function mountScene({ glide } = {}) {
   const root = document.documentElement;
   const journey = document.querySelector('#journey');
   const stage = document.querySelector('#scene-stage');
@@ -106,7 +106,9 @@ export function mountScene() {
     const target = clamp((window.scrollY - journeyTop) / range);
     const elapsed = lastTime === null ? 16.67 : clamp(time - lastTime, 0, 64);
     lastTime = time;
-    progress = snapNext || quiet() ? target : followScroll(progress, target, elapsed);
+    // When the scroll engine is already easing the wheel, the camera follows
+    // it closely instead of adding a second, laggier layer of smoothing.
+    progress = snapNext || quiet() ? target : followScroll(progress, target, elapsed, glide?.smoothing ? 28 : 90);
     snapNext = false;
     if (Math.abs(target - progress) < .0001) progress = target;
     const f = sceneFrame(progress, width, height, quiet());
@@ -130,7 +132,8 @@ export function mountScene() {
   function refresh() { root.classList.toggle('is-still', quiet()); dirty = true; snapNext = true; update(); }
 
   function openScreen(instant = false) {
-    window.scrollTo({ top: journeyTop + range, behavior: instant || quiet() ? 'instant' : 'smooth' });
+    if (glide) glide.to(journeyTop + range, { instant: instant || quiet() });
+    else window.scrollTo({ top: journeyTop + range, behavior: instant || quiet() ? 'instant' : 'smooth' });
   }
   // Tabbing into the page behind the wallpaper opens the screen, so focus is
   // never sitting on something the reader cannot see.
