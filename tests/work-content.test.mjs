@@ -38,3 +38,12 @@ test('the discovery demo is clearly labeled as a prototype', () => {
   assert.doesNotMatch(cards[1][2], /directory data is not currently loaded/);
   assert.match(readFileSync(new URL('../assets/viewer.mjs', import.meta.url), 'utf8'), /'prototype' \? 'View prototype'/);
 });
+
+
+test('external link indicators use decorative SVG rather than missing font glyphs', () => {
+  const viewer = readFileSync(new URL('../assets/viewer.mjs', import.meta.url), 'utf8');
+  for (const source of [html, viewer]) {
+    assert.doesNotMatch(source, /&#8599;|↗/);
+    assert.match(source, /<svg class="external-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">/);
+  }
+});

@@ -23,7 +23,7 @@ export function mountViewer({ glide, quiet, cursor }) {
   // Every card gets a real button, so the viewer is reachable by keyboard; the
   // rest of the card is a pointer shortcut to the same button.
   cards.forEach(card => {
-    const title = card.querySelector('h3').textContent.replace('↗', '').trim();
+    const title = card.querySelector('h3').textContent.trim();
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'card-open';
@@ -58,7 +58,7 @@ export function mountViewer({ glide, quiet, cursor }) {
         <h2 class="sheet-title" id="sheet-title" tabindex="-1"></h2>
         <p class="sheet-text"></p>
         <ul class="sheet-meta" aria-label="Topics"></ul>
-        <a class="sheet-visit" target="_blank" rel="noopener noreferrer" hidden><span class="sheet-visit-label">Visit the live product</span> <span aria-hidden="true">&#8599;</span></a>
+        <a class="sheet-visit" target="_blank" rel="noopener noreferrer" hidden><span class="sheet-visit-label">Visit the live product</span> <svg class="external-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6 4h10v10M16 4 4 16"/></svg></a>
       </article>
       <nav class="sheet-nav" aria-label="Selected work">
         <button type="button" class="sheet-step" data-step="-1"><span class="sheet-step-dir"><span aria-hidden="true">&larr;</span> Previous</span><span class="sheet-step-title"></span></button>
@@ -82,7 +82,7 @@ export function mountViewer({ glide, quiet, cursor }) {
     $('.sheet-index').textContent = String(index + 1).padStart(2, '0');
     $('.sheet-total').textContent = String(list.length).padStart(2, '0');
     $('.sheet-tag').textContent = card.querySelector('.card-tag').textContent;
-    $('.sheet-title').textContent = card.querySelector('h3').textContent.replace('↗', '').trim();
+    $('.sheet-title').textContent = card.querySelector('h3').textContent.trim();
     $('.sheet-text').textContent = card.querySelector('.card-details')?.content.textContent.trim() || card.querySelector('p:not(.card-tag):not(.card-meta)').textContent;
     $('.sheet-meta').replaceChildren(...card.querySelector('.card-meta').textContent.split(/\s*[·•]\s*/).filter(Boolean).map(item => {
       const li = document.createElement('li');
@@ -101,7 +101,7 @@ export function mountViewer({ glide, quiet, cursor }) {
     sheet.querySelectorAll('.sheet-step').forEach((button, i) => {
       const target = i ? next : previous;
       button.hidden = single;
-      button.querySelector('.sheet-step-title').textContent = target.querySelector('h3').textContent.replace('↗', '').trim();
+      button.querySelector('.sheet-step-title').textContent = target.querySelector('h3').textContent.trim();
     });
   }
 
