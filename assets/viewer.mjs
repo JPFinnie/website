@@ -53,7 +53,7 @@ export function mountViewer({ glide, quiet, cursor }) {
         <p class="sheet-tag"></p>
         <h2 class="sheet-title" id="sheet-title" tabindex="-1"></h2>
         <p class="sheet-text"></p>
-        <ul class="sheet-meta" aria-label="Built with"></ul>
+        <ul class="sheet-meta" aria-label="Topics"></ul>
         <a class="sheet-visit" target="_blank" rel="noopener noreferrer" hidden>Visit the live product <span aria-hidden="true">&#8599;</span></a>
       </article>
       <nav class="sheet-nav" aria-label="Projects">

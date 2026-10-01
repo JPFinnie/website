@@ -36,7 +36,7 @@ Past the scene, the page reacts to where the reader is and how they move:
   roles follow in a short stagger; the portrait unveils upward and then drifts
   a little slower than the page.
 - **Work.** Cards are numbered, tilt toward the pointer and carry a light
-  that follows it. A segmented control filters bank and independent work,
+  that follows it. A segmented control filters illustrative product approaches and independent work,
   with the cards animating (FLIP) to their new places.
 - **Experience.** A hairline timeline draws itself down the roles; each
   role's marker lights as it is passed, and its dates stay pinned beside it.

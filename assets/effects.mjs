@@ -319,7 +319,7 @@ export function mountEffects({ glide, quiet }) {
       const before = new Map(cards.map(card => [card, { rect: card.getBoundingClientRect(), hidden: card.hidden }]));
       cards.forEach(card => { card.hidden = !(kind === 'all' || card.dataset.kind === kind); card.style.transform = ''; });
       const shown = cards.filter(card => !card.hidden);
-      status.textContent = kind === 'all' ? `Showing all ${shown.length} projects.` : `Showing ${shown.length} projects ${kind === 'bank' ? 'at the bank' : 'built independently'}.`;
+      status.textContent = kind === 'all' ? `Showing all ${shown.length} entries.` : kind === 'approach' ? `Showing ${shown.length} illustrative product approaches.` : `Showing ${shown.length} independently built projects.`;
       if (quiet()) { shown.forEach(card => reveals.reveal(card)); return; }
       shown.forEach((card, i) => {
         reveals.reveal(card);
