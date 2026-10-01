@@ -7,19 +7,20 @@ const work = html.match(/<section class="band work"[\s\S]*?<\/section>/)[0];
 const cards = [...work.matchAll(/<li class="card" data-kind="([^"]+)"[^>]*>([\s\S]*?)<\/li>/g)];
 
 test('live independent products lead the portfolio, ahead of illustrative approaches', () => {
-  assert.deepEqual(cards.map(card => card[1]), ['indie', 'indie', 'indie', 'approach', 'approach', 'approach']);
+  assert.deepEqual(cards.map(card => card[1]), ['indie', 'indie', 'indie', 'approach', 'approach']);
   assert.match(cards[0][2], /FinanceHermes/);
   assert.match(cards[1][2], /The Six Cut/);
-  assert.match(cards[2][2], /Personal OKF/);
+  assert.match(cards[2][2], /Context systems/);
 });
 
 test('independent summaries remain concise with fuller existing detail available to the viewer', () => {
   for (const card of cards.slice(0, 2)) {
-    assert.match(card[2], /<template class="card-details">[^<]+<\/template>/);
+    assert.doesNotMatch(card[2], /<h3><a/);
     const summary = card[2].match(/<p>([^<]+)<\/p>/)[1];
     assert.ok(summary.split(/\s+/).length <= 25);
   }
-  assert.match(readFileSync(new URL('../assets/viewer.mjs', import.meta.url), 'utf8'), /\.content.textContent.trim\(\)/);
+  assert.match(html, /data-detail-target="#finance-hermes \.case-study-content"/);
+  assert.match(html, /data-detail-target="#six-cut \.case-study-content"/);
 });
 
 test('card actions have visible labels and touch-sized targets', () => {
@@ -33,10 +34,9 @@ test('card actions have visible labels and touch-sized targets', () => {
 
 
 test('the discovery demo is clearly labeled as a prototype', () => {
-  assert.match(cards[1][2], /Independent · prototype/);
-  assert.doesNotMatch(cards[1][2], /Independent · live/);
+  assert.match(cards[1][2], /Independent · live prototype/);
   assert.doesNotMatch(cards[1][2], /directory data is not currently loaded/);
-  assert.match(readFileSync(new URL('../assets/viewer.mjs', import.meta.url), 'utf8'), /'prototype' \? 'View prototype'/);
+  assert.match(readFileSync(new URL('../assets/viewer.mjs', import.meta.url), 'utf8'), /textContent = 'View prototype'/);
 });
 
 

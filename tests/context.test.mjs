@@ -3,10 +3,10 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
-const context = html.match(/<article class="context-feature"[\s\S]*?<\/article>/)[0];
+const context = html.match(/<article class="case-study-source" id="context"[\s\S]*?<\/article>/)[0];
 
 test('context vision distinguishes employee knowledge, client history and estimates', () => {
-  for (const label of ['Shared knowledge for employees', 'Context for each client', 'Facts first. Estimates labelled.', 'Managed as a product']) assert.ok(context.includes(label));
+  for (const label of ['Personal build', 'Proposed organisational extension', 'Proposed client context']) assert.ok(context.includes(label));
   assert.match(context, /organisationally owned and managed/);
   assert.match(context, /client lifetime value \(CLV\)/);
   assert.match(context, /consent where required/);
@@ -30,21 +30,21 @@ test('mock gallery uses optimized local WebP images with exact dimensions, capti
     assert.ok(webp.length < 150000);
   }
   assert.equal((context.match(/<figcaption>/g) || []).length, 3);
-  assert.match(context, /two interface mockups below are AI-generated with fictional content/);
-  assert.match(context, /no real client data/);
+  assert.match(context, /AI-generated mockup/);
+  assert.match(context, /No real client records/);
 });
 
 test('context references are linked and do not misrepresent OKF access controls', () => {
   assert.match(context, /https:\/\/gist.github.com\/karpathy\/442a6bf555914893e9891c11519de94f/);
   assert.match(context, /https:\/\/cloud.google.com\/blog\/products\/data-analytics\/okf-v0-2-adds-trust-signals/);
-  assert.match(context, /they do not enforce access permissions/);
-  assert.match(context, /my proposed direction/);
+  assert.match(context, /permissions still need to be enforced/);
+  assert.match(context, /proposed design/);
 });
 
 test('viewer replaces extended content on each project transition', () => {
   const viewer = readFileSync(new URL('../assets/viewer.mjs', import.meta.url), 'utf8');
-  assert.match(html, /data-detail-target="#context \.context-content"/);
-  assert.match(viewer, /extra\.replaceChildren\(\.\.\.\(detail \? \[detail\.cloneNode\(true\)\] : \[\]\)\)/);
+  assert.match(html, /data-detail-target="#context \.case-study-content"/);
+  assert.match(viewer, /extra\.replaceChildren\(\.\.\.\(content \? \[content\] : \[\]\)\)/);
   assert.match(viewer, /extra.hidden = !detail/);
-  assert.doesNotMatch(context.match(/<div class="context-content">([\s\S]*)/)[1], /\sid="/);
+  assert.doesNotMatch(context.match(/<div class="case-study-content">([\s\S]*)/)[1], /\sid="/);
 });

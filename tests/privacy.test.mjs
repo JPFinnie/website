@@ -4,14 +4,14 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
-const work = html.match(/<section class="band work"[\s\S]*?<\/section>/)[0];
+const work = html.slice(html.indexOf('<section class="band work"'), html.indexOf('<section class="band experience"'));
 
 test('project approaches are illustrative and never attributed to an employer', () => {
-  assert.equal((work.match(/data-kind="approach"/g) || []).length, 3);
+  assert.equal((work.match(/data-kind="approach"/g) || []).length, 2);
   assert.equal((work.match(/data-kind="indie"/g) || []).length, 3);
-  assert.equal((work.match(/Product approach · illustrative/g) || []).length, 3);
+  assert.equal((work.match(/Product approach · illustrative/g) || []).length, 2);
   assert.doesNotMatch(work, /CIBC|Investor|at the bank|corporate|every new client|Braze|Contentstack|historical engineering/i);
-  assert.match(work, /illustrative product approaches/);
+  assert.match(work, /Product approach · illustrative/);
 });
 
 test('employer mention is limited to ordinary role information', () => {

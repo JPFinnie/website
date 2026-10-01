@@ -258,7 +258,7 @@ export function mountEffects({ glide, quiet }) {
     ];
     const targets = [];
     groups.forEach(([selector, delay]) => main.querySelectorAll(selector).forEach((el, i) => {
-      if (el.parentElement.closest('.card, .role, .education, .contact-actions')) return;
+      if (el.closest('.case-study-library') || el.parentElement.closest('.card, .role, .education, .contact-actions')) return;
       if (el.hasAttribute('data-reveal')) return;
       el.setAttribute('data-reveal', '');
       el.style.setProperty('--d', `${delay(i)}ms`);

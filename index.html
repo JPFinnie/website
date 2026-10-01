@@ -113,52 +113,40 @@
     <div class="shell">
       <p class="eyebrow">Selected work</p>
       <h2 id="work-title">How I think. What I build.</h2>
-      <p class="section-lead">Independent products first, followed by illustrative product approaches. Explore the live products or open an entry for more detail.</p>
+      <p class="section-lead">Three independent projects, with the thinking and systems behind them. Open a case study before exploring the prototype.</p>
 
       <div class="filter" role="group" aria-label="Show selected work" hidden>
         <span class="filter-thumb" aria-hidden="true"></span>
-        <button type="button" data-filter="all" aria-pressed="true">All <span class="filter-count">6</span></button>
+        <button type="button" data-filter="all" aria-pressed="true">All <span class="filter-count">5</span></button>
         <button type="button" data-filter="indie" aria-pressed="false">Independent <span class="filter-count">3</span></button>
-        <button type="button" data-filter="approach" aria-pressed="false">Approaches <span class="filter-count">3</span></button>
+        <button type="button" data-filter="approach" aria-pressed="false">Approaches <span class="filter-count">2</span></button>
       </div>
       <p class="visually-hidden" id="work-status" aria-live="polite"></p>
 
       <ol class="cards">
-        <li class="card" data-kind="indie">
+        <li class="card" data-kind="indie" data-project-id="finance-hermes" data-project-url="https://finance-hermes.vercel.app" data-detail-target="#finance-hermes .case-study-content">
           <p class="card-tag">Independent · live</p>
-          <h3><a href="https://finance-hermes.vercel.app" target="_blank" rel="noopener noreferrer">FinanceHermes <svg class="external-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6 4h10v10M16 4 4 16"/></svg></a></h3>
+          <h3>FinanceHermes</h3>
           <p>A financial-research agent that searches the web and produces cited answers in a streaming interface.</p>
-          <template class="card-details">A financial-research agent on a hand-built harness: a streaming tool-call loop over live web search, visible reasoning traces, server-side citation enforcement and a two-tier freemium gate. Zero-dependency serverless deploy, demoed live to rooms of investment advisors.</template>
           <p class="card-meta">SSE streaming · tool loop · citation enforcement · serverless</p>
         </li>
-        <li class="card" data-kind="indie" data-status="prototype">
-          <p class="card-tag">Independent · prototype</p>
-          <h3><a href="https://six-cut.vercel.app" target="_blank" rel="noopener noreferrer">The Six Cut <svg class="external-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6 4h10v10M16 4 4 16"/></svg></a></h3>
-          <p>A prototype for discovering and comparing Toronto&rsquo;s independent butchers.</p>
-          <template class="card-details">A Next.js prototype exploring a scoring-based approach to discovering Toronto&rsquo;s independent butchers.</template>
+        <li class="card" data-kind="indie" data-project-id="six-cut" data-project-url="https://six-cut.vercel.app" data-detail-target="#six-cut .case-study-content">
+          <p class="card-tag">Independent · live prototype</p>
+          <h3>The Six Cut</h3>
+          <p>A map-first guide to Toronto&rsquo;s independent butchers, with a transparent review-based scoring method.</p>
           <p class="card-meta">Next.js · Vercel · scoring methodology</p>
         </li>
-        <li class="card" data-kind="indie">
-          <p class="card-tag">Independent</p>
-          <h3>Personal OKF knowledge base</h3>
-          <p>A personal LLM-wiki setup: a cross-linked markdown knowledge graph used as shared context by Claude Code and the other agents I work with day to day.</p>
-          <p class="card-meta">OKF · embeddings · agent context</p>
+        <li class="card" data-kind="indie" data-project-id="context" data-detail-target="#context .case-study-content">
+          <p class="card-tag">Personal build · wider vision</p>
+          <h3>Context systems</h3>
+          <p>My personal markdown knowledge system, and how I think the same idea should grow into organisationally owned employee and client context.</p>
+          <p class="card-meta">Linked markdown · OKF · organisational context</p>
         </li>
         <li class="card" data-kind="approach">
           <p class="card-tag">Product approach · illustrative</p>
           <h3>AI-assisted product discovery</h3>
           <p>Use AI to explore a product question, sketch possible solutions and build a lightweight prototype. Keep people involved in reviewing the evidence and deciding what is worth pursuing.</p>
           <p class="card-meta">Product discovery · prototyping · human review</p>
-        </li>
-        <li class="card" data-kind="approach" data-detail-target="#context .context-content">
-          <p class="card-tag">Product approach · illustrative</p>
-          <h3>Useful context for AI</h3>
-          <p>Organisationally owned knowledge for employees, with permissioned client context that connects communications, service history and clearly labelled CLV estimates.</p>
-          <a class="context-preview" href="#context" aria-label="Read my approach to organisational and client context">
-            <img src="/assets/context-organisation-mockup.webp" alt="Illustrative employee knowledge system mockup." width="1586" height="992" loading="lazy" decoding="async">
-            <span>Explore the context concept</span>
-          </a>
-          <p class="card-meta">Shared knowledge · client context · source accountability</p>
         </li>
         <li class="card" data-kind="approach">
           <p class="card-tag">Product approach · illustrative</p>
@@ -168,58 +156,141 @@
         </li>
       </ol>
 
-      <article class="context-feature" id="context" aria-labelledby="context-title">
-        <p class="eyebrow">A product perspective</p>
-        <h3 id="context-title">Context should belong to the organisation.</h3>
-        <div class="context-content">
-          <p class="context-intro">I think businesses should build organisationally owned and managed context systems: shared knowledge for employees, and a permissioned view of each client relationship. People and their AI tools should be able to work from context that the business takes responsibility for keeping useful.</p>
-          <div class="context-principles">
-            <div>
-              <h4>Shared knowledge for employees</h4>
-              <p>Connect decisions, research, policies and ways of working to their sources. Give that knowledge clear owners, review points and a record of what changed. Employees should be able to reuse what the organisation has learned, with AI helping maintain the connections.</p>
-            </div>
-            <div>
-              <h4>Context for each client</h4>
-              <p>Bring relevant communications, preferences, commitments and service history into a permissioned timeline. That could include emails, messages and call summaries where capture is appropriate and authorised, helping teams provide continuity across a relationship.</p>
-            </div>
-            <div>
-              <h4>Facts first. Estimates labelled.</h4>
-              <p>Keep observed events and source-backed facts separate from AI summaries and modelled estimates such as client lifetime value (CLV). Make assumptions and freshness visible, so an estimate can inform planning without being mistaken for a fact about a person.</p>
-            </div>
-            <div>
-              <h4>Managed as a product</h4>
-              <p>Ownership includes access rules, consent where required, a clear purpose for what is captured, and retention and correction processes. Shared context needs those controls alongside the knowledge format itself.</p>
-            </div>
+      <div class="case-study-library">
+        <!-- Detailed sources are a readable fallback without JavaScript. The viewer clones them without page-reveal state. -->
+        <article class="case-study-source" id="finance-hermes" aria-labelledby="finance-hermes-title">
+          <h3 id="finance-hermes-title">FinanceHermes</h3>
+          <div class="case-study-content">
+            <section class="case-section">
+              <p class="case-kicker">01 / What I built</p>
+              <h3>A research question becomes a visible workflow.</h3>
+              <p>FinanceHermes is an independent financial-research and education prototype. A user asks a question, the agent chooses tools, reads source material and streams its activity before returning a source-linked answer. The interface makes the research process inspectable instead of showing only a final block of text.</p>
+              <p>Research mode combines model reasoning with web search and page extraction. Learn mode narrows the available tools to a curated educational library. They share the same agent endpoint but have different tool permissions and run budgets.</p>
+            </section>
+            <section class="case-section">
+              <p class="case-kicker">02 / How the system works</p>
+              <h3>A small stack, with the orchestration made explicit.</h3>
+              <ol class="case-steps">
+                <li><strong>Browser → serverless endpoint</strong>Static HTML, CSS and JavaScript send the question to a Node.js function on Vercel. The project declares no npm dependencies; provider credentials stay server-side.</li>
+                <li><strong>Model → tools → model</strong>The server calls an OpenAI-compatible model provider, reconstructs streamed tool-call arguments, runs approved tools and returns their results to the model. It supports structured calls and Hermes-style inline calls.</li>
+                <li><strong>Streaming → final synthesis</strong>Server-Sent Events carry status, output and tool activity to the browser. Separate timeouts and step limits bound a run before final synthesis.</li>
+              </ol>
+            </section>
+            <section class="case-section">
+              <p class="case-kicker">03 / Grounding and quality checks</p>
+              <h3>Retrieval and citations are part of the implementation.</h3>
+              <p>Research uses Tavily-backed search and extraction when configured. The local learning library uses keyword ranking with stemming, title weighting and phrase bonuses. A deterministic final pass checks educational links against the library and repairs plausible but nonexistent article paths.</p>
+              <p>An offline mock harness exercises the real agent loop against controlled upstream responses, including tool-call formats, streaming events, missing credentials, Learn restrictions, link repair and optional access-code gating.</p>
+              <p class="case-note">This is a research and education demo, not financial advice. A linked source is not a guarantee of accuracy. Live research depends on configured services; educational content needs review and refresh. The access-code gate is not a subscription billing system.</p>
+            </section>
+            <section class="case-section case-references">
+              <h3>Build references</h3>
+              <a href="https://github.com/JPFinnie/FinanceHermes/blob/dd6e520fd4aecdc067132e29eda19f81cd9adc40/api/agent.js" target="_blank" rel="noopener noreferrer"><strong>Agent orchestration</strong><span>Streaming, provider integration, tool execution and bounded runs.</span></a>
+              <a href="https://github.com/JPFinnie/FinanceHermes/blob/dd6e520fd4aecdc067132e29eda19f81cd9adc40/api/learn-library.js" target="_blank" rel="noopener noreferrer"><strong>Retrieval and link validation</strong><span>The educational search and source-link checks behind the experience.</span></a>
+            </section>
+            <section class="case-section">
+              <p class="case-kicker">04 / The interface</p>
+              <h3>Start with the question.</h3>
+              <figure class="case-figure">
+                <img src="/assets/financehermes-composer.webp" alt="Actual FinanceHermes research composer with a market-question field, Ask button and example prompts." width="870" height="145" loading="lazy" decoding="async">
+                <figcaption>The live research composer, before a query is submitted. A focused crop of the actual interface; no generated answer is shown.</figcaption>
+              </figure>
+            </section>
           </div>
-          <p class="context-disclaimer">Illustrative concepts only. The two interface mockups below are AI-generated with fictional content; they do not show an employer system or real client records.</p>
-          <div class="context-gallery">
-            <figure>
-              <a href="/assets/context-organisation-mockup.webp" target="_blank" rel="noopener noreferrer" aria-label="Open the fictional employee context mockup at full size">
-                <img src="/assets/context-organisation-mockup.webp" alt="Fictional dark knowledge app showing a shared employee context graph and a product decision panel with owner, sources, review and access fields." width="1586" height="992" loading="lazy" decoding="async">
-              </a>
-              <figcaption><strong>01 · Shared organisational context</strong> An Obsidian-inspired concept connecting people, decisions and source material. AI-generated mockup; all content is fictional. Open the image for a larger view.</figcaption>
-            </figure>
-            <figure>
-              <a href="/assets/context-client-mockup.webp" target="_blank" rel="noopener noreferrer" aria-label="Open the fictional client context mockup at full size">
-                <img src="/assets/context-client-mockup.webp" alt="Fictional client context interface for Demo client 001 with linked preferences and conversations, a permissioned communications timeline, separate facts and CLV estimates, and access and retention controls." width="1586" height="992" loading="lazy" decoding="async">
-              </a>
-              <figcaption><strong>02 · A permissioned client view</strong> A synthetic relationship record illustrates service continuity and the distinction between observed facts and a CLV estimate. AI-generated mockup; no real client data.</figcaption>
-            </figure>
-            <figure class="context-reference">
-              <a href="/assets/context-graph-reference.webp" target="_blank" rel="noopener noreferrer" aria-label="Open the illustrative knowledge graph reference at full size">
-                <img src="/assets/context-graph-reference.webp" alt="Unlabelled grey knowledge graph with linked clusters and hub nodes on a dark background, used as a visual reference for the concept." width="1106" height="908" loading="lazy" decoding="async">
-              </a>
-              <figcaption><strong>03 · The graph as a starting point</strong> A supplied visual reference for connected knowledge. The useful system is the maintained context, sources and responsibilities behind the graph.</figcaption>
-            </figure>
+        </article>
+        <article class="case-study-source" id="six-cut" aria-labelledby="six-cut-title">
+          <h3 id="six-cut-title">The Six Cut</h3>
+          <div class="case-study-content">
+            <section class="case-section">
+              <p class="case-kicker">01 / What I built</p>
+              <h3>Find a local butcher, then understand the score.</h3>
+              <p>The Six Cut is a Toronto-focused discovery product for independent butcher shops. It brings location, specialties, opening hours, shop details and ratings into a map-and-list experience, with an explainable score alongside the underlying information.</p>
+              <p>Users can search, filter and compare shops, then open a profile for the score breakdown, contact details and available imagery. The score is intended as a useful comparison signal, with its method exposed for readers to question.</p>
+            </section>
+            <section class="case-section">
+              <p class="case-kicker">02 / The build</p>
+              <h3>Discovery, structured data, and a resilient interface.</h3>
+              <ol class="case-steps">
+                <li><strong>Discover and clean</strong>Google Places discovery scripts search overlapping areas across Toronto, deduplicate by place ID and filter named chains and non-operational businesses. Neighborhoods are assigned approximately from location.</li>
+                <li><strong>Store and serve</strong>Supabase/Postgres holds published shop data. Server routes resolve Google photo references and reviews without exposing the service key to the browser.</li>
+                <li><strong>Explore and compare</strong>Next.js, React and TypeScript power the product, with Mapbox for map browsing and filters for text, specialty, opening status and score. If the map cannot initialise, the interface falls back to a list.</li>
+              </ol>
+            </section>
+            <section class="case-section">
+              <p class="case-kicker">03 / The scoring method</p>
+              <h3>Weighted signals, with the ingredients visible.</h3>
+              <p>The Six Cut Score uses deterministic review-text heuristics rather than an LLM making a subjective judgement. A lexicon finds positive and negative signals for quality, service and butcher craft, then combines them with the Google rating and review volume.</p>
+              <ul class="case-facts">
+                <li><strong>40% · Quality</strong>Review-text signals about meat quality.</li>
+                <li><strong>20% · Service</strong>Signals about the customer experience.</li>
+                <li><strong>15% · Craft</strong>Markers of specialist butcher skills.</li>
+                <li><strong>25% · Rating + volume</strong>15% normalised rating and 10% logarithmic review volume.</li>
+              </ul>
+              <p>The implementation smooths positive/negative ratios, caps repeated matches and reduces the weight of text components when the review sample is small. Refresh runs combine currently returned reviews with previously observed signal counts in a recent window; the archive stores derived signals rather than raw review text.</p>
+              <p class="case-note">Google supplies a limited review sample. Heuristics can miss context, language nuances and sarcasm, so the score is not a comprehensive quality judgement. Refresh tooling exists; a reliably scheduled refresh is not claimed here.</p>
+            </section>
+            <section class="case-section case-references">
+              <h3>Build references</h3>
+              <a href="https://six-cut.vercel.app/methodology" target="_blank" rel="noopener noreferrer"><strong>Read the scoring methodology</strong><span>The public explanation of the components and weighting.</span></a>
+              <a href="https://github.com/JPFinnie/SixCut/blob/30d4761fe12d53e365a4084626bd737292b76710/lib/scoring.ts" target="_blank" rel="noopener noreferrer"><strong>Inspect the scoring implementation</strong><span>Deterministic lexicons, weighting, smoothing and sample handling.</span></a>
+            </section>
+            <section class="case-section">
+              <p class="case-kicker">04 / The interface</p>
+              <h3>Make the result explainable.</h3>
+              <figure class="case-figure">
+                <img src="/assets/sixcut-score-profile.webp" alt="Actual Six Cut shop profile for Royal Beef showing its overall score, component bars, rating, contact details and specialties." width="820" height="528" loading="lazy" decoding="async">
+                <figcaption>Shop profile and score breakdown, captured from the live prototype. This is a cropped view of the actual interface; displayed scores and shop details may change.</figcaption>
+              </figure>
+            </section>
           </div>
-          <div class="context-sources">
-            <h4>Ideas informing this approach</h4>
-            <p><a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">Andrej Karpathy&rsquo;s LLM Wiki</a> describes an AI-maintained, interlinked markdown knowledge base built from source material, with workflows for adding knowledge, querying it and checking its health.</p>
-            <p><a href="https://cloud.google.com/blog/products/data-analytics/okf-v0-2-adds-trust-signals" target="_blank" rel="noopener noreferrer">Google Cloud&rsquo;s Open Knowledge Format v0.2</a> adds optional signals for provenance, verification, freshness, lifecycle and checking computations. These signals help consumers assess context; they do not enforce access permissions.</p>
-            <p class="context-source-note">The employee and client applications above are my proposed direction, rather than claims of a deployed system or recommendations attributed to these sources.</p>
+        </article>
+        <article class="case-study-source" id="context" aria-labelledby="context-title">
+          <h3 id="context-title">Context systems</h3>
+          <div class="case-study-content">
+            <section class="case-section">
+              <p class="case-kicker">01 / Personal build</p>
+              <h3>Knowledge that carries between conversations.</h3>
+              <p>My personal knowledge base is a set of cross-linked markdown notes used as shared context by Claude Code and the other agents I work with. It gives me something persistent to revisit and connect, rather than leaving everything inside individual chats.</p>
+              <p>The building blocks are deliberately legible: notes, links and a knowledge format that can be inspected alongside the tools using it. The graph is a way to navigate those connections; the useful part is the information behind each node.</p>
+              <figure class="case-figure case-figure-graph">
+                <img src="/assets/context-graph-reference.webp" alt="An unlabelled knowledge graph supplied as an illustrative reference, showing linked clusters and hub nodes on a dark background." width="1106" height="908" loading="lazy" decoding="async">
+                <figcaption>Illustrative graph reference supplied for this case study. It is not evidence of an employer implementation.</figcaption>
+              </figure>
+            </section>
+            <section class="case-section">
+              <p class="case-kicker">02 / The system pattern</p>
+              <h3>Sources, connected knowledge, and rules for upkeep.</h3>
+              <p>Karpathy&rsquo;s LLM Wiki describes a useful pattern: keep source material, build an interlinked markdown wiki from it, and give the agent conventions for maintaining that wiki. Adding a source, answering a question and checking for stale or contradictory claims become explicit workflows.</p>
+              <p>Open Knowledge Format adds a way to describe context consistently. Its v0.2 trust signals can carry provenance, verification and freshness information, so a consumer can assess what it is about to use. Those fields describe trust; permissions still need to be enforced by the surrounding system.</p>
+            </section>
+            <section class="case-section">
+              <p class="case-kicker">03 / Proposed organisational extension</p>
+              <h3>A shared asset that the business owns.</h3>
+              <p>I think businesses should build organisationally owned and managed context systems for employees and their AI tools. Decisions, research, policies and ways of working should connect back to sources, with clear owners, review points and a traceable record of updates.</p>
+              <p>The ambition is continuity: a team should be able to reuse what the organisation has learned instead of rebuilding the same background for each new person or task. This is the broader product direction I see growing from the personal knowledge-system idea.</p>
+              <figure class="case-figure">
+                <img src="/assets/context-organisation-mockup.webp" alt="Fictional employee knowledge interface with a shared graph and a source-linked decision panel showing ownership, review and access fields." width="1586" height="992" loading="lazy" decoding="async">
+                <figcaption><span class="case-badge">AI-generated mockup</span> An illustrative employee context system with fictional content. This is a proposed design, not a deployed employer system.</figcaption>
+              </figure>
+            </section>
+            <section class="case-section">
+              <p class="case-kicker">04 / Proposed client context</p>
+              <h3>One relationship, with its history intact.</h3>
+              <p>A permissioned context record for each client could bring together relevant communications, preferences, commitments and service history. Emails, messages and call summaries can support that view where their capture is appropriate and authorised.</p>
+              <p>Observed events and source-backed facts should remain separate from AI summaries and modelled estimates such as client lifetime value (CLV). Assumptions and freshness need to be visible. Ownership also means access controls, consent where required, purpose-limited capture, and retention and correction processes.</p>
+              <figure class="case-figure">
+                <img src="/assets/context-client-mockup.webp" alt="Fictional client record with a communications timeline, separately labelled facts and CLV estimate, and access and retention controls." width="1586" height="992" loading="lazy" decoding="async">
+                <figcaption><span class="case-badge">AI-generated mockup</span> Synthetic client context demonstrating service continuity. No real client records, metrics or employer details.</figcaption>
+              </figure>
+            </section>
+            <section class="case-section case-references">
+              <h3>Ideas informing the approach</h3>
+              <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer"><strong>Andrej Karpathy · LLM Wiki</strong><span>A maintained, interlinked knowledge base built from source material.</span></a>
+              <a href="https://cloud.google.com/blog/products/data-analytics/okf-v0-2-adds-trust-signals" target="_blank" rel="noopener noreferrer"><strong>Google Cloud · OKF v0.2</strong><span>Optional provenance, verification, freshness and computation checks.</span></a>
+            </section>
           </div>
-        </div>
-      </article>
+        </article>
+      </div>
     </div>
   </section>
 

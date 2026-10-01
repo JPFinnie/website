@@ -15,6 +15,21 @@ export function insetFor(rect, width, height, radius = 12) {
 // Stepping through a list that wraps at both ends.
 export const step = (index, delta, length) => length ? ((index + delta) % length + length) % length : -1;
 
+// Detail sources may have been seen by page effects before opening. Cloned
+// content must never depend on a scroll observer attached to the original.
+export function cloneCaseStudy(source) {
+  if (!source) return null;
+  const clone = source.cloneNode(true);
+  [clone, ...clone.querySelectorAll('[data-reveal], [data-split], [id]')].forEach(node => {
+    node.removeAttribute('data-reveal');
+    node.removeAttribute('data-split');
+    node.removeAttribute('id');
+    node.classList.remove('is-in');
+    node.style.removeProperty('--d');
+  });
+  return clone;
+}
+
 export function mountViewer({ glide, quiet, cursor }) {
   const root = document.documentElement;
   const cards = [...document.querySelectorAll('.cards .card')];
@@ -57,8 +72,8 @@ export function mountViewer({ glide, quiet, cursor }) {
         <p class="sheet-tag"></p>
         <h2 class="sheet-title" id="sheet-title" tabindex="-1"></h2>
         <p class="sheet-text"></p>
-        <div class="sheet-extra" hidden></div>
         <ul class="sheet-meta" aria-label="Topics"></ul>
+        <div class="sheet-extra" hidden></div>
         <a class="sheet-visit" target="_blank" rel="noopener noreferrer" hidden><span class="sheet-visit-label">Visit the live product</span> <svg class="external-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6 4h10v10M16 4 4 16"/></svg></a>
       </article>
       <nav class="sheet-nav" aria-label="Selected work">
@@ -76,9 +91,10 @@ export function mountViewer({ glide, quiet, cursor }) {
 
   function fill(card) {
     current = card;
+    sheet.scrollTop = 0;
     const list = visible();
     const index = list.indexOf(card);
-    const link = card.querySelector('h3 a');
+    const projectUrl = card.dataset.projectUrl;
     $('.sheet-num').textContent = number(card);
     $('.sheet-index').textContent = String(index + 1).padStart(2, '0');
     $('.sheet-total').textContent = String(list.length).padStart(2, '0');
@@ -87,7 +103,8 @@ export function mountViewer({ glide, quiet, cursor }) {
     $('.sheet-text').textContent = card.querySelector('.card-details')?.content.textContent.trim() || card.querySelector('p:not(.card-tag):not(.card-meta)').textContent;
     const detail = card.dataset.detailTarget ? document.querySelector(card.dataset.detailTarget) : null;
     const extra = $('.sheet-extra');
-    extra.replaceChildren(...(detail ? [detail.cloneNode(true)] : []));
+    const content = cloneCaseStudy(detail);
+    extra.replaceChildren(...(content ? [content] : []));
     extra.hidden = !detail;
     $('.sheet-meta').replaceChildren(...card.querySelector('.card-meta').textContent.split(/\s*[·•]\s*/).filter(Boolean).map(item => {
       const li = document.createElement('li');
@@ -95,10 +112,12 @@ export function mountViewer({ glide, quiet, cursor }) {
       return li;
     }));
     const visit = $('.sheet-visit');
-    visit.hidden = !link;
-    if (link) {
-      visit.href = link.href;
-      visit.querySelector('.sheet-visit-label').textContent = card.dataset.status === 'prototype' ? 'View prototype' : 'Visit the live product';
+    visit.hidden = !projectUrl;
+    if (projectUrl) {
+      visit.href = projectUrl;
+      visit.querySelector('.sheet-visit-label').textContent = 'View prototype';
+    } else {
+      visit.removeAttribute('href');
     }
     sheet.dataset.kind = card.dataset.kind;
     const [previous, next] = [list[step(index, -1, list.length)], list[step(index, 1, list.length)]];
@@ -183,5 +202,11 @@ export function mountViewer({ glide, quiet, cursor }) {
     if (event.key === 'ArrowRight') { event.preventDefault(); go(1); }
     if (event.key === 'ArrowLeft') { event.preventDefault(); go(-1); }
   });
+  const openFromHash = () => {
+    const card = cards.find(item => item.dataset.projectId === location.hash.slice(1));
+    if (card && !sheet.open) open(card);
+  };
+  window.addEventListener('hashchange', openFromHash);
+  requestAnimationFrame(openFromHash);
   return { open, close };
 }
