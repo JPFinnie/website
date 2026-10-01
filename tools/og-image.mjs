@@ -22,7 +22,7 @@ body{width:1200px;height:630px;overflow:hidden;position:relative;background:#141
 .scrim{position:absolute;inset:0;background:linear-gradient(100deg,#0b0e14f7 0%,#0b0e14e8 42%,#0b0e1480 100%)}
 .body{position:relative;padding:86px 84px;height:100%;display:flex;flex-direction:column;justify-content:center}
 .rule{width:64px;height:4px;background:#ff6635;margin-bottom:26px}
-.kicker{font-size:22px;letter-spacing:.17em;text-transform:uppercase;color:#ff9a76;font-weight:500}
+.kicker{font-size:20px;letter-spacing:.12em;text-transform:uppercase;color:#ff9a76;font-weight:500}
 h1{font-family:'Space Grotesk',sans-serif;font-size:104px;font-weight:400;letter-spacing:-.042em;line-height:1;margin:26px 0 30px}
 .line{font-size:36px;line-height:1.35;color:#e3e6ec;letter-spacing:-.012em}
 .meta{font-size:26px;color:#9ba0ab;margin-top:14px}
@@ -31,9 +31,9 @@ h1{font-family:'Space Grotesk',sans-serif;font-size:104px;font-weight:400;letter
 <div class="art"></div><div class="scrim"></div>
 <div class="body">
   <div class="rule"></div>
-  <div class="kicker">Product Manager &middot; AI Agents, Fintech &amp; Growth</div>
+  <div class="kicker">Product Manager &middot; Fintech, AI &amp; Customer Experience</div>
   <h1>James Finnie</h1>
-  <div class="line">I build the thing before I pitch it.</div>
+  <div class="line">Making complex products feel simple.</div>
   <div class="meta">Toronto, ON</div>
 </div>
 <div class="url">james-finnie.com</div>
