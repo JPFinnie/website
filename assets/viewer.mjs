@@ -30,6 +30,12 @@ export function cloneCaseStudy(source) {
   return clone;
 }
 
+export function withoutProjectHash(href, projectIds) {
+  const url = new URL(href);
+  if (projectIds.includes(url.hash.slice(1))) url.hash = '';
+  return url.href;
+}
+
 export function mountViewer({ glide, quiet, cursor }) {
   const root = document.documentElement;
   const cards = [...document.querySelectorAll('.cards .card')];
@@ -155,6 +161,8 @@ export function mountViewer({ glide, quiet, cursor }) {
     const card = current;
     const finish = () => {
       sheet.close();
+      const href = withoutProjectHash(location.href, cards.map(item => item.dataset.projectId).filter(Boolean));
+      if (href !== location.href) { try { history.replaceState(null, '', href); } catch {} }
       root.classList.remove('sheet-open');
       cursor?.host(document.body);
       card.querySelector('.card-open').focus({ preventScroll: true });

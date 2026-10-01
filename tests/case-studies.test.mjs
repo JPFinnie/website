@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
-import { cloneCaseStudy } from '../assets/viewer.mjs';
+import { cloneCaseStudy, withoutProjectHash } from '../assets/viewer.mjs';
 
 const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const viewer = readFileSync(new URL('../assets/viewer.mjs', import.meta.url), 'utf8');
@@ -50,4 +50,12 @@ test('page effects exclude fallback content and modal bodies do not rely on obse
   assert.match(css, /\.has-js \.case-study-library\{display:none\}/);
   assert.match(css, /\.sheet \.case-study-content \[data-reveal\]\{opacity:1/);
   assert.match(viewer, /extra.replaceChildren/);
+});
+
+
+test('closing a deep-linked viewer clears its project hash but preserves page navigation and preferences', () => {
+  const ids = ['finance-hermes', 'six-cut', 'context'];
+  assert.equal(withoutProjectHash('https://www.james-finnie.com/?motion=quiet#context', ids), 'https://www.james-finnie.com/?motion=quiet');
+  assert.equal(withoutProjectHash('https://www.james-finnie.com/#work', ids), 'https://www.james-finnie.com/#work');
+  assert.equal(withoutProjectHash('https://www.james-finnie.com/#six-cut', ids), 'https://www.james-finnie.com/');
 });
