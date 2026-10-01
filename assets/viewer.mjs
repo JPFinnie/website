@@ -57,6 +57,7 @@ export function mountViewer({ glide, quiet, cursor }) {
         <p class="sheet-tag"></p>
         <h2 class="sheet-title" id="sheet-title" tabindex="-1"></h2>
         <p class="sheet-text"></p>
+        <div class="sheet-extra" hidden></div>
         <ul class="sheet-meta" aria-label="Topics"></ul>
         <a class="sheet-visit" target="_blank" rel="noopener noreferrer" hidden><span class="sheet-visit-label">Visit the live product</span> <svg class="external-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6 4h10v10M16 4 4 16"/></svg></a>
       </article>
@@ -84,6 +85,10 @@ export function mountViewer({ glide, quiet, cursor }) {
     $('.sheet-tag').textContent = card.querySelector('.card-tag').textContent;
     $('.sheet-title').textContent = card.querySelector('h3').textContent.trim();
     $('.sheet-text').textContent = card.querySelector('.card-details')?.content.textContent.trim() || card.querySelector('p:not(.card-tag):not(.card-meta)').textContent;
+    const detail = card.dataset.detailTarget ? document.querySelector(card.dataset.detailTarget) : null;
+    const extra = $('.sheet-extra');
+    extra.replaceChildren(...(detail ? [detail.cloneNode(true)] : []));
+    extra.hidden = !detail;
     $('.sheet-meta').replaceChildren(...card.querySelector('.card-meta').textContent.split(/\s*[·•]\s*/).filter(Boolean).map(item => {
       const li = document.createElement('li');
       li.textContent = item;

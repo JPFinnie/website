@@ -252,6 +252,39 @@ html:not(.has-js) .masthead,.is-still .masthead,.past-intro .masthead{background
 .card>p{font-size:.9375rem;line-height:1.65}
 .card .card-meta{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-size:.8125rem!important;color:#6b6e75!important;display:flex;flex-wrap:wrap;gap:6px 18px}
 
+/* The context concept is readable on the page and in the project viewer. */
+.context-preview{display:block;margin-block:4px;border-radius:8px;overflow:hidden;background:var(--night);color:#fff}
+.context-preview img{width:100%;height:auto}
+.context-preview span{display:block;padding:10px 12px;font-size:.75rem;font-weight:500}
+.context-preview:hover span{text-decoration:underline;text-underline-offset:3px}
+.context-feature{margin-top:72px;padding-top:48px;border-top:1px solid var(--line);scroll-margin-top:100px}
+.context-feature>h3{max-width:22ch;font:400 clamp(2rem,4.4vw,3.5rem)/1.08 var(--display);letter-spacing:-.04em;margin:16px 0 28px;text-wrap:balance}
+.context-intro{font-size:clamp(1.0625rem,1.8vw,1.25rem);line-height:1.65;max-width:68ch;color:#3c3e44}
+.context-principles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 32px;margin-top:32px}
+.context-content h4{font:500 1.125rem/1.35 var(--display);letter-spacing:-.02em;margin-bottom:10px}
+.context-principles p,.context-sources p{font-size:.9375rem;line-height:1.7;color:var(--ink-soft)}
+.context-disclaimer{margin-top:32px;padding:16px 20px;border:1px solid var(--line);border-radius:8px;background:var(--paper);font-size:.875rem;color:var(--ink-soft)}
+.context-gallery{display:grid;gap:32px;margin-top:32px}
+.context-gallery figure{min-width:0}
+.context-gallery a{display:block;border-radius:12px;overflow:hidden;background:#252525;border:1px solid #3c3c43}
+.context-gallery img{width:100%;height:auto}
+.context-gallery figcaption{margin-top:12px;max-width:78ch;font-size:.8125rem;line-height:1.65;color:var(--ink-soft)}
+.context-gallery figcaption strong{display:block;color:var(--ink);font-weight:500;margin-bottom:3px}
+.context-gallery .context-reference{max-width:600px}
+.context-reference img{max-height:340px;object-fit:contain}
+.context-sources{margin-top:36px;padding-top:24px;border-top:1px solid var(--line);max-width:78ch}
+.context-sources p+p{margin-top:14px}
+.context-sources a{color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px}
+.context-sources .context-source-note{font-size:.8125rem}
+.sheet-extra{margin-top:32px}
+.sheet-extra .context-intro{font-size:1.0625rem}
+.sheet-extra .context-content{max-width:100%}
+@media(max-width:640px){
+  .context-principles{grid-template-columns:1fr;gap:24px}
+  .context-feature{margin-top:48px;padding-top:32px}
+  .context-gallery{gap:24px}
+}
+
 .roles{margin-top:48px;border-top:1px solid var(--line)}
 /* The timeline: a hairline that draws itself down the roles as they are read. */
 .has-timeline .roles{--gutter:clamp(30px,4vw,52px);position:relative;padding-left:var(--gutter);border-top:0}

@@ -150,11 +150,15 @@
           <p>Use AI to explore a product question, sketch possible solutions and build a lightweight prototype. Keep people involved in reviewing the evidence and deciding what is worth pursuing.</p>
           <p class="card-meta">Product discovery · prototyping · human review</p>
         </li>
-        <li class="card" data-kind="approach">
+        <li class="card" data-kind="approach" data-detail-target="#context .context-content">
           <p class="card-tag">Product approach · illustrative</p>
           <h3>Useful context for AI</h3>
-          <p>Organize knowledge so an AI assistant can find relevant context and make its sources easy to check. Focus on clear information, appropriate access and answers people can verify.</p>
-          <p class="card-meta">Knowledge organization · retrieval · source verification</p>
+          <p>Organisationally owned knowledge for employees, with permissioned client context that connects communications, service history and clearly labelled CLV estimates.</p>
+          <a class="context-preview" href="#context" aria-label="Read my approach to organisational and client context">
+            <img src="/assets/context-organisation-mockup.webp" alt="Illustrative employee knowledge system mockup." width="1586" height="992" loading="lazy" decoding="async">
+            <span>Explore the context concept</span>
+          </a>
+          <p class="card-meta">Shared knowledge · client context · source accountability</p>
         </li>
         <li class="card" data-kind="approach">
           <p class="card-tag">Product approach · illustrative</p>
@@ -163,6 +167,59 @@
           <p class="card-meta">Personalization · experimentation · customer experience</p>
         </li>
       </ol>
+
+      <article class="context-feature" id="context" aria-labelledby="context-title">
+        <p class="eyebrow">A product perspective</p>
+        <h3 id="context-title">Context should belong to the organisation.</h3>
+        <div class="context-content">
+          <p class="context-intro">I think businesses should build organisationally owned and managed context systems: shared knowledge for employees, and a permissioned view of each client relationship. People and their AI tools should be able to work from context that the business takes responsibility for keeping useful.</p>
+          <div class="context-principles">
+            <div>
+              <h4>Shared knowledge for employees</h4>
+              <p>Connect decisions, research, policies and ways of working to their sources. Give that knowledge clear owners, review points and a record of what changed. Employees should be able to reuse what the organisation has learned, with AI helping maintain the connections.</p>
+            </div>
+            <div>
+              <h4>Context for each client</h4>
+              <p>Bring relevant communications, preferences, commitments and service history into a permissioned timeline. That could include emails, messages and call summaries where capture is appropriate and authorised, helping teams provide continuity across a relationship.</p>
+            </div>
+            <div>
+              <h4>Facts first. Estimates labelled.</h4>
+              <p>Keep observed events and source-backed facts separate from AI summaries and modelled estimates such as client lifetime value (CLV). Make assumptions and freshness visible, so an estimate can inform planning without being mistaken for a fact about a person.</p>
+            </div>
+            <div>
+              <h4>Managed as a product</h4>
+              <p>Ownership includes access rules, consent where required, a clear purpose for what is captured, and retention and correction processes. Shared context needs those controls alongside the knowledge format itself.</p>
+            </div>
+          </div>
+          <p class="context-disclaimer">Illustrative concepts only. The two interface mockups below are AI-generated with fictional content; they do not show an employer system or real client records.</p>
+          <div class="context-gallery">
+            <figure>
+              <a href="/assets/context-organisation-mockup.webp" target="_blank" rel="noopener noreferrer" aria-label="Open the fictional employee context mockup at full size">
+                <img src="/assets/context-organisation-mockup.webp" alt="Fictional dark knowledge app showing a shared employee context graph and a product decision panel with owner, sources, review and access fields." width="1586" height="992" loading="lazy" decoding="async">
+              </a>
+              <figcaption><strong>01 · Shared organisational context</strong> An Obsidian-inspired concept connecting people, decisions and source material. AI-generated mockup; all content is fictional. Open the image for a larger view.</figcaption>
+            </figure>
+            <figure>
+              <a href="/assets/context-client-mockup.webp" target="_blank" rel="noopener noreferrer" aria-label="Open the fictional client context mockup at full size">
+                <img src="/assets/context-client-mockup.webp" alt="Fictional client context interface for Demo client 001 with linked preferences and conversations, a permissioned communications timeline, separate facts and CLV estimates, and access and retention controls." width="1586" height="992" loading="lazy" decoding="async">
+              </a>
+              <figcaption><strong>02 · A permissioned client view</strong> A synthetic relationship record illustrates service continuity and the distinction between observed facts and a CLV estimate. AI-generated mockup; no real client data.</figcaption>
+            </figure>
+            <figure class="context-reference">
+              <a href="/assets/context-graph-reference.webp" target="_blank" rel="noopener noreferrer" aria-label="Open the illustrative knowledge graph reference at full size">
+                <img src="/assets/context-graph-reference.webp" alt="Unlabelled grey knowledge graph with linked clusters and hub nodes on a dark background, used as a visual reference for the concept." width="1106" height="908" loading="lazy" decoding="async">
+              </a>
+              <figcaption><strong>03 · The graph as a starting point</strong> A supplied visual reference for connected knowledge. The useful system is the maintained context, sources and responsibilities behind the graph.</figcaption>
+            </figure>
+          </div>
+          <div class="context-sources">
+            <h4>Ideas informing this approach</h4>
+            <p><a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">Andrej Karpathy&rsquo;s LLM Wiki</a> describes an AI-maintained, interlinked markdown knowledge base built from source material, with workflows for adding knowledge, querying it and checking its health.</p>
+            <p><a href="https://cloud.google.com/blog/products/data-analytics/okf-v0-2-adds-trust-signals" target="_blank" rel="noopener noreferrer">Google Cloud&rsquo;s Open Knowledge Format v0.2</a> adds optional signals for provenance, verification, freshness, lifecycle and checking computations. These signals help consumers assess context; they do not enforce access permissions.</p>
+            <p class="context-source-note">The employee and client applications above are my proposed direction, rather than claims of a deployed system or recommendations attributed to these sources.</p>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
