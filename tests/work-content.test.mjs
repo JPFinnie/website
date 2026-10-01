@@ -32,9 +32,9 @@ test('card actions have visible labels and touch-sized targets', () => {
 });
 
 
-test('the unpopulated discovery demo is clearly labeled as a prototype', () => {
+test('the discovery demo is clearly labeled as a prototype', () => {
   assert.match(cards[1][2], /Independent · prototype/);
   assert.doesNotMatch(cards[1][2], /Independent · live/);
-  assert.match(cards[1][2], /directory data is not currently loaded/);
+  assert.doesNotMatch(cards[1][2], /directory data is not currently loaded/);
   assert.match(readFileSync(new URL('../assets/viewer.mjs', import.meta.url), 'utf8'), /'prototype' \? 'View prototype'/);
 });
