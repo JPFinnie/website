@@ -47,7 +47,7 @@ button:disabled{cursor:default;opacity:.55}
 /* ---------- Masthead ---------- */
 .masthead{position:fixed;z-index:40;top:0;inset-inline:0;height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding-inline:var(--edge);color:#fff;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease,background .25s ease,box-shadow .25s ease}
 .screen-open .masthead,.is-still .masthead,html:not(.has-js) .masthead{opacity:1;visibility:visible}
-html.in-outro .masthead,html.in-outro .rail{opacity:0;visibility:hidden}
+html.in-outro:not(.is-still) .masthead,html.in-outro:not(.is-still) .rail{opacity:0;visibility:hidden}
 .identity{font-family:var(--display);font-size:1.0625rem;font-weight:500;letter-spacing:-.02em;white-space:nowrap}
 .masthead nav{position:relative;display:flex;align-items:center;gap:clamp(0px,.6vw,8px);font-size:.875rem}
 .masthead nav a{position:relative;z-index:1;display:inline-flex;align-items:center;min-height:44px;padding-inline:14px;color:#ffffffb8;transition:color .3s}
@@ -56,7 +56,7 @@ html.in-outro .masthead,html.in-outro .rail{opacity:0;visibility:hidden}
 .nav-pill.is-on{opacity:1}
 .masthead nav a.cta{padding:8px 16px;min-height:38px;border:1px solid currentColor;border-radius:999px}
 .masthead nav a.cta:hover{background:currentColor;color:var(--night)}
-html:not(.has-js) .masthead,.past-intro .masthead{background:#14151bf2;backdrop-filter:blur(14px);box-shadow:0 1px 0 #ffffff1a}
+html:not(.has-js) .masthead,.is-still .masthead,.past-intro .masthead{background:#14151bf2;backdrop-filter:blur(14px);box-shadow:0 1px 0 #ffffff1a}
 
 /* ---------- Opening scene ---------- */
 .journey{position:relative;height:100svh;background:var(--night)}
@@ -174,12 +174,13 @@ html:not(.has-js) .masthead,.past-intro .masthead{background:#14151bf2;backdrop-
 /* ---------- Project viewer ---------- */
 .card.is-openable{cursor:pointer}
 .card h3 a{position:relative;z-index:2}
-.card-open{position:absolute;right:22px;bottom:22px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center;transition:background .3s,border-color .3s,rotate .5s var(--ease-out)}
-.card-open span,.sheet-close span{position:relative;width:12px;height:12px}
+.card-open{align-self:flex-start;display:inline-flex;align-items:center;gap:14px;min-height:44px;padding:0 16px;margin-top:4px;border-radius:999px;border:1px solid var(--line);background:var(--paper);font-size:.8125rem;font-weight:500;transition:background .3s,border-color .3s,color .3s}
+.card-open span,.sheet-close span{position:relative;flex-shrink:0;width:12px;height:12px}
+.card-open span{transition:rotate .5s var(--ease-out)}
 .card-open span::before,.card-open span::after,.sheet-close span::before,.sheet-close span::after{content:'';position:absolute;top:50%;left:0;width:100%;height:1.5px;margin-top:-.75px;background:currentColor;border-radius:1px}
 .card-open span::after,.sheet-close span::after{rotate:90deg}
-.card:hover .card-open,.card-open:focus-visible{background:var(--ink);border-color:var(--ink);color:var(--paper);rotate:90deg}
-.card .card-meta{padding-right:52px}
+.card:hover .card-open,.card-open:focus-visible{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.card:hover .card-open span,.card-open:focus-visible span{rotate:90deg}
 .sheet{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:var(--paper);color:var(--ink);overflow:auto;overscroll-behavior:contain}
 .sheet::backdrop{background:transparent}
 .sheet::before{content:'';position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 55% at 92% 0%,#ff663524,transparent 70%),radial-gradient(ellipse 50% 60% at 0% 100%,#a698ed2e,transparent 70%)}
@@ -243,7 +244,7 @@ html:not(.has-js) .masthead,.past-intro .masthead{background:#14151bf2;backdrop-
 .filter button[aria-pressed=true]{color:var(--paper)}
 .filter-count{font-size:.6875rem;opacity:.6;font-variant-numeric:tabular-nums}
 .filter-thumb{position:absolute;top:4px;bottom:4px;left:0;width:0;border-radius:999px;background:var(--ink);transition:transform .55s var(--ease-out),width .55s var(--ease-out)}
-.card-tag{font-size:.6875rem!important;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-ink)!important;font-weight:500}
+.card-tag{padding-right:30px;font-size:.6875rem!important;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-ink)!important;font-weight:500}
 .card h3{font-family:var(--display);font-size:1.25rem;font-weight:500;letter-spacing:-.02em;line-height:1.3;color:var(--ink)}
 .card h3 a{border-bottom:1px solid var(--line)}
 .card h3 a:hover{border-color:var(--accent-ink);color:var(--accent-ink)}
@@ -395,7 +396,6 @@ h2[data-split] .w>span{display:inline-block}
   .sheet-bar{height:68px}
   .sheet-nav{grid-template-columns:1fr 1fr;gap:10px}
   .sheet-step-title{font-size:.9375rem}
-  .card-open{right:18px;bottom:18px}
 }
 @media(max-width:400px){
   .filter button{font-size:.8125rem;padding:0 6px}

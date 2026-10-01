@@ -113,17 +113,37 @@
     <div class="shell">
       <p class="eyebrow">Selected work</p>
       <h2 id="work-title">How I think. What I build.</h2>
-      <p class="section-lead">General product approaches alongside independently built projects. The approaches below are illustrative, with no employer-specific implementation details.</p>
+      <p class="section-lead">Independent products first, followed by illustrative product approaches. Explore the live products or open an entry for more detail.</p>
 
       <div class="filter" role="group" aria-label="Show selected work" hidden>
         <span class="filter-thumb" aria-hidden="true"></span>
         <button type="button" data-filter="all" aria-pressed="true">All <span class="filter-count">6</span></button>
-        <button type="button" data-filter="approach" aria-pressed="false">Approaches <span class="filter-count">3</span></button>
         <button type="button" data-filter="indie" aria-pressed="false">Independent <span class="filter-count">3</span></button>
+        <button type="button" data-filter="approach" aria-pressed="false">Approaches <span class="filter-count">3</span></button>
       </div>
       <p class="visually-hidden" id="work-status" aria-live="polite"></p>
 
       <ol class="cards">
+        <li class="card" data-kind="indie">
+          <p class="card-tag">Independent · live</p>
+          <h3><a href="https://finance-hermes.vercel.app" target="_blank" rel="noopener noreferrer">FinanceHermes <span aria-hidden="true">&#8599;</span></a></h3>
+          <p>A financial-research agent that searches the web and produces cited answers in a streaming interface.</p>
+          <template class="card-details">A financial-research agent on a hand-built harness: a streaming tool-call loop over live web search, visible reasoning traces, server-side citation enforcement and a two-tier freemium gate. Zero-dependency serverless deploy, demoed live to rooms of investment advisors.</template>
+          <p class="card-meta">SSE streaming · tool loop · citation enforcement · serverless</p>
+        </li>
+        <li class="card" data-kind="indie" data-status="prototype">
+          <p class="card-tag">Independent · prototype</p>
+          <h3><a href="https://six-cut.vercel.app" target="_blank" rel="noopener noreferrer">The Six Cut <span aria-hidden="true">&#8599;</span></a></h3>
+          <p>A prototype for discovering and comparing Toronto&rsquo;s independent butchers.</p>
+          <template class="card-details">A Next.js prototype exploring a scoring-based approach to discovering Toronto&rsquo;s independent butchers. The public demo shows the interface; directory data is not currently loaded.</template>
+          <p class="card-meta">Next.js · Vercel · scoring methodology</p>
+        </li>
+        <li class="card" data-kind="indie">
+          <p class="card-tag">Independent</p>
+          <h3>Personal OKF knowledge base</h3>
+          <p>A personal LLM-wiki setup: a cross-linked markdown knowledge graph used as shared context by Claude Code and the other agents I work with day to day.</p>
+          <p class="card-meta">OKF · embeddings · agent context</p>
+        </li>
         <li class="card" data-kind="approach">
           <p class="card-tag">Product approach · illustrative</p>
           <h3>AI-assisted product discovery</h3>
@@ -141,24 +161,6 @@
           <h3>Relevant customer experiences</h3>
           <p>Start with a customer need, form a clear hypothesis and test whether a more relevant experience helps. Evaluate usefulness and respect customer preferences before expanding an approach.</p>
           <p class="card-meta">Personalization · experimentation · customer experience</p>
-        </li>
-        <li class="card" data-kind="indie">
-          <p class="card-tag">Independent · live</p>
-          <h3><a href="https://finance-hermes.vercel.app" target="_blank" rel="noopener noreferrer">FinanceHermes <span aria-hidden="true">&#8599;</span></a></h3>
-          <p>A financial-research agent on a hand-built harness: a streaming tool-call loop over live web search, visible reasoning traces, server-side citation enforcement and a two-tier freemium gate. Zero-dependency serverless deploy, demoed live to rooms of investment advisors.</p>
-          <p class="card-meta">SSE streaming · tool loop · citation enforcement · serverless</p>
-        </li>
-        <li class="card" data-kind="indie">
-          <p class="card-tag">Independent</p>
-          <h3>Personal OKF knowledge base</h3>
-          <p>A personal LLM-wiki setup: a cross-linked markdown knowledge graph used as shared context by Claude Code and the other agents I work with day to day.</p>
-          <p class="card-meta">OKF · embeddings · agent context</p>
-        </li>
-        <li class="card" data-kind="indie">
-          <p class="card-tag">Independent · live</p>
-          <h3><a href="https://six-cut.vercel.app" target="_blank" rel="noopener noreferrer">The Six Cut <span aria-hidden="true">&#8599;</span></a></h3>
-          <p>A Next.js discovery product that ranks Toronto&rsquo;s independent butchers against a proprietary scoring methodology.</p>
-          <p class="card-meta">Next.js · Vercel · scoring methodology</p>
         </li>
       </ol>
     </div>

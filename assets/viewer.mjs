@@ -27,9 +27,13 @@ export function mountViewer({ glide, quiet, cursor }) {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'card-open';
-    button.setAttribute('aria-label', `Open project: ${title}`);
+    const action = card.dataset.kind === 'approach' ? 'Explore approach' : 'View project';
+    button.setAttribute('aria-label', `${action}: ${title}`);
     button.setAttribute('aria-haspopup', 'dialog');
-    button.innerHTML = '<span aria-hidden="true"></span>';
+    button.textContent = action;
+    const icon = document.createElement('span');
+    icon.setAttribute('aria-hidden', 'true');
+    button.append(icon);
     card.append(button);
     card.classList.add('is-openable');
     button.addEventListener('click', event => { event.stopPropagation(); open(card); });
@@ -54,9 +58,9 @@ export function mountViewer({ glide, quiet, cursor }) {
         <h2 class="sheet-title" id="sheet-title" tabindex="-1"></h2>
         <p class="sheet-text"></p>
         <ul class="sheet-meta" aria-label="Topics"></ul>
-        <a class="sheet-visit" target="_blank" rel="noopener noreferrer" hidden>Visit the live product <span aria-hidden="true">&#8599;</span></a>
+        <a class="sheet-visit" target="_blank" rel="noopener noreferrer" hidden><span class="sheet-visit-label">Visit the live product</span> <span aria-hidden="true">&#8599;</span></a>
       </article>
-      <nav class="sheet-nav" aria-label="Projects">
+      <nav class="sheet-nav" aria-label="Selected work">
         <button type="button" class="sheet-step" data-step="-1"><span class="sheet-step-dir"><span aria-hidden="true">&larr;</span> Previous</span><span class="sheet-step-title"></span></button>
         <button type="button" class="sheet-step" data-step="1"><span class="sheet-step-dir">Next <span aria-hidden="true">&rarr;</span></span><span class="sheet-step-title"></span></button>
       </nav>
@@ -79,7 +83,7 @@ export function mountViewer({ glide, quiet, cursor }) {
     $('.sheet-total').textContent = String(list.length).padStart(2, '0');
     $('.sheet-tag').textContent = card.querySelector('.card-tag').textContent;
     $('.sheet-title').textContent = card.querySelector('h3').textContent.replace('↗', '').trim();
-    $('.sheet-text').textContent = card.querySelector('p:not(.card-tag):not(.card-meta)').textContent;
+    $('.sheet-text').textContent = card.querySelector('.card-details')?.content.textContent.trim() || card.querySelector('p:not(.card-tag):not(.card-meta)').textContent;
     $('.sheet-meta').replaceChildren(...card.querySelector('.card-meta').textContent.split(/\s*[·•]\s*/).filter(Boolean).map(item => {
       const li = document.createElement('li');
       li.textContent = item;
@@ -87,7 +91,10 @@ export function mountViewer({ glide, quiet, cursor }) {
     }));
     const visit = $('.sheet-visit');
     visit.hidden = !link;
-    if (link) visit.href = link.href;
+    if (link) {
+      visit.href = link.href;
+      visit.querySelector('.sheet-visit-label').textContent = card.dataset.status === 'prototype' ? 'View prototype' : 'Visit the live product';
+    }
     sheet.dataset.kind = card.dataset.kind;
     const [previous, next] = [list[step(index, -1, list.length)], list[step(index, 1, list.length)]];
     const single = list.length < 2;

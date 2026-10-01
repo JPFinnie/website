@@ -160,6 +160,13 @@ export function driveScene({ section, glide, reverse = false, onFrame }) {
   return { update, refresh, page, quiet, get progress() { return progress; }, get top() { return top; }, get range() { return range; }, fullScreen };
 }
 
+// A hidden ending has no geometry and cannot clear its last frame itself.
+// Reset that state immediately when motion is reduced so navigation stays visible.
+export function syncMotionState(root, still) {
+  root.classList.toggle('is-still', still);
+  if (still) root.classList.remove('in-outro');
+}
+
 export function mountScene({ glide } = {}) {
   const root = document.documentElement;
   const section = document.querySelector('#journey');
@@ -168,7 +175,7 @@ export function mountScene({ glide } = {}) {
     root.classList.toggle('screen-open', f.open > .55);
   } });
   const { page, quiet } = scene;
-  const sync = () => root.classList.toggle('is-still', quiet());
+  const sync = () => syncMotionState(root, quiet());
   document.addEventListener('studio:configuration', sync);
   window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change', sync);
   sync();

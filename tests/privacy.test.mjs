@@ -11,7 +11,7 @@ test('project approaches are illustrative and never attributed to an employer', 
   assert.equal((work.match(/data-kind="indie"/g) || []).length, 3);
   assert.equal((work.match(/Product approach · illustrative/g) || []).length, 3);
   assert.doesNotMatch(work, /CIBC|Investor|at the bank|corporate|every new client|Braze|Contentstack|historical engineering/i);
-  assert.match(work, /approaches below are illustrative/);
+  assert.match(work, /illustrative product approaches/);
 });
 
 test('employer mention is limited to ordinary role information', () => {
