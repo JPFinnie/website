@@ -20,7 +20,7 @@ test('cloned detail content has no inherited reveal state or duplicate IDs', () 
   assert.equal(cloneCaseStudy(null), null);
 });
 
-test('rich case studies contain real architecture, limitations and screenshots before outbound CTA', () => {
+test('rich case studies contain real architecture, limitations and screenshots with outbound CTA near the introduction', () => {
   for (const id of ['finance-hermes', 'six-cut']) {
     const source = html.match(new RegExp(`<article class="case-study-source" id="${id}"[\\s\\S]*?<\\/article>`))[0];
     assert.ok((source.match(/class="case-section/g) || []).length >= 5);
@@ -30,7 +30,10 @@ test('rich case studies contain real architecture, limitations and screenshots b
     const image = source.match(/<img src="([^"]+)"/)[1];
     assert.ok(existsSync(new URL('..' + image, import.meta.url)));
   }
-  assert.ok(viewer.indexOf('class="sheet-extra"') < viewer.indexOf('class="sheet-visit"'));
+  assert.ok(viewer.indexOf('class="sheet-text"') < viewer.indexOf('class="sheet-visit"'));
+  assert.ok(viewer.indexOf('class="sheet-visit"') < viewer.indexOf('class="sheet-meta"'));
+  assert.ok(viewer.indexOf('class="sheet-visit"') < viewer.indexOf('class="sheet-extra"'));
+  assert.match(viewer, /visit.hidden = !projectUrl/);
   assert.match(viewer, /textContent = 'View prototype'/);
 });
 

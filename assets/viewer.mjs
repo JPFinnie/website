@@ -78,9 +78,9 @@ export function mountViewer({ glide, quiet, cursor }) {
         <p class="sheet-tag"></p>
         <h2 class="sheet-title" id="sheet-title" tabindex="-1"></h2>
         <p class="sheet-text"></p>
+        <a class="sheet-visit" target="_blank" rel="noopener noreferrer" hidden><span class="sheet-visit-label">Visit the live product</span> <svg class="external-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6 4h10v10M16 4 4 16"/></svg></a>
         <ul class="sheet-meta" aria-label="Topics"></ul>
         <div class="sheet-extra" hidden></div>
-        <a class="sheet-visit" target="_blank" rel="noopener noreferrer" hidden><span class="sheet-visit-label">Visit the live product</span> <svg class="external-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M6 4h10v10M16 4 4 16"/></svg></a>
       </article>
       <nav class="sheet-nav" aria-label="Selected work">
         <button type="button" class="sheet-step" data-step="-1"><span class="sheet-step-dir"><span aria-hidden="true">&larr;</span> Previous</span><span class="sheet-step-title"></span></button>
